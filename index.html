@@ -29,6 +29,7 @@
   --s5: #e87ba4; --s6: #008300; --s7: #4a3aa7; --s8: #e34948;
   --hn3: #c9423f; --hn2: #efb3ad; --hn1: #f8e1de; --h0: #e9ece6;
   --hp1: #dde9f7; --hp2: #aac9ef; --hp3: #2f72c9;
+  --p1: #72b983; --p2: #479d5d; --p3: #2a7a43; --p4: #14552a;
   --display: "Big Shoulders Display", "Big Shoulders", "Arial Narrow", "Helvetica Neue", sans-serif;
   --sans: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
@@ -50,6 +51,7 @@
     --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
     --hn3: #c24a48; --hn2: #6b3232; --hn1: #372426; --h0: #212924;
     --hp1: #1c2d40; --hp2: #28507f; --hp3: #3f82d6;
+    --p1: #2e6a3f; --p2: #3f9055; --p3: #5fb876; --p4: #98dca8;
   }
 }
 :root[data-theme="dark"] {
@@ -68,6 +70,7 @@
   --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
   --hn3: #c24a48; --hn2: #6b3232; --hn1: #372426; --h0: #212924;
   --hp1: #1c2d40; --hp2: #28507f; --hp3: #3f82d6;
+  --p1: #2e6a3f; --p2: #3f9055; --p3: #5fb876; --p4: #98dca8;
 }
 
 * { box-sizing: border-box; }
@@ -224,7 +227,7 @@ button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 /* Heat grid */
 .heat { min-width: 560px; }
 .heat thead th small { display: block; font-size: 10px; letter-spacing: .02em; text-transform: none; color: var(--muted); }
-.heat th[scope="row"] { font-weight: 500; white-space: nowrap; }
+tbody th[scope="row"], tfoot th[scope="row"] { font-weight: 400; white-space: nowrap; }
 .heat th[scope="row"] .mgr { min-width: 0; }
 .heat td.cell { padding: 3px; }
 .cell-in {
@@ -252,6 +255,33 @@ button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .ramp { display: inline-flex; align-items: center; gap: 6px; }
 .ramp i { display: inline-block; width: 22px; height: 12px; border-radius: 2px; }
 .ring { display: inline-block; width: 22px; height: 12px; border-radius: 2px; box-shadow: inset 0 0 0 2px var(--ink); vertical-align: -2px; margin-right: 4px; }
+
+/* Points by position */
+.pos-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
+.pick { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); }
+.pick select {
+  font: 500 14px/1.4 var(--sans);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--axis);
+  border-radius: 4px;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+.pick select:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.leaders { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px 24px; padding: 14px 16px; border-bottom: 1px solid var(--rule); }
+.leader { display: flex; flex-direction: column; gap: 2px; }
+.leader-v { font-weight: 600; }
+.leader-d { font-size: 13px; color: var(--ink-2); }
+.psw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; }
+.split { min-width: 760px; }
+.split .bar-cell { width: 42%; min-width: 220px; }
+.bar { display: flex; gap: 2px; height: 14px; }
+.bar i { display: block; height: 100%; min-width: 0; }
+.bar i:first-child { border-top-left-radius: 3px; border-bottom-left-radius: 3px; }
+.bar i:last-child { border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
+.split td.top-pos .r { font-weight: 700; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+.hitnote { display: block; font-size: 11px; font-weight: 400; color: var(--muted); }
 
 /* Past seasons */
 .past { min-width: 640px; }
@@ -306,6 +336,23 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
     </div>
   </section>
 
+  <section aria-labelledby="h-pos" id="pos-section">
+    <div class="pos-head">
+      <div class="sec-head">
+        <h2 id="h-pos">Where the points come from</h2>
+        <p>Points from goalkeepers, defenders, midfielders and forwards, with captain bonus counted in the captain's position. Bars share one scale, so a longer bar means more points.</p>
+      </div>
+      <label class="pick" for="pos-scope">Show
+        <select id="pos-scope"></select>
+      </label>
+    </div>
+    <div class="panel">
+      <div class="leaders" id="pos-leaders"></div>
+      <div class="scroll"><table class="split" id="pos-table"></table></div>
+      <p class="key" id="pos-note">Position points are before transfer hits, so a row can add up to more than the league table total.</p>
+    </div>
+  </section>
+
   <section aria-labelledby="h-race">
     <div class="sec-head">
       <h2 id="h-race">Race for first</h2>
@@ -355,7 +402,7 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
 </div>
 
 <script>
-const DATA = {"league": {"id": 1661423, "name": "90 Minutes of Hell", "admin_entry": 7587350}, "events": [{"event": 1, "average": 50, "highest": 131, "finished": true, "current": false}, {"event": 2, "average": 81, "highest": 161, "finished": true, "current": false}, {"event": 3, "average": 51, "highest": 119, "finished": true, "current": false}, {"event": 4, "average": 69, "highest": 151, "finished": true, "current": true}], "managers": [{"entry": 7587350, "name": "Akshay Prabhakar", "team": "False 9 to 5", "rank": 1, "last_rank": 1, "total": 298, "gws": [{"event": 1, "points": 48, "total": 48, "overall_rank": 4969899, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 3, "chip": null, "captain": "B.Fernandes", "captain_mult": 2}, {"event": 2, "points": 117, "total": 165, "overall_rank": 724567, "value": 100.2, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 2, "chip": null, "captain": "B.Fernandes", "captain_mult": 2}, {"event": 3, "points": 63, "total": 228, "overall_rank": 336710, "value": 100.4, "bank": 0.0, "transfers": 1, "hits": 0, "bench": 7, "chip": "3xc", "captain": "Haaland", "captain_mult": 3}, {"event": 4, "points": 70, "total": 298, "overall_rank": 820064, "value": 100.2, "bank": 0.4, "transfers": 1, "hits": 0, "bench": 2, "chip": null, "captain": "Haaland", "captain_mult": 2}], "past": [{"season_name": "2020/21", "total_points": 2147, "rank": 1301110, "rank_percentage": "16"}, {"season_name": "2021/22", "total_points": 1892, "rank": 3849963, "rank_percentage": "42"}, {"season_name": "2022/23", "total_points": 2209, "rank": 2580824, "rank_percentage": "23"}, {"season_name": "2024/25", "total_points": 2081, "rank": 4529911, "rank_percentage": "40"}, {"season_name": "2025/26", "total_points": 1891, "rank": 6068509, "rank_percentage": "47"}], "chips": [{"name": "3xc", "time": "2026-09-04T15:56:18.167001Z", "event": 3}]}, {"entry": 7599534, "name": "United forever", "team": "ReigningChamp", "rank": 2, "last_rank": 2, "total": 279, "gws": [{"event": 1, "points": 39, "total": 39, "overall_rank": 7295417, "value": 100.0, "bank": 1.5, "transfers": 0, "hits": 0, "bench": 2, "chip": null, "captain": "B.Fernandes", "captain_mult": 2}, {"event": 2, "points": 118, "total": 157, "overall_rank": 1297132, "value": 100.1, "bank": 1.5, "transfers": 0, "hits": 0, "bench": 2, "chip": null, "captain": "B.Fernandes", "captain_mult": 2}, {"event": 3, "points": 56, "total": 213, "overall_rank": 1102932, "value": 100.1, "bank": 0.3, "transfers": 2, "hits": 0, "bench": 4, "chip": null, "captain": "Haaland", "captain_mult": 2}, {"event": 4, "points": 66, "total": 279, "overall_rank": 2038413, "value": 100.3, "bank": 1.2, "transfers": 1, "hits": 0, "bench": 1, "chip": null, "captain": "Isak", "captain_mult": 2}], "past": [{"season_name": "2022/23", "total_points": 2159, "rank": 3220592, "rank_percentage": "28"}, {"season_name": "2024/25", "total_points": 2307, "rank": 1425923, "rank_percentage": "12"}, {"season_name": "2025/26", "total_points": 2211, "rank": 781029, "rank_percentage": "6"}], "chips": []}, {"entry": 7598024, "name": "Nabrique Iglesias", "team": "HaaLand Rovers", "rank": 3, "last_rank": 3, "total": 277, "gws": [{"event": 1, "points": 52, "total": 52, "overall_rank": 3770910, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 22, "chip": null, "captain": "B.Fernandes", "captain_mult": 2}, {"event": 2, "points": 108, "total": 160, "overall_rank": 1053358, "value": 100.2, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 10, "chip": null, "captain": "B.Fernandes", "captain_mult": 2}, {"event": 3, "points": 48, "total": 208, "overall_rank": 1496797, "value": 100.4, "bank": 0.3, "transfers": 1, "hits": 0, "bench": 14, "chip": "3xc", "captain": "Haaland", "captain_mult": 3}, {"event": 4, "points": 69, "total": 277, "overall_rank": 2199447, "value": 100.3, "bank": 2.5, "transfers": 2, "hits": 0, "bench": 12, "chip": null, "captain": "Palmer", "captain_mult": 2}], "past": [{"season_name": "2020/21", "total_points": 1493, "rank": 6596185, "rank_percentage": "80"}, {"season_name": "2021/22", "total_points": 1609, "rank": 6612178, "rank_percentage": "72"}, {"season_name": "2022/23", "total_points": 1930, "rank": 6092238, "rank_percentage": "53"}, {"season_name": "2024/25", "total_points": 2456, "rank": 269811, "rank_percentage": "2"}, {"season_name": "2025/26", "total_points": 2193, "rank": 968412, "rank_percentage": "8"}], "chips": [{"name": "3xc", "time": "2026-09-04T16:18:12.465057Z", "event": 3}]}, {"entry": 4762060, "name": "sai charan Komuravelli", "team": "saicha blasters", "rank": 4, "last_rank": 4, "total": 254, "gws": [{"event": 1, "points": 43, "total": 43, "overall_rank": 6382778, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 2, "chip": null, "captain": "Haaland", "captain_mult": 2}, {"event": 2, "points": 74, "total": 117, "overall_rank": 6409651, "value": 100.1, "bank": 0.4, "transfers": 1, "hits": 0, "bench": 8, "chip": null, "captain": "Haaland", "captain_mult": 2}, {"event": 3, "points": 67, "total": 184, "overall_rank": 4368198, "value": 100.1, "bank": 0.7, "transfers": 1, "hits": 0, "bench": 11, "chip": "3xc", "captain": "Haaland", "captain_mult": 3}, {"event": 4, "points": 70, "total": 254, "overall_rank": 4327799, "value": 100.3, "bank": 1.2, "transfers": 1, "hits": 0, "bench": 5, "chip": null, "captain": "Haaland", "captain_mult": 2}], "past": [{"season_name": "2020/21", "total_points": 1969, "rank": 2921635, "rank_percentage": "36"}, {"season_name": "2021/22", "total_points": 2068, "rank": 2185937, "rank_percentage": "24"}, {"season_name": "2022/23", "total_points": 2271, "rank": 1838617, "rank_percentage": "16"}, {"season_name": "2024/25", "total_points": 2123, "rank": 3957951, "rank_percentage": "35"}, {"season_name": "2025/26", "total_points": 1973, "rank": 4541856, "rank_percentage": "35"}], "chips": [{"name": "3xc", "time": "2026-09-04T13:07:01.157989Z", "event": 3}]}, {"entry": 6341322, "name": "Rohith Pulipaka", "team": "Puli_fc", "rank": 5, "last_rank": 5, "total": 246, "gws": [{"event": 1, "points": 42, "total": 42, "overall_rank": 6633922, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 0, "chip": null, "captain": "Haaland", "captain_mult": 2}, {"event": 2, "points": 90, "total": 132, "overall_rank": 4398720, "value": 100.2, "bank": 0.0, "transfers": 1, "hits": 0, "bench": 0, "chip": null, "captain": "Haaland", "captain_mult": 2}, {"event": 3, "points": 53, "total": 181, "overall_rank": 4802696, "value": 100.2, "bank": 0.0, "transfers": 2, "hits": 4, "bench": 1, "chip": null, "captain": "Haaland", "captain_mult": 2}, {"event": 4, "points": 73, "total": 246, "overall_rank": 5139486, "value": 100.3, "bank": 1.3, "transfers": 3, "hits": 8, "bench": 0, "chip": null, "captain": "João Pedro", "captain_mult": 2}], "past": [{"season_name": "2025/26", "total_points": 1742, "rank": 8535497, "rank_percentage": "66"}], "chips": []}, {"entry": 7693414, "name": "Sandeep X", "team": "Fooslashers", "rank": 6, "last_rank": 6, "total": 238, "gws": [{"event": 1, "points": 52, "total": 52, "overall_rank": 3770910, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 8, "chip": null, "captain": "João Pedro", "captain_mult": 2}, {"event": 2, "points": 89, "total": 141, "overall_rank": 3075903, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 0, "chip": null, "captain": "João Pedro", "captain_mult": 2}, {"event": 3, "points": 29, "total": 170, "overall_rank": 6049699, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 0, "chip": null, "captain": "João Pedro", "captain_mult": 2}, {"event": 4, "points": 68, "total": 238, "overall_rank": 5793085, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 0, "chip": null, "captain": "João Pedro", "captain_mult": 2}], "past": [], "chips": []}, {"entry": 7628837, "name": "Aravind Kadiri", "team": "Godofredemption", "rank": 7, "last_rank": 7, "total": 227, "gws": [{"event": 1, "points": 29, "total": 29, "overall_rank": 8566706, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 15, "chip": null, "captain": "Haaland", "captain_mult": 2}, {"event": 2, "points": 65, "total": 94, "overall_rank": 8394700, "value": 99.9, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 0, "chip": null, "captain": "Haaland", "captain_mult": 2}, {"event": 3, "points": 60, "total": 154, "overall_rank": 7602511, "value": 99.5, "bank": 0.1, "transfers": 1, "hits": 0, "bench": 8, "chip": null, "captain": "Haaland", "captain_mult": 2}, {"event": 4, "points": 73, "total": 227, "overall_rank": 6761783, "value": 99.3, "bank": 0.0, "transfers": 2, "hits": 0, "bench": 0, "chip": null, "captain": "João Pedro", "captain_mult": 2}], "past": [{"season_name": "2024/25", "total_points": 2360, "rank": 881049, "rank_percentage": "8"}, {"season_name": "2025/26", "total_points": 1700, "rank": 9110520, "rank_percentage": "70"}], "chips": []}, {"entry": 7592803, "name": "Aditya Bitra", "team": "Pending Moderation", "rank": 8, "last_rank": 8, "total": 180, "gws": [{"event": 1, "points": 25, "total": 25, "overall_rank": 8765561, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 11, "chip": null, "captain": "B.Fernandes", "captain_mult": 2}, {"event": 2, "points": 58, "total": 83, "overall_rank": 8909232, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 13, "chip": "freehit", "captain": "Palmer", "captain_mult": 2}, {"event": 3, "points": 51, "total": 134, "overall_rank": 8727735, "value": 99.8, "bank": 0.1, "transfers": 0, "hits": 0, "bench": 5, "chip": "wildcard", "captain": "Haaland", "captain_mult": 2}, {"event": 4, "points": 50, "total": 180, "overall_rank": 9161694, "value": 100.3, "bank": 3.7, "transfers": 2, "hits": 4, "bench": 15, "chip": null, "captain": "Haaland", "captain_mult": 2}], "past": [{"season_name": "2024/25", "total_points": 2184, "rank": 3087482, "rank_percentage": "27"}, {"season_name": "2025/26", "total_points": 1857, "rank": 6679994, "rank_percentage": "51"}], "chips": [{"name": "freehit", "time": "2026-08-27T16:11:44.761135Z", "event": 2}, {"name": "wildcard", "time": "2026-09-02T04:34:58.119613Z", "event": 3}]}], "fetched_at": "2026-09-15 16:33 UTC"};
+const DATA = {"league": {"id": 1661423, "name": "90 Minutes of Hell", "admin_entry": 7587350}, "events": [{"event": 1, "average": 50, "highest": 131, "finished": true, "current": false}, {"event": 2, "average": 81, "highest": 161, "finished": true, "current": false}, {"event": 3, "average": 51, "highest": 119, "finished": true, "current": false}, {"event": 4, "average": 69, "highest": 151, "finished": true, "current": true}], "managers": [{"entry": 7587350, "name": "Akshay Prabhakar", "team": "False 9 to 5", "rank": 1, "last_rank": 1, "total": 298, "gws": [{"event": 1, "points": 48, "total": 48, "overall_rank": 4969899, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 3, "chip": null, "captain": "B.Fernandes", "captain_mult": 2, "pos": [6, 11, 17, 14]}, {"event": 2, "points": 117, "total": 165, "overall_rank": 724567, "value": 100.2, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 2, "chip": null, "captain": "B.Fernandes", "captain_mult": 2, "pos": [6, 15, 66, 30]}, {"event": 3, "points": 63, "total": 228, "overall_rank": 336710, "value": 100.4, "bank": 0.0, "transfers": 1, "hits": 0, "bench": 7, "chip": "3xc", "captain": "Haaland", "captain_mult": 3, "pos": [3, 12, 19, 29]}, {"event": 4, "points": 70, "total": 298, "overall_rank": 820064, "value": 100.2, "bank": 0.4, "transfers": 1, "hits": 0, "bench": 2, "chip": null, "captain": "Haaland", "captain_mult": 2, "pos": [14, 8, 8, 40]}], "past": [{"season_name": "2020/21", "total_points": 2147, "rank": 1301110, "rank_percentage": "16"}, {"season_name": "2021/22", "total_points": 1892, "rank": 3849963, "rank_percentage": "42"}, {"season_name": "2022/23", "total_points": 2209, "rank": 2580824, "rank_percentage": "23"}, {"season_name": "2024/25", "total_points": 2081, "rank": 4529911, "rank_percentage": "40"}, {"season_name": "2025/26", "total_points": 1891, "rank": 6068509, "rank_percentage": "47"}], "chips": [{"name": "3xc", "time": "2026-09-04T15:56:18.167001Z", "event": 3}]}, {"entry": 7599534, "name": "United forever", "team": "ReigningChamp", "rank": 2, "last_rank": 2, "total": 279, "gws": [{"event": 1, "points": 39, "total": 39, "overall_rank": 7295417, "value": 100.0, "bank": 1.5, "transfers": 0, "hits": 0, "bench": 2, "chip": null, "captain": "B.Fernandes", "captain_mult": 2, "pos": [2, 16, 16, 5]}, {"event": 2, "points": 118, "total": 157, "overall_rank": 1297132, "value": 100.1, "bank": 1.5, "transfers": 0, "hits": 0, "bench": 2, "chip": null, "captain": "B.Fernandes", "captain_mult": 2, "pos": [1, 22, 74, 21]}, {"event": 3, "points": 56, "total": 213, "overall_rank": 1102932, "value": 100.1, "bank": 0.3, "transfers": 2, "hits": 0, "bench": 4, "chip": null, "captain": "Haaland", "captain_mult": 2, "pos": [6, 11, 7, 32]}, {"event": 4, "points": 66, "total": 279, "overall_rank": 2038413, "value": 100.3, "bank": 1.2, "transfers": 1, "hits": 0, "bench": 1, "chip": null, "captain": "Isak", "captain_mult": 2, "pos": [7, 14, 22, 23]}], "past": [{"season_name": "2022/23", "total_points": 2159, "rank": 3220592, "rank_percentage": "28"}, {"season_name": "2024/25", "total_points": 2307, "rank": 1425923, "rank_percentage": "12"}, {"season_name": "2025/26", "total_points": 2211, "rank": 781029, "rank_percentage": "6"}], "chips": []}, {"entry": 7598024, "name": "Nabrique Iglesias", "team": "HaaLand Rovers", "rank": 3, "last_rank": 3, "total": 277, "gws": [{"event": 1, "points": 52, "total": 52, "overall_rank": 3770910, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 22, "chip": null, "captain": "B.Fernandes", "captain_mult": 2, "pos": [2, 16, 20, 14]}, {"event": 2, "points": 108, "total": 160, "overall_rank": 1053358, "value": 100.2, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 10, "chip": null, "captain": "B.Fernandes", "captain_mult": 2, "pos": [1, 16, 61, 30]}, {"event": 3, "points": 48, "total": 208, "overall_rank": 1496797, "value": 100.4, "bank": 0.3, "transfers": 1, "hits": 0, "bench": 14, "chip": "3xc", "captain": "Haaland", "captain_mult": 3, "pos": [3, 6, 10, 29]}, {"event": 4, "points": 69, "total": 277, "overall_rank": 2199447, "value": 100.3, "bank": 2.5, "transfers": 2, "hits": 0, "bench": 12, "chip": null, "captain": "Palmer", "captain_mult": 2, "pos": [8, 13, 17, 31]}], "past": [{"season_name": "2020/21", "total_points": 1493, "rank": 6596185, "rank_percentage": "80"}, {"season_name": "2021/22", "total_points": 1609, "rank": 6612178, "rank_percentage": "72"}, {"season_name": "2022/23", "total_points": 1930, "rank": 6092238, "rank_percentage": "53"}, {"season_name": "2024/25", "total_points": 2456, "rank": 269811, "rank_percentage": "2"}, {"season_name": "2025/26", "total_points": 2193, "rank": 968412, "rank_percentage": "8"}], "chips": [{"name": "3xc", "time": "2026-09-04T16:18:12.465057Z", "event": 3}]}, {"entry": 4762060, "name": "sai charan Komuravelli", "team": "saicha blasters", "rank": 4, "last_rank": 4, "total": 254, "gws": [{"event": 1, "points": 43, "total": 43, "overall_rank": 6382778, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 2, "chip": null, "captain": "Haaland", "captain_mult": 2, "pos": [6, 9, 22, 6]}, {"event": 2, "points": 74, "total": 117, "overall_rank": 6409651, "value": 100.1, "bank": 0.4, "transfers": 1, "hits": 0, "bench": 8, "chip": null, "captain": "Haaland", "captain_mult": 2, "pos": [6, 14, 28, 26]}, {"event": 3, "points": 67, "total": 184, "overall_rank": 4368198, "value": 100.1, "bank": 0.7, "transfers": 1, "hits": 0, "bench": 11, "chip": "3xc", "captain": "Haaland", "captain_mult": 3, "pos": [3, 21, 15, 28]}, {"event": 4, "points": 70, "total": 254, "overall_rank": 4327799, "value": 100.3, "bank": 1.2, "transfers": 1, "hits": 0, "bench": 5, "chip": null, "captain": "Haaland", "captain_mult": 2, "pos": [14, 20, 16, 20]}], "past": [{"season_name": "2020/21", "total_points": 1969, "rank": 2921635, "rank_percentage": "36"}, {"season_name": "2021/22", "total_points": 2068, "rank": 2185937, "rank_percentage": "24"}, {"season_name": "2022/23", "total_points": 2271, "rank": 1838617, "rank_percentage": "16"}, {"season_name": "2024/25", "total_points": 2123, "rank": 3957951, "rank_percentage": "35"}, {"season_name": "2025/26", "total_points": 1973, "rank": 4541856, "rank_percentage": "35"}], "chips": [{"name": "3xc", "time": "2026-09-04T13:07:01.157989Z", "event": 3}]}, {"entry": 6341322, "name": "Rohith Pulipaka", "team": "Puli_fc", "rank": 5, "last_rank": 5, "total": 246, "gws": [{"event": 1, "points": 42, "total": 42, "overall_rank": 6633922, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 0, "chip": null, "captain": "Haaland", "captain_mult": 2, "pos": [1, 23, 14, 4]}, {"event": 2, "points": 90, "total": 132, "overall_rank": 4398720, "value": 100.2, "bank": 0.0, "transfers": 1, "hits": 0, "bench": 0, "chip": null, "captain": "Haaland", "captain_mult": 2, "pos": [6, 16, 33, 35]}, {"event": 3, "points": 53, "total": 181, "overall_rank": 4802696, "value": 100.2, "bank": 0.0, "transfers": 2, "hits": 4, "bench": 1, "chip": null, "captain": "Haaland", "captain_mult": 2, "pos": [2, 21, 11, 19]}, {"event": 4, "points": 73, "total": 246, "overall_rank": 5139486, "value": 100.3, "bank": 1.3, "transfers": 3, "hits": 8, "bench": 0, "chip": null, "captain": "João Pedro", "captain_mult": 2, "pos": [6, 18, 16, 33]}], "past": [{"season_name": "2025/26", "total_points": 1742, "rank": 8535497, "rank_percentage": "66"}], "chips": []}, {"entry": 7693414, "name": "Sandeep X", "team": "Fooslashers", "rank": 6, "last_rank": 6, "total": 238, "gws": [{"event": 1, "points": 52, "total": 52, "overall_rank": 3770910, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 8, "chip": null, "captain": "João Pedro", "captain_mult": 2, "pos": [6, 8, 16, 22]}, {"event": 2, "points": 89, "total": 141, "overall_rank": 3075903, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 0, "chip": null, "captain": "João Pedro", "captain_mult": 2, "pos": [6, 4, 61, 18]}, {"event": 3, "points": 29, "total": 170, "overall_rank": 6049699, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 0, "chip": null, "captain": "João Pedro", "captain_mult": 2, "pos": [3, 7, 17, 2]}, {"event": 4, "points": 68, "total": 238, "overall_rank": 5793085, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 0, "chip": null, "captain": "João Pedro", "captain_mult": 2, "pos": [14, 10, 20, 24]}], "past": [], "chips": []}, {"entry": 7628837, "name": "Aravind Kadiri", "team": "Godofredemption", "rank": 7, "last_rank": 7, "total": 227, "gws": [{"event": 1, "points": 29, "total": 29, "overall_rank": 8566706, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 15, "chip": null, "captain": "Haaland", "captain_mult": 2, "pos": [6, 3, 15, 5]}, {"event": 2, "points": 65, "total": 94, "overall_rank": 8394700, "value": 99.9, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 0, "chip": null, "captain": "Haaland", "captain_mult": 2, "pos": [6, 4, 29, 26]}, {"event": 3, "points": 60, "total": 154, "overall_rank": 7602511, "value": 99.5, "bank": 0.1, "transfers": 1, "hits": 0, "bench": 8, "chip": null, "captain": "Haaland", "captain_mult": 2, "pos": [3, 8, 29, 20]}, {"event": 4, "points": 73, "total": 227, "overall_rank": 6761783, "value": 99.3, "bank": 0.0, "transfers": 2, "hits": 0, "bench": 0, "chip": null, "captain": "João Pedro", "captain_mult": 2, "pos": [14, 11, 15, 33]}], "past": [{"season_name": "2024/25", "total_points": 2360, "rank": 881049, "rank_percentage": "8"}, {"season_name": "2025/26", "total_points": 1700, "rank": 9110520, "rank_percentage": "70"}], "chips": []}, {"entry": 7592803, "name": "Aditya Bitra", "team": "Pending Moderation", "rank": 8, "last_rank": 8, "total": 180, "gws": [{"event": 1, "points": 25, "total": 25, "overall_rank": 8765561, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 11, "chip": null, "captain": "B.Fernandes", "captain_mult": 2, "pos": [2, 8, 12, 3]}, {"event": 2, "points": 58, "total": 83, "overall_rank": 8909232, "value": 100.0, "bank": 0.0, "transfers": 0, "hits": 0, "bench": 13, "chip": "freehit", "captain": "Palmer", "captain_mult": 2, "pos": [10, 3, 34, 11]}, {"event": 3, "points": 51, "total": 134, "overall_rank": 8727735, "value": 99.8, "bank": 0.1, "transfers": 0, "hits": 0, "bench": 5, "chip": "wildcard", "captain": "Haaland", "captain_mult": 2, "pos": [6, 16, 10, 19]}, {"event": 4, "points": 50, "total": 180, "overall_rank": 9161694, "value": 100.3, "bank": 3.7, "transfers": 2, "hits": 4, "bench": 15, "chip": null, "captain": "Haaland", "captain_mult": 2, "pos": [2, 5, 23, 20]}], "past": [{"season_name": "2024/25", "total_points": 2184, "rank": 3087482, "rank_percentage": "27"}, {"season_name": "2025/26", "total_points": 1857, "rank": 6679994, "rank_percentage": "51"}], "chips": [{"name": "freehit", "time": "2026-08-27T16:11:44.761135Z", "event": 2}, {"name": "wildcard", "time": "2026-09-02T04:34:58.119613Z", "event": 3}]}], "fetched_at": "2026-09-15 16:39 UTC"};
 
 const M = DATA.managers;
 const EV = DATA.events;
@@ -514,11 +561,54 @@ document.querySelectorAll('#legend button').forEach(b => {
   b.addEventListener('pointerenter', () => { if (pinned == null) focusOn(entry); });
   b.addEventListener('pointerleave', () => { if (pinned == null) focusOn(null); });
 });
-document.querySelectorAll('tbody tr[data-entry]').forEach(tr => {
-  const entry = +tr.dataset.entry;
-  tr.addEventListener('pointerenter', () => { if (pinned == null) focusOn(entry); });
-  tr.addEventListener('pointerleave', () => { if (pinned == null) focusOn(null); });
-});
+function linkRows(root) {
+  root.querySelectorAll('tbody tr[data-entry]').forEach(tr => {
+    const entry = +tr.dataset.entry;
+    tr.addEventListener('pointerenter', () => { if (pinned == null) focusOn(entry); });
+    tr.addEventListener('pointerleave', () => { if (pinned == null) focusOn(null); });
+  });
+}
+linkRows(document);
+
+// Points by position
+const POS = [['GK', 'Best goalkeeping'], ['DEF', 'Best defence'], ['MID', 'Best midfield'], ['FWD', 'Best attack']];
+const scopeSel = $('#pos-scope');
+function drawPositions() {
+  const scope = scopeSel.value;
+  const rows = M.map(m => {
+    const gs = scope === 'season' ? m.gws : m.gws.filter(g => g.event === +scope);
+    const pos = [0, 1, 2, 3].map(k => gs.reduce((a, g) => a + g.pos[k], 0));
+    return { m, pos, sum: pos.reduce((a, b) => a + b, 0), hits: gs.reduce((a, g) => a + g.hits, 0) };
+  });
+  const maxLen = Math.max(1, ...rows.map(r => r.pos.reduce((a, v) => a + Math.max(0, v), 0)));
+  const best = [0, 1, 2, 3].map(k => Math.max(...rows.map(r => r.pos[k])));
+  const when = scope === 'season' ? 'this season' : `in GW${scope}`;
+
+  $('#pos-leaders').innerHTML = POS.map(([, title], k) => {
+    const who = rows.filter(r => r.pos[k] === best[k]).map(r => r.m.first);
+    return `<div class="leader"><p class="label"><span class="psw" style="background:var(--p${k + 1})"></span>${title}</p><p class="leader-v">${esc(who.length > 1 ? who.slice(0, -1).join(', ') + ' & ' + who[who.length - 1] : who[0])}</p><p class="leader-d">${best[k]} pts ${when}</p></div>`;
+  }).join('');
+
+  $('#pos-table').innerHTML = `
+    <thead><tr><th scope="col">Manager</th><th scope="col">Split</th>${POS.map(([short], k) => `<th scope="col" class="num"><span class="psw" style="background:var(--p${k + 1})"></span>${short}</th>`).join('')}<th scope="col" class="num">Points</th></tr></thead>
+    <tbody>${rows.map(r => {
+      const len = r.pos.reduce((a, v) => a + Math.max(0, v), 0);
+      const segs = r.pos.map((v, k) => v > 0 ? `<i style="flex:${v} 1 0;background:var(--p${k + 1})" title="${POS[k][0]}: ${v} pts"></i>` : '').join('');
+      return `<tr data-entry="${r.m.entry}"><th scope="row">${mgrCell(r.m)}</th>
+        <td class="bar-cell"><div class="bar" style="width:${(len / maxLen * 100).toFixed(1)}%" role="img" aria-label="${POS.map(([short], k) => `${short} ${r.pos[k]}`).join(', ')}">${segs}</div></td>
+        ${r.pos.map((v, k) => `<td class="num${v === best[k] ? ' top-pos' : ''}"><span class="r">${v}</span></td>`).join('')}
+        <td class="num total">${r.sum}${r.hits ? `<small class="hitnote">−${r.hits} in hits</small>` : ''}</td></tr>`;
+    }).join('')}</tbody>`;
+  linkRows($('#pos-table'));
+  if (pinned != null) focusOn(pinned);
+}
+if (M.every(m => m.gws.every(g => Array.isArray(g.pos)))) {
+  scopeSel.innerHTML = '<option value="season">Whole season</option>' + [...EV].reverse().map(e => `<option value="${e.event}">Gameweek ${e.event}</option>`).join('');
+  scopeSel.addEventListener('change', drawPositions);
+  drawPositions();
+} else {
+  $('#pos-section').hidden = true;
+}
 
 // Bump chart
 function drawBump() {

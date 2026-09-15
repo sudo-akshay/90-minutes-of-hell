@@ -21,6 +21,7 @@
   --s5: #e87ba4; --s6: #008300; --s7: #4a3aa7; --s8: #e34948;
   --hn3: #c9423f; --hn2: #efb3ad; --hn1: #f8e1de; --h0: #e9ece6;
   --hp1: #dde9f7; --hp2: #aac9ef; --hp3: #2f72c9;
+  --p1: #72b983; --p2: #479d5d; --p3: #2a7a43; --p4: #14552a;
   --display: "Big Shoulders Display", "Big Shoulders", "Arial Narrow", "Helvetica Neue", sans-serif;
   --sans: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
@@ -42,6 +43,7 @@
     --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
     --hn3: #c24a48; --hn2: #6b3232; --hn1: #372426; --h0: #212924;
     --hp1: #1c2d40; --hp2: #28507f; --hp3: #3f82d6;
+    --p1: #2e6a3f; --p2: #3f9055; --p3: #5fb876; --p4: #98dca8;
   }
 }
 :root[data-theme="dark"] {
@@ -60,6 +62,7 @@
   --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
   --hn3: #c24a48; --hn2: #6b3232; --hn1: #372426; --h0: #212924;
   --hp1: #1c2d40; --hp2: #28507f; --hp3: #3f82d6;
+  --p1: #2e6a3f; --p2: #3f9055; --p3: #5fb876; --p4: #98dca8;
 }
 
 * { box-sizing: border-box; }
@@ -216,7 +219,7 @@ button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 /* Heat grid */
 .heat { min-width: 560px; }
 .heat thead th small { display: block; font-size: 10px; letter-spacing: .02em; text-transform: none; color: var(--muted); }
-.heat th[scope="row"] { font-weight: 500; white-space: nowrap; }
+tbody th[scope="row"], tfoot th[scope="row"] { font-weight: 400; white-space: nowrap; }
 .heat th[scope="row"] .mgr { min-width: 0; }
 .heat td.cell { padding: 3px; }
 .cell-in {
@@ -244,6 +247,33 @@ button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .ramp { display: inline-flex; align-items: center; gap: 6px; }
 .ramp i { display: inline-block; width: 22px; height: 12px; border-radius: 2px; }
 .ring { display: inline-block; width: 22px; height: 12px; border-radius: 2px; box-shadow: inset 0 0 0 2px var(--ink); vertical-align: -2px; margin-right: 4px; }
+
+/* Points by position */
+.pos-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
+.pick { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); }
+.pick select {
+  font: 500 14px/1.4 var(--sans);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--axis);
+  border-radius: 4px;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+.pick select:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.leaders { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px 24px; padding: 14px 16px; border-bottom: 1px solid var(--rule); }
+.leader { display: flex; flex-direction: column; gap: 2px; }
+.leader-v { font-weight: 600; }
+.leader-d { font-size: 13px; color: var(--ink-2); }
+.psw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; }
+.split { min-width: 760px; }
+.split .bar-cell { width: 42%; min-width: 220px; }
+.bar { display: flex; gap: 2px; height: 14px; }
+.bar i { display: block; height: 100%; min-width: 0; }
+.bar i:first-child { border-top-left-radius: 3px; border-bottom-left-radius: 3px; }
+.bar i:last-child { border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
+.split td.top-pos .r { font-weight: 700; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+.hitnote { display: block; font-size: 11px; font-weight: 400; color: var(--muted); }
 
 /* Past seasons */
 .past { min-width: 640px; }
@@ -295,6 +325,23 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
         </thead>
         <tbody></tbody>
       </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-pos" id="pos-section">
+    <div class="pos-head">
+      <div class="sec-head">
+        <h2 id="h-pos">Where the points come from</h2>
+        <p>Points from goalkeepers, defenders, midfielders and forwards, with captain bonus counted in the captain's position. Bars share one scale, so a longer bar means more points.</p>
+      </div>
+      <label class="pick" for="pos-scope">Show
+        <select id="pos-scope"></select>
+      </label>
+    </div>
+    <div class="panel">
+      <div class="leaders" id="pos-leaders"></div>
+      <div class="scroll"><table class="split" id="pos-table"></table></div>
+      <p class="key" id="pos-note">Position points are before transfer hits, so a row can add up to more than the league table total.</p>
     </div>
   </section>
 
@@ -506,11 +553,54 @@ document.querySelectorAll('#legend button').forEach(b => {
   b.addEventListener('pointerenter', () => { if (pinned == null) focusOn(entry); });
   b.addEventListener('pointerleave', () => { if (pinned == null) focusOn(null); });
 });
-document.querySelectorAll('tbody tr[data-entry]').forEach(tr => {
-  const entry = +tr.dataset.entry;
-  tr.addEventListener('pointerenter', () => { if (pinned == null) focusOn(entry); });
-  tr.addEventListener('pointerleave', () => { if (pinned == null) focusOn(null); });
-});
+function linkRows(root) {
+  root.querySelectorAll('tbody tr[data-entry]').forEach(tr => {
+    const entry = +tr.dataset.entry;
+    tr.addEventListener('pointerenter', () => { if (pinned == null) focusOn(entry); });
+    tr.addEventListener('pointerleave', () => { if (pinned == null) focusOn(null); });
+  });
+}
+linkRows(document);
+
+// Points by position
+const POS = [['GK', 'Best goalkeeping'], ['DEF', 'Best defence'], ['MID', 'Best midfield'], ['FWD', 'Best attack']];
+const scopeSel = $('#pos-scope');
+function drawPositions() {
+  const scope = scopeSel.value;
+  const rows = M.map(m => {
+    const gs = scope === 'season' ? m.gws : m.gws.filter(g => g.event === +scope);
+    const pos = [0, 1, 2, 3].map(k => gs.reduce((a, g) => a + g.pos[k], 0));
+    return { m, pos, sum: pos.reduce((a, b) => a + b, 0), hits: gs.reduce((a, g) => a + g.hits, 0) };
+  });
+  const maxLen = Math.max(1, ...rows.map(r => r.pos.reduce((a, v) => a + Math.max(0, v), 0)));
+  const best = [0, 1, 2, 3].map(k => Math.max(...rows.map(r => r.pos[k])));
+  const when = scope === 'season' ? 'this season' : `in GW${scope}`;
+
+  $('#pos-leaders').innerHTML = POS.map(([, title], k) => {
+    const who = rows.filter(r => r.pos[k] === best[k]).map(r => r.m.first);
+    return `<div class="leader"><p class="label"><span class="psw" style="background:var(--p${k + 1})"></span>${title}</p><p class="leader-v">${esc(who.length > 1 ? who.slice(0, -1).join(', ') + ' & ' + who[who.length - 1] : who[0])}</p><p class="leader-d">${best[k]} pts ${when}</p></div>`;
+  }).join('');
+
+  $('#pos-table').innerHTML = `
+    <thead><tr><th scope="col">Manager</th><th scope="col">Split</th>${POS.map(([short], k) => `<th scope="col" class="num"><span class="psw" style="background:var(--p${k + 1})"></span>${short}</th>`).join('')}<th scope="col" class="num">Points</th></tr></thead>
+    <tbody>${rows.map(r => {
+      const len = r.pos.reduce((a, v) => a + Math.max(0, v), 0);
+      const segs = r.pos.map((v, k) => v > 0 ? `<i style="flex:${v} 1 0;background:var(--p${k + 1})" title="${POS[k][0]}: ${v} pts"></i>` : '').join('');
+      return `<tr data-entry="${r.m.entry}"><th scope="row">${mgrCell(r.m)}</th>
+        <td class="bar-cell"><div class="bar" style="width:${(len / maxLen * 100).toFixed(1)}%" role="img" aria-label="${POS.map(([short], k) => `${short} ${r.pos[k]}`).join(', ')}">${segs}</div></td>
+        ${r.pos.map((v, k) => `<td class="num${v === best[k] ? ' top-pos' : ''}"><span class="r">${v}</span></td>`).join('')}
+        <td class="num total">${r.sum}${r.hits ? `<small class="hitnote">−${r.hits} in hits</small>` : ''}</td></tr>`;
+    }).join('')}</tbody>`;
+  linkRows($('#pos-table'));
+  if (pinned != null) focusOn(pinned);
+}
+if (M.every(m => m.gws.every(g => Array.isArray(g.pos)))) {
+  scopeSel.innerHTML = '<option value="season">Whole season</option>' + [...EV].reverse().map(e => `<option value="${e.event}">Gameweek ${e.event}</option>`).join('');
+  scopeSel.addEventListener('change', drawPositions);
+  drawPositions();
+} else {
+  $('#pos-section').hidden = true;
+}
 
 // Bump chart
 function drawBump() {

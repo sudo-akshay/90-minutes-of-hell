@@ -23,6 +23,7 @@ def get(path, **params):
 
 boot = get("bootstrap-static/")
 players = {e["id"]: e["web_name"] for e in boot["elements"]}
+positions = {e["id"]: e["element_type"] for e in boot["elements"]}  # 1 GK, 2 DEF, 3 MID, 4 FWD
 events = [
     {"event": e["id"], "average": e["average_entry_score"], "highest": e["highest_score"],
      "finished": e["finished"], "current": e["is_current"]}
@@ -38,6 +39,13 @@ while True:
         break
     page += 1
 
+live = {}
+
+def live_points(event):
+    if event not in live:
+        live[event] = {e["id"]: e["stats"]["total_points"] for e in get(f"event/{event}/live/")["elements"]}
+    return live[event]
+
 out = []
 for m in managers:
     h = get(f"entry/{m['entry']}/history/")
@@ -45,6 +53,11 @@ for m in managers:
     for gw in h["current"]:
         picks = get(f"entry/{m['entry']}/event/{gw['event']}/picks/")
         cap = next((p for p in picks["picks"] if p["is_captain"]), None)
+        # Multipliers already reflect auto-subs, captaincy and Bench Boost, so this sums to the GW score.
+        pts = live_points(gw["event"])
+        by_pos = [0, 0, 0, 0]
+        for p in picks["picks"]:
+            by_pos[positions[p["element"]] - 1] += pts.get(p["element"], 0) * p["multiplier"]
         gws.append({
             "event": gw["event"], "points": gw["points"], "total": gw["total_points"],
             "overall_rank": gw["overall_rank"], "value": gw["value"] / 10, "bank": gw["bank"] / 10,
@@ -52,6 +65,7 @@ for m in managers:
             "bench": gw["points_on_bench"], "chip": picks.get("active_chip"),
             "captain": players.get(cap["element"]) if cap else None,
             "captain_mult": cap["multiplier"] if cap else None,
+            "pos": by_pos,
         })
     out.append({
         "entry": m["entry"], "name": m["player_name"], "team": m["entry_name"],
