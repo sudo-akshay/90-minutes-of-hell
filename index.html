@@ -112,6 +112,37 @@ b { font-weight: 600; }
 .ticks i.done { background: var(--accent); }
 .ticks i.now { box-shadow: inset 0 0 0 2px var(--ink); }
 
+/* Tabs */
+.tabs {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  gap: 4px;
+  margin-top: -28px;
+  background: var(--ground);
+  border-bottom: 1px solid var(--rule);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tabs a {
+  flex: none;
+  padding: 14px 14px 11px;
+  font: 700 19px/1 var(--display);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+}
+.tabs a:first-child { padding-left: 0; }
+.tabs a:hover { color: var(--ink); }
+.tabs a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--accent); }
+.tabs a:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+.t-short { display: none; }
+.view { display: flex; flex-direction: column; gap: 48px; }
+
 /* Notes strip */
 .notes {
   display: grid;
@@ -363,6 +394,11 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
   .ticks { gap: 2px; }
   .chart { padding: 12px 8px 4px; }
   .leaders { padding: 12px; }
+  .t-long { display: none; }
+  .t-short { display: inline; }
+  .tabs { gap: 0; justify-content: space-between; }
+  .tabs a { padding: 13px 8px 10px; font-size: 17px; }
+  .tabs a:last-child { padding-right: 0; }
 }
 @media (max-width: 380px) {
   th, td { padding-inline: 4px; }
@@ -388,137 +424,155 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
     </div>
   </header>
 
-  <div class="notes" id="notes"></div>
+  <nav class="tabs" id="tabs" aria-label="Dashboard sections">
+    <a href="#table"><span class="t-long">Table</span><span class="t-short">Table</span></a>
+    <a href="#next"><span class="t-long">Next 3 GWs</span><span class="t-short">Next 3</span></a>
+    <a href="#gameweeks"><span class="t-long">Gameweeks</span><span class="t-short">Weeks</span></a>
+    <a href="#squads"><span class="t-long">Squads</span><span class="t-short">Squads</span></a>
+    <a href="#history"><span class="t-long">History</span><span class="t-short">History</span></a>
+  </nav>
 
-  <section aria-labelledby="h-table">
-    <div class="sec-head">
-      <h2 id="h-table">The table</h2>
-      <p id="table-sub">Gap is points behind the leader. Hits and bench points are season totals.</p>
-    </div>
-    <div class="panel scroll">
-      <table class="standings" id="standings">
-        <thead>
-          <tr>
-            <th scope="col">Pos</th>
-            <th scope="col">Manager</th>
-            <th scope="col" class="hide-m">Form</th>
-            <th scope="col" class="num" id="th-gw">GW</th>
-            <th scope="col" class="num">Total</th>
-            <th scope="col" class="num">Gap</th>
-            <th scope="col" id="th-cap" class="hide-m">Captain</th>
-            <th scope="col" class="hide-m">Chips used</th>
-            <th scope="col" class="num hide-m">Hits</th>
-            <th scope="col" class="num hide-m">Bench</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </section>
+  <div class="view" id="view-table" data-view="table" data-title="Table">
+    <div class="notes" id="notes"></div>
 
-  <section aria-labelledby="h-race">
-    <div class="sec-head">
-      <h2 id="h-race">Race for first</h2>
-      <p>League position after each gameweek. Hover a line, or pick a manager below to follow them.</p>
-    </div>
-    <div class="panel chart">
-      <div class="legend" id="legend" aria-label="Follow a manager"></div>
-      <div class="bump" id="bump"></div>
-    </div>
-  </section>
-
-  <section aria-labelledby="h-pred" id="pred-section">
-    <div class="sec-head">
-      <h2 id="h-pred">Next 3 gameweeks</h2>
-      <p id="pred-intro">Projected points if nobody makes transfers or plays chips.</p>
-    </div>
-    <div class="panel">
-      <div class="leaders" id="pred-leaders"></div>
-      <div class="scroll"><table class="pred" id="pred-table"></table></div>
-      <p class="key" id="pred-note">Assumes every manager keeps their current squad and plays no chips. The captain shown is the model's pick, not the manager's.</p>
-    </div>
-  </section>
-
-  <section aria-labelledby="h-pos" id="pos-section">
-    <div class="pos-head">
+    <section aria-labelledby="h-table">
       <div class="sec-head">
-        <h2 id="h-pos">Where the points come from</h2>
-        <p>Points from goalkeepers, defenders, midfielders and forwards, with captain bonus counted in the captain's position. Bars share one scale, so a longer bar means more points.</p>
+        <h2 id="h-table">The table</h2>
+        <p id="table-sub">Gap is points behind the leader. Hits and bench points are season totals.</p>
       </div>
-      <label class="pick" for="pos-scope">Show
-        <select id="pos-scope"></select>
-      </label>
-    </div>
-    <div class="panel">
-      <div class="leaders" id="pos-leaders"></div>
-      <div class="scroll"><table class="split" id="pos-table"></table></div>
-      <p class="key" id="pos-note">Position points are before transfer hits, so a row can add up to more than the league table total.</p>
-    </div>
-  </section>
-
-  <section aria-labelledby="h-weeks">
-    <div class="sec-head">
-      <h2 id="h-weeks">Week by week</h2>
-      <p>Each gameweek score, shaded against the average of every FPL manager that week. Scores are before transfer hits.</p>
-    </div>
-    <div class="panel">
-      <div class="scroll">
-        <table class="heat sticky-first" id="heat"></table>
+      <div class="panel scroll">
+        <table class="standings" id="standings">
+          <thead>
+            <tr>
+              <th scope="col">Pos</th>
+              <th scope="col">Manager</th>
+              <th scope="col" class="hide-m">Form</th>
+              <th scope="col" class="num" id="th-gw">GW</th>
+              <th scope="col" class="num">Total</th>
+              <th scope="col" class="num">Gap</th>
+              <th scope="col" id="th-cap" class="hide-m">Captain</th>
+              <th scope="col" class="hide-m">Chips used</th>
+              <th scope="col" class="num hide-m">Hits</th>
+              <th scope="col" class="num hide-m">Bench</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </div>
-      <div class="key">
-        <span class="ramp">Below average
-          <i style="background:var(--hn3)"></i><i style="background:var(--hn2)"></i><i style="background:var(--hn1)"></i><i style="background:var(--h0)"></i><i style="background:var(--hp1)"></i><i style="background:var(--hp2)"></i><i style="background:var(--hp3)"></i>
-          Above average
-        </span>
-        <span>Steps at ±5, ±15 and ±30 pts</span>
-        <span><span class="ring"></span>Best score in the league that week</span>
-        <span><span class="tag">TC</span> Triple Captain · <span class="tag">FH</span> Free Hit · <span class="tag">WC</span> Wildcard · <span class="tag">BB</span> Bench Boost</span>
+    </section>
+
+    <section aria-labelledby="h-race">
+      <div class="sec-head">
+        <h2 id="h-race">Race for first</h2>
+        <p>League position after each gameweek. Hover a line, or pick a manager below to follow them.</p>
       </div>
-    </div>
-  </section>
+      <div class="panel chart">
+        <div class="legend" id="legend" aria-label="Follow a manager"></div>
+        <div class="bump" id="bump"></div>
+      </div>
+    </section>
 
-  <section aria-labelledby="h-month" id="month-section">
-    <div class="sec-head">
-      <h2 id="h-month">Manager of the Month</h2>
-      <p>Points in each FPL month after transfer hits, counted the same way as the official monthly standings.</p>
-    </div>
-    <div class="panel">
-      <div class="leaders" id="month-leaders"></div>
-      <div class="scroll"><table class="months sticky-first" id="month-table"></table></div>
-    </div>
-  </section>
+    <section aria-labelledby="h-allplay" id="allplay-section">
+      <div class="sec-head">
+        <h2 id="h-allplay">All-play table</h2>
+        <p>The league as if every manager played everyone else each gameweek: a win for outscoring them, a draw for matching them. A huge week still counts as one set of wins, so this rewards steady scoring. Compare it with the real table to see who is riding a few big weeks.</p>
+      </div>
+      <div class="panel">
+        <div class="leaders" id="allplay-leaders"></div>
+        <div class="scroll"><table class="allplay" id="allplay-table"></table></div>
+      </div>
+    </section>
+  </div>
 
-  <section aria-labelledby="h-allplay" id="allplay-section">
-    <div class="sec-head">
-      <h2 id="h-allplay">All-play table</h2>
-      <p>The league as if every manager played everyone else each gameweek: a win for outscoring them, a draw for matching them. A huge week still counts as one set of wins, so this rewards steady scoring. Compare it with the real table to see who is riding a few big weeks.</p>
-    </div>
-    <div class="panel">
-      <div class="leaders" id="allplay-leaders"></div>
-      <div class="scroll"><table class="allplay" id="allplay-table"></table></div>
-    </div>
-  </section>
+  <div class="view" id="view-next" data-view="next" data-title="Next 3 GWs">
+    <section aria-labelledby="h-pred" id="pred-section">
+      <div class="sec-head">
+        <h2 id="h-pred">Next 3 gameweeks</h2>
+        <p id="pred-intro">Projected points if nobody makes transfers or plays chips.</p>
+      </div>
+      <div class="panel">
+        <div class="leaders" id="pred-leaders"></div>
+        <div class="scroll"><table class="pred" id="pred-table"></table></div>
+        <p class="key" id="pred-note">Assumes every manager keeps their current squad and plays no chips. The captain shown is the model's pick, not the manager's.</p>
+      </div>
+    </section>
+  </div>
 
-  <section aria-labelledby="h-cap" id="cap-section">
-    <div class="sec-head">
-      <h2 id="h-cap">Captain regret</h2>
-      <p>Each gameweek, the captain's bonus points against the best captain the manager could have picked from their own starting XI, after auto-subs. Triple Captain weeks count the bonus twice.</p>
-    </div>
-    <div class="panel">
-      <div class="leaders" id="cap-leaders"></div>
-      <div class="scroll"><table class="regret" id="cap-table"></table></div>
-    </div>
-  </section>
+  <div class="view" id="view-gameweeks" data-view="gameweeks" data-title="Gameweeks">
+    <section aria-labelledby="h-weeks">
+      <div class="sec-head">
+        <h2 id="h-weeks">Week by week</h2>
+        <p>Each gameweek score, shaded against the average of every FPL manager that week. Scores are before transfer hits.</p>
+      </div>
+      <div class="panel">
+        <div class="scroll">
+          <table class="heat sticky-first" id="heat"></table>
+        </div>
+        <div class="key">
+          <span class="ramp">Below average
+            <i style="background:var(--hn3)"></i><i style="background:var(--hn2)"></i><i style="background:var(--hn1)"></i><i style="background:var(--h0)"></i><i style="background:var(--hp1)"></i><i style="background:var(--hp2)"></i><i style="background:var(--hp3)"></i>
+            Above average
+          </span>
+          <span>Steps at ±5, ±15 and ±30 pts</span>
+          <span><span class="ring"></span>Best score in the league that week</span>
+          <span><span class="tag">TC</span> Triple Captain · <span class="tag">FH</span> Free Hit · <span class="tag">WC</span> Wildcard · <span class="tag">BB</span> Bench Boost</span>
+        </div>
+      </div>
+    </section>
 
-  <section aria-labelledby="h-past">
-    <div class="sec-head">
-      <h2 id="h-past">Previous seasons</h2>
-      <p>Overall rank among all FPL managers at the end of each season, with points below. Lower rank is better; each manager's best finish is underlined.</p>
-    </div>
-    <div class="panel scroll">
-      <table class="past sticky-first" id="past"></table>
-    </div>
-  </section>
+    <section aria-labelledby="h-month" id="month-section">
+      <div class="sec-head">
+        <h2 id="h-month">Manager of the Month</h2>
+        <p>Points in each FPL month after transfer hits, counted the same way as the official monthly standings.</p>
+      </div>
+      <div class="panel">
+        <div class="leaders" id="month-leaders"></div>
+        <div class="scroll"><table class="months sticky-first" id="month-table"></table></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="view" id="view-squads" data-view="squads" data-title="Squads">
+    <section aria-labelledby="h-pos" id="pos-section">
+      <div class="pos-head">
+        <div class="sec-head">
+          <h2 id="h-pos">Where the points come from</h2>
+          <p>Points from goalkeepers, defenders, midfielders and forwards, with captain bonus counted in the captain's position. Bars share one scale, so a longer bar means more points.</p>
+        </div>
+        <label class="pick" for="pos-scope">Show
+          <select id="pos-scope"></select>
+        </label>
+      </div>
+      <div class="panel">
+        <div class="leaders" id="pos-leaders"></div>
+        <div class="scroll"><table class="split" id="pos-table"></table></div>
+        <p class="key" id="pos-note">Position points are before transfer hits, so a row can add up to more than the league table total.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-cap" id="cap-section">
+      <div class="sec-head">
+        <h2 id="h-cap">Captain regret</h2>
+        <p>Each gameweek, the captain's bonus points against the best captain the manager could have picked from their own starting XI, after auto-subs. Triple Captain weeks count the bonus twice.</p>
+      </div>
+      <div class="panel">
+        <div class="leaders" id="cap-leaders"></div>
+        <div class="scroll"><table class="regret" id="cap-table"></table></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="view" id="view-history" data-view="history" data-title="History">
+    <section aria-labelledby="h-past">
+      <div class="sec-head">
+        <h2 id="h-past">Previous seasons</h2>
+        <p>Overall rank among all FPL managers at the end of each season, with points below. Lower rank is better; each manager's best finish is underlined.</p>
+      </div>
+      <div class="panel scroll">
+        <table class="past sticky-first" id="past"></table>
+      </div>
+    </section>
+  </div>
 
   <footer>
     <p id="source"></p>
@@ -988,6 +1042,25 @@ function markScrollers() {
 markScrollers();
 addEventListener('resize', markScrollers);
 document.fonts?.ready.then(markScrollers);
+
+// Tabs: each view has its own address, e.g. #squads
+const VIEWS = [...document.querySelectorAll('.view')];
+function showView() {
+  const view = VIEWS.find(v => v.dataset.view === location.hash.slice(1)) || VIEWS[0];
+  VIEWS.forEach(v => { v.hidden = v !== view; });
+  document.querySelectorAll('#tabs a').forEach(a => {
+    if (a.getAttribute('href') === '#' + view.dataset.view) a.setAttribute('aria-current', 'page');
+    else a.removeAttribute('aria-current');
+  });
+  document.title = view === VIEWS[0] ? DATA.league.name : `${view.dataset.title} · ${DATA.league.name}`;
+  markScrollers();
+}
+addEventListener('hashchange', () => {
+  showView();
+  const nav = $('#tabs');
+  if (scrollY > nav.offsetTop) scrollTo({ top: nav.offsetTop });
+});
+showView();
 </script>
 
 </body>
