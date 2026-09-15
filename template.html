@@ -66,7 +66,9 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 body {
+  margin: 0;
   background: var(--ground);
   color: var(--ink);
   font: 15px/1.5 var(--sans);
@@ -218,7 +220,7 @@ button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 
 /* Heat grid */
 .heat { min-width: 560px; }
-.heat thead th small { display: block; font-size: 10px; letter-spacing: .02em; text-transform: none; color: var(--muted); }
+thead th small { display: block; font-size: 10px; letter-spacing: .02em; text-transform: none; color: var(--muted); }
 tbody th[scope="row"], tfoot th[scope="row"] { font-weight: 400; white-space: nowrap; }
 .heat th[scope="row"] .mgr { min-width: 0; }
 .heat td.cell { padding: 3px; }
@@ -272,8 +274,27 @@ tbody th[scope="row"], tfoot th[scope="row"] { font-weight: 400; white-space: no
 .bar i { display: block; height: 100%; min-width: 0; }
 .bar i:first-child { border-top-left-radius: 3px; border-bottom-left-radius: 3px; }
 .bar i:last-child { border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
-.split td.top-pos .r { font-weight: 700; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+td.top-pos .r { font-weight: 700; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 3px; }
 .hitnote { display: block; font-size: 11px; font-weight: 400; color: var(--muted); }
+
+/* Captain regret, months, all-play */
+.regret { min-width: 780px; }
+.months { min-width: 480px; }
+.allplay { min-width: 760px; }
+.pill {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 6px;
+  border: 1px solid var(--axis);
+  border-radius: 999px;
+  font: 500 10px/1.6 var(--mono);
+  letter-spacing: .04em;
+  color: var(--muted);
+  vertical-align: 1px;
+}
+.call { font-size: 13px; color: var(--ink-2); white-space: nowrap; }
+.call b { color: var(--ink); font-weight: 600; }
+.luck { font-size: 13px; color: var(--ink-2); white-space: nowrap; }
 
 /* Past seasons */
 .past { min-width: 640px; }
@@ -345,6 +366,17 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
     </div>
   </section>
 
+  <section aria-labelledby="h-cap" id="cap-section">
+    <div class="sec-head">
+      <h2 id="h-cap">Captain regret</h2>
+      <p>Each gameweek, the captain's bonus points against the best captain the manager could have picked from their own starting XI, after auto-subs. Triple Captain weeks count the bonus twice.</p>
+    </div>
+    <div class="panel">
+      <div class="leaders" id="cap-leaders"></div>
+      <div class="scroll"><table class="regret" id="cap-table"></table></div>
+    </div>
+  </section>
+
   <section aria-labelledby="h-race">
     <div class="sec-head">
       <h2 id="h-race">Race for first</h2>
@@ -374,6 +406,28 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
         <span><span class="ring"></span>Best score in the league that week</span>
         <span><span class="tag">TC</span> Triple Captain · <span class="tag">FH</span> Free Hit · <span class="tag">WC</span> Wildcard · <span class="tag">BB</span> Bench Boost</span>
       </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-month" id="month-section">
+    <div class="sec-head">
+      <h2 id="h-month">Manager of the Month</h2>
+      <p>Points in each FPL month after transfer hits, counted the same way as the official monthly standings.</p>
+    </div>
+    <div class="panel">
+      <div class="leaders" id="month-leaders"></div>
+      <div class="scroll"><table class="months" id="month-table"></table></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-allplay" id="allplay-section">
+    <div class="sec-head">
+      <h2 id="h-allplay">All-play table</h2>
+      <p>The league as if every manager played everyone else each gameweek: a win for outscoring them, a draw for matching them. A huge week still counts as one set of wins, so this rewards steady scoring. Compare it with the real table to see who is riding a few big weeks.</p>
+    </div>
+    <div class="panel">
+      <div class="leaders" id="allplay-leaders"></div>
+      <div class="scroll"><table class="allplay" id="allplay-table"></table></div>
     </div>
   </section>
 
@@ -601,6 +655,124 @@ if (M.every(m => m.gws.every(g => Array.isArray(g.pos)))) {
 } else {
   $('#pos-section').hidden = true;
 }
+
+// Shared helpers for the leader strips
+const net = (m, event) => { const g = m.gw[event]; return g ? g.points - g.hits : 0; };
+const namesList = list => list.length > 1 ? list.slice(0, -1).join(', ') + ' & ' + list[list.length - 1] : (list[0] ?? '');
+const leaderHTML = (labelHTML, value, detail) =>
+  `<div class="leader"><p class="label">${labelHTML}</p><p class="leader-v">${esc(value)}</p><p class="leader-d">${esc(detail)}</p></div>`;
+
+// Captain regret
+const capRows = M.map(m => {
+  const weeks = m.gws.filter(g => g.cap && g.best);
+  const r = { m, lost: 0, gained: 0, right: 0, weeks: weeks.length, worst: null };
+  weeks.forEach(g => {
+    const extra = g.cmult - 1;
+    const miss = (g.best.pts - g.cap.pts) * extra;
+    r.lost += miss;
+    r.gained += g.cap.pts * extra;
+    if (miss === 0) r.right++;
+    if (miss > 0 && (!r.worst || miss > r.worst.miss)) r.worst = { miss, g };
+  });
+  return r;
+});
+if (capRows.some(r => r.weeks)) {
+  const minLost = Math.min(...capRows.map(r => r.lost));
+  const maxLost = Math.max(...capRows.map(r => r.lost));
+  const maxRight = Math.max(...capRows.map(r => r.right));
+  const costliest = capRows.filter(r => r.worst).sort((a, b) => b.worst.miss - a.worst.miss)[0];
+  const who = f => namesList(capRows.filter(f).map(r => r.m.first));
+  $('#cap-leaders').innerHTML = [
+    leaderHTML('Sharpest captaincy', who(r => r.lost === minLost), `${minLost} pts lost to captain choices`),
+    leaderHTML('Most right calls', who(r => r.right === maxRight), `Picked the best captain ${maxRight} of ${EV.length} weeks`),
+    leaderHTML('Most points lost', who(r => r.lost === maxLost), `${maxLost} pts lost to captain choices`),
+    costliest
+      ? leaderHTML('Costliest call', costliest.m.first, `GW${costliest.worst.g.event}: ${costliest.worst.g.cap.name} (${costliest.worst.g.cap.pts}) over ${costliest.worst.g.best.name} (${costliest.worst.g.best.pts}), −${costliest.worst.miss} pts`)
+      : leaderHTML('Costliest call', 'Nobody yet', 'Every captain was the best pick'),
+  ].join('');
+  $('#cap-table').innerHTML = `
+    <thead><tr><th scope="col">Manager</th><th scope="col" class="num">Right calls</th><th scope="col" class="num">Captain bonus<small>points earned</small></th><th scope="col" class="num">Best possible<small>from their XI</small></th><th scope="col" class="num">Points lost</th><th scope="col">Costliest call</th></tr></thead>
+    <tbody>${capRows.map(r => `<tr data-entry="${r.m.entry}"><th scope="row">${mgrCell(r.m)}</th>
+      <td class="num">${r.right} of ${r.weeks}</td>
+      <td class="num">${r.gained}</td>
+      <td class="num">${r.gained + r.lost}</td>
+      <td class="num total${r.lost === minLost ? ' top-pos' : ''}"><span class="r">${r.lost ? '−' + r.lost : '0'}</span></td>
+      <td class="call">${r.worst ? `GW${r.worst.g.event}: <b>${esc(r.worst.g.cap.name)}</b> ${r.worst.g.cap.pts} over <b>${esc(r.worst.g.best.name)}</b> ${r.worst.g.best.pts}` : '<span class="muted">No misses</span>'}</td>
+    </tr>`).join('')}</tbody>`;
+  linkRows($('#cap-table'));
+} else {
+  $('#cap-section').hidden = true;
+}
+
+// Manager of the Month
+const months = (DATA.phases || []).filter(ph => ph.start <= LAST);
+if (months.length) {
+  const lastDone = EV[EV.length - 1].finished ? LAST : LAST - 1;
+  const range = ph => ph.start === ph.stop ? `GW${ph.start}` : `GW${ph.start}–${ph.stop}`;
+  const mrows = months.map(ph => {
+    const evs = EV.filter(e => e.event >= ph.start && e.event <= ph.stop).map(e => e.event);
+    const scores = M.map(m => evs.reduce((a, e) => a + net(m, e), 0));
+    return { ph, evs, scores, top: Math.max(...scores), done: ph.stop <= lastDone };
+  });
+  const wins = M.map((m, i) => mrows.filter(r => r.done && r.scores[i] === r.top).length);
+  $('#month-leaders').innerHTML = [...mrows].reverse().map(r => leaderHTML(
+    `${esc(r.ph.name)}${r.done ? '' : '<span class="pill">In progress</span>'}`,
+    namesList(M.filter((m, i) => r.scores[i] === r.top).map(m => m.first)),
+    r.done ? `Won with ${r.top} pts over ${range(r.ph)}` : `Leading with ${r.top} pts after GW${r.evs[r.evs.length - 1]} (${range(r.ph)})`
+  )).join('');
+  $('#month-table').innerHTML = `
+    <thead><tr><th scope="col">Manager</th>${mrows.map(r => `<th scope="col" class="num">${esc(r.ph.name)}<small>${range(r.ph)}${r.done ? '' : ' · so far'}</small></th>`).join('')}<th scope="col" class="num">Months won</th></tr></thead>
+    <tbody>${M.map((m, i) => `<tr data-entry="${m.entry}"><th scope="row">${mgrCell(m)}</th>${mrows.map(r => `<td class="num${r.scores[i] === r.top ? ' top-pos' : ''}"><span class="r">${r.scores[i]}</span></td>`).join('')}<td class="num total">${wins[i]}</td></tr>`).join('')}</tbody>`;
+  linkRows($('#month-table'));
+} else {
+  $('#month-section').hidden = true;
+}
+
+// All-play table
+const ap = M.map(m => ({ m, w: 0, d: 0, l: 0, tops: 0 }));
+EV.forEach(e => {
+  const sc = M.map(m => net(m, e.event));
+  const best = Math.max(...sc);
+  ap.forEach((r, i) => {
+    if (sc[i] === best) r.tops++;
+    sc.forEach((v, j) => { if (i !== j) { if (sc[i] > v) r.w++; else if (sc[i] < v) r.l++; else r.d++; } });
+  });
+});
+ap.forEach(r => { const n = r.w + r.d + r.l; r.pct = n ? (r.w + r.d / 2) / n : 0; });
+const apSorted = [...ap].sort((a, b) => b.pct - a.pct || a.m.i - b.m.i);
+apSorted.forEach(r => {
+  r.pos = apSorted.findIndex(x => x.pct === r.pct) + 1;
+  r.joint = apSorted.filter(x => x.pct === r.pct).length > 1;
+  r.real = RANK[LAST][r.m.entry];
+  r.diff = r.pos - r.real.pos; // positive: the real table has them higher than all-play form
+});
+const maxDiff = Math.max(...ap.map(r => r.diff));
+const minDiff = Math.min(...ap.map(r => r.diff));
+const maxTops = Math.max(...ap.map(r => r.tops));
+const pct = r => Math.round(r.pct * 100) + '%';
+const places = n => `${n} ${n === 1 ? 'place' : 'places'}`;
+$('#allplay-leaders').innerHTML = [
+  leaderHTML('Most consistent', namesList(apSorted.filter(r => r.pct === apSorted[0].pct).map(r => r.m.first)), `Won ${pct(apSorted[0])} of weekly matchups`),
+  leaderHTML('Most weeks top', namesList(ap.filter(r => r.tops === maxTops).map(r => r.m.first)), `Top score in the league ${maxTops} of ${EV.length} weeks`),
+  maxDiff > 0
+    ? leaderHTML('Table flatters', namesList(ap.filter(r => r.diff === maxDiff).map(r => r.m.first)), `${places(maxDiff)} higher than all-play form`)
+    : leaderHTML('Table flatters', 'Nobody', 'The real table matches all-play form'),
+  minDiff < 0
+    ? leaderHTML('Table is harsh on', namesList(ap.filter(r => r.diff === minDiff).map(r => r.m.first)), `${places(-minDiff)} lower than all-play form`)
+    : leaderHTML('Table is harsh on', 'Nobody', 'The real table matches all-play form'),
+].join('');
+$('#allplay-table').innerHTML = `
+  <thead><tr><th scope="col">Pos</th><th scope="col">Manager</th><th scope="col" class="num">Won</th><th scope="col" class="num">Drawn</th><th scope="col" class="num">Lost</th><th scope="col" class="num">Win rate</th><th scope="col" class="num">Weeks top</th><th scope="col" class="num">Real position</th><th scope="col">Real table vs all-play</th></tr></thead>
+  <tbody>${apSorted.map(r => `<tr data-entry="${r.m.entry}">
+    <td class="pos"><span class="pos-n">${r.joint ? '=' : ''}${r.pos}</span></td>
+    <td>${mgrCell(r.m)}</td>
+    <td class="num">${r.w}</td><td class="num">${r.d}</td><td class="num">${r.l}</td>
+    <td class="num total">${pct(r)}</td>
+    <td class="num">${r.tops}</td>
+    <td class="num">${posLabel(r.real)}</td>
+    <td class="luck">${r.diff > 0 ? `▲ ${places(r.diff)} higher` : r.diff < 0 ? `▼ ${places(-r.diff)} lower` : 'Same'}</td>
+  </tr>`).join('')}</tbody>`;
+linkRows($('#allplay-table'));
 
 // Bump chart
 function drawBump() {
