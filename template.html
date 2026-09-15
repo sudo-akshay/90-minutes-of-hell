@@ -349,6 +349,17 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
     </div>
   </section>
 
+  <section aria-labelledby="h-race">
+    <div class="sec-head">
+      <h2 id="h-race">Race for first</h2>
+      <p>League position after each gameweek. Hover a line, or pick a manager below to follow them.</p>
+    </div>
+    <div class="panel chart">
+      <div class="legend" id="legend" aria-label="Follow a manager"></div>
+      <div class="bump" id="bump"></div>
+    </div>
+  </section>
+
   <section aria-labelledby="h-pos" id="pos-section">
     <div class="pos-head">
       <div class="sec-head">
@@ -363,28 +374,6 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
       <div class="leaders" id="pos-leaders"></div>
       <div class="scroll"><table class="split" id="pos-table"></table></div>
       <p class="key" id="pos-note">Position points are before transfer hits, so a row can add up to more than the league table total.</p>
-    </div>
-  </section>
-
-  <section aria-labelledby="h-cap" id="cap-section">
-    <div class="sec-head">
-      <h2 id="h-cap">Captain regret</h2>
-      <p>Each gameweek, the captain's bonus points against the best captain the manager could have picked from their own starting XI, after auto-subs. Triple Captain weeks count the bonus twice.</p>
-    </div>
-    <div class="panel">
-      <div class="leaders" id="cap-leaders"></div>
-      <div class="scroll"><table class="regret" id="cap-table"></table></div>
-    </div>
-  </section>
-
-  <section aria-labelledby="h-race">
-    <div class="sec-head">
-      <h2 id="h-race">Race for first</h2>
-      <p>League position after each gameweek. Hover a line, or pick a manager below to follow them.</p>
-    </div>
-    <div class="panel chart">
-      <div class="legend" id="legend" aria-label="Follow a manager"></div>
-      <div class="bump" id="bump"></div>
     </div>
   </section>
 
@@ -428,6 +417,17 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
     <div class="panel">
       <div class="leaders" id="allplay-leaders"></div>
       <div class="scroll"><table class="allplay" id="allplay-table"></table></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-cap" id="cap-section">
+    <div class="sec-head">
+      <h2 id="h-cap">Captain regret</h2>
+      <p>Each gameweek, the captain's bonus points against the best captain the manager could have picked from their own starting XI, after auto-subs. Triple Captain weeks count the bonus twice.</p>
+    </div>
+    <div class="panel">
+      <div class="leaders" id="cap-leaders"></div>
+      <div class="scroll"><table class="regret" id="cap-table"></table></div>
     </div>
   </section>
 
