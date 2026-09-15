@@ -412,6 +412,38 @@ td.top-pos .r { font-weight: 700; text-decoration: underline; text-decoration-co
 @media (max-width: 1000px) { .titles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .titles { grid-template-columns: minmax(0, 1fr); } }
 
+/* Player ownership */
+.own { min-width: 0; }
+.own-filters { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; padding: 12px 16px; border-bottom: 1px solid var(--rule); }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg button {
+  padding: 4px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-2);
+  font: 500 13px/1.4 var(--sans);
+  cursor: pointer;
+}
+.seg button:hover { background: var(--hover); color: var(--ink); }
+.seg button[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); background: var(--hover); }
+.pips { display: inline-flex; gap: 3px; vertical-align: middle; }
+.pip { display: block; width: 10px; height: 10px; border-radius: 2px; box-shadow: inset 0 0 0 1px var(--axis); }
+.pip.xi { background: var(--c); box-shadow: none; }
+.pip.bench { box-shadow: inset 0 0 0 2px var(--c); }
+.pip.on { outline: 2px solid var(--ink); outline-offset: 1px; }
+.own-count { margin-left: 8px; font-size: 13px; color: var(--ink-2); white-space: nowrap; }
+.own-cell { white-space: nowrap; }
+.own .who { font-size: 13px; color: var(--ink-2); }
+.own-empty { padding: 20px 16px; color: var(--muted); }
+.key .pip { display: inline-block; vertical-align: -1px; margin-right: 4px; }
+@media (max-width: 640px) {
+  .own-count { display: block; margin: 4px 0 0; }
+  .own-cell { white-space: normal; }
+  .pips { gap: 2px; }
+  .pip { width: 9px; height: 9px; }
+}
+
 /* Next gameweeks */
 .pred td.num small { display: block; font-size: 11px; font-weight: 400; color: var(--muted); white-space: nowrap; }
 .range { position: relative; height: 14px; min-width: 150px; }
@@ -626,6 +658,35 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
   </div>
 
   <div class="view" id="view-squads" data-view="squads" data-title="Squads">
+    <section aria-labelledby="h-own" id="own-section">
+      <div class="sec-head">
+        <h2 id="h-own">Player ownership</h2>
+        <p>Every player in the league's current squads and who owns them. Each square is one manager, in table order: filled means in their starting XI, outlined means on their bench.</p>
+      </div>
+      <div class="panel">
+        <div class="leaders" id="own-leaders"></div>
+        <div class="own-filters">
+          <div class="seg" id="own-pos" role="group" aria-label="Position">
+            <button type="button" id="own-pos-all" data-pos="all" aria-pressed="true">All</button>
+            <button type="button" id="own-pos-gk" data-pos="GK" aria-pressed="false">GK</button>
+            <button type="button" id="own-pos-def" data-pos="DEF" aria-pressed="false">DEF</button>
+            <button type="button" id="own-pos-mid" data-pos="MID" aria-pressed="false">MID</button>
+            <button type="button" id="own-pos-fwd" data-pos="FWD" aria-pressed="false">FWD</button>
+          </div>
+          <label class="pick" for="own-scope">Owned by
+            <select id="own-scope">
+              <option value="all">Any number of managers</option>
+              <option value="everyone">Everyone</option>
+              <option value="most">Half or more</option>
+              <option value="diff">One or two (differentials)</option>
+            </select>
+          </label>
+        </div>
+        <div class="scroll"><table class="own" id="own-table"></table></div>
+        <div class="key" id="own-key"></div>
+      </div>
+    </section>
+
     <section aria-labelledby="h-pos" id="pos-section">
       <div class="pos-head">
         <div class="sec-head">
@@ -1227,6 +1288,88 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
       btn.textContent = paused ? 'Play' : 'Pause';
       btn.setAttribute('aria-pressed', String(paused));
     });
+  }
+}
+
+// Player ownership
+{
+  const P = DATA.players || {};
+  const owned = {};
+  M.forEach(m => (m.squad || []).forEach(sp => { (owned[sp.id] ||= []).push({ m, xi: sp.xi }); }));
+  const lastCap = m => m.gws[m.gws.length - 1]?.captain_id;
+  const rows = Object.entries(owned).filter(([id]) => P[id]).map(([id, own]) => ({
+    id: +id,
+    p: P[id],
+    own,
+    n: own.length,
+    xi: own.filter(o => o.xi).length,
+    caps: M.filter(m => lastCap(m) === +id).length,
+    here: own.length / M.length * 100,
+  }));
+  rows.sort((a, b) => b.n - a.n || b.xi - a.xi || b.p.points - a.p.points || a.p.name.localeCompare(b.p.name));
+
+  if (!rows.length) {
+    $('#own-section').hidden = true;
+  } else {
+    const pctText = v => (v >= 10 || v === 0 ? Math.round(v) : v.toFixed(1)) + '%';
+    const topList = list => list.length > 3 ? `${list.slice(0, 3).join(', ')} and ${list.length - 3} more` : namesList(list);
+    const maxN = rows[0].n;
+    const maxCaps = Math.max(...rows.map(r => r.caps));
+    const diffs = rows.filter(r => r.n === 1).sort((a, b) => b.p.points - a.p.points);
+    const loved = [...rows].sort((a, b) => (b.here - b.p.selected) - (a.here - a.p.selected))[0];
+    $('#own-leaders').innerHTML = [
+      leaderHTML('Most owned', topList(rows.filter(r => r.n === maxN).map(r => r.p.name)), maxN === M.length ? 'In every squad in the league' : `In ${maxN} of ${M.length} squads`),
+      maxCaps
+        ? leaderHTML(`GW${LAST} captain`, namesList(rows.filter(r => r.caps === maxCaps).map(r => r.p.name)), `Captained by ${maxCaps} of ${M.length} managers`)
+        : leaderHTML(`GW${LAST} captain`, 'No data', 'Captain picks are missing'),
+      diffs.length
+        ? leaderHTML('Best differential', diffs[0].p.name, `${diffs[0].p.points} pts this season, owned only by ${diffs[0].own[0].m.first}`)
+        : leaderHTML('Best differential', 'None', 'Every owned player is shared'),
+      leaderHTML('League favourite', loved.p.name, `${pctText(loved.here)} of this league vs ${pctText(loved.p.selected)} of all FPL managers`),
+    ].join('');
+
+    const ownersText = r => r.n === M.length && r.xi === M.length
+      ? 'Everyone'
+      : namesList(r.own.map(o => o.m.first + (o.xi ? '' : ' (bench)')));
+    const pips = r => {
+      const byEntry = new Map(r.own.map(o => [o.m.entry, o]));
+      return `<span class="pips" role="img" aria-label="Owned by ${esc(ownersText(r))}">${M.map(m => {
+        const o = byEntry.get(m.entry);
+        const state = o ? (o.xi ? 'xi' : 'bench') : '';
+        return `<i class="pip ${state}" data-entry="${m.entry}" style="--c:var(--s${m.i + 1})" title="${esc(m.first)}: ${o ? (o.xi ? 'starting XI' : 'bench') : 'not owned'}"></i>`;
+      }).join('')}</span>`;
+    };
+
+    const posBtns = [...document.querySelectorAll('#own-pos button')];
+    const scopeSel = $('#own-scope');
+    const draw = () => {
+      const pos = posBtns.find(b => b.getAttribute('aria-pressed') === 'true')?.dataset.pos || 'all';
+      const scope = scopeSel.value;
+      const shown = rows.filter(r =>
+        (pos === 'all' || r.p.pos === pos) &&
+        (scope === 'all' || (scope === 'everyone' && r.n === M.length) || (scope === 'most' && r.n >= M.length / 2) || (scope === 'diff' && r.n <= 2)));
+      $('#own-table').innerHTML = `
+        <thead><tr><th scope="col">Player</th><th scope="col">Owners</th><th scope="col" class="num hide-m">Starting</th><th scope="col" class="num hide-m">GW${LAST} captain</th><th scope="col" class="num hide-m">Here</th><th scope="col" class="num">All FPL</th><th scope="col" class="num hide-m">Season pts</th><th scope="col" class="hide-m hide-t">Owned by</th></tr></thead>
+        <tbody>${shown.length ? shown.map(r => `<tr>
+          <th scope="row"><div class="mgr-t"><b>${esc(r.p.name)}</b><span class="team">${esc(r.p.team)} · ${esc(r.p.pos)} · £${r.p.price.toFixed(1)}m</span></div></th>
+          <td class="own-cell">${pips(r)}<span class="own-count">${r.n} of ${M.length}</span></td>
+          <td class="num hide-m">${r.xi}</td>
+          <td class="num hide-m">${r.caps || '<span class="muted">–</span>'}</td>
+          <td class="num hide-m">${pctText(r.here)}</td>
+          <td class="num">${pctText(r.p.selected)}</td>
+          <td class="num hide-m">${r.p.points}</td>
+          <td class="who hide-m hide-t">${esc(ownersText(r))}</td>
+        </tr>`).join('') : `<tr><td colspan="8" class="own-empty">No players match these filters.</td></tr>`}</tbody>`;
+      if (pinned != null) focusOn(pinned);
+      markScrollers?.();
+    };
+    posBtns.forEach(b => b.addEventListener('click', () => {
+      posBtns.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+      draw();
+    }));
+    scopeSel.addEventListener('change', draw);
+    $('#own-key').innerHTML = `<span><i class="pip xi" style="--c:var(--ink-2)"></i>Starting XI</span><span><i class="pip bench" style="--c:var(--ink-2)"></i>Bench</span><span>Squares in table order: ${M.map(m => `<span class="swatch" style="display:inline-block;background:var(--s${m.i + 1});margin:0 3px 0 6px"></span>${esc(m.first)}`).join('')}</span><span>“All FPL” is the share of every FPL manager who owns the player.</span>`;
+    draw();
   }
 }
 

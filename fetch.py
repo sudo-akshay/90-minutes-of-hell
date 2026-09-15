@@ -77,6 +77,7 @@ for m in managers:
             "bench": gw["points_on_bench"], "chip": picks.get("active_chip"),
             "captain": players.get(cap["element"]) if cap else None,
             "captain_mult": cap["multiplier"] if cap else None,
+            "captain_id": cap["element"] if cap else None,
             "pos": by_pos,
             "xi": [p["element"] for p in picks["picks"] if p["multiplier"] > 0],
             "cmult": 3 if picks.get("active_chip") == "3xc" else 2,
@@ -114,8 +115,17 @@ for pid, own in owners.items():
                  "added": e["news_added"], "owners": own})
 news.sort(key=lambda n: n["added"] or "", reverse=True)
 
+# Details for every player someone in the league owns, for the ownership table.
+players = {
+    str(pid): {"name": elements[pid]["web_name"], "team": teams[elements[pid]["team"]],
+               "pos": ["GK", "DEF", "MID", "FWD"][elements[pid]["element_type"] - 1],
+               "price": elements[pid]["now_cost"] / 10, "selected": float(elements[pid]["selected_by_percent"]),
+               "points": elements[pid]["total_points"]}
+    for pid in owners
+}
+
 data = {"league": {"id": league["id"], "name": league["name"], "admin_entry": league["admin_entry"]},
-        "events": events, "phases": phases, "managers": out, "news": news,
+        "events": events, "phases": phases, "managers": out, "news": news, "players": players,
         "fetched_at": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())}
 OUT.write_text(json.dumps(data, indent=1, ensure_ascii=False))
 print(f"{league['name']}: {len(out)} managers, up to GW{events[-1]['event'] if events else 0}")

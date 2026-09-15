@@ -170,6 +170,7 @@
      "chip": null,
      "captain": "B.Fernandes",
      "captain_mult": 2,
+     "captain_id": 426,
      "pos": [
       6,
       11,
@@ -212,6 +213,7 @@
      "chip": null,
      "captain": "B.Fernandes",
      "captain_mult": 2,
+     "captain_id": 426,
      "pos": [
       6,
       15,
@@ -254,6 +256,7 @@
      "chip": "3xc",
      "captain": "Haaland",
      "captain_mult": 3,
+     "captain_id": 411,
      "pos": [
       3,
       12,
@@ -296,6 +299,7 @@
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
+     "captain_id": 411,
      "pos": [
       14,
       8,
@@ -449,6 +453,7 @@
      "chip": null,
      "captain": "B.Fernandes",
      "captain_mult": 2,
+     "captain_id": 426,
      "pos": [
       2,
       16,
@@ -491,6 +496,7 @@
      "chip": null,
      "captain": "B.Fernandes",
      "captain_mult": 2,
+     "captain_id": 426,
      "pos": [
       1,
       22,
@@ -533,6 +539,7 @@
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
+     "captain_id": 411,
      "pos": [
       6,
       11,
@@ -575,6 +582,7 @@
      "chip": null,
      "captain": "Isak",
      "captain_mult": 2,
+     "captain_id": 379,
      "pos": [
       7,
       14,
@@ -710,6 +718,7 @@
      "chip": null,
      "captain": "B.Fernandes",
      "captain_mult": 2,
+     "captain_id": 426,
      "pos": [
       2,
       16,
@@ -752,6 +761,7 @@
      "chip": null,
      "captain": "B.Fernandes",
      "captain_mult": 2,
+     "captain_id": 426,
      "pos": [
       1,
       16,
@@ -794,6 +804,7 @@
      "chip": "3xc",
      "captain": "Haaland",
      "captain_mult": 3,
+     "captain_id": 411,
      "pos": [
       3,
       6,
@@ -836,6 +847,7 @@
      "chip": null,
      "captain": "Palmer",
      "captain_mult": 2,
+     "captain_id": 154,
      "pos": [
       8,
       13,
@@ -989,6 +1001,7 @@
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
+     "captain_id": 411,
      "pos": [
       6,
       9,
@@ -1031,6 +1044,7 @@
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
+     "captain_id": 411,
      "pos": [
       6,
       14,
@@ -1073,6 +1087,7 @@
      "chip": "3xc",
      "captain": "Haaland",
      "captain_mult": 3,
+     "captain_id": 411,
      "pos": [
       3,
       21,
@@ -1115,6 +1130,7 @@
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
+     "captain_id": 411,
      "pos": [
       14,
       20,
@@ -1268,6 +1284,7 @@
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
+     "captain_id": 411,
      "pos": [
       1,
       23,
@@ -1310,6 +1327,7 @@
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
+     "captain_id": 411,
      "pos": [
       6,
       16,
@@ -1352,6 +1370,7 @@
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
+     "captain_id": 411,
      "pos": [
       2,
       21,
@@ -1394,6 +1413,7 @@
      "chip": null,
      "captain": "João Pedro",
      "captain_mult": 2,
+     "captain_id": 165,
      "pos": [
       6,
       18,
@@ -1517,6 +1537,7 @@
      "chip": null,
      "captain": "João Pedro",
      "captain_mult": 2,
+     "captain_id": 165,
      "pos": [
       6,
       8,
@@ -1559,6 +1580,7 @@
      "chip": null,
      "captain": "João Pedro",
      "captain_mult": 2,
+     "captain_id": 165,
      "pos": [
       6,
       4,
@@ -1601,6 +1623,7 @@
      "chip": null,
      "captain": "João Pedro",
      "captain_mult": 2,
+     "captain_id": 165,
      "pos": [
       3,
       7,
@@ -1643,6 +1666,7 @@
      "chip": null,
      "captain": "João Pedro",
      "captain_mult": 2,
+     "captain_id": 165,
      "pos": [
       14,
       10,
@@ -1759,6 +1783,7 @@
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
+     "captain_id": 411,
      "pos": [
       6,
       3,
@@ -1801,6 +1826,7 @@
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
+     "captain_id": 411,
      "pos": [
       6,
       4,
@@ -1843,6 +1869,7 @@
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
+     "captain_id": 411,
      "pos": [
       3,
       8,
@@ -1885,6 +1912,7 @@
      "chip": null,
      "captain": "João Pedro",
      "captain_mult": 2,
+     "captain_id": 165,
      "pos": [
       14,
       11,
@@ -2014,6 +2042,7 @@
      "chip": null,
      "captain": "B.Fernandes",
      "captain_mult": 2,
+     "captain_id": 426,
      "pos": [
       2,
       8,
@@ -2056,6 +2085,7 @@
      "chip": "freehit",
      "captain": "Palmer",
      "captain_mult": 2,
+     "captain_id": 154,
      "pos": [
       10,
       3,
@@ -2098,6 +2128,7 @@
      "chip": "wildcard",
      "captain": "Haaland",
      "captain_mult": 2,
+     "captain_id": 411,
      "pos": [
       6,
       16,
@@ -2140,6 +2171,7 @@
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
+     "captain_id": 411,
      "pos": [
       2,
       5,
@@ -2283,7 +2315,545 @@
    ]
   }
  ],
- "fetched_at": "2026-09-15 17:56 UTC",
+ "players": {
+  "1": {
+   "name": "Raya",
+   "team": "ARS",
+   "pos": "GK",
+   "price": 6.0,
+   "selected": 40.5,
+   "points": 29
+  },
+  "8": {
+   "name": "Calafiori",
+   "team": "ARS",
+   "pos": "DEF",
+   "price": 5.8,
+   "selected": 50.1,
+   "points": 28
+  },
+  "173": {
+   "name": "Thomas",
+   "team": "COV",
+   "pos": "DEF",
+   "price": 4.0,
+   "selected": 9.0,
+   "points": 15
+  },
+  "277": {
+   "name": "Egan",
+   "team": "HUL",
+   "pos": "DEF",
+   "price": 4.1,
+   "selected": 6.8,
+   "points": 25
+  },
+  "426": {
+   "name": "B.Fernandes",
+   "team": "MUN",
+   "pos": "MID",
+   "price": 12.0,
+   "selected": 41.7,
+   "points": 29
+  },
+  "427": {
+   "name": "Mbeumo",
+   "team": "MUN",
+   "pos": "MID",
+   "price": 7.9,
+   "selected": 22.8,
+   "points": 23
+  },
+  "397": {
+   "name": "Semenyo",
+   "team": "MCI",
+   "pos": "MID",
+   "price": 8.4,
+   "selected": 15.5,
+   "points": 16
+  },
+  "237": {
+   "name": "Ndiaye",
+   "team": "MCI",
+   "pos": "MID",
+   "price": 5.9,
+   "selected": 8.0,
+   "points": 17
+  },
+  "346": {
+   "name": "Calvert-Lewin",
+   "team": "LEE",
+   "pos": "FWD",
+   "price": 6.0,
+   "selected": 22.6,
+   "points": 20
+  },
+  "411": {
+   "name": "Haaland",
+   "team": "MCI",
+   "pos": "FWD",
+   "price": 15.5,
+   "selected": 72.4,
+   "points": 33
+  },
+  "165": {
+   "name": "João Pedro",
+   "team": "CHE",
+   "pos": "FWD",
+   "price": 7.8,
+   "selected": 75.3,
+   "points": 33
+  },
+  "497": {
+   "name": "Dubravka",
+   "team": "TOT",
+   "pos": "GK",
+   "price": 4.0,
+   "selected": 17.6,
+   "points": 0
+  },
+  "212": {
+   "name": "Hughes",
+   "team": "CRY",
+   "pos": "MID",
+   "price": 4.4,
+   "selected": 8.0,
+   "points": 2
+  },
+  "259": {
+   "name": "Diop",
+   "team": "IPS",
+   "pos": "DEF",
+   "price": 4.0,
+   "selected": 13.8,
+   "points": 8
+  },
+  "175": {
+   "name": "van Ewijk",
+   "team": "COV",
+   "pos": "DEF",
+   "price": 4.0,
+   "selected": 10.1,
+   "points": 6
+  },
+  "496": {
+   "name": "Kinsky",
+   "team": "TOT",
+   "pos": "GK",
+   "price": 4.5,
+   "selected": 18.4,
+   "points": 16
+  },
+  "418": {
+   "name": "Maguire",
+   "team": "MUN",
+   "pos": "DEF",
+   "price": 4.9,
+   "selected": 10.1,
+   "points": 8
+  },
+  "31": {
+   "name": "Konsa",
+   "team": "ARS",
+   "pos": "DEF",
+   "price": 4.5,
+   "selected": 18.1,
+   "points": 11
+  },
+  "368": {
+   "name": "Szoboszlai",
+   "team": "LIV",
+   "pos": "MID",
+   "price": 7.0,
+   "selected": 36.1,
+   "points": 18
+  },
+  "124": {
+   "name": "Groß",
+   "team": "BHA",
+   "pos": "MID",
+   "price": 5.6,
+   "selected": 18.7,
+   "points": 33
+  },
+  "379": {
+   "name": "Isak",
+   "team": "LIV",
+   "pos": "FWD",
+   "price": 9.1,
+   "selected": 22.1,
+   "points": 25
+  },
+  "301": {
+   "name": "Palmer",
+   "team": "IPS",
+   "pos": "GK",
+   "price": 4.0,
+   "selected": 4.1,
+   "points": 0
+  },
+  "499": {
+   "name": "Pedro Porro",
+   "team": "TOT",
+   "pos": "DEF",
+   "price": 5.5,
+   "selected": 9.2,
+   "points": 8
+  },
+  "454": {
+   "name": "Elanga",
+   "team": "NEW",
+   "pos": "MID",
+   "price": 6.2,
+   "selected": 9.6,
+   "points": 18
+  },
+  "109": {
+   "name": "Verbruggen",
+   "team": "BHA",
+   "pos": "GK",
+   "price": 4.5,
+   "selected": 22.0,
+   "points": 17
+  },
+  "87": {
+   "name": "Ajer",
+   "team": "BRE",
+   "pos": "DEF",
+   "price": 4.5,
+   "selected": 4.3,
+   "points": 14
+  },
+  "557": {
+   "name": "Tzolis",
+   "team": "ARS",
+   "pos": "MID",
+   "price": 6.4,
+   "selected": 14.7,
+   "points": 14
+  },
+  "154": {
+   "name": "Palmer",
+   "team": "CHE",
+   "pos": "MID",
+   "price": 9.7,
+   "selected": 26.8,
+   "points": 26
+  },
+  "399": {
+   "name": "Cherki",
+   "team": "MCI",
+   "pos": "MID",
+   "price": 7.8,
+   "selected": 28.4,
+   "points": 26
+  },
+  "127": {
+   "name": "Gomez",
+   "team": "BHA",
+   "pos": "MID",
+   "price": 5.0,
+   "selected": 4.6,
+   "points": 16
+  },
+  "503": {
+   "name": "Van de Ven",
+   "team": "TOT",
+   "pos": "DEF",
+   "price": 5.0,
+   "selected": 3.9,
+   "points": 15
+  },
+  "419": {
+   "name": "Martinez",
+   "team": "MUN",
+   "pos": "DEF",
+   "price": 5.0,
+   "selected": 1.3,
+   "points": 6
+  },
+  "40": {
+   "name": "Rogers",
+   "team": "CHE",
+   "pos": "MID",
+   "price": 7.7,
+   "selected": 37.7,
+   "points": 27
+  },
+  "565": {
+   "name": "M.Sangaré",
+   "team": "BRE",
+   "pos": "MID",
+   "price": 5.7,
+   "selected": 12.1,
+   "points": 22
+  },
+  "249": {
+   "name": "Barry",
+   "team": "EVE",
+   "pos": "FWD",
+   "price": 5.6,
+   "selected": 6.5,
+   "points": 14
+  },
+  "28": {
+   "name": "Martinez",
+   "team": "CHE",
+   "pos": "GK",
+   "price": 5.0,
+   "selected": 5.0,
+   "points": 7
+  },
+  "43": {
+   "name": "Tielemans",
+   "team": "MUN",
+   "pos": "MID",
+   "price": 5.8,
+   "selected": 1.6,
+   "points": 10
+  },
+  "552": {
+   "name": "Brobbey",
+   "team": "SUN",
+   "pos": "FWD",
+   "price": 5.8,
+   "selected": 6.1,
+   "points": 7
+  },
+  "226": {
+   "name": "Pickford",
+   "team": "EVE",
+   "pos": "GK",
+   "price": 5.5,
+   "selected": 8.8,
+   "points": 17
+  },
+  "388": {
+   "name": "Guéhi",
+   "team": "MCI",
+   "pos": "DEF",
+   "price": 6.0,
+   "selected": 18.5,
+   "points": 26
+  },
+  "290": {
+   "name": "Slater",
+   "team": "HUL",
+   "pos": "MID",
+   "price": 4.5,
+   "selected": 5.6,
+   "points": 13
+  },
+  "423": {
+   "name": "Shaw",
+   "team": "MUN",
+   "pos": "DEF",
+   "price": 4.4,
+   "selected": 10.3,
+   "points": 7
+  },
+  "272": {
+   "name": "Kusi-Asare",
+   "team": "FUL",
+   "pos": "FWD",
+   "price": 4.5,
+   "selected": 5.9,
+   "points": 0
+  },
+  "387": {
+   "name": "O'Reilly",
+   "team": "MCI",
+   "pos": "DEF",
+   "price": 6.4,
+   "selected": 12.4,
+   "points": 5
+  },
+  "356": {
+   "name": "Virgil",
+   "team": "LIV",
+   "pos": "DEF",
+   "price": 6.5,
+   "selected": 16.7,
+   "points": 17
+  },
+  "142": {
+   "name": "James",
+   "team": "CHE",
+   "pos": "DEF",
+   "price": 5.4,
+   "selected": 7.2,
+   "points": 3
+  },
+  "377": {
+   "name": "Munoz",
+   "team": "LIV",
+   "pos": "MID",
+   "price": 6.5,
+   "selected": 1.1,
+   "points": 14
+  },
+  "480": {
+   "name": "Gibbs-White",
+   "team": "NFO",
+   "pos": "MID",
+   "price": 7.9,
+   "selected": 12.0,
+   "points": 26
+  },
+  "55": {
+   "name": "Watkins",
+   "team": "AVL",
+   "pos": "FWD",
+   "price": 7.8,
+   "selected": 2.8,
+   "points": 0
+  },
+  "273": {
+   "name": "Phillips",
+   "team": "HUL",
+   "pos": "GK",
+   "price": 4.0,
+   "selected": 1.4,
+   "points": 0
+  },
+  "556": {
+   "name": "Targett",
+   "team": "HUL",
+   "pos": "DEF",
+   "price": 4.0,
+   "selected": 1.8,
+   "points": 1
+  },
+  "498": {
+   "name": "Senesi",
+   "team": "TOT",
+   "pos": "DEF",
+   "price": 5.8,
+   "selected": 4.0,
+   "points": 3
+  },
+  "586": {
+   "name": "Mendy",
+   "team": "HUL",
+   "pos": "DEF",
+   "price": 4.1,
+   "selected": 7.3,
+   "points": 25
+  },
+  "201": {
+   "name": "Muñoz",
+   "team": "NFO",
+   "pos": "DEF",
+   "price": 5.4,
+   "selected": 5.5,
+   "points": 3
+  },
+  "428": {
+   "name": "Cunha",
+   "team": "MUN",
+   "pos": "MID",
+   "price": 7.9,
+   "selected": 6.1,
+   "points": 16
+  },
+  "453": {
+   "name": "Barnes",
+   "team": "NEW",
+   "pos": "MID",
+   "price": 6.0,
+   "selected": 3.1,
+   "points": 19
+  },
+  "308": {
+   "name": "Furlong",
+   "team": "IPS",
+   "pos": "DEF",
+   "price": 4.0,
+   "selected": 0.5,
+   "points": 1
+  },
+  "422": {
+   "name": "Mazraoui",
+   "team": "MUN",
+   "pos": "DEF",
+   "price": 4.4,
+   "selected": 0.5,
+   "points": 3
+  },
+  "572": {
+   "name": "Tzolakis",
+   "team": "HUL",
+   "pos": "GK",
+   "price": 4.6,
+   "selected": 10.8,
+   "points": 28
+  },
+  "279": {
+   "name": "Ajayi",
+   "team": "HUL",
+   "pos": "DEF",
+   "price": 4.2,
+   "selected": 13.7,
+   "points": 26
+  },
+  "282": {
+   "name": "Giles",
+   "team": "HUL",
+   "pos": "DEF",
+   "price": 4.0,
+   "selected": 2.4,
+   "points": 24
+  },
+  "12": {
+   "name": "Saka",
+   "team": "ARS",
+   "pos": "MID",
+   "price": 9.5,
+   "selected": 12.2,
+   "points": 30
+  },
+  "367": {
+   "name": "Gakpo",
+   "team": "LIV",
+   "pos": "MID",
+   "price": 7.2,
+   "selected": 12.1,
+   "points": 29
+  },
+  "605": {
+   "name": "Yalcouyé",
+   "team": "BHA",
+   "pos": "MID",
+   "price": 4.5,
+   "selected": 3.7,
+   "points": 19
+  },
+  "305": {
+   "name": "Davis",
+   "team": "IPS",
+   "pos": "DEF",
+   "price": 4.0,
+   "selected": 6.2,
+   "points": 23
+  },
+  "321": {
+   "name": "Walle Egeli",
+   "team": "IPS",
+   "pos": "FWD",
+   "price": 4.5,
+   "selected": 3.6,
+   "points": 1
+  },
+  "304": {
+   "name": "O'Shea",
+   "team": "IPS",
+   "pos": "DEF",
+   "price": 4.0,
+   "selected": 2.9,
+   "points": 8
+  }
+ },
+ "fetched_at": "2026-09-15 18:05 UTC",
  "predictions": {
   "from_event": 4,
   "events": [
@@ -2885,6 +3455,6 @@
     "flags": []
    }
   },
-  "generated_at": "2026-09-15 17:56 UTC"
+  "generated_at": "2026-09-15 18:06 UTC"
  }
 }
