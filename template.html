@@ -1,0 +1,593 @@
+<title>90 Minutes of Hell</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --ground: #eef1eb;
+  --surface: #fbfcf9;
+  --ink: #111a15;
+  --ink-2: #435047;
+  --muted: #647069;
+  --rule: #d9dfd7;
+  --axis: #bcc5bc;
+  --hover: #e6ebe3;
+  --accent: #f2b705;
+  --accent-ink: #1a1400;
+  --up: #1d7a2b;
+  --down: #b43131;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+  --s5: #e87ba4; --s6: #008300; --s7: #4a3aa7; --s8: #e34948;
+  --hn3: #c9423f; --hn2: #efb3ad; --hn1: #f8e1de; --h0: #e9ece6;
+  --hp1: #dde9f7; --hp2: #aac9ef; --hp3: #2f72c9;
+  --display: "Big Shoulders Display", "Big Shoulders", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --sans: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground: #0e1411;
+    --surface: #18201b;
+    --ink: #e8eee9;
+    --ink-2: #b3beb6;
+    --muted: #8a968e;
+    --rule: #28322c;
+    --axis: #3a463e;
+    --hover: #212b25;
+    --up: #45c257;
+    --down: #ef7070;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+    --hn3: #c24a48; --hn2: #6b3232; --hn1: #372426; --h0: #212924;
+    --hp1: #1c2d40; --hp2: #28507f; --hp3: #3f82d6;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #0e1411;
+  --surface: #18201b;
+  --ink: #e8eee9;
+  --ink-2: #b3beb6;
+  --muted: #8a968e;
+  --rule: #28322c;
+  --axis: #3a463e;
+  --hover: #212b25;
+  --up: #45c257;
+  --down: #ef7070;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+  --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+  --hn3: #c24a48; --hn2: #6b3232; --hn1: #372426; --h0: #212924;
+  --hp1: #1c2d40; --hp2: #28507f; --hp3: #3f82d6;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font: 15px/1.5 var(--sans);
+  padding-block: 32px 64px;
+  padding-inline: clamp(16px, 4vw, 48px);
+}
+.wrap { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px; }
+p { margin: 0; }
+b { font-weight: 600; }
+.muted { color: var(--muted); }
+.label {
+  font: 500 11px/1.3 var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Masthead */
+.mast { display: flex; flex-direction: column; gap: 20px; }
+.mast h1 {
+  margin: 0;
+  font: 800 clamp(48px, 9vw, 96px)/.88 var(--display);
+  text-transform: uppercase;
+  letter-spacing: .005em;
+  text-wrap: balance;
+}
+.season { display: flex; flex-direction: column; gap: 8px; }
+.season-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; }
+.season-row .gw { font-weight: 600; }
+.ticks { display: grid; grid-template-columns: repeat(38, 1fr); gap: 3px; }
+.ticks i { display: block; height: 14px; border-radius: 2px; background: var(--rule); }
+.ticks i.done { background: var(--accent); }
+.ticks i.now { box-shadow: inset 0 0 0 2px var(--ink); }
+
+/* Notes strip */
+.notes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px 28px;
+  border-top: 2px solid var(--ink);
+  padding-top: 16px;
+}
+.note { display: flex; flex-direction: column; gap: 4px; }
+.note-v { font-size: 18px; font-weight: 600; line-height: 1.25; text-wrap: balance; }
+.note-d { font-size: 13px; color: var(--ink-2); }
+
+/* Sections */
+section { display: flex; flex-direction: column; gap: 16px; }
+.sec-head { display: flex; flex-direction: column; gap: 4px; }
+.sec-head h2 {
+  margin: 0;
+  font: 700 30px/1 var(--display);
+  text-transform: uppercase;
+  letter-spacing: .02em;
+}
+.sec-head p { color: var(--ink-2); max-width: 65ch; }
+.panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; }
+.scroll { overflow-x: auto; }
+
+/* Tables */
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { padding: 10px 12px; text-align: left; vertical-align: middle; }
+thead th {
+  font: 500 11px/1.3 var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+tbody tr + tr > * { border-top: 1px solid var(--rule); }
+tbody tr { transition: background-color .15s; }
+tbody tr.on > th, tbody tr.on > td:not(.cell) { background: var(--hover); }
+.num { text-align: right; }
+thead th.num { text-align: right; }
+
+.standings { min-width: 900px; }
+.pos { width: 64px; white-space: nowrap; }
+.pos-n { font: 800 30px/1 var(--display); display: inline-block; min-width: 24px; }
+.mv { font-size: 11px; font-weight: 600; margin-left: 4px; vertical-align: 6px; }
+.mv.up { color: var(--up); }
+.mv.down { color: var(--down); }
+.mv.same { color: var(--muted); }
+.mgr { display: flex; align-items: center; gap: 10px; min-width: 220px; }
+.swatch { flex: none; width: 10px; height: 10px; border-radius: 50%; }
+.mgr-t { display: flex; flex-direction: column; line-height: 1.3; }
+.team { font-size: 13px; color: var(--muted); }
+.you {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: 600 10px/1.5 var(--mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  vertical-align: 2px;
+}
+.total { font-size: 18px; font-weight: 700; }
+.form { display: block; }
+.tag {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  padding: 0 5px;
+  border: 1px solid var(--axis);
+  border-radius: 3px;
+  font: 500 11px/1.6 var(--mono);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.tag small { font-size: 9px; color: var(--muted); }
+.chips { display: flex; gap: 4px; flex-wrap: wrap; }
+
+/* Bump chart */
+.chart { padding: 16px 16px 8px; display: flex; flex-direction: column; gap: 12px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; }
+.legend button {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-2);
+  font: 500 13px/1.4 var(--sans);
+  cursor: pointer;
+}
+.legend button i { width: 8px; height: 8px; border-radius: 50%; }
+.legend button:hover, .legend button.on { background: var(--hover); color: var(--ink); }
+.legend button[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); }
+button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.bump { position: relative; }
+.bump svg { display: block; overflow: visible; }
+.bump .grid { stroke: var(--rule); stroke-width: 1; }
+.bump .ax { fill: var(--muted); font: 500 11px var(--mono); }
+.series { transition: opacity .15s; }
+.series .line { fill: none; stroke: var(--c); stroke-width: 2.5; stroke-linecap: round; }
+.series.me .line { stroke-width: 3.5; }
+.series.on .line { stroke-width: 4; }
+.series .dot { fill: var(--c); stroke: var(--surface); stroke-width: 2; }
+.series .end { fill: var(--ink); font: 600 13px var(--sans); }
+.series .end-t { fill: var(--muted); font-weight: 400; }
+.series .hit { fill: none; stroke: transparent; stroke-width: 18; pointer-events: stroke; cursor: pointer; }
+.bump.dim .series:not(.on) { opacity: .14; }
+.tip {
+  position: absolute;
+  z-index: 2;
+  display: flex; flex-direction: column; gap: 2px;
+  width: max-content; max-width: 230px;
+  padding: 8px 10px;
+  background: var(--surface);
+  border: 1px solid var(--axis);
+  border-radius: 4px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .12);
+  font-size: 13px;
+  line-height: 1.35;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+}
+.tip span { color: var(--ink-2); }
+
+/* Heat grid */
+.heat { min-width: 560px; }
+.heat thead th small { display: block; font-size: 10px; letter-spacing: .02em; text-transform: none; color: var(--muted); }
+.heat th[scope="row"] { font-weight: 500; white-space: nowrap; }
+.heat th[scope="row"] .mgr { min-width: 0; }
+.heat td.cell { padding: 3px; }
+.cell-in {
+  display: flex; align-items: center; justify-content: space-between; gap: 6px;
+  min-height: 44px;
+  padding: 6px 10px;
+  border-radius: 3px;
+  background: var(--h0);
+  color: var(--ink);
+}
+.cell-p { font-size: 17px; font-weight: 600; }
+.cell-x { display: flex; gap: 4px; align-items: center; }
+.cell-x .tag { background: var(--surface); }
+.hit-t { font: 500 11px var(--mono); color: inherit; opacity: .85; }
+.hn1 .cell-in { background: var(--hn1); }
+.hn2 .cell-in { background: var(--hn2); }
+.hn3 .cell-in { background: var(--hn3); color: #fff; }
+.hp1 .cell-in { background: var(--hp1); }
+.hp2 .cell-in { background: var(--hp2); }
+.hp3 .cell-in { background: var(--hp3); color: #fff; }
+.best .cell-in { box-shadow: inset 0 0 0 2px var(--ink); }
+.heat tfoot td, .heat tfoot th { border-top: 1px solid var(--ink); color: var(--ink-2); font-weight: 500; }
+.heat tfoot .cell-in { background: transparent; min-height: 0; padding-block: 0; }
+.key { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; padding: 12px 16px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--ink-2); }
+.ramp { display: inline-flex; align-items: center; gap: 6px; }
+.ramp i { display: inline-block; width: 22px; height: 12px; border-radius: 2px; }
+.ring { display: inline-block; width: 22px; height: 12px; border-radius: 2px; box-shadow: inset 0 0 0 2px var(--ink); vertical-align: -2px; margin-right: 4px; }
+
+/* Past seasons */
+.past { min-width: 640px; }
+.past td.num small { display: block; font-size: 11px; color: var(--muted); }
+.past td.best-f .r { font-weight: 700; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+
+footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--rule); padding-top: 16px; font-size: 13px; color: var(--ink-2); max-width: 80ch; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <p class="label" id="eyebrow">Classic mini-league</p>
+    <h1 id="league-name">90 Minutes of Hell</h1>
+    <div class="season">
+      <div class="season-row">
+        <span class="gw" id="gw-line">Gameweek 4 of 38</span>
+        <span class="muted" id="stamp"></span>
+      </div>
+      <div class="ticks" id="ticks" role="img" aria-label="Season progress"></div>
+    </div>
+  </header>
+
+  <div class="notes" id="notes"></div>
+
+  <section aria-labelledby="h-table">
+    <div class="sec-head">
+      <h2 id="h-table">The table</h2>
+      <p id="table-sub">Gap is points behind the leader. Hits and bench points are season totals.</p>
+    </div>
+    <div class="panel scroll">
+      <table class="standings" id="standings">
+        <thead>
+          <tr>
+            <th scope="col">Pos</th>
+            <th scope="col">Manager</th>
+            <th scope="col">Form</th>
+            <th scope="col" class="num" id="th-gw">GW</th>
+            <th scope="col" class="num">Total</th>
+            <th scope="col" class="num">Gap</th>
+            <th scope="col" id="th-cap">Captain</th>
+            <th scope="col">Chips used</th>
+            <th scope="col" class="num">Hits</th>
+            <th scope="col" class="num">Bench</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-race">
+    <div class="sec-head">
+      <h2 id="h-race">Race for first</h2>
+      <p>League position after each gameweek. Hover a line, or pick a manager below to follow them.</p>
+    </div>
+    <div class="panel chart">
+      <div class="legend" id="legend" aria-label="Follow a manager"></div>
+      <div class="bump" id="bump"></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-weeks">
+    <div class="sec-head">
+      <h2 id="h-weeks">Week by week</h2>
+      <p>Each gameweek score, shaded against the average of every FPL manager that week. Scores are before transfer hits.</p>
+    </div>
+    <div class="panel">
+      <div class="scroll">
+        <table class="heat" id="heat"></table>
+      </div>
+      <div class="key">
+        <span class="ramp">Below average
+          <i style="background:var(--hn3)"></i><i style="background:var(--hn2)"></i><i style="background:var(--hn1)"></i><i style="background:var(--h0)"></i><i style="background:var(--hp1)"></i><i style="background:var(--hp2)"></i><i style="background:var(--hp3)"></i>
+          Above average
+        </span>
+        <span>Steps at ±5, ±15 and ±30 pts</span>
+        <span><span class="ring"></span>Best score in the league that week</span>
+        <span><span class="tag">TC</span> Triple Captain · <span class="tag">FH</span> Free Hit · <span class="tag">WC</span> Wildcard · <span class="tag">BB</span> Bench Boost</span>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-past">
+    <div class="sec-head">
+      <h2 id="h-past">Previous seasons</h2>
+      <p>Overall rank among all FPL managers at the end of each season, with points below. Lower rank is better; each manager's best finish is underlined.</p>
+    </div>
+    <div class="panel scroll">
+      <table class="past" id="past"></table>
+    </div>
+  </section>
+
+  <footer>
+    <p id="source"></p>
+    <p>Totals include transfer hits. Managers level on points share a position, shown with “=”.</p>
+  </footer>
+</div>
+
+<script>
+const DATA = /*DATA*/null;
+
+const M = DATA.managers;
+const EV = DATA.events;
+const LAST = EV[EV.length - 1].event;
+const YOU = DATA.league.admin_entry;
+
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const ord = n => { const s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); };
+const compact = n => n >= 1e6 ? (n / 1e6).toFixed(2) + 'M' : n >= 1e4 ? Math.round(n / 1e3) + 'k' : n.toLocaleString('en-GB');
+const CHIP = { '3xc': ['TC', 'Triple Captain'], bboost: ['BB', 'Bench Boost'], freehit: ['FH', 'Free Hit'], wildcard: ['WC', 'Wildcard'], manager: ['AM', 'Assistant Manager'] };
+const chipTag = c => CHIP[c]?.[0] ?? String(c).toUpperCase();
+const chipLong = c => CHIP[c]?.[1] ?? c;
+
+M.forEach((m, i) => {
+  m.i = i;
+  m.first = m.name.split(' ')[0];
+  m.gw = Object.fromEntries(m.gws.map(g => [g.event, g]));
+  m.benchSum = m.gws.reduce((a, g) => a + g.bench, 0);
+  m.hitSum = m.gws.reduce((a, g) => a + g.hits, 0);
+});
+
+// League position after each gameweek, rebuilt from running totals.
+const RANK = {};
+EV.forEach(e => {
+  const rows = M.map(m => ({ m, t: m.gw[e.event]?.total ?? 0 })).sort((a, b) => b.t - a.t || a.m.i - b.m.i);
+  RANK[e.event] = {};
+  rows.forEach((r, k) => {
+    const same = rows.filter(x => x.t === r.t).length;
+    RANK[e.event][r.m.entry] = { slot: k + 1, pos: rows.findIndex(x => x.t === r.t) + 1, joint: same > 1 };
+  });
+});
+const posLabel = r => (r.joint ? '=' : '') + ord(r.pos);
+
+// Masthead
+$('#eyebrow').textContent = `Classic mini-league · ID ${DATA.league.id} · ${M.length} managers`;
+$('#league-name').textContent = DATA.league.name;
+$('#gw-line').textContent = `After Gameweek ${LAST} of 38`;
+$('#ticks').innerHTML = Array.from({ length: 38 }, (_, k) => `<i class="${k + 1 <= LAST ? 'done' : ''}${k + 1 === LAST ? ' now' : ''}"></i>`).join('');
+$('#ticks').setAttribute('aria-label', `${LAST} of 38 gameweeks played`);
+const [fd, ft] = DATA.fetched_at.split(' ');
+const stampDate = new Date(fd + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+$('#stamp').textContent = `Data as of ${stampDate}, ${ft} UTC`;
+$('#source').textContent = `Source: the Fantasy Premier League API, league ${DATA.league.id}, fetched ${stampDate} at ${ft} UTC.`;
+
+// Notes
+const lastEv = EV[EV.length - 1];
+const gwPts = M.map(m => m.gw[LAST]?.points ?? 0);
+const topPts = Math.max(...gwPts);
+const topM = M.filter(m => (m.gw[LAST]?.points ?? 0) === topPts);
+const leagueAvg = Math.round(gwPts.reduce((a, b) => a + b, 0) / M.length);
+const bench = [...M].sort((a, b) => b.benchSum - a.benchSum)[0];
+const hits = [...M].sort((a, b) => b.hitSum - a.hitSum)[0];
+const notes = [
+  ['Top of the table', M[0].name, `${M[0].total} pts, ${M[0].total - M[1].total} clear of ${M[1].first}`],
+  [`GW${LAST} top score`, topM.map(m => m.name).join(' & '), `${topPts} pts · league avg ${leagueAvg}, global avg ${lastEv.average}`],
+  ['Most left on the bench', bench.name, `${bench.benchSum} pts on the bench over ${EV.length} gameweeks`],
+  ['Most spent on hits', hits.hitSum ? hits.name : 'Nobody yet', hits.hitSum ? `−${hits.hitSum} pts in transfer hits this season` : 'No transfer hits taken'],
+];
+$('#notes').innerHTML = notes.map(([l, v, d]) =>
+  `<div class="note"><p class="label">${esc(l)}</p><p class="note-v">${esc(v)}</p><p class="note-d">${esc(d)}</p></div>`).join('');
+
+// Standings
+const maxPts = Math.max(...M.flatMap(m => m.gws.map(g => g.points)));
+const youChip = m => m.entry === YOU ? '<span class="you">You</span>' : '';
+const mgrCell = m => `<div class="mgr"><span class="swatch" style="background:var(--s${m.i + 1})"></span><div class="mgr-t"><span><b>${esc(m.name)}</b>${youChip(m)}</span><span class="team">${esc(m.team)}</span></div></div>`;
+$('#th-gw').textContent = `GW${LAST}`;
+$('#th-cap').textContent = `GW${LAST} captain`;
+$('#standings tbody').innerHTML = M.map(m => {
+  const r = RANK[LAST][m.entry];
+  const p = RANK[LAST - 1]?.[m.entry];
+  const move = p ? p.pos - r.pos : 0;
+  const mv = !p ? '' : move > 0
+    ? `<span class="mv up" title="Up ${move} since GW${LAST - 1}">▲${move}</span>`
+    : move < 0
+      ? `<span class="mv down" title="Down ${-move} since GW${LAST - 1}">▼${-move}</span>`
+      : `<span class="mv same" title="No change since GW${LAST - 1}">–</span>`;
+  const bars = EV.map((e, k) => {
+    const pts = m.gw[e.event]?.points ?? 0;
+    const h = Math.max(2, Math.round(pts / maxPts * 28));
+    return `<rect x="${k * 11}" y="${28 - h}" width="8" height="${h}" rx="1.5"><title>GW${e.event}: ${pts} pts</title></rect>`;
+  }).join('');
+  const g = m.gw[LAST] || {};
+  const gap = M[0].total - m.total;
+  const chips = m.chips.length
+    ? `<div class="chips">${m.chips.map(c => `<span class="tag" title="${esc(chipLong(c.name))}, GW${c.event}">${chipTag(c.name)}<small>GW${c.event}</small></span>`).join('')}</div>`
+    : '<span class="muted">None</span>';
+  return `<tr data-entry="${m.entry}">
+    <td class="pos"><span class="pos-n">${r.joint ? '=' : ''}${r.pos}</span>${mv}</td>
+    <td>${mgrCell(m)}</td>
+    <td><svg class="form" width="${EV.length * 11 - 3}" height="28" viewBox="0 0 ${EV.length * 11 - 3} 28" style="fill:var(--s${m.i + 1})" role="img" aria-label="Gameweek points: ${m.gws.map(x => x.points).join(', ')}">${bars}</svg></td>
+    <td class="num">${g.points ?? '—'}</td>
+    <td class="num total">${m.total}</td>
+    <td class="num ${gap ? '' : 'muted'}">${gap ? '−' + gap : '—'}</td>
+    <td>${esc(g.captain ?? '—')}${g.captain_mult === 3 ? ' <span class="tag">TC</span>' : ''}</td>
+    <td>${chips}</td>
+    <td class="num">${m.hitSum ? '−' + m.hitSum : '0'}</td>
+    <td class="num">${m.benchSum}</td>
+  </tr>`;
+}).join('');
+
+// Heat grid
+const bin = d => { const a = Math.abs(d), s = a < 5 ? 0 : a < 15 ? 1 : a < 30 ? 2 : 3; return s ? (d > 0 ? 'hp' : 'hn') + s : 'h0'; };
+const bestBy = Object.fromEntries(EV.map(e => [e.event, Math.max(...M.map(m => m.gw[e.event]?.points ?? 0))]));
+$('#heat').innerHTML = `
+  <thead><tr><th scope="col">Manager</th>${EV.map(e => `<th scope="col">GW${e.event}<small>FPL avg ${e.average} · top ${e.highest}</small></th>`).join('')}</tr></thead>
+  <tbody>${M.map(m => `<tr data-entry="${m.entry}"><th scope="row">${mgrCell(m)}</th>${EV.map(e => {
+    const g = m.gw[e.event];
+    if (!g) return '<td class="cell"><div class="cell-in"><span class="muted">—</span></div></td>';
+    const d = g.points - e.average;
+    const extra = `${g.chip ? `<span class="tag">${chipTag(g.chip)}</span>` : ''}${g.hits ? `<span class="hit-t">−${g.hits}</span>` : ''}`;
+    const title = `${m.name}, GW${e.event}: ${g.points} pts (${d >= 0 ? '+' : ''}${d} vs FPL average). Captain ${g.captain}${g.chip ? ', ' + chipLong(g.chip) : ''}${g.hits ? `, −${g.hits} hit` : ''}, ${g.bench} on bench.`;
+    return `<td class="cell ${bin(d)}${g.points === bestBy[e.event] ? ' best' : ''}" title="${esc(title)}"><div class="cell-in"><span class="cell-p">${g.points}</span><span class="cell-x">${extra}</span></div></td>`;
+  }).join('')}</tr>`).join('')}</tbody>
+  <tfoot><tr><th scope="row">League average</th>${EV.map(e => {
+    const v = M.map(m => m.gw[e.event]?.points ?? 0);
+    return `<td class="cell"><div class="cell-in"><span>${Math.round(v.reduce((a, b) => a + b, 0) / v.length)}</span></div></td>`;
+  }).join('')}</tr></tfoot>`;
+
+// Previous seasons
+const seasons = [...new Set(M.flatMap(m => m.past.map(p => p.season_name)))].sort().slice(-4);
+const lastSeason = seasons[seasons.length - 1];
+const nowLabel = lastSeason ? `${+lastSeason.slice(0, 4) + 1}/${String(+lastSeason.slice(5) + 1).padStart(2, '0')} so far` : 'This season';
+$('#past').innerHTML = `
+  <thead><tr><th scope="col">Manager</th><th scope="col" class="num">Seasons</th>${seasons.map(s => `<th scope="col" class="num">${s}</th>`).join('')}<th scope="col" class="num">${nowLabel}</th></tr></thead>
+  <tbody>${M.map(m => {
+    const byS = Object.fromEntries(m.past.map(p => [p.season_name, p]));
+    const best = m.past.length ? Math.min(...m.past.map(p => p.rank)) : null;
+    const now = m.gw[LAST]?.overall_rank;
+    return `<tr data-entry="${m.entry}"><th scope="row">${mgrCell(m)}</th>
+      <td class="num">${m.past.length ? m.past.length + 1 : '1st'}</td>
+      ${seasons.map(s => {
+        const p = byS[s];
+        return p
+          ? `<td class="num ${p.rank === best ? 'best-f' : ''}"><span class="r">${compact(p.rank)}</span><small>${p.total_points} pts</small></td>`
+          : '<td class="num muted">—</td>';
+      }).join('')}
+      <td class="num"><span class="r">${now ? compact(now) : '—'}</span><small>${m.total} pts</small></td>
+    </tr>`;
+  }).join('')}</tbody>`;
+
+// Linked highlight across chart, legend and tables
+let pinned = null;
+function focusOn(entry) {
+  document.querySelectorAll('[data-entry]').forEach(el => el.classList.toggle('on', entry != null && +el.dataset.entry === entry));
+  $('#bump').classList.toggle('dim', entry != null);
+}
+function togglePin(entry) {
+  pinned = pinned === entry ? null : entry;
+  focusOn(pinned);
+  document.querySelectorAll('#legend button').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.entry === pinned)));
+}
+$('#legend').innerHTML = M.map(m =>
+  `<button type="button" id="follow-${m.entry}" data-entry="${m.entry}" aria-pressed="false"><i style="background:var(--s${m.i + 1})"></i>${esc(m.first)}</button>`).join('');
+document.querySelectorAll('#legend button').forEach(b => {
+  const entry = +b.dataset.entry;
+  b.addEventListener('click', () => togglePin(entry));
+  b.addEventListener('pointerenter', () => { if (pinned == null) focusOn(entry); });
+  b.addEventListener('pointerleave', () => { if (pinned == null) focusOn(null); });
+});
+document.querySelectorAll('tbody tr[data-entry]').forEach(tr => {
+  const entry = +tr.dataset.entry;
+  tr.addEventListener('pointerenter', () => { if (pinned == null) focusOn(entry); });
+  tr.addEventListener('pointerleave', () => { if (pinned == null) focusOn(null); });
+});
+
+// Bump chart
+function drawBump() {
+  const box = $('#bump');
+  const W = Math.max(300, box.clientWidth);
+  const narrow = W < 600;
+  const rowH = narrow ? 34 : 40, mT = 12, mB = 34, mL = 38, mR = narrow ? 108 : 214;
+  const H = mT + mB + rowH * (M.length - 1);
+  const n = EV.length;
+  const step = n > 1 ? (W - mL - mR) / (n - 1) : 0;
+  const x = k => n > 1 ? mL + k * step : (W - mR + mL) / 2;
+  const y = s => mT + (s - 1) * rowH;
+
+  let s = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="League position after each gameweek">`;
+  for (let k = 1; k <= M.length; k++) {
+    s += `<line class="grid" x1="${mL}" x2="${x(n - 1)}" y1="${y(k)}" y2="${y(k)}"/>`;
+    s += `<text class="ax" x="${mL - 14}" y="${y(k)}" text-anchor="end" dominant-baseline="middle">${ord(k)}</text>`;
+  }
+  EV.forEach((e, k) => { s += `<text class="ax" x="${x(k)}" y="${H - 8}" text-anchor="middle">GW${e.event}</text>`; });
+
+  [...M].reverse().forEach(m => {
+    const pts = EV.map((e, k) => [x(k), y(RANK[e.event][m.entry].slot)]);
+    let d = `M${pts[0][0]},${pts[0][1]}`;
+    for (let k = 1; k < pts.length; k++) {
+      const [x0, y0] = pts[k - 1], [x1, y1] = pts[k], mx = (x0 + x1) / 2;
+      d += ` C${mx},${y0} ${mx},${y1} ${x1},${y1}`;
+    }
+    const [ex, ey] = pts[pts.length - 1];
+    s += `<g class="series${m.entry === YOU ? ' me' : ''}" data-entry="${m.entry}" style="--c:var(--s${m.i + 1})">
+      <path class="line" d="${d}"/>
+      ${pts.map(([px, py]) => `<circle class="dot" cx="${px}" cy="${py}" r="4.5"/>`).join('')}
+      <text class="end" x="${ex + 14}" y="${ey}" dominant-baseline="middle">${esc(narrow ? m.first : m.name)}<tspan class="end-t" dx="6">${m.total}</tspan></text>
+      <path class="hit" d="${d}"/>
+    </g>`;
+  });
+  s += '</svg>';
+  box.innerHTML = s + '<div class="tip" id="tip" hidden></div>';
+
+  const tip = $('#tip');
+  box.querySelectorAll('.series').forEach(g => {
+    const entry = +g.dataset.entry;
+    const m = M.find(z => z.entry === entry);
+    g.addEventListener('pointerenter', () => { if (pinned == null) focusOn(entry); });
+    g.addEventListener('pointermove', ev => {
+      const rect = box.getBoundingClientRect();
+      const k = n > 1 ? Math.max(0, Math.min(n - 1, Math.round((ev.clientX - rect.left - mL) / step))) : 0;
+      const e = EV[k], gw = m.gw[e.event], r = RANK[e.event][entry];
+      tip.innerHTML = `<b>${esc(m.name)}</b><span>GW${e.event} · ${posLabel(r)} · ${gw.total} pts</span><span>${gw.points} that week${gw.hits ? ` (−${gw.hits} hit)` : ''}${gw.chip ? ` · ${esc(chipLong(gw.chip))}` : ''}</span>`;
+      tip.hidden = false;
+      tip.style.left = Math.max(0, Math.min(x(k) + 12, W - 236)) + 'px';
+      tip.style.top = Math.min(y(r.slot) + 12, H - 70) + 'px';
+    });
+    g.addEventListener('pointerleave', () => { tip.hidden = true; if (pinned == null) focusOn(null); });
+    g.addEventListener('click', () => togglePin(entry));
+  });
+  if (pinned != null) focusOn(pinned);
+}
+
+let lastW = 0;
+new ResizeObserver(() => {
+  const w = $('#bump').clientWidth;
+  if (w !== lastW) { lastW = w; drawBump(); }
+}).observe($('#bump'));
+drawBump();
+</script>
