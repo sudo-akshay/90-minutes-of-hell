@@ -436,6 +436,41 @@ td.top-pos .r { font-weight: 700; text-decoration: underline; text-decoration-co
 .own-cell { white-space: nowrap; }
 .own .who { font-size: 13px; color: var(--ink-2); }
 .own-empty { padding: 20px 16px; color: var(--muted); }
+.own-selects { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+.dir-btn, .pager-btns button {
+  padding: 5px 10px;
+  border: 1px solid var(--axis);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--ink);
+  font: 500 13px/1.4 var(--sans);
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+}
+.dir-btn:hover, .pager-btns button:hover:not(:disabled) { background: var(--hover); }
+.pager-btns button:disabled { color: var(--muted); cursor: default; opacity: .6; }
+.pager-btns button[aria-current="page"] { border-color: var(--ink); background: var(--hover); font-weight: 700; }
+.dir-btn:focus-visible, .pager-btns button:focus-visible, .sort-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; padding: 12px 16px; border-top: 1px solid var(--rule); }
+.pager-info { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.pager-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.pager-btns .gap { padding: 0 4px; color: var(--muted); }
+.sort-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.sort-btn:hover, th[aria-sort] .sort-btn { color: var(--ink); }
+.sort-ind { font-size: 9px; opacity: .45; }
+th[aria-sort] .sort-ind { opacity: 1; }
 .key .pip { display: inline-block; vertical-align: -1px; margin-right: 4px; }
 @media (max-width: 640px) {
   .own-count { display: block; margin: 4px 0 0; }
@@ -673,16 +708,34 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
             <button type="button" id="own-pos-mid" data-pos="MID" aria-pressed="false">MID</button>
             <button type="button" id="own-pos-fwd" data-pos="FWD" aria-pressed="false">FWD</button>
           </div>
-          <label class="pick" for="own-scope">Owned by
-            <select id="own-scope">
-              <option value="all">Any number of managers</option>
-              <option value="everyone">Everyone</option>
-              <option value="most">Half or more</option>
-              <option value="diff">One or two (differentials)</option>
+          <div class="own-selects">
+            <label class="pick" for="own-scope">Owned by
+              <select id="own-scope">
+                <option value="all">Any number of managers</option>
+                <option value="everyone">Everyone</option>
+                <option value="most">Half or more</option>
+                <option value="diff">One or two (differentials)</option>
+              </select>
+            </label>
+            <label class="pick" for="own-sort">Sort by
+              <select id="own-sort"></select>
+            </label>
+            <button type="button" class="dir-btn" id="own-dir">High to low</button>
+          </div>
+        </div>
+        <div class="scroll"><table class="own" id="own-table"></table></div>
+        <div class="pager">
+          <p class="pager-info" id="own-info" aria-live="polite"></p>
+          <div class="pager-btns" id="own-pages" role="group" aria-label="Pages"></div>
+          <label class="pick" for="own-size">Rows
+            <select id="own-size">
+              <option value="15">15</option>
+              <option value="30">30</option>
+              <option value="50">50</option>
+              <option value="all">All</option>
             </select>
           </label>
         </div>
-        <div class="scroll"><table class="own" id="own-table"></table></div>
         <div class="key" id="own-key"></div>
       </div>
     </section>
@@ -1291,7 +1344,7 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
   }
 }
 
-// Player ownership
+// Player ownership: filter, sort by any field, paginate
 {
   const P = DATA.players || {};
   const owned = {};
@@ -1306,19 +1359,23 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
     caps: M.filter(m => lastCap(m) === +id).length,
     here: own.length / M.length * 100,
   }));
-  rows.sort((a, b) => b.n - a.n || b.xi - a.xi || b.p.points - a.p.points || a.p.name.localeCompare(b.p.name));
 
   if (!rows.length) {
     $('#own-section').hidden = true;
   } else {
     const pctText = v => (v >= 10 || v === 0 ? Math.round(v) : v.toFixed(1)) + '%';
     const topList = list => list.length > 3 ? `${list.slice(0, 3).join(', ')} and ${list.length - 3} more` : namesList(list);
-    const maxN = rows[0].n;
+    const ownersText = r => r.n === M.length && r.xi === M.length
+      ? 'Everyone'
+      : namesList(r.own.map(o => o.m.first + (o.xi ? '' : ' (bench)')));
+
+    const byOwners = [...rows].sort((a, b) => b.n - a.n || b.xi - a.xi || b.p.points - a.p.points);
+    const maxN = byOwners[0].n;
     const maxCaps = Math.max(...rows.map(r => r.caps));
     const diffs = rows.filter(r => r.n === 1).sort((a, b) => b.p.points - a.p.points);
     const loved = [...rows].sort((a, b) => (b.here - b.p.selected) - (a.here - a.p.selected))[0];
     $('#own-leaders').innerHTML = [
-      leaderHTML('Most owned', topList(rows.filter(r => r.n === maxN).map(r => r.p.name)), maxN === M.length ? 'In every squad in the league' : `In ${maxN} of ${M.length} squads`),
+      leaderHTML('Most owned', topList(byOwners.filter(r => r.n === maxN).map(r => r.p.name)), maxN === M.length ? 'In every squad in the league' : `In ${maxN} of ${M.length} squads`),
       maxCaps
         ? leaderHTML(`GW${LAST} captain`, namesList(rows.filter(r => r.caps === maxCaps).map(r => r.p.name)), `Captained by ${maxCaps} of ${M.length} managers`)
         : leaderHTML(`GW${LAST} captain`, 'No data', 'Captain picks are missing'),
@@ -1328,9 +1385,6 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
       leaderHTML('League favourite', loved.p.name, `${pctText(loved.here)} of this league vs ${pctText(loved.p.selected)} of all FPL managers`),
     ].join('');
 
-    const ownersText = r => r.n === M.length && r.xi === M.length
-      ? 'Everyone'
-      : namesList(r.own.map(o => o.m.first + (o.xi ? '' : ' (bench)')));
     const pips = r => {
       const byEntry = new Map(r.own.map(o => [o.m.entry, o]));
       return `<span class="pips" role="img" aria-label="Owned by ${esc(ownersText(r))}">${M.map(m => {
@@ -1340,34 +1394,152 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
       }).join('')}</span>`;
     };
 
+    // Every sortable field. `col` marks the ones with their own column header.
+    const POS_ORDER = { GK: 0, DEF: 1, MID: 2, FWD: 3 };
+    const FIELDS = [
+      { key: 'owners', label: 'Owners', type: 'num', get: r => r.n, col: '' },
+      { key: 'name', label: 'Player', type: 'text', get: r => r.p.name },
+      { key: 'team', label: 'Club', type: 'text', get: r => r.p.team },
+      { key: 'pos', label: 'Position', type: 'pos', get: r => POS_ORDER[r.p.pos] },
+      { key: 'price', label: 'Price', type: 'num', get: r => r.p.price },
+      { key: 'xi', label: 'Starting', type: 'num', get: r => r.xi },
+      { key: 'caps', label: `GW${LAST} captain`, type: 'num', get: r => r.caps },
+      { key: 'here', label: 'Here', type: 'num', get: r => r.here },
+      { key: 'fpl', label: 'All FPL', type: 'num', get: r => r.p.selected },
+      { key: 'points', label: 'Season pts', type: 'num', get: r => r.p.points },
+      { key: 'ownedby', label: 'Owned by', type: 'text', get: r => ownersText(r) },
+    ];
+    const field = key => FIELDS.find(f => f.key === key);
+    const defaultDir = f => (f.type === 'num' ? -1 : 1);
+    const dirText = (f, dir) => f.type === 'num' ? (dir < 0 ? 'High to low' : 'Low to high')
+      : f.type === 'pos' ? (dir > 0 ? 'GK to FWD' : 'FWD to GK')
+      : (dir > 0 ? 'A to Z' : 'Z to A');
+    const COLUMNS = [
+      { key: 'name', label: 'Player', cls: '' },
+      { key: 'owners', label: 'Owners', cls: '' },
+      { key: 'price', label: 'Price', cls: 'num hide-m' },
+      { key: 'xi', label: 'Starting', cls: 'num hide-m' },
+      { key: 'caps', label: `GW${LAST} captain`, cls: 'num hide-m' },
+      { key: 'here', label: 'Here', cls: 'num hide-m' },
+      { key: 'fpl', label: 'All FPL', cls: 'num' },
+      { key: 'points', label: 'Season pts', cls: 'num hide-m' },
+      { key: 'ownedby', label: 'Owned by', cls: 'hide-m hide-t' },
+    ];
+
+    const state = { pos: 'all', scope: 'all', key: 'owners', dir: -1, page: 1, size: 15 };
     const posBtns = [...document.querySelectorAll('#own-pos button')];
-    const scopeSel = $('#own-scope');
-    const draw = () => {
-      const pos = posBtns.find(b => b.getAttribute('aria-pressed') === 'true')?.dataset.pos || 'all';
-      const scope = scopeSel.value;
-      const shown = rows.filter(r =>
-        (pos === 'all' || r.p.pos === pos) &&
-        (scope === 'all' || (scope === 'everyone' && r.n === M.length) || (scope === 'most' && r.n >= M.length / 2) || (scope === 'diff' && r.n <= 2)));
+    const scopeSel = $('#own-scope'), sortSel = $('#own-sort'), dirBtn = $('#own-dir'), sizeSel = $('#own-size');
+    sortSel.innerHTML = FIELDS.map(f => `<option value="${f.key}">${esc(f.label)}</option>`).join('');
+
+    const draw = (focusSel = null, scrollUp = false) => {
+      const f = field(state.key);
+      const shown = rows
+        .filter(r =>
+          (state.pos === 'all' || r.p.pos === state.pos) &&
+          (state.scope === 'all' || (state.scope === 'everyone' && r.n === M.length) || (state.scope === 'most' && r.n >= M.length / 2) || (state.scope === 'diff' && r.n <= 2)))
+        .sort((a, b) => {
+          const va = f.get(a), vb = f.get(b);
+          const c = (f.type === 'text' ? va.localeCompare(vb) : va - vb) * state.dir;
+          return c || b.n - a.n || b.p.points - a.p.points || a.p.name.localeCompare(b.p.name);
+        });
+      const size = state.size === 'all' ? Math.max(1, shown.length) : state.size;
+      const pages = Math.max(1, Math.ceil(shown.length / size));
+      state.page = Math.min(Math.max(1, state.page), pages);
+      const from = (state.page - 1) * size;
+      const slice = shown.slice(from, from + size);
+
       $('#own-table').innerHTML = `
-        <thead><tr><th scope="col">Player</th><th scope="col">Owners</th><th scope="col" class="num hide-m">Starting</th><th scope="col" class="num hide-m">GW${LAST} captain</th><th scope="col" class="num hide-m">Here</th><th scope="col" class="num">All FPL</th><th scope="col" class="num hide-m">Season pts</th><th scope="col" class="hide-m hide-t">Owned by</th></tr></thead>
-        <tbody>${shown.length ? shown.map(r => `<tr>
-          <th scope="row"><div class="mgr-t"><b>${esc(r.p.name)}</b><span class="team">${esc(r.p.team)} · ${esc(r.p.pos)} · £${r.p.price.toFixed(1)}m</span></div></th>
+        <thead><tr>${COLUMNS.map(c => {
+          const active = c.key === state.key;
+          const sortAttr = active ? ` aria-sort="${state.dir > 0 ? 'ascending' : 'descending'}"` : '';
+          const ind = active ? (state.dir > 0 ? '▲' : '▼') : '↕';
+          return `<th scope="col" class="${c.cls}"${sortAttr}><button type="button" class="sort-btn" data-key="${c.key}">${esc(c.label)}<span class="sort-ind" aria-hidden="true">${ind}</span></button></th>`;
+        }).join('')}</tr></thead>
+        <tbody>${slice.length ? slice.map(r => `<tr>
+          <th scope="row"><div class="mgr-t"><b>${esc(r.p.name)}</b><span class="team">${esc(r.p.team)} · ${esc(r.p.pos)}</span></div></th>
           <td class="own-cell">${pips(r)}<span class="own-count">${r.n} of ${M.length}</span></td>
+          <td class="num hide-m">£${r.p.price.toFixed(1)}m</td>
           <td class="num hide-m">${r.xi}</td>
           <td class="num hide-m">${r.caps || '<span class="muted">–</span>'}</td>
           <td class="num hide-m">${pctText(r.here)}</td>
           <td class="num">${pctText(r.p.selected)}</td>
           <td class="num hide-m">${r.p.points}</td>
           <td class="who hide-m hide-t">${esc(ownersText(r))}</td>
-        </tr>`).join('') : `<tr><td colspan="8" class="own-empty">No players match these filters.</td></tr>`}</tbody>`;
+        </tr>`).join('') : `<tr><td colspan="${COLUMNS.length}" class="own-empty">No players match these filters.</td></tr>`}</tbody>`;
+
+      $('#own-info').textContent = shown.length
+        ? `Players ${from + 1}–${from + slice.length} of ${shown.length}`
+        : 'No players';
+      const nums = [];
+      for (let k = 1; k <= pages; k++) {
+        if (pages <= 7 || k === 1 || k === pages || Math.abs(k - state.page) <= 1) nums.push(k);
+        else if (nums[nums.length - 1] !== '…') nums.push('…');
+      }
+      $('#own-pages').innerHTML = pages > 1
+        ? `<button type="button" data-go="prev"${state.page === 1 ? ' disabled' : ''}>← <span class="t-long">Previous</span></button>`
+          + nums.map(k => k === '…' ? '<span class="gap">…</span>'
+            : `<button type="button" data-page="${k}" aria-label="Page ${k}"${k === state.page ? ' aria-current="page"' : ''}>${k}</button>`).join('')
+          + `<button type="button" data-go="next"${state.page === pages ? ' disabled' : ''}><span class="t-long">Next</span> →</button>`
+        : '';
+
+      sortSel.value = state.key;
+      dirBtn.textContent = dirText(f, state.dir);
+      dirBtn.setAttribute('aria-label', `Sort direction: ${dirText(f, state.dir)}`);
+
+      if (focusSel) {
+        const target = document.querySelector(focusSel);
+        (target && !target.disabled ? target : $('#own-pages [aria-current="page"]'))?.focus({ preventScroll: true });
+      }
+      if (scrollUp) {
+        const top = $('#own-table').getBoundingClientRect().top;
+        const navH = $('#tabs').offsetHeight;
+        if (top < navH) scrollTo({ top: scrollY + top - navH - 12 });
+      }
       if (pinned != null) focusOn(pinned);
       markScrollers?.();
     };
+
+    // Column headers: click to sort, click again to reverse
+    $('#own-table').addEventListener('click', e => {
+      const btn = e.target.closest('.sort-btn');
+      if (!btn) return;
+      const key = btn.dataset.key;
+      if (key === state.key) state.dir *= -1;
+      else { state.key = key; state.dir = defaultDir(field(key)); }
+      state.page = 1;
+      draw(`.sort-btn[data-key="${key}"]`);
+    });
+    sortSel.addEventListener('change', () => {
+      state.key = sortSel.value;
+      state.dir = defaultDir(field(state.key));
+      state.page = 1;
+      draw();
+    });
+    dirBtn.addEventListener('click', () => { state.dir *= -1; state.page = 1; draw(); });
     posBtns.forEach(b => b.addEventListener('click', () => {
       posBtns.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+      state.pos = b.dataset.pos;
+      state.page = 1;
       draw();
     }));
-    scopeSel.addEventListener('change', draw);
+    scopeSel.addEventListener('change', () => { state.scope = scopeSel.value; state.page = 1; draw(); });
+    sizeSel.addEventListener('change', () => {
+      state.size = sizeSel.value === 'all' ? 'all' : +sizeSel.value;
+      state.page = 1;
+      draw();
+    });
+    $('#own-pages').addEventListener('click', e => {
+      const btn = e.target.closest('button');
+      if (!btn || btn.disabled) return;
+      if (btn.dataset.go) {
+        state.page += btn.dataset.go === 'next' ? 1 : -1;
+        draw(`#own-pages [data-go="${btn.dataset.go}"]`, true);
+      } else {
+        state.page = +btn.dataset.page;
+        draw(`#own-pages [data-page="${btn.dataset.page}"]`, true);
+      }
+    });
+
     $('#own-key').innerHTML = `<span><i class="pip xi" style="--c:var(--ink-2)"></i>Starting XI</span><span><i class="pip bench" style="--c:var(--ink-2)"></i>Bench</span><span>Squares in table order: ${M.map(m => `<span class="swatch" style="display:inline-block;background:var(--s${m.i + 1});margin:0 3px 0 6px"></span>${esc(m.first)}`).join('')}</span><span>“All FPL” is the share of every FPL manager who owns the player.</span>`;
     draw();
   }
