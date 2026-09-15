@@ -328,6 +328,33 @@ td.top-pos .r { font-weight: 700; text-decoration: underline; text-decoration-co
 .call b { color: var(--ink); font-weight: 600; }
 .luck { font-size: 13px; color: var(--ink-2); white-space: nowrap; }
 
+/* Titles */
+.titles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.tcard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  transition: border-color .15s;
+}
+.tcard.on { border-color: var(--ink); }
+.tcard .mgr { min-width: 0; }
+.tcard h3 { margin: 0; font: 800 30px/.95 var(--display); text-transform: uppercase; letter-spacing: .01em; text-wrap: balance; }
+.tcard-why { font-size: 14px; color: var(--ink-2); }
+.meter { display: flex; flex-direction: column; gap: 4px; margin-top: auto; padding-top: 6px; }
+.meter-track { position: relative; height: 14px; }
+.meter-track::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--rule); }
+.meter-track i { position: absolute; top: 3px; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: var(--axis); }
+.meter-track i.me { top: 1px; width: 12px; height: 12px; margin-left: -6px; background: var(--c); box-shadow: 0 0 0 2px var(--surface); z-index: 1; }
+.meter-ends { display: flex; justify-content: space-between; gap: 8px; font: 500 11px/1.3 var(--mono); color: var(--muted); }
+.tcard-also { font-size: 12px; color: var(--muted); }
+.tcard-also b { font-weight: 500; color: var(--ink-2); }
+@media (max-width: 1000px) { .titles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .titles { grid-template-columns: minmax(0, 1fr); } }
+
 /* Next gameweeks */
 .pred td.num small { display: block; font-size: 11px; font-weight: 400; color: var(--muted); white-space: nowrap; }
 .range { position: relative; height: 14px; min-width: 150px; }
@@ -389,7 +416,7 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
   .t-long { display: none; }
   .t-short { display: inline; }
   .tabs { gap: 0; justify-content: space-between; }
-  .tabs a { padding: 13px 8px 10px; font-size: 17px; }
+  .tabs a { padding: 13px 5px 10px; font-size: 15px; }
   .tabs a:last-child { padding-right: 0; }
 }
 @media (max-width: 380px) {
@@ -418,6 +445,7 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
 
   <nav class="tabs" id="tabs" aria-label="Dashboard sections">
     <a href="#table"><span class="t-long">Table</span><span class="t-short">Table</span></a>
+    <a href="#titles"><span class="t-long">Titles</span><span class="t-short">Titles</span></a>
     <a href="#next"><span class="t-long">Next 3 GWs</span><span class="t-short">Next 3</span></a>
     <a href="#gameweeks"><span class="t-long">Gameweeks</span><span class="t-short">Weeks</span></a>
     <a href="#squads"><span class="t-long">Squads</span><span class="t-short">Squads</span></a>
@@ -473,6 +501,16 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
         <div class="leaders" id="allplay-leaders"></div>
         <div class="scroll"><table class="allplay" id="allplay-table"></table></div>
       </div>
+    </section>
+  </div>
+
+  <div class="view" id="view-titles" data-view="titles" data-title="Titles">
+    <section aria-labelledby="h-titles" id="titles-section">
+      <div class="sec-head">
+        <h2 id="h-titles">Titles</h2>
+        <p>One title for every manager, earned by whatever sets their game apart from the rest of the league. No two managers share a title, and they are recalculated on every refresh, so expect them to change as the season goes on.</p>
+      </div>
+      <div class="titles" id="titles-grid"></div>
     </section>
   </div>
 
@@ -955,6 +993,141 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
   linkRows($('#pred-table'));
 } else {
   $('#pred-section').hidden = true;
+}
+
+// Titles: one per manager, from whatever sets their game apart
+{
+  const avg = a => a.reduce((s, x) => s + x, 0) / a.length;
+  const spread = a => { const mu = avg(a); return Math.sqrt(avg(a.map(x => (x - mu) ** 2))); };
+  const n = EV.length;
+  const pct = v => Math.round(v * 100) + '%';
+  const capBy = Object.fromEntries(capRows.map(r => [r.m.entry, r]));
+  const apBy = Object.fromEntries(ap.map(r => [r.m.entry, r]));
+  const favCaptains = Object.fromEntries(EV.map(e => {
+    const count = {};
+    M.forEach(m => { const c = m.gw[e.event]?.captain; if (c) count[c] = (count[c] || 0) + 1; });
+    const max = Math.max(0, ...Object.values(count));
+    return [e.event, new Set(Object.keys(count).filter(c => count[c] === max))];
+  }));
+  const overlap = m => {
+    const vals = [];
+    m.gws.forEach(g => {
+      if (!g.xi) return;
+      M.forEach(o => {
+        const theirs = o !== m && o.gw[g.event]?.xi;
+        if (!theirs) return;
+        const set = new Set(theirs);
+        vals.push(g.xi.filter(x => set.has(x)).length / g.xi.length);
+      });
+    });
+    return vals.length ? avg(vals) : null;
+  };
+  const posShare = (m, k) => {
+    const withPos = m.gws.filter(g => g.pos);
+    const total = withPos.reduce((s, g) => s + g.pos.reduce((a, b) => a + b, 0), 0);
+    return total > 0 ? withPos.reduce((s, g) => s + g.pos[k], 0) / total : null;
+  };
+
+  const stats = M.map(m => {
+    const scores = m.gws.map(g => g.points - g.hits);
+    const cap = capBy[m.entry];
+    const lastGw = m.gws[m.gws.length - 1];
+    return {
+      transfers: m.gws.reduce((s, g) => s + g.transfers, 0),
+      hits: m.hitSum,
+      bench: m.benchSum,
+      chips: m.chips.length,
+      capLost: cap && cap.weeks ? cap.lost : null,
+      swing: scores.length > 1 ? spread(scores) : null,
+      maverick: m.gws.filter(g => g.captain && favCaptains[g.event] && !favCaptains[g.event].has(g.captain)).length,
+      overlap: overlap(m),
+      def: posShare(m, 1), mid: posShare(m, 2), fwd: posShare(m, 3),
+      climb: RANK[EV[0].event][m.entry].pos - RANK[LAST][m.entry].pos,
+      leading: EV.filter(e => RANK[e.event][m.entry].pos === 1).length,
+      tops: apBy[m.entry].tops,
+      value: lastGw ? lastGw.value + lastGw.bank : null,
+    };
+  });
+
+  const most = (c, word = 'the most in the league') => c.top ? `, ${word}` : '';
+  const TITLES = [
+    { name: 'The Tinkerer', key: 'transfers', dir: 1, range: 2, ok: v => v >= 2, fmt: v => `${v}`, why: (v, c) => `${v} transfers made${c.top ? ', the most in the league' : `, against a league average of ${c.avg.toFixed(1)}`}` },
+    { name: 'Set and Forget', key: 'transfers', dir: -1, range: 2, ok: () => true, fmt: v => `${v}`, why: (v, c) => v === 0 ? 'Not a single transfer all season' : `Only ${v} ${v === 1 ? 'transfer' : 'transfers'} all season${most(c, 'the fewest in the league')}` },
+    { name: 'Hit Merchant', key: 'hits', dir: 1, range: 4, ok: v => v > 0, fmt: v => v ? `−${v}` : '0', why: (v, c) => `−${v} pts spent on transfer hits${most(c)}` },
+    { name: 'Captain Fantastic', key: 'capLost', dir: -1, range: 4, ok: v => v != null, fmt: v => `${v} lost`, why: (v, c) => `Lost just ${v} pts to captain choices${most(c, 'the fewest in the league')}` },
+    { name: 'Armband Anguish', key: 'capLost', dir: 1, range: 4, ok: v => v > 0, fmt: v => `${v} lost`, why: (v, c) => `${v} pts lost by captaining the wrong player${most(c)}` },
+    { name: 'Bench Regret', key: 'bench', dir: 1, range: 5, ok: v => v > 0, fmt: v => `${v} pts`, why: (v, c) => `${v} pts left on the bench${most(c)}` },
+    { name: 'The Metronome', key: 'swing', dir: -1, range: 3, ok: v => v != null, fmt: v => `±${Math.round(v)}`, why: (v, c) => `Weekly scores stay within about ±${Math.round(v)} pts of their average${most(c, 'the steadiest in the league')}` },
+    { name: 'The Rollercoaster', key: 'swing', dir: 1, range: 3, ok: v => v != null, fmt: v => `±${Math.round(v)}`, why: (v, c) => `Weekly scores swing by about ±${Math.round(v)} pts${most(c, 'the wildest in the league')}` },
+    { name: 'Chip Happy', key: 'chips', dir: 1, range: 1, ok: v => v > 0, fmt: v => `${v} ${v === 1 ? 'chip' : 'chips'}`, why: (v, c, m) => `Already played ${m.chips.map(ch => `${chipLong(ch.name)} in GW${ch.event}`).join(' and ')}` },
+    { name: 'The Maverick', key: 'maverick', dir: 1, range: 1, ok: v => v > 0, fmt: v => `${v} of ${n}`, why: v => `Went against the league's favourite captain in ${v} of ${n} gameweeks` },
+    { name: 'The Contrarian', key: 'overlap', dir: -1, range: 0.05, ok: v => v != null, fmt: pct, why: (v, c) => `Only ${pct(v)} of their starting XI matches a typical rival's${most(c, 'the most unique team in the league')}` },
+    { name: 'The Template', key: 'overlap', dir: 1, range: 0.05, ok: v => v != null, fmt: pct, why: (v, c) => `${pct(v)} of their starting XI matches a typical rival's${most(c, 'more than anyone else')}` },
+    { name: 'Midfield Maestro', key: 'mid', dir: 1, range: 0.04, ok: v => v != null, fmt: pct, why: (v, c) => `${pct(v)} of their points come from midfielders${most(c, 'the highest share in the league')}` },
+    { name: 'The Back Line', key: 'def', dir: 1, range: 0.04, ok: v => v != null, fmt: pct, why: (v, c) => `${pct(v)} of their points come from defenders${most(c, 'the highest share in the league')}` },
+    { name: 'Strike Force', key: 'fwd', dir: 1, range: 0.04, ok: v => v != null, fmt: pct, why: (v, c) => `${pct(v)} of their points come from forwards${most(c, 'the highest share in the league')}` },
+    { name: 'The Climber', key: 'climb', dir: 1, range: 1, ok: v => v > 0, fmt: v => (v > 0 ? `+${v}` : `${v}`), why: v => `Up ${v} ${v === 1 ? 'place' : 'places'} in the table since GW1` },
+    { name: 'Front Runner', key: 'leading', dir: 1, range: 1, ok: v => v > 0, fmt: v => `${v} of ${n}`, why: v => `Top of the table after ${v} of ${n} gameweeks` },
+    { name: 'Big Week Hunter', key: 'tops', dir: 1, range: 1, ok: v => v > 0, fmt: v => `${v}`, why: v => `Top scorer in the league in ${v} ${v === 1 ? 'gameweek' : 'gameweeks'}` },
+    { name: 'Market Wizard', key: 'value', dir: 1, range: 1, ok: v => v != null, fmt: v => `£${v.toFixed(1)}m`, why: (v, c) => `£${v.toFixed(1)}m team value, bank included${most(c, 'the highest in the league')}` },
+  ];
+
+  // Score every manager on every title by how far they stand from the league average.
+  const cands = [];
+  TITLES.forEach((t, ti) => {
+    t.vals = stats.map(st => st[t.key]);
+    const valid = t.vals.filter(v => v != null);
+    if (valid.length < 2) return;
+    t.lo = Math.min(...valid);
+    t.hi = Math.max(...valid);
+    if (t.hi - t.lo < t.range) return;
+    t.avg = avg(valid);
+    const sd = spread(valid) || 1;
+    t.vals.forEach((v, i) => {
+      if (v == null || !t.ok(v)) return;
+      cands.push({ ti, i, z: t.dir * (v - t.avg) / sd, top: v === (t.dir > 0 ? t.hi : t.lo) });
+    });
+  });
+  cands.sort((a, b) => b.z - a.z || (b.top - a.top) || a.i - b.i);
+
+  // Hand out titles strongest first, one per manager and one manager per title.
+  const primary = new Array(M.length).fill(null);
+  const used = new Set();
+  cands.forEach(c => {
+    if (c.z > 0 && !primary[c.i] && !used.has(c.ti)) { primary[c.i] = c; used.add(c.ti); }
+  });
+  M.forEach((m, i) => {
+    if (primary[i]) return;
+    const c = cands.find(x => x.i === i && !used.has(x.ti));
+    if (c) { primary[i] = c; used.add(c.ti); }
+  });
+
+  $('#titles-grid').innerHTML = M.map((m, i) => {
+    const c = primary[i];
+    const head = `<p class="label">${posLabel(RANK[LAST][m.entry])} in the league · ${m.total} pts</p>${mgrCell(m)}`;
+    if (!c) {
+      return `<article class="tcard" data-entry="${m.entry}" style="--c:var(--s${m.i + 1})">${head}<h3>The All-Rounder</h3><p class="tcard-why">Nothing sets their game apart from the league yet.</p></article>`;
+    }
+    const t = TITLES[c.ti], v = t.vals[i];
+    const x = val => (t.hi === t.lo ? 50 : (val - t.lo) / (t.hi - t.lo) * 100).toFixed(1);
+    const dots = t.vals.map((val, j) => val == null || j === i ? '' : `<i style="left:${x(val)}%"></i>`).join('') + `<i class="me" style="left:${x(v)}%"></i>`;
+    const also = cands.filter(o => o.i === i && o !== c && o.top && o.z >= 1 && !used.has(o.ti)).slice(0, 2).map(o => TITLES[o.ti].name);
+    return `<article class="tcard" data-entry="${m.entry}" style="--c:var(--s${m.i + 1})">
+      ${head}
+      <h3>${esc(t.name)}</h3>
+      <p class="tcard-why">${esc(t.why(v, { top: c.top, avg: t.avg }, m))}</p>
+      <div class="meter" role="img" aria-label="${esc(m.first)}: ${esc(t.fmt(v))}. League range ${esc(t.fmt(t.lo))} to ${esc(t.fmt(t.hi))}.">
+        <div class="meter-track">${dots}</div>
+        <div class="meter-ends"><span>${esc(t.fmt(t.lo))}</span><span>league range</span><span>${esc(t.fmt(t.hi))}</span></div>
+      </div>
+      ${also.length ? `<p class="tcard-also">Also top for <b>${esc(also.join(' · '))}</b></p>` : ''}
+    </article>`;
+  }).join('');
+  document.querySelectorAll('.tcard').forEach(card => {
+    const entry = +card.dataset.entry;
+    card.addEventListener('pointerenter', () => { if (pinned == null) focusOn(entry); });
+    card.addEventListener('pointerleave', () => { if (pinned == null) focusOn(null); });
+  });
 }
 
 // Bump chart

@@ -77,6 +77,7 @@ for m in managers:
             "captain": players.get(cap["element"]) if cap else None,
             "captain_mult": cap["multiplier"] if cap else None,
             "pos": by_pos,
+            "xi": [p["element"] for p in picks["picks"] if p["multiplier"] > 0],
             "cmult": 3 if picks.get("active_chip") == "3xc" else 2,
             "cap": pick_info(eff),
             "best": pick_info(best),
