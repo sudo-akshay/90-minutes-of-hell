@@ -151,18 +151,6 @@ thead th.num { text-align: right; }
 .swatch { flex: none; width: 10px; height: 10px; border-radius: 50%; }
 .mgr-t { display: flex; flex-direction: column; line-height: 1.3; }
 .team { font-size: 13px; color: var(--muted); }
-.you {
-  display: inline-block;
-  margin-left: 6px;
-  padding: 1px 6px;
-  border-radius: 3px;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font: 600 10px/1.5 var(--mono);
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  vertical-align: 2px;
-}
 .total { font-size: 18px; font-weight: 700; }
 .form { display: block; }
 .tag {
@@ -202,7 +190,6 @@ button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .bump .ax { fill: var(--muted); font: 500 11px var(--mono); }
 .series { transition: opacity .15s; }
 .series .line { fill: none; stroke: var(--c); stroke-width: 2.5; stroke-linecap: round; }
-.series.me .line { stroke-width: 3.5; }
 .series.on .line { stroke-width: 4; }
 .series .dot { fill: var(--c); stroke: var(--surface); stroke-width: 2; }
 .series .end { fill: var(--ink); font: 600 13px var(--sans); }
@@ -365,7 +352,6 @@ const DATA = /*DATA*/null;
 const M = DATA.managers;
 const EV = DATA.events;
 const LAST = EV[EV.length - 1].event;
-const YOU = DATA.league.admin_entry;
 
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -425,8 +411,7 @@ $('#notes').innerHTML = notes.map(([l, v, d]) =>
 
 // Standings
 const maxPts = Math.max(...M.flatMap(m => m.gws.map(g => g.points)));
-const youChip = m => m.entry === YOU ? '<span class="you">You</span>' : '';
-const mgrCell = m => `<div class="mgr"><span class="swatch" style="background:var(--s${m.i + 1})"></span><div class="mgr-t"><span><b>${esc(m.name)}</b>${youChip(m)}</span><span class="team">${esc(m.team)}</span></div></div>`;
+const mgrCell = m => `<div class="mgr"><span class="swatch" style="background:var(--s${m.i + 1})"></span><div class="mgr-t"><span><b>${esc(m.name)}</b></span><span class="team">${esc(m.team)}</span></div></div>`;
 $('#th-gw').textContent = `GW${LAST}`;
 $('#th-cap').textContent = `GW${LAST} captain`;
 $('#standings tbody').innerHTML = M.map(m => {
@@ -554,7 +539,7 @@ function drawBump() {
       d += ` C${mx},${y0} ${mx},${y1} ${x1},${y1}`;
     }
     const [ex, ey] = pts[pts.length - 1];
-    s += `<g class="series${m.entry === YOU ? ' me' : ''}" data-entry="${m.entry}" style="--c:var(--s${m.i + 1})">
+    s += `<g class="series" data-entry="${m.entry}" style="--c:var(--s${m.i + 1})">
       <path class="line" d="${d}"/>
       ${pts.map(([px, py]) => `<circle class="dot" cx="${px}" cy="${py}" r="4.5"/>`).join('')}
       <text class="end" x="${ex + 14}" y="${ey}" dominant-baseline="middle">${esc(narrow ? m.first : m.name)}<tspan class="end-t" dx="6">${m.total}</tspan></text>
