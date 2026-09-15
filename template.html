@@ -133,7 +133,64 @@ b { font-weight: 600; }
 .tabs a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--accent); }
 .tabs a:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
 .t-short { display: none; }
-.view { display: flex; flex-direction: column; gap: 48px; }
+.view { display: flex; flex-direction: column; gap: 48px; margin-top: -8px; }
+
+/* Injury news ticker */
+.ticker {
+  display: flex;
+  align-items: stretch;
+  margin-top: -28px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  font-size: 13px;
+}
+.ticker-label {
+  flex: none;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: 700 15px/1 var(--display);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.ticker-window { flex: 1; min-width: 0; overflow: hidden; }
+.ticker-track { display: flex; width: max-content; animation: tick var(--dur, 60s) linear infinite; }
+.ticker-track ul { display: flex; margin: 0; padding: 0 0 0 16px; list-style: none; }
+.tk-item { display: flex; align-items: center; gap: 8px; padding: 9px 0; white-space: nowrap; color: var(--ink-2); }
+.tk-item + .tk-item::before { content: ""; width: 4px; height: 4px; margin: 0 14px 0 6px; border-radius: 50%; background: var(--axis); }
+.tk-item b { color: var(--ink); font-weight: 600; }
+.tk-meta { font: 500 11px var(--mono); color: var(--muted); }
+.tk-sev { padding: 1px 6px; border-radius: 3px; font: 600 10px/1.5 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+.tk-sev.crit { background: #d03b3b; color: #fff; }
+.tk-sev.serious { background: #ec835a; color: #1f0e05; }
+.tk-sev.warn { background: #fab219; color: #1a1400; }
+.tk-sev.good { background: #0ca30c; color: #041a04; }
+.ticker:hover .ticker-track, .ticker:focus-within .ticker-track, .ticker.paused .ticker-track { animation-play-state: paused; }
+.ticker.static .ticker-track { animation: none; }
+.ticker-btn {
+  flex: none;
+  padding: 0 14px;
+  border: 0;
+  border-left: 1px solid var(--rule);
+  background: transparent;
+  color: var(--ink-2);
+  font: 500 12px var(--sans);
+  cursor: pointer;
+}
+.ticker-btn:hover { background: var(--hover); color: var(--ink); }
+.ticker-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+.ticker.static .ticker-btn { display: none; }
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+  .ticker-window { overflow-x: auto; }
+  .ticker-track ul[aria-hidden] { display: none; }
+  .ticker-btn { display: none; }
+}
 
 /* Notes strip */
 .notes {
@@ -451,6 +508,12 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
     <a href="#squads"><span class="t-long">Squads</span><span class="t-short">Squads</span></a>
     <a href="#history"><span class="t-long">History</span><span class="t-short">History</span></a>
   </nav>
+
+  <div class="ticker" id="ticker-wrap" role="region" aria-label="Injury news for players in the league's squads">
+    <p class="ticker-label"><span class="t-long">Injury news</span><span class="t-short">Injuries</span></p>
+    <div class="ticker-window"><div class="ticker-track" id="ticker-track"></div></div>
+    <button type="button" class="ticker-btn" id="ticker-toggle" aria-pressed="false">Pause</button>
+  </div>
 
   <div class="view" id="view-table" data-view="table" data-title="Table">
     <div class="notes" id="notes"></div>
@@ -1128,6 +1191,43 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
     card.addEventListener('pointerenter', () => { if (pinned == null) focusOn(entry); });
     card.addEventListener('pointerleave', () => { if (pinned == null) focusOn(null); });
   });
+}
+
+// Injury news ticker
+{
+  const NEWS = DATA.news || [];
+  const wrap = $('#ticker-wrap'), track = $('#ticker-track'), btn = $('#ticker-toggle');
+  const byEntry = Object.fromEntries(M.map(m => [m.entry, m]));
+  const severity = n => {
+    if (n.status === 's') return ['crit', 'Suspended'];
+    if (n.status === 'u' || n.status === 'n') return ['crit', 'Unavailable'];
+    if (n.chance === 0) return ['crit', 'Out'];
+    if (n.chance != null && n.chance <= 50) return ['serious', `${n.chance}%`];
+    if (n.chance != null && n.chance < 100) return ['warn', `${n.chance}%`];
+    return ['good', 'Update'];
+  };
+  const when = iso => iso ? new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' }) : '';
+  const owners = n => n.owners.length === M.length && n.owners.every(o => o.xi)
+    ? 'Owned by everyone'
+    : 'Owned by ' + namesList(n.owners.map(o => byEntry[o.entry].first + (o.xi ? '' : ' (bench)')));
+  const items = NEWS.map(n => {
+    const [cls, label] = severity(n);
+    return `<li class="tk-item"><span class="tk-sev ${cls}">${label}</span><b>${esc(n.name)}</b><span class="tk-meta">${esc(n.team)} · ${esc(n.pos)}${n.added ? ' · ' + when(n.added) : ''}</span><span>${esc(n.news || 'No details from FPL yet')}</span><span class="tk-meta">${esc(owners(n))}</span></li>`;
+  }).join('');
+  if (!NEWS.length) {
+    wrap.classList.add('static');
+    track.innerHTML = '<ul><li class="tk-item">No injury or suspension news for any player in the league’s squads.</li></ul>';
+  } else {
+    track.innerHTML = `<ul>${items}</ul><ul aria-hidden="true">${items}</ul>`;
+    const setSpeed = () => { track.style.setProperty('--dur', Math.max(20, track.scrollWidth / 2 / 45).toFixed(1) + 's'); };
+    setSpeed();
+    document.fonts?.ready.then(setSpeed);
+    btn.addEventListener('click', () => {
+      const paused = wrap.classList.toggle('paused');
+      btn.textContent = paused ? 'Play' : 'Pause';
+      btn.setAttribute('aria-pressed', String(paused));
+    });
+  }
 }
 
 // Bump chart

@@ -91,6 +91,68 @@
    "entry": 7587350,
    "name": "Akshay Prabhakar",
    "team": "False 9 to 5",
+   "squad": [
+    {
+     "id": 1,
+     "xi": true
+    },
+    {
+     "id": 8,
+     "xi": true
+    },
+    {
+     "id": 173,
+     "xi": true
+    },
+    {
+     "id": 277,
+     "xi": true
+    },
+    {
+     "id": 426,
+     "xi": true
+    },
+    {
+     "id": 427,
+     "xi": true
+    },
+    {
+     "id": 397,
+     "xi": true
+    },
+    {
+     "id": 237,
+     "xi": true
+    },
+    {
+     "id": 346,
+     "xi": true
+    },
+    {
+     "id": 411,
+     "xi": true
+    },
+    {
+     "id": 165,
+     "xi": true
+    },
+    {
+     "id": 497,
+     "xi": false
+    },
+    {
+     "id": 212,
+     "xi": false
+    },
+    {
+     "id": 259,
+     "xi": false
+    },
+    {
+     "id": 175,
+     "xi": false
+    }
+   ],
    "rank": 1,
    "last_rank": 1,
    "total": 298,
@@ -308,6 +370,68 @@
    "entry": 7599534,
    "name": "United forever",
    "team": "ReigningChamp",
+   "squad": [
+    {
+     "id": 496,
+     "xi": true
+    },
+    {
+     "id": 418,
+     "xi": true
+    },
+    {
+     "id": 8,
+     "xi": true
+    },
+    {
+     "id": 31,
+     "xi": true
+    },
+    {
+     "id": 259,
+     "xi": true
+    },
+    {
+     "id": 426,
+     "xi": true
+    },
+    {
+     "id": 368,
+     "xi": true
+    },
+    {
+     "id": 124,
+     "xi": true
+    },
+    {
+     "id": 346,
+     "xi": true
+    },
+    {
+     "id": 411,
+     "xi": true
+    },
+    {
+     "id": 379,
+     "xi": true
+    },
+    {
+     "id": 301,
+     "xi": false
+    },
+    {
+     "id": 499,
+     "xi": false
+    },
+    {
+     "id": 454,
+     "xi": false
+    },
+    {
+     "id": 212,
+     "xi": false
+    }
+   ],
    "rank": 2,
    "last_rank": 2,
    "total": 279,
@@ -507,6 +631,68 @@
    "entry": 7598024,
    "name": "Nabrique Iglesias",
    "team": "HaaLand Rovers",
+   "squad": [
+    {
+     "id": 109,
+     "xi": true
+    },
+    {
+     "id": 31,
+     "xi": true
+    },
+    {
+     "id": 87,
+     "xi": true
+    },
+    {
+     "id": 8,
+     "xi": true
+    },
+    {
+     "id": 557,
+     "xi": true
+    },
+    {
+     "id": 368,
+     "xi": true
+    },
+    {
+     "id": 154,
+     "xi": true
+    },
+    {
+     "id": 399,
+     "xi": true
+    },
+    {
+     "id": 165,
+     "xi": true
+    },
+    {
+     "id": 411,
+     "xi": true
+    },
+    {
+     "id": 346,
+     "xi": true
+    },
+    {
+     "id": 496,
+     "xi": false
+    },
+    {
+     "id": 127,
+     "xi": false
+    },
+    {
+     "id": 259,
+     "xi": false
+    },
+    {
+     "id": 418,
+     "xi": false
+    }
+   ],
    "rank": 3,
    "last_rank": 3,
    "total": 277,
@@ -724,6 +910,68 @@
    "entry": 4762060,
    "name": "sai charan Komuravelli",
    "team": "saicha blasters",
+   "squad": [
+    {
+     "id": 1,
+     "xi": true
+    },
+    {
+     "id": 503,
+     "xi": true
+    },
+    {
+     "id": 8,
+     "xi": true
+    },
+    {
+     "id": 419,
+     "xi": true
+    },
+    {
+     "id": 31,
+     "xi": true
+    },
+    {
+     "id": 397,
+     "xi": true
+    },
+    {
+     "id": 399,
+     "xi": true
+    },
+    {
+     "id": 40,
+     "xi": true
+    },
+    {
+     "id": 565,
+     "xi": true
+    },
+    {
+     "id": 411,
+     "xi": true
+    },
+    {
+     "id": 249,
+     "xi": true
+    },
+    {
+     "id": 28,
+     "xi": false
+    },
+    {
+     "id": 499,
+     "xi": false
+    },
+    {
+     "id": 43,
+     "xi": false
+    },
+    {
+     "id": 552,
+     "xi": false
+    }
+   ],
    "rank": 4,
    "last_rank": 4,
    "total": 254,
@@ -941,6 +1189,68 @@
    "entry": 6341322,
    "name": "Rohith Pulipaka",
    "team": "Puli_fc",
+   "squad": [
+    {
+     "id": 226,
+     "xi": true
+    },
+    {
+     "id": 388,
+     "xi": true
+    },
+    {
+     "id": 8,
+     "xi": true
+    },
+    {
+     "id": 31,
+     "xi": true
+    },
+    {
+     "id": 212,
+     "xi": true
+    },
+    {
+     "id": 290,
+     "xi": true
+    },
+    {
+     "id": 426,
+     "xi": true
+    },
+    {
+     "id": 40,
+     "xi": true
+    },
+    {
+     "id": 368,
+     "xi": true
+    },
+    {
+     "id": 411,
+     "xi": true
+    },
+    {
+     "id": 165,
+     "xi": true
+    },
+    {
+     "id": 301,
+     "xi": false
+    },
+    {
+     "id": 423,
+     "xi": false
+    },
+    {
+     "id": 499,
+     "xi": false
+    },
+    {
+     "id": 272,
+     "xi": false
+    }
+   ],
    "rank": 5,
    "last_rank": 5,
    "total": 246,
@@ -1128,6 +1438,68 @@
    "entry": 7693414,
    "name": "Sandeep X",
    "team": "Fooslashers",
+   "squad": [
+    {
+     "id": 1,
+     "xi": true
+    },
+    {
+     "id": 387,
+     "xi": true
+    },
+    {
+     "id": 356,
+     "xi": true
+    },
+    {
+     "id": 142,
+     "xi": true
+    },
+    {
+     "id": 399,
+     "xi": true
+    },
+    {
+     "id": 426,
+     "xi": true
+    },
+    {
+     "id": 377,
+     "xi": true
+    },
+    {
+     "id": 480,
+     "xi": true
+    },
+    {
+     "id": 40,
+     "xi": true
+    },
+    {
+     "id": 165,
+     "xi": true
+    },
+    {
+     "id": 55,
+     "xi": true
+    },
+    {
+     "id": 273,
+     "xi": false
+    },
+    {
+     "id": 556,
+     "xi": false
+    },
+    {
+     "id": 498,
+     "xi": false
+    },
+    {
+     "id": 272,
+     "xi": false
+    }
+   ],
    "rank": 6,
    "last_rank": 6,
    "total": 238,
@@ -1308,6 +1680,68 @@
    "entry": 7628837,
    "name": "Aravind Kadiri",
    "team": "Godofredemption",
+   "squad": [
+    {
+     "id": 1,
+     "xi": true
+    },
+    {
+     "id": 356,
+     "xi": true
+    },
+    {
+     "id": 586,
+     "xi": true
+    },
+    {
+     "id": 201,
+     "xi": true
+    },
+    {
+     "id": 428,
+     "xi": true
+    },
+    {
+     "id": 427,
+     "xi": true
+    },
+    {
+     "id": 40,
+     "xi": true
+    },
+    {
+     "id": 399,
+     "xi": true
+    },
+    {
+     "id": 453,
+     "xi": true
+    },
+    {
+     "id": 411,
+     "xi": true
+    },
+    {
+     "id": 165,
+     "xi": true
+    },
+    {
+     "id": 497,
+     "xi": false
+    },
+    {
+     "id": 308,
+     "xi": false
+    },
+    {
+     "id": 272,
+     "xi": false
+    },
+    {
+     "id": 422,
+     "xi": false
+    }
+   ],
    "rank": 7,
    "last_rank": 7,
    "total": 227,
@@ -1501,6 +1935,68 @@
    "entry": 7592803,
    "name": "Aditya Bitra",
    "team": "Pending Moderation",
+   "squad": [
+    {
+     "id": 572,
+     "xi": true
+    },
+    {
+     "id": 173,
+     "xi": true
+    },
+    {
+     "id": 279,
+     "xi": true
+    },
+    {
+     "id": 282,
+     "xi": true
+    },
+    {
+     "id": 12,
+     "xi": true
+    },
+    {
+     "id": 154,
+     "xi": true
+    },
+    {
+     "id": 399,
+     "xi": true
+    },
+    {
+     "id": 367,
+     "xi": true
+    },
+    {
+     "id": 605,
+     "xi": true
+    },
+    {
+     "id": 411,
+     "xi": true
+    },
+    {
+     "id": 379,
+     "xi": true
+    },
+    {
+     "id": 497,
+     "xi": false
+    },
+    {
+     "id": 305,
+     "xi": false
+    },
+    {
+     "id": 321,
+     "xi": false
+    },
+    {
+     "id": 304,
+     "xi": false
+    }
+   ],
    "rank": 8,
    "last_rank": 8,
    "total": 180,
@@ -1702,7 +2198,92 @@
    ]
   }
  ],
- "fetched_at": "2026-09-15 17:50 UTC",
+ "news": [
+  {
+   "name": "Elanga",
+   "team": "NEW",
+   "pos": "MID",
+   "status": "i",
+   "chance": 0,
+   "news": "Unspecified injury - Unknown return date",
+   "added": "2026-09-14T20:00:09.505598Z",
+   "owners": [
+    {
+     "entry": 7599534,
+     "xi": false
+    }
+   ]
+  },
+  {
+   "name": "Mendy",
+   "team": "HUL",
+   "pos": "DEF",
+   "status": "d",
+   "chance": 50,
+   "news": "Concussion - 50% chance of playing",
+   "added": "2026-09-12T18:00:09.334142Z",
+   "owners": [
+    {
+     "entry": 7628837,
+     "xi": true
+    }
+   ]
+  },
+  {
+   "name": "Pedro Porro",
+   "team": "TOT",
+   "pos": "DEF",
+   "status": "d",
+   "chance": 75,
+   "news": "Unspecified injury - 75% chance of playing",
+   "added": "2026-09-11T18:00:09.076279Z",
+   "owners": [
+    {
+     "entry": 7599534,
+     "xi": false
+    },
+    {
+     "entry": 4762060,
+     "xi": false
+    },
+    {
+     "entry": 6341322,
+     "xi": false
+    }
+   ]
+  },
+  {
+   "name": "Shaw",
+   "team": "MUN",
+   "pos": "DEF",
+   "status": "d",
+   "chance": 75,
+   "news": "Unspecified injury - 75% chance of playing",
+   "added": "2026-09-11T13:00:09.030120Z",
+   "owners": [
+    {
+     "entry": 6341322,
+     "xi": false
+    }
+   ]
+  },
+  {
+   "name": "Watkins",
+   "team": "AVL",
+   "pos": "FWD",
+   "status": "u",
+   "chance": 0,
+   "news": "Has joined Al Hilal permanently",
+   "added": "2026-09-01T13:15:16.698799Z",
+   "owners": [
+    {
+     "entry": 7693414,
+     "xi": true
+    }
+   ]
+  }
+ ],
+ "fetched_at": "2026-09-15 17:56 UTC",
  "predictions": {
   "from_event": 4,
   "events": [
@@ -2304,6 +2885,6 @@
     "flags": []
    }
   },
-  "generated_at": "2026-09-15 17:51 UTC"
+  "generated_at": "2026-09-15 17:56 UTC"
  }
 }

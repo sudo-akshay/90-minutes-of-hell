@@ -52,9 +52,10 @@ def live_points(event):
 out = []
 for m in managers:
     h = get(f"entry/{m['entry']}/history/")
-    gws = []
+    gws, picks_by_event = [], {}
     for gw in h["current"]:
         picks = get(f"entry/{m['entry']}/event/{gw['event']}/picks/")
+        picks_by_event[gw["event"]] = picks
         cap = next((p for p in picks["picks"] if p["is_captain"]), None)
         # Multipliers already reflect auto-subs, captaincy and Bench Boost, so this sums to the GW score.
         pts = live_points(gw["event"])
@@ -82,14 +83,39 @@ for m in managers:
             "cap": pick_info(eff),
             "best": pick_info(best),
         })
+    # The squad they carry into the next gameweek (a Free Hit squad reverts).
+    squad = []
+    if picks_by_event:
+        latest_event = max(picks_by_event)
+        latest = picks_by_event[latest_event]
+        if latest.get("active_chip") == "freehit" and latest_event - 1 in picks_by_event:
+            latest = picks_by_event[latest_event - 1]
+        squad = [{"id": p["element"], "xi": p["position"] <= 11} for p in latest["picks"]]
     out.append({
-        "entry": m["entry"], "name": m["player_name"], "team": m["entry_name"],
+        "entry": m["entry"], "name": m["player_name"], "team": m["entry_name"], "squad": squad,
         "rank": m["rank"], "last_rank": m["last_rank"], "total": m["total"],
         "gws": gws, "past": h["past"], "chips": h["chips"],
     })
 
+# Injury and availability news for every player in the league's current squads, newest first.
+teams = {t["id"]: t["short_name"] for t in boot["teams"]}
+elements = {e["id"]: e for e in boot["elements"]}
+owners = {}
+for m in out:
+    for p in m["squad"]:
+        owners.setdefault(p["id"], []).append({"entry": m["entry"], "xi": p["xi"]})
+news = []
+for pid, own in owners.items():
+    e = elements[pid]
+    if not e["news"] and e["status"] == "a":
+        continue
+    news.append({"name": e["web_name"], "team": teams[e["team"]], "pos": ["GK", "DEF", "MID", "FWD"][e["element_type"] - 1],
+                 "status": e["status"], "chance": e["chance_of_playing_next_round"], "news": e["news"],
+                 "added": e["news_added"], "owners": own})
+news.sort(key=lambda n: n["added"] or "", reverse=True)
+
 data = {"league": {"id": league["id"], "name": league["name"], "admin_entry": league["admin_entry"]},
-        "events": events, "phases": phases, "managers": out,
+        "events": events, "phases": phases, "managers": out, "news": news,
         "fetched_at": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())}
 OUT.write_text(json.dumps(data, indent=1, ensure_ascii=False))
 print(f"{league['name']}: {len(out)} managers, up to GW{events[-1]['event'] if events else 0}")
