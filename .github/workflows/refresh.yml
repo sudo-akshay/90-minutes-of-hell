@@ -19,6 +19,9 @@ jobs:
       - name: Fetch league data
         run: python fetch.py
 
+      - name: Project next 3 gameweeks
+        run: python predict.py
+
       - name: Build page
         run: python build.py
 

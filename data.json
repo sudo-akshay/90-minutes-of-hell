@@ -1286,5 +1286,608 @@
    ]
   }
  ],
- "fetched_at": "2026-09-15 16:50 UTC"
+ "fetched_at": "2026-09-15 17:34 UTC",
+ "predictions": {
+  "from_event": 4,
+  "events": [
+   5,
+   6,
+   7
+  ],
+  "managers": {
+   "7587350": {
+    "gws": [
+     {
+      "event": 5,
+      "pts": 68.1,
+      "captain": "Haaland",
+      "captain_xp": 17.6,
+      "captain_vs": "SUN (H)",
+      "top": [
+       {
+        "name": "Haaland",
+        "xp": 8.8
+       },
+       {
+        "name": "B.Fernandes",
+        "xp": 6.7
+       },
+       {
+        "name": "João Pedro",
+        "xp": 6.4
+       }
+      ]
+     },
+     {
+      "event": 6,
+      "pts": 65.4,
+      "captain": "B.Fernandes",
+      "captain_xp": 14.6,
+      "captain_vs": "TOT (H)",
+      "top": [
+       {
+        "name": "B.Fernandes",
+        "xp": 7.3
+       },
+       {
+        "name": "João Pedro",
+        "xp": 6.9
+       },
+       {
+        "name": "Calafiori",
+        "xp": 6.7
+       }
+      ]
+     },
+     {
+      "event": 7,
+      "pts": 67.6,
+      "captain": "Haaland",
+      "captain_xp": 17.6,
+      "captain_vs": "IPS (H)",
+      "top": [
+       {
+        "name": "Haaland",
+        "xp": 8.8
+       },
+       {
+        "name": "B.Fernandes",
+        "xp": 6.7
+       },
+       {
+        "name": "João Pedro",
+        "xp": 6.4
+       }
+      ]
+     }
+    ],
+    "total": 201.1,
+    "flags": []
+   },
+   "7599534": {
+    "gws": [
+     {
+      "event": 5,
+      "pts": 60.9,
+      "captain": "Haaland",
+      "captain_xp": 17.6,
+      "captain_vs": "SUN (H)",
+      "top": [
+       {
+        "name": "Haaland",
+        "xp": 8.8
+       },
+       {
+        "name": "B.Fernandes",
+        "xp": 6.7
+       },
+       {
+        "name": "Calafiori",
+        "xp": 5.5
+       }
+      ]
+     },
+     {
+      "event": 6,
+      "pts": 58.0,
+      "captain": "B.Fernandes",
+      "captain_xp": 14.6,
+      "captain_vs": "TOT (H)",
+      "top": [
+       {
+        "name": "B.Fernandes",
+        "xp": 7.3
+       },
+       {
+        "name": "Calafiori",
+        "xp": 6.7
+       },
+       {
+        "name": "Haaland",
+        "xp": 6.4
+       }
+      ]
+     },
+     {
+      "event": 7,
+      "pts": 61.3,
+      "captain": "Haaland",
+      "captain_xp": 17.6,
+      "captain_vs": "IPS (H)",
+      "top": [
+       {
+        "name": "Haaland",
+        "xp": 8.8
+       },
+       {
+        "name": "B.Fernandes",
+        "xp": 6.7
+       },
+       {
+        "name": "Groß",
+        "xp": 5.6
+       }
+      ]
+     }
+    ],
+    "total": 180.2,
+    "flags": [
+     {
+      "name": "Pedro Porro",
+      "chance": 75,
+      "news": "Unspecified injury - 75% chance of playing"
+     },
+     {
+      "name": "Elanga",
+      "chance": 0,
+      "news": "Unspecified injury - Unknown return date"
+     }
+    ]
+   },
+   "7598024": {
+    "gws": [
+     {
+      "event": 5,
+      "pts": 64.3,
+      "captain": "Haaland",
+      "captain_xp": 17.6,
+      "captain_vs": "SUN (H)",
+      "top": [
+       {
+        "name": "Haaland",
+        "xp": 8.8
+       },
+       {
+        "name": "João Pedro",
+        "xp": 6.4
+       },
+       {
+        "name": "Cherki",
+        "xp": 6.3
+       }
+      ]
+     },
+     {
+      "event": 6,
+      "pts": 60.2,
+      "captain": "João Pedro",
+      "captain_xp": 13.8,
+      "captain_vs": "BOU (H)",
+      "top": [
+       {
+        "name": "João Pedro",
+        "xp": 6.9
+       },
+       {
+        "name": "Calafiori",
+        "xp": 6.7
+       },
+       {
+        "name": "Haaland",
+        "xp": 6.4
+       }
+      ]
+     },
+     {
+      "event": 7,
+      "pts": 64.7,
+      "captain": "Haaland",
+      "captain_xp": 17.6,
+      "captain_vs": "IPS (H)",
+      "top": [
+       {
+        "name": "Haaland",
+        "xp": 8.8
+       },
+       {
+        "name": "João Pedro",
+        "xp": 6.4
+       },
+       {
+        "name": "Cherki",
+        "xp": 6.3
+       }
+      ]
+     }
+    ],
+    "total": 189.2,
+    "flags": []
+   },
+   "4762060": {
+    "gws": [
+     {
+      "event": 5,
+      "pts": 63.5,
+      "captain": "Haaland",
+      "captain_xp": 17.6,
+      "captain_vs": "SUN (H)",
+      "top": [
+       {
+        "name": "Haaland",
+        "xp": 8.8
+       },
+       {
+        "name": "Cherki",
+        "xp": 6.3
+       },
+       {
+        "name": "Semenyo",
+        "xp": 6.1
+       }
+      ]
+     },
+     {
+      "event": 6,
+      "pts": 58.2,
+      "captain": "Calafiori",
+      "captain_xp": 13.4,
+      "captain_vs": "LEE (H)",
+      "top": [
+       {
+        "name": "Calafiori",
+        "xp": 6.7
+       },
+       {
+        "name": "Haaland",
+        "xp": 6.4
+       },
+       {
+        "name": "Raya",
+        "xp": 6.1
+       }
+      ]
+     },
+     {
+      "event": 7,
+      "pts": 63.4,
+      "captain": "Haaland",
+      "captain_xp": 17.6,
+      "captain_vs": "IPS (H)",
+      "top": [
+       {
+        "name": "Haaland",
+        "xp": 8.8
+       },
+       {
+        "name": "Cherki",
+        "xp": 6.3
+       },
+       {
+        "name": "Semenyo",
+        "xp": 6.1
+       }
+      ]
+     }
+    ],
+    "total": 185.1,
+    "flags": [
+     {
+      "name": "Pedro Porro",
+      "chance": 75,
+      "news": "Unspecified injury - 75% chance of playing"
+     }
+    ]
+   },
+   "6341322": {
+    "gws": [
+     {
+      "event": 5,
+      "pts": 64.1,
+      "captain": "Haaland",
+      "captain_xp": 17.6,
+      "captain_vs": "SUN (H)",
+      "top": [
+       {
+        "name": "Haaland",
+        "xp": 8.8
+       },
+       {
+        "name": "B.Fernandes",
+        "xp": 6.7
+       },
+       {
+        "name": "Guéhi",
+        "xp": 6.4
+       }
+      ]
+     },
+     {
+      "event": 6,
+      "pts": 61.2,
+      "captain": "B.Fernandes",
+      "captain_xp": 14.6,
+      "captain_vs": "TOT (H)",
+      "top": [
+       {
+        "name": "B.Fernandes",
+        "xp": 7.3
+       },
+       {
+        "name": "João Pedro",
+        "xp": 6.9
+       },
+       {
+        "name": "Calafiori",
+        "xp": 6.7
+       }
+      ]
+     },
+     {
+      "event": 7,
+      "pts": 63.9,
+      "captain": "Haaland",
+      "captain_xp": 17.6,
+      "captain_vs": "IPS (H)",
+      "top": [
+       {
+        "name": "Haaland",
+        "xp": 8.8
+       },
+       {
+        "name": "B.Fernandes",
+        "xp": 6.7
+       },
+       {
+        "name": "Guéhi",
+        "xp": 6.4
+       }
+      ]
+     }
+    ],
+    "total": 189.2,
+    "flags": [
+     {
+      "name": "Shaw",
+      "chance": 75,
+      "news": "Unspecified injury - 75% chance of playing"
+     },
+     {
+      "name": "Pedro Porro",
+      "chance": 75,
+      "news": "Unspecified injury - 75% chance of playing"
+     }
+    ]
+   },
+   "7693414": {
+    "gws": [
+     {
+      "event": 5,
+      "pts": 55.3,
+      "captain": "B.Fernandes",
+      "captain_xp": 13.4,
+      "captain_vs": "FUL (A)",
+      "top": [
+       {
+        "name": "B.Fernandes",
+        "xp": 6.7
+       },
+       {
+        "name": "Gibbs-White",
+        "xp": 6.7
+       },
+       {
+        "name": "João Pedro",
+        "xp": 6.4
+       }
+      ]
+     },
+     {
+      "event": 6,
+      "pts": 54.9,
+      "captain": "B.Fernandes",
+      "captain_xp": 14.6,
+      "captain_vs": "TOT (H)",
+      "top": [
+       {
+        "name": "B.Fernandes",
+        "xp": 7.3
+       },
+       {
+        "name": "João Pedro",
+        "xp": 6.9
+       },
+       {
+        "name": "Raya",
+        "xp": 6.1
+       }
+      ]
+     },
+     {
+      "event": 7,
+      "pts": 53.9,
+      "captain": "B.Fernandes",
+      "captain_xp": 13.4,
+      "captain_vs": "LEE (A)",
+      "top": [
+       {
+        "name": "B.Fernandes",
+        "xp": 6.7
+       },
+       {
+        "name": "João Pedro",
+        "xp": 6.4
+       },
+       {
+        "name": "Cherki",
+        "xp": 6.3
+       }
+      ]
+     }
+    ],
+    "total": 164.1,
+    "flags": [
+     {
+      "name": "Watkins",
+      "chance": 0,
+      "news": "Has joined Al Hilal permanently"
+     }
+    ]
+   },
+   "7628837": {
+    "gws": [
+     {
+      "event": 5,
+      "pts": 63.4,
+      "captain": "Haaland",
+      "captain_xp": 17.6,
+      "captain_vs": "SUN (H)",
+      "top": [
+       {
+        "name": "Haaland",
+        "xp": 8.8
+       },
+       {
+        "name": "João Pedro",
+        "xp": 6.4
+       },
+       {
+        "name": "Cherki",
+        "xp": 6.3
+       }
+      ]
+     },
+     {
+      "event": 6,
+      "pts": 60.0,
+      "captain": "João Pedro",
+      "captain_xp": 13.8,
+      "captain_vs": "BOU (H)",
+      "top": [
+       {
+        "name": "João Pedro",
+        "xp": 6.9
+       },
+       {
+        "name": "Haaland",
+        "xp": 6.4
+       },
+       {
+        "name": "Raya",
+        "xp": 6.1
+       }
+      ]
+     },
+     {
+      "event": 7,
+      "pts": 63.4,
+      "captain": "Haaland",
+      "captain_xp": 17.6,
+      "captain_vs": "IPS (H)",
+      "top": [
+       {
+        "name": "Haaland",
+        "xp": 8.8
+       },
+       {
+        "name": "João Pedro",
+        "xp": 6.4
+       },
+       {
+        "name": "Cherki",
+        "xp": 6.3
+       }
+      ]
+     }
+    ],
+    "total": 186.8,
+    "flags": [
+     {
+      "name": "Mendy",
+      "chance": 50,
+      "news": "Concussion - 50% chance of playing"
+     }
+    ]
+   },
+   "7592803": {
+    "gws": [
+     {
+      "event": 5,
+      "pts": 62.2,
+      "captain": "Haaland",
+      "captain_xp": 17.6,
+      "captain_vs": "SUN (H)",
+      "top": [
+       {
+        "name": "Haaland",
+        "xp": 8.8
+       },
+       {
+        "name": "Saka",
+        "xp": 6.5
+       },
+       {
+        "name": "Cherki",
+        "xp": 6.3
+       }
+      ]
+     },
+     {
+      "event": 6,
+      "pts": 60.5,
+      "captain": "Saka",
+      "captain_xp": 15.8,
+      "captain_vs": "LEE (H)",
+      "top": [
+       {
+        "name": "Saka",
+        "xp": 7.9
+       },
+       {
+        "name": "Haaland",
+        "xp": 6.4
+       },
+       {
+        "name": "Palmer",
+        "xp": 5.9
+       }
+      ]
+     },
+     {
+      "event": 7,
+      "pts": 62.7,
+      "captain": "Haaland",
+      "captain_xp": 17.6,
+      "captain_vs": "IPS (H)",
+      "top": [
+       {
+        "name": "Haaland",
+        "xp": 8.8
+       },
+       {
+        "name": "Saka",
+        "xp": 6.5
+       },
+       {
+        "name": "Cherki",
+        "xp": 6.3
+       }
+      ]
+     }
+    ],
+    "total": 185.4,
+    "flags": []
+   }
+  },
+  "generated_at": "2026-09-15 17:35 UTC"
+ }
 }
