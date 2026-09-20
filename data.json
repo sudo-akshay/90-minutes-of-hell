@@ -3242,7 +3242,7 @@
    "points": 10
   }
  },
- "fetched_at": "2026-09-20 17:14 UTC",
+ "fetched_at": "2026-09-20 17:15 UTC",
  "predictions": {
   "from_event": 5,
   "events": [
@@ -3485,7 +3485,7 @@
     "gws": [
      {
       "event": 6,
-      "pts": 60.3,
+      "pts": 60.4,
       "captain": "Calafiori",
       "captain_xp": 12.6,
       "captain_vs": "LEE (H)",
@@ -3547,7 +3547,7 @@
       ]
      }
     ],
-    "total": 180.1,
+    "total": 180.2,
     "flags": [
      {
       "name": "Pedro Porro",
@@ -3656,7 +3656,7 @@
      },
      {
       "event": 7,
-      "pts": 60.9,
+      "pts": 61.0,
       "captain": "Haaland",
       "captain_xp": 17.4,
       "captain_vs": "IPS (H)",
@@ -3677,7 +3677,7 @@
      },
      {
       "event": 8,
-      "pts": 56.9,
+      "pts": 57.0,
       "captain": "Haaland",
       "captain_xp": 12.6,
       "captain_vs": "AVL (A)",
@@ -3691,13 +3691,13 @@
         "xp": 5.5
        },
        {
-        "name": "Rogers",
+        "name": "Mbeumo",
         "xp": 5.2
        }
       ]
      }
     ],
-    "total": 174.8,
+    "total": 175.0,
     "flags": []
    },
    "7693414": {
@@ -3866,6 +3866,6 @@
     ]
    }
   },
-  "generated_at": "2026-09-20 17:14 UTC"
+  "generated_at": "2026-09-20 17:15 UTC"
  }
 }
