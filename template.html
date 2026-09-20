@@ -659,9 +659,17 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
   </div>
 
   <div class="view" id="view-titles" data-view="titles" data-title="Titles">
+    <section aria-labelledby="h-week" id="week-section">
+      <div class="sec-head">
+        <h2 id="h-week">This week</h2>
+        <p id="week-intro">A fresh title for everyone based on this gameweek alone. Recalculated on every refresh, so this week's hero is next week's Bench Muppet.</p>
+      </div>
+      <div class="titles" id="week-grid"></div>
+    </section>
+
     <section aria-labelledby="h-titles" id="titles-section">
       <div class="sec-head">
-        <h2 id="h-titles">Titles</h2>
+        <h2 id="h-titles">Season titles</h2>
         <p>One title for every manager, earned by whatever sets their game apart from the rest of the league. No two managers share a title, and they are recalculated on every refresh, so expect them to change as the season goes on.</p>
       </div>
       <div class="titles" id="titles-grid"></div>
@@ -1706,6 +1714,120 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
       if (w !== gapW) { gapW = w; drawGap(); }
     }).observe($('#cmp-chart'));
     draw();
+  }
+}
+
+// This week: one roast per manager from the current gameweek only
+{
+  const sec = $('#week-section');
+  const haveWeek = LAST > 1 && M.every(m => m.gw[LAST] && m.gw[LAST - 1]);
+  if (!haveWeek) {
+    sec.hidden = true;
+  } else {
+    const avg = a => a.reduce((s, x) => s + x, 0) / a.length;
+    const spread = a => { const mu = avg(a); return Math.sqrt(avg(a.map(x => (x - mu) ** 2))); };
+    const pct = v => Math.round(v * 100) + '%';
+    const fplAvg = EV[EV.length - 1].average;
+
+    const stats = M.map(m => {
+      const g = m.gw[LAST], prev = m.gw[LAST - 1];
+      const overlap = (() => {
+        if (!g.xi) return null;
+        const vals = M.filter(o => o !== m && o.gw[LAST]?.xi).map(o => {
+          const set = new Set(o.gw[LAST].xi);
+          return g.xi.filter(x => set.has(x)).length / g.xi.length;
+        });
+        return vals.length ? avg(vals) : null;
+      })();
+      return {
+        m, g,
+        net: g.points - g.hits,
+        bench: g.bench,
+        hits: g.hits,
+        transfers: g.transfers,
+        miss: g.cap && g.best ? (g.best.pts - g.cap.pts) * (g.cmult - 1) : null,
+        overlap,
+        climb: prev.overall_rank - g.overall_rank,
+        chip: g.chip,
+      };
+    });
+
+    const TITLES = [
+      { name: 'Weekend Winner', key: 'net', dir: 1, range: 1, ok: () => true,
+        fmt: v => `${v} pts`, why: (v, r) => `${v} pts, the best in the league this week. Screenshot it, it might not happen again.` },
+      { name: 'Wooden Spoon', key: 'net', dir: -1, range: 1, ok: () => true,
+        fmt: v => `${v} pts`, why: v => `${v} pts this week. The FPL average was ${fplAvg}.` },
+      { name: 'Bench Muppet', key: 'bench', dir: 1, range: 4, ok: v => v > 3,
+        fmt: v => `${v} pts`, why: (v, r) => `${v} pts left rotting on the bench${v > r.net ? ' — more than the XI they actually picked scored' : ''}. Picking the right eleven is free.` },
+      { name: 'Captain Calamity', key: 'miss', dir: 1, range: 4, ok: v => v > 0,
+        fmt: v => `−${v}`, why: (v, r) => `Captained ${r.g.cap.name} (${r.g.cap.pts}) with ${r.g.best.name} (${r.g.best.pts}) sitting in the same XI. −${v} pts for that armband.` },
+      { name: 'Armband Genius', key: 'miss', dir: -1, range: 4, ok: v => v != null,
+        fmt: v => `−${v}`, why: (v, r) => v === 0 ? `Captained ${r.g.cap.name}, the best pick in their XI. Enjoy being right for once.` : `Only ${v} pts lost to the armband this week, the least in the league.` },
+      { name: 'Hit Merchant', key: 'hits', dir: 1, range: 4, ok: v => v > 0,
+        fmt: v => v ? `−${v}` : '0', why: (v, r) => `−${v} pts on transfers, then scored ${r.net}. Money well spent.` },
+      { name: 'Green Arrow', key: 'climb', dir: 1, range: 1000, ok: v => v > 0,
+        fmt: v => (v > 0 ? '+' : '') + compact(Math.abs(v)), why: v => `Up ${compact(v)} places in the overall rankings this week. Don't get used to it.` },
+      { name: 'Red Arrow', key: 'climb', dir: -1, range: 1000, ok: v => v < 0,
+        fmt: v => (v > 0 ? '+' : '−') + compact(Math.abs(v)), why: v => `Down ${compact(-v)} places in the overall rankings this week. Ouch.` },
+      { name: 'Sheep of the Week', key: 'overlap', dir: 1, range: 0.05, ok: v => v != null,
+        fmt: pct, why: v => `${pct(v)} of their XI is the same as everyone else's. Original thought: not detected.` },
+      { name: 'Lone Wolf', key: 'overlap', dir: -1, range: 0.05, ok: v => v != null,
+        fmt: pct, why: (v, r) => `Only ${pct(v)} of their XI matches a rival's. Brave, reckless, or both — ${r.net} pts says which.` },
+      { name: 'Chip Burner', key: 'chipUsed', dir: 1, range: 1, ok: v => v > 0,
+        fmt: v => v ? 'used' : '–', why: (v, r) => `Burned their ${chipLong(r.chip)} this week for ${r.net} pts.` },
+      { name: 'Set and Forget', key: 'transfers', dir: -1, range: 1, ok: () => true,
+        fmt: v => `${v}`, why: (v, r) => v === 0 ? `Didn't make a single transfer. Bold strategy, ${r.net} pts.` : `Just ${v} ${v === 1 ? 'transfer' : 'transfers'} made, the fewest in the league.` },
+    ];
+    stats.forEach(r => { r.chipUsed = r.chip ? 1 : 0; });
+
+    const cands = [];
+    TITLES.forEach((t, ti) => {
+      t.vals = stats.map(r => r[t.key]);
+      const valid = t.vals.filter(v => v != null);
+      if (valid.length < 2) return;
+      t.lo = Math.min(...valid); t.hi = Math.max(...valid);
+      if (t.hi - t.lo < t.range) return;
+      t.avg = avg(valid);
+      const sd = spread(valid) || 1;
+      t.vals.forEach((v, i) => {
+        if (v == null || !t.ok(v, stats[i])) return;
+        cands.push({ ti, i, z: t.dir * (v - t.avg) / sd, top: v === (t.dir > 0 ? t.hi : t.lo) });
+      });
+    });
+    cands.sort((a, b) => b.z - a.z || (b.top - a.top) || a.i - b.i);
+    const primary = new Array(M.length).fill(null), used = new Set();
+    cands.forEach(c => { if (c.z > 0 && !primary[c.i] && !used.has(c.ti)) { primary[c.i] = c; used.add(c.ti); } });
+    M.forEach((m, i) => {
+      if (primary[i]) return;
+      const c = cands.find(x => x.i === i && !used.has(x.ti));
+      if (c) { primary[i] = c; used.add(c.ti); }
+    });
+
+    $('#week-intro').textContent = `A fresh title for everyone from GW${LAST} alone${LIVE ? ', while it is still being played' : ''}. Recalculated on every refresh, so this week's hero is next week's Bench Muppet.`;
+    $('#week-grid').innerHTML = M.map((m, i) => {
+      const c = primary[i], r = stats[i];
+      const head = `<p class="label">GW${LAST}${LIVE ? ' so far' : ''} · ${r.net} pts</p>${mgrCell(m)}`;
+      if (!c) {
+        return `<article class="tcard" data-entry="${m.entry}" style="--c:var(--s${m.i + 1})">${head}<h3>Utterly Forgettable</h3><p class="tcard-why">Nothing good, nothing terrible. ${r.net} pts and no story at all.</p></article>`;
+      }
+      const t = TITLES[c.ti], v = t.vals[i];
+      const x = val => (t.hi === t.lo ? 50 : (val - t.lo) / (t.hi - t.lo) * 100).toFixed(1);
+      const dots = t.vals.map((val, j) => val == null || j === i ? '' : `<i style="left:${x(val)}%"></i>`).join('') + `<i class="me" style="left:${x(v)}%"></i>`;
+      return `<article class="tcard" data-entry="${m.entry}" style="--c:var(--s${m.i + 1})">
+        ${head}
+        <h3>${esc(t.name)}</h3>
+        <p class="tcard-why">${esc(t.why(v, r))}</p>
+        <div class="meter" role="img" aria-label="${esc(m.first)}: ${esc(t.fmt(v))}. League range ${esc(t.fmt(t.lo))} to ${esc(t.fmt(t.hi))}.">
+          <div class="meter-track">${dots}</div>
+          <div class="meter-ends"><span>${esc(t.fmt(t.lo))}</span><span>league range</span><span>${esc(t.fmt(t.hi))}</span></div>
+        </div>
+      </article>`;
+    }).join('');
+    document.querySelectorAll('#week-grid .tcard').forEach(card => {
+      const entry = +card.dataset.entry;
+      card.addEventListener('pointerenter', () => { if (pinned == null) focusOn(entry); });
+      card.addEventListener('pointerleave', () => { if (pinned == null) focusOn(null); });
+    });
   }
 }
 
