@@ -488,6 +488,29 @@ th[aria-sort] .sort-ind { opacity: 1; }
   .pip { width: 9px; height: 9px; }
 }
 
+/* Compare squads */
+.cmp-pickers { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 12px 16px; border-bottom: 1px solid var(--rule); }
+.cmp-stats { min-width: 0; }
+.cmp-stats td.win { font-weight: 700; color: var(--ink); }
+.cmp-gap { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-top: 1px solid var(--rule); }
+.cmp-gap p:last-child { font-size: 13px; color: var(--ink-2); }
+.cmp-gap svg { display: block; overflow: visible; }
+.gap-line { fill: none; stroke: var(--c); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.gap-zero { stroke: var(--axis); stroke-width: 1; }
+.gap-dot { fill: var(--c); stroke: var(--surface); stroke-width: 2; }
+.gap-ax { fill: var(--muted); font: 500 11px var(--mono); }
+.gap-end { fill: var(--ink); font: 600 12px var(--sans); }
+.cmp-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--rule); border-top: 1px solid var(--rule); }
+.cmp-col { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; background: var(--surface); }
+.cmp-col h3 { margin: 0; font: 700 18px/1.1 var(--display); text-transform: uppercase; letter-spacing: .03em; }
+.cmp-col ul { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.cmp-p { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 14px; }
+.cmp-p b { font-weight: 600; }
+.cmp-p .team { display: block; font-size: 12px; }
+.cmp-pts { font-variant-numeric: tabular-nums; color: var(--ink-2); white-space: nowrap; }
+.cmp-empty { font-size: 13px; color: var(--muted); }
+@media (max-width: 760px) { .cmp-cols { grid-template-columns: minmax(0, 1fr); } }
+
 /* Next gameweeks */
 .pred td.num small { display: block; font-size: 11px; font-weight: 400; color: var(--muted); white-space: nowrap; }
 .range { position: relative; height: 14px; min-width: 150px; }
@@ -746,6 +769,27 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
           </label>
         </div>
         <div class="key" id="own-key"></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-compare" id="compare-section">
+      <div class="sec-head">
+        <h2 id="h-compare">Compare squads</h2>
+        <p>Pick any two managers to see the players they share, the ones they own alone, and how their seasons compare.</p>
+      </div>
+      <div class="panel">
+        <div class="cmp-pickers">
+          <label class="pick" for="cmp-a">First <select id="cmp-a"></select></label>
+          <button type="button" class="dir-btn" id="cmp-swap">Swap</button>
+          <label class="pick" for="cmp-b">Second <select id="cmp-b"></select></label>
+        </div>
+        <div class="scroll"><table class="cmp-stats" id="cmp-stats"></table></div>
+        <div class="cmp-gap">
+          <p class="label">Points gap after each gameweek</p>
+          <div id="cmp-chart"></div>
+          <p id="cmp-caption"></p>
+        </div>
+        <div class="cmp-cols" id="cmp-cols"></div>
       </div>
     </section>
 
@@ -1551,6 +1595,124 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
     });
 
     $('#own-key').innerHTML = `<span><i class="pip xi" style="--c:var(--ink-2)"></i>Starting XI</span><span><i class="pip bench" style="--c:var(--ink-2)"></i>Bench</span><span>Squares in table order: ${M.map(m => `<span class="swatch" style="display:inline-block;background:var(--s${m.i + 1});margin:0 3px 0 6px"></span>${esc(m.first)}`).join('')}</span><span>“All FPL” is the share of every FPL manager who owns the player.</span>`;
+    draw();
+  }
+}
+
+// Compare squads
+{
+  const sec = $('#compare-section');
+  if (M.length < 2 || !M.every(m => m.squad?.length)) {
+    sec.hidden = true;
+  } else {
+    const P = DATA.players || {};
+    const selA = $('#cmp-a'), selB = $('#cmp-b');
+    const capBy = Object.fromEntries(capRows.map(r => [r.m.entry, r]));
+    const opts = M.map(m => `<option value="${m.entry}">${esc(m.name)}</option>`).join('');
+    selA.innerHTML = opts; selB.innerHTML = opts;
+    selA.value = M[0].entry; selB.value = M[1].entry;
+    const find = v => M.find(m => m.entry === +v) || M[0];
+    const money = m => { const g = m.gws[m.gws.length - 1]; return g ? g.value + g.bank : null; };
+    const sum = (m, k) => m.gws.reduce((s, g) => s + g[k], 0);
+    let gapState = null;
+
+    const player = (id, tags) => {
+      const p = P[id];
+      if (!p) return '';
+      return `<li class="cmp-p"><span><b>${esc(p.name)}</b><span class="team">${esc(p.team)} · ${esc(p.pos)} · £${p.price.toFixed(1)}m${tags ? ' · ' + esc(tags) : ''}</span></span><span class="cmp-pts">${p.points} pts</span></li>`;
+    };
+    const sortIds = ids => [...ids].sort((x, y) => (P[y]?.points ?? 0) - (P[x]?.points ?? 0) || (P[x]?.name || '').localeCompare(P[y]?.name || ''));
+
+    const drawGap = () => {
+      if (!gapState) return;
+      const { cum, a } = gapState;
+      const box = $('#cmp-chart');
+      const W = Math.max(240, box.clientWidth);
+      const H = 120, mL = 34, mR = 46, mT = 12, mB = 26;
+      const n = cum.length;
+      const span = Math.max(8, ...cum.map(v => Math.abs(v)));
+      const x = k => n > 1 ? mL + k * (W - mL - mR) / (n - 1) : (W - mR + mL) / 2;
+      const y = v => mT + (1 - (v + span) / (2 * span)) * (H - mT - mB);
+      const pts = cum.map((v, k) => [x(k), y(v)]);
+      const d = pts.map(([px, py], k) => `${k ? 'L' : 'M'}${px.toFixed(1)},${py.toFixed(1)}`).join(' ');
+      const last = cum[n - 1];
+      box.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Points gap after each gameweek, from ${cum[0] >= 0 ? '+' : ''}${cum[0]} to ${last >= 0 ? '+' : ''}${last}">
+        <line class="gap-zero" x1="${mL}" x2="${W - mR}" y1="${y(0)}" y2="${y(0)}"/>
+        <text class="gap-ax" x="${mL - 8}" y="${y(0)}" text-anchor="end" dominant-baseline="middle">0</text>
+        <text class="gap-ax" x="${mL - 8}" y="${y(span)}" text-anchor="end" dominant-baseline="middle">+${span}</text>
+        <g style="--c:var(--s${a.i + 1})"><path class="gap-line" d="${d}"/>${pts.map(([px, py]) => `<circle class="gap-dot" cx="${px}" cy="${py}" r="4"/>`).join('')}</g>
+        ${EV.map((e, k) => `<text class="gap-ax" x="${x(k)}" y="${H - 8}" text-anchor="middle">${e.event}</text>`).join('')}
+        <text class="gap-end" x="${x(n - 1) + 10}" y="${y(last)}" dominant-baseline="middle">${last >= 0 ? '+' : ''}${last}</text>
+      </svg>`;
+    };
+
+    const draw = () => {
+      if (selA.value === selB.value) {
+        const other = M.find(m => m.entry !== +selA.value);
+        selB.value = other.entry;
+      }
+      const a = find(selA.value), b = find(selB.value);
+      const sqA = new Map(a.squad.map(sp => [sp.id, sp.xi]));
+      const sqB = new Map(b.squad.map(sp => [sp.id, sp.xi]));
+      const shared = [...sqA.keys()].filter(id => sqB.has(id));
+      const onlyA = [...sqA.keys()].filter(id => !sqB.has(id));
+      const onlyB = [...sqB.keys()].filter(id => !sqA.has(id));
+
+      let wa = 0, wb = 0, dr = 0, run = 0;
+      const cum = EV.map(e => {
+        const da = net(a, e.event), db = net(b, e.event);
+        if (da > db) wa++; else if (db > da) wb++; else dr++;
+        run += da - db;
+        return run;
+      });
+      gapState = { cum, a };
+
+      const rows = [
+        { label: 'Position', a: posLabel(RANK[LAST][a.entry]), b: posLabel(RANK[LAST][b.entry]), win: RANK[LAST][a.entry].pos < RANK[LAST][b.entry].pos ? 'a' : RANK[LAST][b.entry].pos < RANK[LAST][a.entry].pos ? 'b' : '' },
+        { label: 'Total points', a: a.total, b: b.total, win: a.total > b.total ? 'a' : b.total > a.total ? 'b' : '' },
+        { label: `GW${LAST}${LIVE ? ' so far' : ''}`, a: net(a, LAST), b: net(b, LAST), win: net(a, LAST) > net(b, LAST) ? 'a' : net(b, LAST) > net(a, LAST) ? 'b' : '' },
+        { label: 'Weeks outscored', a: `${wa} of ${EV.length}`, b: `${wb} of ${EV.length}`, win: wa > wb ? 'a' : wb > wa ? 'b' : '', note: dr ? `${dr} level` : '' },
+        { label: 'Transfers', a: sum(a, 'transfers'), b: sum(b, 'transfers'), win: '' },
+        { label: 'Points on hits', a: a.hitSum ? `−${a.hitSum}` : '0', b: b.hitSum ? `−${b.hitSum}` : '0', win: a.hitSum < b.hitSum ? 'a' : b.hitSum < a.hitSum ? 'b' : '' },
+        { label: 'Bench points', a: a.benchSum, b: b.benchSum, win: a.benchSum < b.benchSum ? 'a' : b.benchSum < a.benchSum ? 'b' : '' },
+        { label: 'Captain regret', a: capBy[a.entry] ? `−${capBy[a.entry].lost}` : '–', b: capBy[b.entry] ? `−${capBy[b.entry].lost}` : '–', win: capBy[a.entry] && capBy[b.entry] ? (capBy[a.entry].lost < capBy[b.entry].lost ? 'a' : capBy[b.entry].lost < capBy[a.entry].lost ? 'b' : '') : '' },
+        { label: 'Chips used', a: a.chips.length ? a.chips.map(c => chipTag(c.name)).join(', ') : 'None', b: b.chips.length ? b.chips.map(c => chipTag(c.name)).join(', ') : 'None', win: '' },
+        { label: 'Team value', a: money(a) ? `£${money(a).toFixed(1)}m` : '–', b: money(b) ? `£${money(b).toFixed(1)}m` : '–', win: money(a) > money(b) ? 'a' : money(b) > money(a) ? 'b' : '' },
+        { label: 'Players shared', a: `${shared.length} of ${a.squad.length}`, b: `${shared.length} of ${b.squad.length}`, win: '' },
+      ];
+      $('#cmp-stats').innerHTML = `
+        <thead><tr><th scope="col">Measure</th><th scope="col" class="num">${esc(a.name)}</th><th scope="col" class="num">${esc(b.name)}</th></tr></thead>
+        <tbody>${rows.map(r => `<tr><th scope="row">${esc(r.label)}${r.note ? `<small>${esc(r.note)}</small>` : ''}</th><td class="num${r.win === 'a' ? ' win' : ''}">${esc(String(r.a))}</td><td class="num${r.win === 'b' ? ' win' : ''}">${esc(String(r.b))}</td></tr>`).join('')}</tbody>`;
+
+      const lead = cum[cum.length - 1] ?? 0;
+      const swaps = cum.filter((v, k) => k > 0 && v !== 0 && Math.sign(v) !== Math.sign(cum[k - 1]) && cum[k - 1] !== 0).length;
+      $('#cmp-caption').textContent = lead === 0
+        ? `${a.first} and ${b.first} are level on points.`
+        : `${(lead > 0 ? a : b).first} leads by ${Math.abs(lead)} pts` + (swaps ? `, and the lead has changed hands ${swaps === 1 ? 'once' : swaps + ' times'}.` : '.')
+          + ` The line shows ${a.first} minus ${b.first}, so above the zero line means ${a.first} is ahead.`;
+      drawGap();
+
+      const tag = xi => xi ? 'starting' : 'bench';
+      const list = (title, ids, body) => `<div class="cmp-col"><h3>${esc(title)}</h3>${ids.length ? `<ul>${ids.map(body).join('')}</ul>` : '<p class="cmp-empty">Nobody</p>'}</div>`;
+      $('#cmp-cols').innerHTML =
+        list(`Only ${a.first} (${onlyA.length})`, sortIds(onlyA), id => player(id, tag(sqA.get(id)))) +
+        list(`Shared (${shared.length})`, sortIds(shared), id => player(id, `${a.first}: ${tag(sqA.get(id))} · ${b.first}: ${tag(sqB.get(id))}`)) +
+        list(`Only ${b.first} (${onlyB.length})`, sortIds(onlyB), id => player(id, tag(sqB.get(id))));
+      markScrollers?.();
+    };
+
+    selA.addEventListener('change', draw);
+    selB.addEventListener('change', draw);
+    $('#cmp-swap').addEventListener('click', () => {
+      const v = selA.value; selA.value = selB.value; selB.value = v;
+      draw();
+      $('#cmp-swap').focus({ preventScroll: true });
+    });
+    let gapW = 0;
+    new ResizeObserver(() => {
+      const w = $('#cmp-chart').clientWidth;
+      if (w !== gapW) { gapW = w; drawGap(); }
+    }).observe($('#cmp-chart'));
     draw();
   }
 }
