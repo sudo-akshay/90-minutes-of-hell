@@ -1756,7 +1756,7 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
       { name: 'Weekend Winner', key: 'net', dir: 1, range: 1, ok: () => true,
         fmt: v => `${v} pts`, why: (v, r) => `${v} pts, the best in the league this week. Screenshot it, it might not happen again.` },
       { name: 'Wooden Spoon', key: 'net', dir: -1, range: 1, ok: () => true,
-        fmt: v => `${v} pts`, why: v => `${v} pts this week. The FPL average was ${fplAvg}.` },
+        fmt: v => `${v} pts`, why: v => `${v} pts, the worst in the league this week${v < fplAvg ? `, and the FPL average was ${fplAvg}` : ''}.` },
       { name: 'Bench Muppet', key: 'bench', dir: 1, range: 4, ok: v => v > 3,
         fmt: v => `${v} pts`, why: (v, r) => `${v} pts left rotting on the bench${v > r.net ? ' — more than the XI they actually picked scored' : ''}. Picking the right eleven is free.` },
       { name: 'Captain Calamity', key: 'miss', dir: 1, range: 4, ok: v => v > 0,
@@ -1796,6 +1796,16 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
     });
     cands.sort((a, b) => b.z - a.z || (b.top - a.top) || a.i - b.i);
     const primary = new Array(M.length).fill(null), used = new Set();
+
+    // The best and worst scores of the week belong to whoever actually scored them.
+    const nets = stats.map(r => r.net);
+    [['Weekend Winner', nets.indexOf(Math.max(...nets))], ['Wooden Spoon', nets.indexOf(Math.min(...nets))]].forEach(([name, i]) => {
+      const ti = TITLES.findIndex(t => t.name === name);
+      if (i < 0 || ti < 0 || primary[i] || used.has(ti) || TITLES[ti].lo == null) return;
+      primary[i] = cands.find(c => c.i === i && c.ti === ti) || { ti, i, z: 0, top: true };
+      used.add(ti);
+    });
+
     cands.forEach(c => { if (c.z > 0 && !primary[c.i] && !used.has(c.ti)) { primary[c.i] = c; used.add(c.ti); } });
     M.forEach((m, i) => {
       if (primary[i]) return;
