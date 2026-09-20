@@ -4019,7 +4019,7 @@
    "team": "ARS",
    "pos": "DEF",
    "price": 5.8,
-   "selected": 50.7,
+   "selected": 50.6,
    "points": 29
   },
   "173": {
@@ -4043,7 +4043,7 @@
    "team": "MUN",
    "pos": "MID",
    "price": 12.0,
-   "selected": 39.6,
+   "selected": 39.5,
    "points": 31
   },
   "427": {
@@ -4051,7 +4051,7 @@
    "team": "MUN",
    "pos": "MID",
    "price": 7.9,
-   "selected": 21.3,
+   "selected": 21.2,
    "points": 25
   },
   "397": {
@@ -4083,7 +4083,7 @@
    "team": "MCI",
    "pos": "FWD",
    "price": 15.6,
-   "selected": 73.4,
+   "selected": 73.5,
    "points": 39
   },
   "464": {
@@ -4107,7 +4107,7 @@
    "team": "CRY",
    "pos": "MID",
    "price": 4.4,
-   "selected": 7.6,
+   "selected": 7.5,
    "points": 2
   },
   "259": {
@@ -4155,7 +4155,7 @@
    "team": "NEW",
    "pos": "MID",
    "price": 6.1,
-   "selected": 5.2,
+   "selected": 5.1,
    "points": 18
   },
   "480": {
@@ -4171,7 +4171,7 @@
    "team": "BHA",
    "pos": "MID",
    "price": 5.8,
-   "selected": 25.2,
+   "selected": 25.4,
    "points": 47
   },
   "379": {
@@ -4251,7 +4251,7 @@
    "team": "CHE",
    "pos": "FWD",
    "price": 7.8,
-   "selected": 67.2,
+   "selected": 67.1,
    "points": 33
   },
   "419": {
@@ -4307,7 +4307,7 @@
    "team": "SUN",
    "pos": "FWD",
    "price": 5.7,
-   "selected": 5.9,
+   "selected": 6.0,
    "points": 24
   },
   "226": {
@@ -4363,7 +4363,7 @@
    "team": "FUL",
    "pos": "FWD",
    "price": 4.5,
-   "selected": 5.6,
+   "selected": 5.5,
    "points": 0
   },
   "356": {
@@ -4396,14 +4396,14 @@
    "pos": "MID",
    "price": 7.9,
    "selected": 5.7,
-   "points": 18
+   "points": 26
   },
   "453": {
    "name": "Barnes",
    "team": "NEW",
    "pos": "MID",
    "price": 6.1,
-   "selected": 4.9,
+   "selected": 5.0,
    "points": 28
   },
   "308": {
@@ -4535,7 +4535,366 @@
    "points": 10
   }
  },
- "fetched_at": "2026-09-20 17:26 UTC",
+ "gw_news": {
+  "event": 5,
+  "fixtures": [
+   {
+    "home": {
+     "short": "BRE",
+     "name": "Brentford"
+    },
+    "away": {
+     "short": "CHE",
+     "name": "Chelsea"
+    },
+    "hs": 3,
+    "as": 0,
+    "kickoff": "2026-09-18T19:00:00Z",
+    "started": true,
+    "finished": false,
+    "minutes": 90
+   },
+   {
+    "home": {
+     "short": "TOT",
+     "name": "Spurs"
+    },
+    "away": {
+     "short": "AVL",
+     "name": "Aston Villa"
+    },
+    "hs": 2,
+    "as": 3,
+    "kickoff": "2026-09-19T11:30:00Z",
+    "started": true,
+    "finished": false,
+    "minutes": 90
+   },
+   {
+    "home": {
+     "short": "BHA",
+     "name": "Brighton"
+    },
+    "away": {
+     "short": "ARS",
+     "name": "Arsenal"
+    },
+    "hs": 3,
+    "as": 0,
+    "kickoff": "2026-09-19T14:00:00Z",
+    "started": true,
+    "finished": false,
+    "minutes": 90
+   },
+   {
+    "home": {
+     "short": "EVE",
+     "name": "Everton"
+    },
+    "away": {
+     "short": "IPS",
+     "name": "Ipswich Town"
+    },
+    "hs": 1,
+    "as": 0,
+    "kickoff": "2026-09-19T14:00:00Z",
+    "started": true,
+    "finished": false,
+    "minutes": 90
+   },
+   {
+    "home": {
+     "short": "NEW",
+     "name": "Newcastle"
+    },
+    "away": {
+     "short": "HUL",
+     "name": "Hull City"
+    },
+    "hs": 2,
+    "as": 1,
+    "kickoff": "2026-09-19T14:00:00Z",
+    "started": true,
+    "finished": false,
+    "minutes": 90
+   },
+   {
+    "home": {
+     "short": "NFO",
+     "name": "Nott'm Forest"
+    },
+    "away": {
+     "short": "COV",
+     "name": "Coventry City"
+    },
+    "hs": 0,
+    "as": 1,
+    "kickoff": "2026-09-19T16:30:00Z",
+    "started": true,
+    "finished": false,
+    "minutes": 90
+   },
+   {
+    "home": {
+     "short": "BOU",
+     "name": "Bournemouth"
+    },
+    "away": {
+     "short": "LIV",
+     "name": "Liverpool"
+    },
+    "hs": 0,
+    "as": 1,
+    "kickoff": "2026-09-20T13:00:00Z",
+    "started": true,
+    "finished": false,
+    "minutes": 90
+   },
+   {
+    "home": {
+     "short": "LEE",
+     "name": "Leeds"
+    },
+    "away": {
+     "short": "CRY",
+     "name": "Crystal Palace"
+    },
+    "hs": 0,
+    "as": 0,
+    "kickoff": "2026-09-20T13:00:00Z",
+    "started": true,
+    "finished": false,
+    "minutes": 90
+   },
+   {
+    "home": {
+     "short": "MCI",
+     "name": "Man City"
+    },
+    "away": {
+     "short": "SUN",
+     "name": "Sunderland"
+    },
+    "hs": 5,
+    "as": 3,
+    "kickoff": "2026-09-20T13:00:00Z",
+    "started": true,
+    "finished": false,
+    "minutes": 90
+   },
+   {
+    "home": {
+     "short": "FUL",
+     "name": "Fulham"
+    },
+    "away": {
+     "short": "MUN",
+     "name": "Man Utd"
+    },
+    "hs": 1,
+    "as": 1,
+    "kickoff": "2026-09-20T15:30:00Z",
+    "started": true,
+    "finished": false,
+    "minutes": 90
+   }
+  ],
+  "performers": [
+   {
+    "name": "Brobbey",
+    "team": "SUN",
+    "pos": "FWD",
+    "points": 17,
+    "goals": 3,
+    "assists": 0,
+    "clean": 0,
+    "bonus": 3,
+    "minutes": 90,
+    "owners": [
+     4762060
+    ]
+   },
+   {
+    "name": "Semenyo",
+    "team": "MCI",
+    "pos": "MID",
+    "points": 17,
+    "goals": 2,
+    "assists": 1,
+    "clean": 0,
+    "bonus": 2,
+    "minutes": 90,
+    "owners": [
+     7587350
+    ]
+   },
+   {
+    "name": "Dasilva",
+    "team": "COV",
+    "pos": "DEF",
+    "points": 15,
+    "goals": 1,
+    "assists": 0,
+    "clean": 1,
+    "bonus": 3,
+    "minutes": 90,
+    "owners": []
+   },
+   {
+    "name": "Groß",
+    "team": "BHA",
+    "pos": "MID",
+    "points": 14,
+    "goals": 1,
+    "assists": 1,
+    "clean": 1,
+    "bonus": 3,
+    "minutes": 90,
+    "owners": [
+     7599534,
+     4762060
+    ]
+   },
+   {
+    "name": "Schuster",
+    "team": "BRE",
+    "pos": "DEF",
+    "points": 14,
+    "goals": 0,
+    "assists": 1,
+    "clean": 1,
+    "bonus": 3,
+    "minutes": 90,
+    "owners": []
+   },
+   {
+    "name": "Tarkowski",
+    "team": "EVE",
+    "pos": "DEF",
+    "points": 14,
+    "goals": 0,
+    "assists": 1,
+    "clean": 1,
+    "bonus": 3,
+    "minutes": 90,
+    "owners": []
+   },
+   {
+    "name": "Hall",
+    "team": "NEW",
+    "pos": "DEF",
+    "points": 13,
+    "goals": 1,
+    "assists": 0,
+    "clean": 0,
+    "bonus": 3,
+    "minutes": 90,
+    "owners": []
+   },
+   {
+    "name": "Manzambi",
+    "team": "AVL",
+    "pos": "MID",
+    "points": 13,
+    "goals": 1,
+    "assists": 1,
+    "clean": 1,
+    "bonus": 2,
+    "minutes": 71,
+    "owners": []
+   },
+   {
+    "name": "Buendía",
+    "team": "AVL",
+    "pos": "MID",
+    "points": 12,
+    "goals": 1,
+    "assists": 0,
+    "clean": 0,
+    "bonus": 3,
+    "minutes": 90,
+    "owners": []
+   },
+   {
+    "name": "Rushworth",
+    "team": "COV",
+    "pos": "GK",
+    "points": 11,
+    "goals": 0,
+    "assists": 1,
+    "clean": 1,
+    "bonus": 2,
+    "minutes": 90,
+    "owners": []
+   },
+   {
+    "name": "Cunha",
+    "team": "MUN",
+    "pos": "MID",
+    "points": 10,
+    "goals": 1,
+    "assists": 0,
+    "clean": 0,
+    "bonus": 3,
+    "minutes": 90,
+    "owners": [
+     7628837
+    ]
+   },
+   {
+    "name": "Trafford",
+    "team": "LEE",
+    "pos": "GK",
+    "points": 10,
+    "goals": 0,
+    "assists": 0,
+    "clean": 1,
+    "bonus": 3,
+    "minutes": 90,
+    "owners": []
+   },
+   {
+    "name": "Willock",
+    "team": "NEW",
+    "pos": "MID",
+    "points": 10,
+    "goals": 1,
+    "assists": 0,
+    "clean": 0,
+    "bonus": 3,
+    "minutes": 86,
+    "owners": []
+   },
+   {
+    "name": "Anthony",
+    "team": "BRE",
+    "pos": "MID",
+    "points": 10,
+    "goals": 1,
+    "assists": 0,
+    "clean": 1,
+    "bonus": 2,
+    "minutes": 80,
+    "owners": []
+   },
+   {
+    "name": "Kostoulas",
+    "team": "BHA",
+    "pos": "FWD",
+    "points": 10,
+    "goals": 1,
+    "assists": 1,
+    "clean": 1,
+    "bonus": 2,
+    "minutes": 75,
+    "owners": []
+   }
+  ],
+  "average": 18,
+  "highest": 108,
+  "finished": false
+ },
+ "fetched_at": "2026-09-20 17:58 UTC",
  "predictions": {
   "from_event": 5,
   "events": [
@@ -4724,7 +5083,7 @@
      },
      {
       "event": 7,
-      "pts": 62.4,
+      "pts": 62.5,
       "captain": "Haaland",
       "captain_xp": 17.4,
       "captain_vs": "IPS (H)",
@@ -4765,7 +5124,7 @@
       ]
      }
     ],
-    "total": 177.9,
+    "total": 178.0,
     "flags": [
      {
       "name": "João Pedro",
@@ -4799,7 +5158,7 @@
      },
      {
       "event": 7,
-      "pts": 63.4,
+      "pts": 63.5,
       "captain": "Haaland",
       "captain_xp": 17.4,
       "captain_vs": "IPS (H)",
@@ -4840,7 +5199,7 @@
       ]
      }
     ],
-    "total": 180.3,
+    "total": 180.4,
     "flags": [
      {
       "name": "Pedro Porro",
@@ -4928,7 +5287,7 @@
     "gws": [
      {
       "event": 6,
-      "pts": 57.1,
+      "pts": 57.6,
       "captain": "Haaland",
       "captain_xp": 12.6,
       "captain_vs": "LIV (A)",
@@ -4949,7 +5308,7 @@
      },
      {
       "event": 7,
-      "pts": 61.1,
+      "pts": 61.6,
       "captain": "Haaland",
       "captain_xp": 17.4,
       "captain_vs": "IPS (H)",
@@ -4970,7 +5329,7 @@
      },
      {
       "event": 8,
-      "pts": 57.0,
+      "pts": 57.6,
       "captain": "Haaland",
       "captain_xp": 12.6,
       "captain_vs": "AVL (A)",
@@ -4990,7 +5349,7 @@
       ]
      }
     ],
-    "total": 175.2,
+    "total": 176.8,
     "flags": []
    },
    "7693414": {
@@ -5159,6 +5518,6 @@
     ]
    }
   },
-  "generated_at": "2026-09-20 17:26 UTC"
+  "generated_at": "2026-09-20 17:59 UTC"
  }
 }

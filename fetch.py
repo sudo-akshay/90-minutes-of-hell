@@ -159,8 +159,38 @@ players = {
     for pid in owners
 }
 
+# This gameweek's matches and the players who scored best in them.
+gw_news = None
+if events:
+    cur = events[-1]["event"]
+    teams_full = {t["id"]: {"short": t["short_name"], "name": t["name"]} for t in boot["teams"]}
+    fixtures = [
+        {"home": teams_full[f["team_h"]], "away": teams_full[f["team_a"]],
+         "hs": f["team_h_score"], "as": f["team_a_score"], "kickoff": f["kickoff_time"],
+         "started": bool(f["started"]), "finished": bool(f["finished"]), "minutes": f["minutes"]}
+        for f in get("fixtures/", event=cur)
+    ]
+    fixtures.sort(key=lambda f: f["kickoff"] or "")
+    performers = []
+    for e in get(f"event/{cur}/live/")["elements"]:
+        st = e["stats"]
+        if st["minutes"] == 0:
+            continue
+        el = elements[e["id"]]
+        performers.append({
+            "name": el["web_name"], "team": teams_full[el["team"]]["short"],
+            "pos": ["GK", "DEF", "MID", "FWD"][el["element_type"] - 1],
+            "points": st["total_points"], "goals": st["goals_scored"], "assists": st["assists"],
+            "clean": st["clean_sheets"], "bonus": st["bonus"], "minutes": st["minutes"],
+            "owners": [o["entry"] for o in owners.get(e["id"], [])],
+        })
+    performers.sort(key=lambda p: (-p["points"], -p["bonus"], p["name"]))
+    gw_news = {"event": cur, "fixtures": fixtures, "performers": performers[:15],
+               "average": events[-1]["average"], "highest": events[-1]["highest"],
+               "finished": events[-1]["finished"]}
+
 data = {"league": {"id": league["id"], "name": league["name"], "admin_entry": league["admin_entry"]},
-        "events": events, "phases": phases, "managers": out, "news": news, "players": players,
+        "events": events, "phases": phases, "managers": out, "news": news, "players": players, "gw_news": gw_news,
         "fetched_at": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())}
 OUT.write_text(json.dumps(data, indent=1, ensure_ascii=False))
 print(f"{league['name']}: {len(out)} managers, up to GW{events[-1]['event'] if events else 0}")

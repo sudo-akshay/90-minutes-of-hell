@@ -386,6 +386,19 @@ td.top-pos .r { font-weight: 700; text-decoration: underline; text-decoration-co
 .call b { color: var(--ink); font-weight: 600; }
 .luck { font-size: 13px; color: var(--ink-2); white-space: nowrap; }
 
+/* This gameweek */
+.fixtures { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px; padding: 14px 16px; border-bottom: 1px solid var(--rule); }
+.fx { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 12px; border: 1px solid var(--rule); border-radius: 5px; font-variant-numeric: tabular-nums; }
+.fx-teams { display: flex; flex-direction: column; gap: 3px; font-size: 13px; }
+.fx-team { display: flex; align-items: baseline; gap: 8px; }
+.fx-team b { font-weight: 600; }
+.fx-team.lost { color: var(--muted); }
+.fx-goals { font-weight: 700; font-size: 15px; }
+.fx-st { flex: none; font: 500 10px/1.6 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.fx.live .fx-st { padding: 0 6px; border-radius: 3px; background: var(--accent); color: var(--accent-ink); }
+.performers { min-width: 0; }
+.performers .who { font-size: 13px; color: var(--ink-2); }
+
 /* Titles */
 .titles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .tcard {
@@ -728,6 +741,19 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
   </div>
 
   <div class="view" id="view-gameweeks" data-view="gameweeks" data-title="Gameweeks">
+    <section aria-labelledby="h-now" id="gwnews-section">
+      <div class="sec-head">
+        <h2 id="h-now">This gameweek</h2>
+        <p id="gwnews-intro">Scores from this week's matches and the players making the difference.</p>
+      </div>
+      <div class="panel">
+        <div class="leaders" id="gwnews-leaders"></div>
+        <div class="fixtures" id="fixtures"></div>
+        <div class="scroll"><table class="performers sticky-first" id="performers"></table></div>
+        <p class="key" id="gwnews-key"></p>
+      </div>
+    </section>
+
     <section aria-labelledby="h-weeks">
       <div class="sec-head">
         <h2 id="h-weeks">Week by week</h2>
@@ -2045,6 +2071,60 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
       card('Highest team value', `£${value.v.toFixed(1)}m`, value.m.name, 'Squad value including money in the bank'),
     ].filter(Boolean);
     $('#records-grid').innerHTML = cards.join('');
+  }
+}
+
+// This gameweek: scores and the players behind them
+{
+  const N = DATA.gw_news;
+  const sec = $('#gwnews-section');
+  if (!N || !N.fixtures?.length) {
+    sec.hidden = true;
+  } else {
+    const byEntry = Object.fromEntries(M.map(m => [m.entry, m]));
+    const kickoff = iso => iso
+      ? new Date(iso).toLocaleString('en-GB', { weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false })
+      : 'TBC';
+    const state = f => f.finished ? ['', 'FT'] : f.started ? ['live', `${f.minutes}'`] : ['', kickoff(f.kickoff)];
+    const side = (team, goals, other) => `<span class="fx-team${goals != null && other != null && goals < other ? ' lost' : ''}"><b>${esc(team.short)}</b>${goals != null ? `<span class="fx-goals">${goals}</span>` : ''}</span>`;
+
+    $('#gwnews-intro').textContent = N.finished
+      ? `Every match from GW${N.event}, and the players who made the difference.`
+      : `GW${N.event} as it happens: live scores, and the players making the difference.`;
+    $('#fixtures').innerHTML = N.fixtures.map(f => {
+      const [cls, label] = state(f);
+      return `<div class="fx ${cls}"><div class="fx-teams">${side(f.home, f.hs, f.as)}${side(f.away, f.as, f.hs)}</div><span class="fx-st">${esc(label)}</span></div>`;
+    }).join('');
+
+    const played = N.fixtures.filter(f => f.started).length;
+    const done = N.fixtures.filter(f => f.finished).length;
+    const leagueBest = [...M].sort((a, b) => net(b, LAST) - net(a, LAST))[0];
+    const topP = N.performers[0];
+    const ourBest = N.performers.find(p => p.owners.length);
+    $('#gwnews-leaders').innerHTML = [
+      leaderHTML('Matches',
+        `${done || played} of ${N.fixtures.length}`,
+        done === N.fixtures.length ? 'All results in'
+          : done ? `${played} kicked off, ${done} finished`
+          : `${played} kicked off, none confirmed final yet`),
+      leaderHTML('FPL average', `${N.average} pts`, `The best score in the game is ${N.highest}`),
+      leaderHTML('Best in the league', leagueBest.first, `${net(leagueBest, LAST)} pts this gameweek`),
+      topP ? leaderHTML('Top scorer', topP.name, `${topP.points} pts for ${topP.team}${topP.owners.length ? `, owned by ${namesList(topP.owners.map(e => byEntry[e].first))}` : ', owned by nobody here'}`) : '',
+    ].filter(Boolean).join('');
+
+    $('#performers').innerHTML = `
+      <thead><tr><th scope="col">Player</th><th scope="col" class="num">Pts</th><th scope="col" class="num hide-m">Goals</th><th scope="col" class="num hide-m">Assists</th><th scope="col" class="num hide-m">Bonus</th><th scope="col" class="num hide-m">Mins</th><th scope="col">Owned by</th></tr></thead>
+      <tbody>${N.performers.map(p => `<tr>
+        <th scope="row"><div class="mgr-t"><b>${esc(p.name)}</b><span class="team">${esc(p.team)} · ${esc(p.pos)}</span></div></th>
+        <td class="num total">${p.points}</td>
+        <td class="num hide-m">${p.goals || '<span class="muted">–</span>'}</td>
+        <td class="num hide-m">${p.assists || '<span class="muted">–</span>'}</td>
+        <td class="num hide-m">${p.bonus || '<span class="muted">–</span>'}</td>
+        <td class="num hide-m">${p.minutes}</td>
+        <td class="who">${p.owners.length ? esc(namesList(p.owners.map(e => byEntry[e].first))) : '<span class="muted">Nobody</span>'}</td>
+      </tr>`).join('')}</tbody>`;
+    $('#gwnews-key').textContent = `Top ${N.performers.length} scorers of GW${N.event}, with the managers here who own them. ${ourBest ? `Best owned player: ${ourBest.name} on ${ourBest.points}.` : ''}`;
+    markScrollers?.();
   }
 }
 
