@@ -32,6 +32,8 @@ events = [
     for e in boot["events"] if e["finished"] or e["is_current"]
 ]
 
+live_event = next((e["event"] for e in events if not e["finished"]), None)
+
 league, managers, page = None, [], 1
 while True:
     d = get(f"leagues-classic/{LEAGUE_ID}/standings/", page_standings=page)
@@ -84,6 +86,14 @@ for m in managers:
             "cap": pick_info(eff),
             "best": pick_info(best),
         })
+    # While a gameweek is being played the league standings update before the manager's
+    # history row does, so take the live score from the total instead of the lagging row.
+    if live_event and gws and gws[-1]["event"] == live_event:
+        prev_total = gws[-2]["total"] if len(gws) > 1 else 0
+        gws[-1]["total"] = m["total"]
+        gws[-1]["points"] = m["total"] - prev_total + gws[-1]["hits"]
+        gws[-1]["live"] = True
+
     # The squad they carry into the next gameweek (a Free Hit squad reverts).
     squad = []
     if picks_by_event:
