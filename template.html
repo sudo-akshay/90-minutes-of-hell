@@ -103,6 +103,7 @@ b { font-weight: 600; }
 .ticks i { display: block; height: 14px; border-radius: 2px; background: var(--rule); }
 .ticks i.done { background: var(--accent); }
 .ticks i.now { box-shadow: inset 0 0 0 2px var(--ink); }
+.ticks i.live { background: transparent; box-shadow: inset 0 0 0 2px var(--accent); }
 
 /* Tabs */
 .tabs {
@@ -793,6 +794,7 @@ const DATA = /*DATA*/null;
 const M = DATA.managers;
 const EV = DATA.events;
 const LAST = EV[EV.length - 1].event;
+const LIVE = !EV[EV.length - 1].finished;  // the latest gameweek is still being played
 
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -825,9 +827,9 @@ const posLabel = r => (r.joint ? '=' : '') + ord(r.pos);
 // Masthead
 $('#eyebrow').textContent = `Classic mini-league · ID ${DATA.league.id} · ${M.length} managers`;
 $('#league-name').textContent = DATA.league.name;
-$('#gw-line').textContent = `After Gameweek ${LAST} of 38`;
-$('#ticks').innerHTML = Array.from({ length: 38 }, (_, k) => `<i class="${k + 1 <= LAST ? 'done' : ''}${k + 1 === LAST ? ' now' : ''}"></i>`).join('');
-$('#ticks').setAttribute('aria-label', `${LAST} of 38 gameweeks played`);
+$('#gw-line').textContent = LIVE ? `Gameweek ${LAST} of 38 in progress` : `After Gameweek ${LAST} of 38`;
+$('#ticks').innerHTML = Array.from({ length: 38 }, (_, k) => `<i class="${k + 1 <= LAST ? (k + 1 === LAST && LIVE ? 'live' : 'done') : ''}${k + 1 === LAST ? ' now' : ''}"></i>`).join('');
+$('#ticks').setAttribute('aria-label', LIVE ? `${LAST - 1} of 38 gameweeks played, gameweek ${LAST} in progress` : `${LAST} of 38 gameweeks played`);
 const [fd, ft] = DATA.fetched_at.split(' ');
 const stampDate = new Date(fd + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 $('#stamp').textContent = `Data as of ${stampDate}, ${ft} UTC`;
@@ -843,7 +845,7 @@ const bench = [...M].sort((a, b) => b.benchSum - a.benchSum)[0];
 const hits = [...M].sort((a, b) => b.hitSum - a.hitSum)[0];
 const notes = [
   ['Top of the table', M[0].name, `${M[0].total} pts, ${M[0].total - M[1].total} clear of ${M[1].first}`],
-  [`GW${LAST} top score`, topM.map(m => m.name).join(' & '), `${topPts} pts · league avg ${leagueAvg}, global avg ${lastEv.average}`],
+  [LIVE ? `GW${LAST} top score so far` : `GW${LAST} top score`, topM.map(m => m.name).join(' & '), `${topPts} pts · league avg ${leagueAvg}, global avg ${lastEv.average}`],
   ['Most left on the bench', bench.name, `${bench.benchSum} pts on the bench over ${EV.length} gameweeks`],
   ['Most spent on hits', hits.hitSum ? hits.name : 'Nobody yet', hits.hitSum ? `−${hits.hitSum} pts in transfer hits this season` : 'No transfer hits taken'],
 ];
@@ -853,7 +855,7 @@ $('#notes').innerHTML = notes.map(([l, v, d]) =>
 // Standings
 const maxPts = Math.max(...M.flatMap(m => m.gws.map(g => g.points)));
 const mgrCell = (m, extra = '') => `<div class="mgr"><span class="swatch" style="background:var(--s${m.i + 1})"></span><div class="mgr-t"><span><b>${esc(m.name)}</b></span><span class="team">${esc(m.team)}</span>${extra}</div></div>`;
-$('#th-gw').textContent = `GW${LAST}`;
+$('#th-gw').innerHTML = `GW${LAST}${LIVE ? '<small>in progress</small>' : ''}`;
 $('#th-cap').textContent = `GW${LAST} captain`;
 $('#standings tbody').innerHTML = M.map(m => {
   const r = RANK[LAST][m.entry];
@@ -892,7 +894,7 @@ $('#standings tbody').innerHTML = M.map(m => {
 const bin = d => { const a = Math.abs(d), s = a < 5 ? 0 : a < 15 ? 1 : a < 30 ? 2 : 3; return s ? (d > 0 ? 'hp' : 'hn') + s : 'h0'; };
 const bestBy = Object.fromEntries(EV.map(e => [e.event, Math.max(...M.map(m => m.gw[e.event]?.points ?? 0))]));
 $('#heat').innerHTML = `
-  <thead><tr><th scope="col">Manager</th>${EV.map(e => `<th scope="col">GW${e.event}<small>FPL avg ${e.average} · top ${e.highest}</small></th>`).join('')}</tr></thead>
+  <thead><tr><th scope="col">Manager</th>${EV.map(e => `<th scope="col">GW${e.event}<small>FPL avg ${e.average} · top ${e.highest}${e.event === LAST && LIVE ? ' · in progress' : ''}</small></th>`).join('')}</tr></thead>
   <tbody>${M.map(m => `<tr data-entry="${m.entry}"><th scope="row">${mgrCell(m)}</th>${EV.map(e => {
     const g = m.gw[e.event];
     if (!g) return '<td class="cell"><div class="cell-in"><span class="muted">—</span></div></td>';
