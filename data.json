@@ -419,6 +419,80 @@
      "time": "2026-09-04T15:56:18.167001Z",
      "event": 3
     }
+   ],
+   "transfers_log": [
+    {
+     "event": 3,
+     "in": {
+      "id": 277,
+      "name": "Egan",
+      "cost": 4.0
+     },
+     "out": {
+      "id": 539,
+      "name": "O'Nien",
+      "cost": 4.0
+     },
+     "pts_in": 9,
+     "pts_out": 0,
+     "delta": 9,
+     "chip": "3xc",
+     "weeks": 3
+    },
+    {
+     "event": 4,
+     "in": {
+      "id": 173,
+      "name": "Thomas",
+      "cost": 4.0
+     },
+     "out": {
+      "id": 423,
+      "name": "Shaw",
+      "cost": 4.4
+     },
+     "pts_in": 9,
+     "pts_out": 2,
+     "delta": 7,
+     "chip": null,
+     "weeks": 2
+    },
+    {
+     "event": 5,
+     "in": {
+      "id": 40,
+      "name": "Rogers",
+      "cost": 7.7
+     },
+     "out": {
+      "id": 237,
+      "name": "Ndiaye",
+      "cost": 5.9
+     },
+     "pts_in": 2,
+     "pts_out": 5,
+     "delta": -3,
+     "chip": null,
+     "weeks": 1
+    },
+    {
+     "event": 5,
+     "in": {
+      "id": 464,
+      "name": "Wissa",
+      "cost": 6.2
+     },
+     "out": {
+      "id": 165,
+      "name": "João Pedro",
+      "cost": 7.6
+     },
+     "pts_in": 0,
+     "pts_out": 0,
+     "delta": 0,
+     "chip": null,
+     "weeks": 1
+    }
    ]
   },
   {
@@ -728,7 +802,81 @@
      "rank_percentage": "6"
     }
    ],
-   "chips": []
+   "chips": [],
+   "transfers_log": [
+    {
+     "event": 3,
+     "in": {
+      "id": 379,
+      "name": "Isak",
+      "cost": 9.0
+     },
+     "out": {
+      "id": 527,
+      "name": "Richarlison",
+      "cost": 5.9
+     },
+     "pts_in": 23,
+     "pts_out": 0,
+     "delta": 23,
+     "chip": null,
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 454,
+      "name": "Elanga",
+      "cost": 6.1
+     },
+     "out": {
+      "id": 427,
+      "name": "Mbeumo",
+      "cost": 8.0
+     },
+     "pts_in": 1,
+     "pts_out": 12,
+     "delta": -11,
+     "chip": null,
+     "weeks": 3
+    },
+    {
+     "event": 4,
+     "in": {
+      "id": 31,
+      "name": "Konsa",
+      "cost": 4.5
+     },
+     "out": {
+      "id": 11,
+      "name": "Mosquera",
+      "cost": 5.4
+     },
+     "pts_in": 7,
+     "pts_out": 0,
+     "delta": 7,
+     "chip": null,
+     "weeks": 2
+    },
+    {
+     "event": 5,
+     "in": {
+      "id": 480,
+      "name": "Gibbs-White",
+      "cost": 8.0
+     },
+     "out": {
+      "id": 368,
+      "name": "Szoboszlai",
+      "cost": 7.0
+     },
+     "pts_in": 2,
+     "pts_out": 2,
+     "delta": 0,
+     "chip": null,
+     "weeks": 1
+    }
+   ]
   },
   {
    "entry": 7598024,
@@ -1054,6 +1202,80 @@
      "name": "3xc",
      "time": "2026-09-04T16:18:12.465057Z",
      "event": 3
+    }
+   ],
+   "transfers_log": [
+    {
+     "event": 3,
+     "in": {
+      "id": 399,
+      "name": "Cherki",
+      "cost": 7.7
+     },
+     "out": {
+      "id": 427,
+      "name": "Mbeumo",
+      "cost": 8.0
+     },
+     "pts_in": 12,
+     "pts_out": 12,
+     "delta": 0,
+     "chip": "3xc",
+     "weeks": 3
+    },
+    {
+     "event": 4,
+     "in": {
+      "id": 31,
+      "name": "Konsa",
+      "cost": 4.5
+     },
+     "out": {
+      "id": 329,
+      "name": "Rodon",
+      "cost": 4.4
+     },
+     "pts_in": 7,
+     "pts_out": 0,
+     "delta": 7,
+     "chip": null,
+     "weeks": 2
+    },
+    {
+     "event": 4,
+     "in": {
+      "id": 154,
+      "name": "Palmer",
+      "cost": 9.7
+     },
+     "out": {
+      "id": 426,
+      "name": "B.Fernandes",
+      "cost": 12.0
+     },
+     "pts_in": 7,
+     "pts_out": 4,
+     "delta": 3,
+     "chip": null,
+     "weeks": 2
+    },
+    {
+     "event": 5,
+     "in": {
+      "id": 480,
+      "name": "Gibbs-White",
+      "cost": 8.0
+     },
+     "out": {
+      "id": 368,
+      "name": "Szoboszlai",
+      "cost": 7.0
+     },
+     "pts_in": 2,
+     "pts_out": 2,
+     "delta": 0,
+     "chip": null,
+     "weeks": 1
     }
    ]
   },
@@ -1382,6 +1604,80 @@
      "time": "2026-09-04T13:07:01.157989Z",
      "event": 3
     }
+   ],
+   "transfers_log": [
+    {
+     "event": 2,
+     "in": {
+      "id": 565,
+      "name": "M.Sangaré",
+      "cost": 5.6
+     },
+     "out": {
+      "id": 542,
+      "name": "E.Le Fée",
+      "cost": 6.0
+     },
+     "pts_in": 8,
+     "pts_out": 16,
+     "delta": -8,
+     "chip": null,
+     "weeks": 4
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 464,
+      "name": "Wissa",
+      "cost": 6.1
+     },
+     "out": {
+      "id": 223,
+      "name": "Mateta",
+      "cost": 6.4
+     },
+     "pts_in": 3,
+     "pts_out": 0,
+     "delta": 3,
+     "chip": "3xc",
+     "weeks": 3
+    },
+    {
+     "event": 4,
+     "in": {
+      "id": 249,
+      "name": "Barry",
+      "cost": 5.6
+     },
+     "out": {
+      "id": 464,
+      "name": "Wissa",
+      "cost": 6.1
+     },
+     "pts_in": 8,
+     "pts_out": 2,
+     "delta": 6,
+     "chip": null,
+     "weeks": 2
+    },
+    {
+     "event": 5,
+     "in": {
+      "id": 124,
+      "name": "Groß",
+      "cost": 5.7
+     },
+     "out": {
+      "id": 397,
+      "name": "Semenyo",
+      "cost": 8.4
+     },
+     "pts_in": 14,
+     "pts_out": 17,
+     "delta": -3,
+     "chip": null,
+     "weeks": 1
+    }
    ]
   },
   {
@@ -1679,7 +1975,171 @@
      "rank_percentage": "66"
     }
    ],
-   "chips": []
+   "chips": [],
+   "transfers_log": [
+    {
+     "event": 2,
+     "in": {
+      "id": 165,
+      "name": "João Pedro",
+      "cost": 7.5
+     },
+     "out": {
+      "id": 25,
+      "name": "Gyökeres",
+      "cost": 7.5
+     },
+     "pts_in": 22,
+     "pts_out": 2,
+     "delta": 20,
+     "chip": null,
+     "weeks": 4
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 290,
+      "name": "Slater",
+      "cost": 4.5
+     },
+     "out": {
+      "id": 427,
+      "name": "Mbeumo",
+      "cost": 8.0
+     },
+     "pts_in": 7,
+     "pts_out": 12,
+     "delta": -5,
+     "chip": null,
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 426,
+      "name": "B.Fernandes",
+      "cost": 12.0
+     },
+     "out": {
+      "id": 397,
+      "name": "Semenyo",
+      "cost": 8.5
+     },
+     "pts_in": 6,
+     "pts_out": 26,
+     "delta": -20,
+     "chip": null,
+     "weeks": 3
+    },
+    {
+     "event": 4,
+     "in": {
+      "id": 226,
+      "name": "Pickford",
+      "cost": 5.5
+     },
+     "out": {
+      "id": 529,
+      "name": "Roefs",
+      "cost": 5.0
+     },
+     "pts_in": 14,
+     "pts_out": 2,
+     "delta": 12,
+     "chip": null,
+     "weeks": 2
+    },
+    {
+     "event": 4,
+     "in": {
+      "id": 40,
+      "name": "Rogers",
+      "cost": 7.6
+     },
+     "out": {
+      "id": 480,
+      "name": "Gibbs-White",
+      "cost": 7.9
+     },
+     "pts_in": 10,
+     "pts_out": 10,
+     "delta": 0,
+     "chip": null,
+     "weeks": 2
+    },
+    {
+     "event": 4,
+     "in": {
+      "id": 31,
+      "name": "Konsa",
+      "cost": 4.4
+     },
+     "out": {
+      "id": 498,
+      "name": "Senesi",
+      "cost": 5.9
+     },
+     "pts_in": 7,
+     "pts_out": 0,
+     "delta": 7,
+     "chip": null,
+     "weeks": 2
+    },
+    {
+     "event": 5,
+     "in": {
+      "id": 320,
+      "name": "Akpom",
+      "cost": 5.0
+     },
+     "out": {
+      "id": 165,
+      "name": "João Pedro",
+      "cost": 7.6
+     },
+     "pts_in": 1,
+     "pts_out": 0,
+     "delta": 1,
+     "chip": null,
+     "weeks": 1
+    },
+    {
+     "event": 5,
+     "in": {
+      "id": 399,
+      "name": "Cherki",
+      "cost": 7.8
+     },
+     "out": {
+      "id": 290,
+      "name": "Slater",
+      "cost": 4.5
+     },
+     "pts_in": 8,
+     "pts_out": 2,
+     "delta": 6,
+     "chip": null,
+     "weeks": 1
+    },
+    {
+     "event": 5,
+     "in": {
+      "id": 286,
+      "name": "Belloumi",
+      "cost": 5.0
+     },
+     "out": {
+      "id": 212,
+      "name": "Hughes",
+      "cost": 4.5
+     },
+     "pts_in": 4,
+     "pts_out": 0,
+     "delta": 4,
+     "chip": null,
+     "weeks": 1
+    }
+   ]
   },
   {
    "entry": 7628837,
@@ -1749,7 +2209,7 @@
    ],
    "rank": 6,
    "last_rank": 7,
-   "total": 273,
+   "total": 281,
    "gws": [
     {
      "event": 1,
@@ -1925,8 +2385,8 @@
     },
     {
      "event": 5,
-     "points": 46,
-     "total": 273,
+     "points": 54,
+     "total": 281,
      "overall_rank": 6856503,
      "value": 99.4,
      "bank": 1.5,
@@ -1940,7 +2400,7 @@
      "pos": [
       1,
       10,
-      23,
+      31,
       12
      ],
      "xi": [
@@ -1962,8 +2422,8 @@
       "pts": 6
      },
      "best": {
-      "name": "Barnes",
-      "pts": 9
+      "name": "Cunha",
+      "pts": 10
      },
      "live": true
     }
@@ -1982,7 +2442,81 @@
      "rank_percentage": "70"
     }
    ],
-   "chips": []
+   "chips": [],
+   "transfers_log": [
+    {
+     "event": 3,
+     "in": {
+      "id": 165,
+      "name": "João Pedro",
+      "cost": 7.7
+     },
+     "out": {
+      "id": 55,
+      "name": "Watkins",
+      "cost": 7.8
+     },
+     "pts_in": 13,
+     "pts_out": 0,
+     "delta": 13,
+     "chip": null,
+     "weeks": 3
+    },
+    {
+     "event": 4,
+     "in": {
+      "id": 272,
+      "name": "Kusi-Asare",
+      "cost": 4.5
+     },
+     "out": {
+      "id": 490,
+      "name": "Wood",
+      "cost": 5.9
+     },
+     "pts_in": 0,
+     "pts_out": 2,
+     "delta": -2,
+     "chip": null,
+     "weeks": 2
+    },
+    {
+     "event": 4,
+     "in": {
+      "id": 399,
+      "name": "Cherki",
+      "cost": 7.8
+     },
+     "out": {
+      "id": 14,
+      "name": "Eze",
+      "cost": 6.3
+     },
+     "pts_in": 9,
+     "pts_out": 2,
+     "delta": 7,
+     "chip": null,
+     "weeks": 2
+    },
+    {
+     "event": 5,
+     "in": {
+      "id": 464,
+      "name": "Wissa",
+      "cost": 6.2
+     },
+     "out": {
+      "id": 165,
+      "name": "João Pedro",
+      "cost": 7.7
+     },
+     "pts_in": 0,
+     "pts_out": 0,
+     "delta": 0,
+     "chip": null,
+     "weeks": 1
+    }
+   ]
   },
   {
    "entry": 7693414,
@@ -2272,7 +2806,8 @@
     }
    ],
    "past": [],
-   "chips": []
+   "chips": [],
+   "transfers_log": []
   },
   {
    "entry": 7592803,
@@ -2585,6 +3120,764 @@
      "name": "wildcard",
      "time": "2026-09-02T04:34:58.119613Z",
      "event": 3
+    }
+   ],
+   "transfers_log": [
+    {
+     "event": 2,
+     "in": {
+      "id": 86,
+      "name": "Lewis-Potter",
+      "cost": 5.5
+     },
+     "out": {
+      "id": 123,
+      "name": "Hinshelwood",
+      "cost": 6.0
+     },
+     "pts_in": 12,
+     "pts_out": 0,
+     "delta": 12,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 2,
+     "in": {
+      "id": 40,
+      "name": "Rogers",
+      "cost": 7.5
+     },
+     "out": {
+      "id": 86,
+      "name": "Lewis-Potter",
+      "cost": 5.5
+     },
+     "pts_in": 21,
+     "pts_out": 12,
+     "delta": 9,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 2,
+     "in": {
+      "id": 572,
+      "name": "Tzolakis",
+      "cost": 4.5
+     },
+     "out": {
+      "id": 109,
+      "name": "Verbruggen",
+      "cost": 4.5
+     },
+     "pts_in": 24,
+     "pts_out": 17,
+     "delta": 7,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 2,
+     "in": {
+      "id": 385,
+      "name": "Trafford",
+      "cost": 5.0
+     },
+     "out": {
+      "id": 496,
+      "name": "Kinsky",
+      "cost": 4.5
+     },
+     "pts_in": 19,
+     "pts_out": 16,
+     "delta": 3,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 2,
+     "in": {
+      "id": 388,
+      "name": "Guéhi",
+      "cost": 6.0
+     },
+     "out": {
+      "id": 4,
+      "name": "Gabriel",
+      "cost": 8.0
+     },
+     "pts_in": 20,
+     "pts_out": 20,
+     "delta": 0,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 2,
+     "in": {
+      "id": 586,
+      "name": "Mendy",
+      "cost": 4.0
+     },
+     "out": {
+      "id": 112,
+      "name": "Van Hecke",
+      "cost": 5.0
+     },
+     "pts_in": 10,
+     "pts_out": 23,
+     "delta": -13,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 2,
+     "in": {
+      "id": 115,
+      "name": "De Cuyper",
+      "cost": 4.6
+     },
+     "out": {
+      "id": 173,
+      "name": "Thomas",
+      "cost": 4.0
+     },
+     "pts_in": 21,
+     "pts_out": 21,
+     "delta": 0,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 2,
+     "in": {
+      "id": 10,
+      "name": "White",
+      "cost": 5.5
+     },
+     "out": {
+      "id": 175,
+      "name": "van Ewijk",
+      "cost": 4.0
+     },
+     "pts_in": 10,
+     "pts_out": 5,
+     "delta": 5,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 2,
+     "in": {
+      "id": 123,
+      "name": "Hinshelwood",
+      "cost": 6.0
+     },
+     "out": {
+      "id": 397,
+      "name": "Semenyo",
+      "cost": 8.5
+     },
+     "pts_in": 0,
+     "pts_out": 31,
+     "delta": -31,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 2,
+     "in": {
+      "id": 565,
+      "name": "M.Sangaré",
+      "cost": 5.6
+     },
+     "out": {
+      "id": 455,
+      "name": "Tonali",
+      "cost": 5.5
+     },
+     "pts_in": 8,
+     "pts_out": 12,
+     "delta": -4,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 2,
+     "in": {
+      "id": 154,
+      "name": "Palmer",
+      "cost": 9.5
+     },
+     "out": {
+      "id": 426,
+      "name": "B.Fernandes",
+      "cost": 12.0
+     },
+     "pts_in": 15,
+     "pts_out": 29,
+     "delta": -14,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 2,
+     "in": {
+      "id": 165,
+      "name": "João Pedro",
+      "cost": 7.6
+     },
+     "out": {
+      "id": 411,
+      "name": "Haaland",
+      "cost": 15.5
+     },
+     "pts_in": 22,
+     "pts_out": 37,
+     "delta": -15,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 2,
+     "in": {
+      "id": 316,
+      "name": "Emersonn",
+      "cost": 5.5
+     },
+     "out": {
+      "id": 321,
+      "name": "Walle Egeli",
+      "cost": 4.5
+     },
+     "pts_in": 17,
+     "pts_out": 0,
+     "delta": 17,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 2,
+     "in": {
+      "id": 249,
+      "name": "Barry",
+      "cost": 5.5
+     },
+     "out": {
+      "id": 248,
+      "name": "Beto",
+      "cost": 5.5
+     },
+     "pts_in": 12,
+     "pts_out": 1,
+     "delta": 11,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 2,
+     "in": {
+      "id": 86,
+      "name": "Lewis-Potter",
+      "cost": 5.5
+     },
+     "out": {
+      "id": 124,
+      "name": "Groß",
+      "cost": 5.5
+     },
+     "pts_in": 12,
+     "pts_out": 45,
+     "delta": -33,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 2,
+     "in": {
+      "id": 88,
+      "name": "Kayode",
+      "cost": 4.6
+     },
+     "out": {
+      "id": 469,
+      "name": "N.Williams",
+      "cost": 5.0
+     },
+     "pts_in": 10,
+     "pts_out": 17,
+     "delta": -7,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 2,
+     "in": {
+      "id": 367,
+      "name": "Gakpo",
+      "cost": 7.0
+     },
+     "out": {
+      "id": 480,
+      "name": "Gibbs-White",
+      "cost": 8.0
+     },
+     "pts_in": 20,
+     "pts_out": 26,
+     "delta": -6,
+     "chip": "freehit",
+     "weeks": 4
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 304,
+      "name": "O'Shea",
+      "cost": 4.0
+     },
+     "out": {
+      "id": 277,
+      "name": "Egan",
+      "cost": 4.0
+     },
+     "pts_in": 6,
+     "pts_out": 9,
+     "delta": -3,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 497,
+      "name": "Dubravka",
+      "cost": 4.0
+     },
+     "out": {
+      "id": 109,
+      "name": "Verbruggen",
+      "cost": 4.5
+     },
+     "pts_in": 0,
+     "pts_out": 17,
+     "delta": -17,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 305,
+      "name": "Davis",
+      "cost": 4.0
+     },
+     "out": {
+      "id": 449,
+      "name": "Hall",
+      "cost": 5.1
+     },
+     "pts_in": 17,
+     "pts_out": 17,
+     "delta": 0,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 282,
+      "name": "Giles",
+      "cost": 4.0
+     },
+     "out": {
+      "id": 10,
+      "name": "White",
+      "cost": 5.5
+     },
+     "pts_in": 12,
+     "pts_out": 3,
+     "delta": 9,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 173,
+      "name": "Thomas",
+      "cost": 4.0
+     },
+     "out": {
+      "id": 8,
+      "name": "Calafiori",
+      "cost": 5.6
+     },
+     "pts_in": 13,
+     "pts_out": 9,
+     "delta": 4,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 426,
+      "name": "B.Fernandes",
+      "cost": 12.0
+     },
+     "out": {
+      "id": 565,
+      "name": "M.Sangaré",
+      "cost": 5.7
+     },
+     "pts_in": 6,
+     "pts_out": 4,
+     "delta": 2,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 321,
+      "name": "Walle Egeli",
+      "cost": 4.5
+     },
+     "out": {
+      "id": 464,
+      "name": "Wissa",
+      "cost": 6.1
+     },
+     "pts_in": 0,
+     "pts_out": 3,
+     "delta": -3,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 572,
+      "name": "Tzolakis",
+      "cost": 4.5
+     },
+     "out": {
+      "id": 496,
+      "name": "Kinsky",
+      "cost": 4.5
+     },
+     "pts_in": 14,
+     "pts_out": 15,
+     "delta": -1,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 565,
+      "name": "M.Sangaré",
+      "cost": 5.7
+     },
+     "out": {
+      "id": 426,
+      "name": "B.Fernandes",
+      "cost": 12.0
+     },
+     "pts_in": 4,
+     "pts_out": 6,
+     "delta": -2,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 605,
+      "name": "Yalcouyé",
+      "cost": 4.5
+     },
+     "out": {
+      "id": 124,
+      "name": "Groß",
+      "cost": 5.5
+     },
+     "pts_in": 11,
+     "pts_out": 32,
+     "delta": -21,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 449,
+      "name": "Hall",
+      "cost": 5.1
+     },
+     "out": {
+      "id": 173,
+      "name": "Thomas",
+      "cost": 4.0
+     },
+     "pts_in": 17,
+     "pts_out": 13,
+     "delta": 4,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 277,
+      "name": "Egan",
+      "cost": 4.0
+     },
+     "out": {
+      "id": 175,
+      "name": "van Ewijk",
+      "cost": 4.0
+     },
+     "pts_in": 9,
+     "pts_out": 3,
+     "delta": 6,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 10,
+      "name": "White",
+      "cost": 5.5
+     },
+     "out": {
+      "id": 469,
+      "name": "N.Williams",
+      "cost": 5.0
+     },
+     "pts_in": 3,
+     "pts_out": 11,
+     "delta": -8,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 279,
+      "name": "Ajayi",
+      "cost": 4.1
+     },
+     "out": {
+      "id": 112,
+      "name": "Van Hecke",
+      "cost": 5.0
+     },
+     "pts_in": 7,
+     "pts_out": 22,
+     "delta": -15,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 8,
+      "name": "Calafiori",
+      "cost": 5.6
+     },
+     "out": {
+      "id": 4,
+      "name": "Gabriel",
+      "cost": 8.0
+     },
+     "pts_in": 9,
+     "pts_out": 12,
+     "delta": -3,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 12,
+      "name": "Saka",
+      "cost": 9.5
+     },
+     "out": {
+      "id": 480,
+      "name": "Gibbs-White",
+      "cost": 7.9
+     },
+     "pts_in": 12,
+     "pts_out": 13,
+     "delta": -1,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 154,
+      "name": "Palmer",
+      "cost": 9.6
+     },
+     "out": {
+      "id": 397,
+      "name": "Semenyo",
+      "cost": 8.5
+     },
+     "pts_in": 8,
+     "pts_out": 26,
+     "delta": -18,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 399,
+      "name": "Cherki",
+      "cost": 7.7
+     },
+     "out": {
+      "id": 455,
+      "name": "Tonali",
+      "cost": 5.4
+     },
+     "pts_in": 12,
+     "pts_out": 10,
+     "delta": 2,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 464,
+      "name": "Wissa",
+      "cost": 6.1
+     },
+     "out": {
+      "id": 321,
+      "name": "Walle Egeli",
+      "cost": 4.5
+     },
+     "pts_in": 3,
+     "pts_out": 0,
+     "delta": 3,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 3,
+     "in": {
+      "id": 165,
+      "name": "João Pedro",
+      "cost": 7.7
+     },
+     "out": {
+      "id": 248,
+      "name": "Beto",
+      "cost": 5.4
+     },
+     "pts_in": 13,
+     "pts_out": 0,
+     "delta": 13,
+     "chip": "wildcard",
+     "weeks": 3
+    },
+    {
+     "event": 4,
+     "in": {
+      "id": 379,
+      "name": "Isak",
+      "cost": 9.0
+     },
+     "out": {
+      "id": 165,
+      "name": "João Pedro",
+      "cost": 7.7
+     },
+     "pts_in": 10,
+     "pts_out": 12,
+     "delta": -2,
+     "chip": null,
+     "weeks": 2
+    },
+    {
+     "event": 4,
+     "in": {
+      "id": 367,
+      "name": "Gakpo",
+      "cost": 7.1
+     },
+     "out": {
+      "id": 426,
+      "name": "B.Fernandes",
+      "cost": 12.0
+     },
+     "pts_in": 4,
+     "pts_out": 4,
+     "delta": 0,
+     "chip": null,
+     "weeks": 2
+    },
+    {
+     "event": 5,
+     "in": {
+      "id": 1,
+      "name": "Raya",
+      "cost": 6.0
+     },
+     "out": {
+      "id": 572,
+      "name": "Tzolakis",
+      "cost": 4.5
+     },
+     "pts_in": 1,
+     "pts_out": 6,
+     "delta": -5,
+     "chip": null,
+     "weeks": 1
+    },
+    {
+     "event": 5,
+     "in": {
+      "id": 165,
+      "name": "João Pedro",
+      "cost": 7.8
+     },
+     "out": {
+      "id": 379,
+      "name": "Isak",
+      "cost": 9.0
+     },
+     "pts_in": 0,
+     "pts_out": 8,
+     "delta": -8,
+     "chip": null,
+     "weeks": 1
+    },
+    {
+     "event": 5,
+     "in": {
+      "id": 40,
+      "name": "Rogers",
+      "cost": 7.7
+     },
+     "out": {
+      "id": 605,
+      "name": "Yalcouyé",
+      "cost": 4.5
+     },
+     "pts_in": 2,
+     "pts_out": 1,
+     "delta": 1,
+     "chip": null,
+     "weeks": 1
     }
    ]
   }
@@ -3242,7 +4535,7 @@
    "points": 10
   }
  },
- "fetched_at": "2026-09-20 17:15 UTC",
+ "fetched_at": "2026-09-20 17:26 UTC",
  "predictions": {
   "from_event": 5,
   "events": [
@@ -3255,14 +4548,14 @@
     "gws": [
      {
       "event": 6,
-      "pts": 63.3,
+      "pts": 63.5,
       "captain": "B.Fernandes",
-      "captain_xp": 13.7,
+      "captain_xp": 13.9,
       "captain_vs": "TOT (H)",
       "top": [
        {
         "name": "B.Fernandes",
-        "xp": 6.8
+        "xp": 6.9
        },
        {
         "name": "Calafiori",
@@ -3276,7 +4569,7 @@
      },
      {
       "event": 7,
-      "pts": 65.0,
+      "pts": 65.1,
       "captain": "Haaland",
       "captain_xp": 17.4,
       "captain_vs": "IPS (H)",
@@ -3291,20 +4584,20 @@
        },
        {
         "name": "B.Fernandes",
-        "xp": 6.3
+        "xp": 6.4
        }
       ]
      },
      {
       "event": 8,
-      "pts": 62.0,
+      "pts": 62.2,
       "captain": "B.Fernandes",
-      "captain_xp": 13.7,
+      "captain_xp": 13.9,
       "captain_vs": "BOU (H)",
       "top": [
        {
         "name": "B.Fernandes",
-        "xp": 6.8
+        "xp": 6.9
        },
        {
         "name": "Haaland",
@@ -3317,7 +4610,7 @@
       ]
      }
     ],
-    "total": 190.3,
+    "total": 190.8,
     "flags": [
      {
       "name": "van Ewijk",
@@ -3330,14 +4623,14 @@
     "gws": [
      {
       "event": 6,
-      "pts": 59.0,
+      "pts": 59.2,
       "captain": "B.Fernandes",
-      "captain_xp": 13.7,
+      "captain_xp": 13.9,
       "captain_vs": "TOT (H)",
       "top": [
        {
         "name": "B.Fernandes",
-        "xp": 6.8
+        "xp": 6.9
        },
        {
         "name": "Calafiori",
@@ -3351,7 +4644,7 @@
      },
      {
       "event": 7,
-      "pts": 61.5,
+      "pts": 61.6,
       "captain": "Haaland",
       "captain_xp": 17.4,
       "captain_vs": "IPS (H)",
@@ -3362,7 +4655,7 @@
        },
        {
         "name": "B.Fernandes",
-        "xp": 6.3
+        "xp": 6.4
        },
        {
         "name": "Groß",
@@ -3372,14 +4665,14 @@
      },
      {
       "event": 8,
-      "pts": 59.7,
+      "pts": 59.9,
       "captain": "B.Fernandes",
-      "captain_xp": 13.7,
+      "captain_xp": 13.9,
       "captain_vs": "BOU (H)",
       "top": [
        {
         "name": "B.Fernandes",
-        "xp": 6.8
+        "xp": 6.9
        },
        {
         "name": "Haaland",
@@ -3392,7 +4685,7 @@
       ]
      }
     ],
-    "total": 180.2,
+    "total": 180.7,
     "flags": [
      {
       "name": "Elanga",
@@ -3410,7 +4703,7 @@
     "gws": [
      {
       "event": 6,
-      "pts": 57.5,
+      "pts": 57.6,
       "captain": "Calafiori",
       "captain_xp": 12.6,
       "captain_vs": "LEE (H)",
@@ -3452,7 +4745,7 @@
      },
      {
       "event": 8,
-      "pts": 57.8,
+      "pts": 57.9,
       "captain": "Haaland",
       "captain_xp": 12.6,
       "captain_vs": "AVL (A)",
@@ -3472,7 +4765,7 @@
       ]
      }
     ],
-    "total": 177.7,
+    "total": 177.9,
     "flags": [
      {
       "name": "João Pedro",
@@ -3527,7 +4820,7 @@
      },
      {
       "event": 8,
-      "pts": 56.4,
+      "pts": 56.5,
       "captain": "Haaland",
       "captain_xp": 12.6,
       "captain_vs": "AVL (A)",
@@ -3547,7 +4840,7 @@
       ]
      }
     ],
-    "total": 180.2,
+    "total": 180.3,
     "flags": [
      {
       "name": "Pedro Porro",
@@ -3560,14 +4853,14 @@
     "gws": [
      {
       "event": 6,
-      "pts": 58.6,
+      "pts": 58.8,
       "captain": "B.Fernandes",
-      "captain_xp": 13.7,
+      "captain_xp": 13.9,
       "captain_vs": "TOT (H)",
       "top": [
        {
         "name": "B.Fernandes",
-        "xp": 6.8
+        "xp": 6.9
        },
        {
         "name": "Calafiori",
@@ -3596,20 +4889,20 @@
        },
        {
         "name": "B.Fernandes",
-        "xp": 6.3
+        "xp": 6.4
        }
       ]
      },
      {
       "event": 8,
-      "pts": 57.2,
+      "pts": 57.4,
       "captain": "B.Fernandes",
-      "captain_xp": 13.7,
+      "captain_xp": 13.9,
       "captain_vs": "BOU (H)",
       "top": [
        {
         "name": "B.Fernandes",
-        "xp": 6.8
+        "xp": 6.9
        },
        {
         "name": "Haaland",
@@ -3622,7 +4915,7 @@
       ]
      }
     ],
-    "total": 178.6,
+    "total": 179.0,
     "flags": [
      {
       "name": "Pedro Porro",
@@ -3635,7 +4928,7 @@
     "gws": [
      {
       "event": 6,
-      "pts": 57.0,
+      "pts": 57.1,
       "captain": "Haaland",
       "captain_xp": 12.6,
       "captain_vs": "LIV (A)",
@@ -3656,7 +4949,7 @@
      },
      {
       "event": 7,
-      "pts": 61.0,
+      "pts": 61.1,
       "captain": "Haaland",
       "captain_xp": 17.4,
       "captain_vs": "IPS (H)",
@@ -3692,26 +4985,26 @@
        },
        {
         "name": "Mbeumo",
-        "xp": 5.2
+        "xp": 5.3
        }
       ]
      }
     ],
-    "total": 175.0,
+    "total": 175.2,
     "flags": []
    },
    "7693414": {
     "gws": [
      {
       "event": 6,
-      "pts": 46.7,
+      "pts": 46.9,
       "captain": "B.Fernandes",
-      "captain_xp": 13.7,
+      "captain_xp": 13.9,
       "captain_vs": "TOT (H)",
       "top": [
        {
         "name": "B.Fernandes",
-        "xp": 6.8
+        "xp": 6.9
        },
        {
         "name": "Raya",
@@ -3725,7 +5018,7 @@
      },
      {
       "event": 7,
-      "pts": 46.7,
+      "pts": 46.8,
       "captain": "Cherki",
       "captain_xp": 12.9,
       "captain_vs": "IPS (H)",
@@ -3736,7 +5029,7 @@
        },
        {
         "name": "B.Fernandes",
-        "xp": 6.3
+        "xp": 6.4
        },
        {
         "name": "Gibbs-White",
@@ -3746,14 +5039,14 @@
      },
      {
       "event": 8,
-      "pts": 49.8,
+      "pts": 50.0,
       "captain": "B.Fernandes",
-      "captain_xp": 13.7,
+      "captain_xp": 13.9,
       "captain_vs": "BOU (H)",
       "top": [
        {
         "name": "B.Fernandes",
-        "xp": 6.8
+        "xp": 6.9
        },
        {
         "name": "Gibbs-White",
@@ -3766,7 +5059,7 @@
       ]
      }
     ],
-    "total": 143.2,
+    "total": 143.7,
     "flags": [
      {
       "name": "James",
@@ -3866,6 +5159,6 @@
     ]
    }
   },
-  "generated_at": "2026-09-20 17:15 UTC"
+  "generated_at": "2026-09-20 17:26 UTC"
  }
 }

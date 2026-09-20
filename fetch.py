@@ -45,6 +45,11 @@ while True:
 
 live = {}
 
+def points_of(event, pid):
+    v = live_points(event).get(pid, 0)
+    return v[0] if isinstance(v, (tuple, list)) else v
+
+
 def live_points(event):
     if event not in live:
         live[event] = {e["id"]: (e["stats"]["total_points"], e["stats"]["minutes"])
@@ -86,6 +91,26 @@ for m in managers:
             "cap": pick_info(eff),
             "best": pick_info(best),
         })
+    # Every transfer, with what the player coming in has scored against the player
+    # going out since the swap. Free Hit moves are marked: they only last a week.
+    played = [g["event"] for g in gws]
+    transfers_log = []
+    for t in get(f"entry/{m['entry']}/transfers/"):
+        if t["event"] not in played:
+            continue
+        rest = [e for e in played if e >= t["event"]]
+        pts_in = sum(points_of(e, t["element_in"]) for e in rest)
+        pts_out = sum(points_of(e, t["element_out"]) for e in rest)
+        transfers_log.append({
+            "event": t["event"],
+            "in": {"id": t["element_in"], "name": players.get(t["element_in"]), "cost": t["element_in_cost"] / 10},
+            "out": {"id": t["element_out"], "name": players.get(t["element_out"]), "cost": t["element_out_cost"] / 10},
+            "pts_in": pts_in, "pts_out": pts_out, "delta": pts_in - pts_out,
+            "chip": picks_by_event.get(t["event"], {}).get("active_chip"),
+            "weeks": len(rest),
+        })
+    transfers_log.sort(key=lambda t: t["event"])
+
     # While a gameweek is being played the league standings update before the manager's
     # history row does, so take the live score from the total instead of the lagging row.
     if live_event and gws and gws[-1]["event"] == live_event:
@@ -105,7 +130,7 @@ for m in managers:
     out.append({
         "entry": m["entry"], "name": m["player_name"], "team": m["entry_name"], "squad": squad,
         "rank": m["rank"], "last_rank": m["last_rank"], "total": m["total"],
-        "gws": gws, "past": h["past"], "chips": h["chips"],
+        "gws": gws, "past": h["past"], "chips": h["chips"], "transfers_log": transfers_log,
     })
 
 # Injury and availability news for every player in the league's current squads, newest first.

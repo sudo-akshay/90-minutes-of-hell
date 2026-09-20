@@ -511,6 +511,31 @@ th[aria-sort] .sort-ind { opacity: 1; }
 .range .dot { position: absolute; top: 1px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; box-shadow: 0 0 0 2px var(--surface); }
 .pred-flags { font-size: 12px; line-height: 1.35; color: var(--ink-2); margin-top: 2px; }
 
+/* Head-to-head grid */
+.h2h { min-width: 0; }
+.h2h td { text-align: center; font-variant-numeric: tabular-nums; }
+.h2h td.up { background: var(--hp1); }
+.h2h td.down { background: var(--hn1); }
+.h2h td.level { background: var(--h0); }
+.h2h td.self { color: var(--muted); }
+.h2h thead th { text-align: center; }
+.h2h tbody td.tot { background: transparent; font-weight: 700; }
+
+/* Transfer report card */
+.tr-sum, .tr-list { min-width: 0; }
+.tr-list .swap { display: flex; flex-direction: column; gap: 2px; }
+.tr-list .out { color: var(--ink-2); }
+.tr-list .in b { font-weight: 600; }
+.tr-delta.good { color: var(--up); font-weight: 700; }
+.tr-delta.bad { color: var(--down); font-weight: 700; }
+
+/* Records */
+.records { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.rec { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; }
+.rec-v { font: 800 32px/1 var(--display); }
+.rec-who { font-weight: 600; }
+.rec-d { font-size: 13px; color: var(--ink-2); }
+
 /* Past seasons */
 .past { min-width: 640px; }
 .past td.num small { display: block; font-size: 11px; color: var(--muted); }
@@ -568,6 +593,7 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
   .tabs a:last-child { padding-right: 0; }
 }
 @media (max-width: 380px) {
+  .hide-xs { display: none; }
   th, td { padding-inline: 4px; }
   th:first-child, td:first-child { padding-left: 10px; }
   th:last-child, td:last-child { padding-right: 10px; }
@@ -623,7 +649,7 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
               <th scope="col" class="hide-m">Form</th>
               <th scope="col" class="num" id="th-gw">GW</th>
               <th scope="col" class="num">Total</th>
-              <th scope="col" class="num">Gap</th>
+              <th scope="col" class="num hide-xs">Gap</th>
               <th scope="col" id="th-cap" class="hide-m">Captain</th>
               <th scope="col" class="hide-m">Chips used</th>
               <th scope="col" class="num hide-m">Hits</th>
@@ -643,6 +669,17 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
       <div class="panel chart">
         <div class="legend" id="legend" aria-label="Follow a manager"></div>
         <div class="bump" id="bump"></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-h2h" id="h2h-section">
+      <div class="sec-head">
+        <h2 id="h-h2h">Head-to-head grid</h2>
+        <p>Every manager against every other, gameweek by gameweek. Read across a row: the record is that manager's wins, draws and losses against the manager in that column.</p>
+      </div>
+      <div class="panel">
+        <div class="scroll"><table class="h2h sticky-first" id="h2h-table"></table></div>
+        <p class="key" id="h2h-key"></p>
       </div>
     </section>
 
@@ -810,6 +847,23 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
       </div>
     </section>
 
+    <section aria-labelledby="h-tr" id="tr-section">
+      <div class="sec-head">
+        <h2 id="h-tr">Transfer report card</h2>
+        <p>Every transfer, and what the player coming in has scored against the player going out since the swap. Free Hit moves only last a week, so they are marked and left out of the totals.</p>
+      </div>
+      <div class="panel">
+        <div class="leaders" id="tr-leaders"></div>
+        <div class="scroll"><table class="tr-sum sticky-first" id="tr-summary"></table></div>
+        <div class="own-filters">
+          <label class="pick" for="tr-who">Show transfers by
+            <select id="tr-who"></select>
+          </label>
+        </div>
+        <div class="scroll"><table class="tr-list" id="tr-table"></table></div>
+      </div>
+    </section>
+
     <section aria-labelledby="h-cap" id="cap-section">
       <div class="sec-head">
         <h2 id="h-cap">Captain regret</h2>
@@ -823,6 +877,14 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
   </div>
 
   <div class="view" id="view-history" data-view="history" data-title="History">
+    <section aria-labelledby="h-rec" id="records-section">
+      <div class="sec-head">
+        <h2 id="h-rec">Records</h2>
+        <p>The best and worst of the season so far. Every one of these is up for grabs each gameweek.</p>
+      </div>
+      <div class="records" id="records-grid"></div>
+    </section>
+
     <section aria-labelledby="h-past">
       <div class="sec-head">
         <h2 id="h-past">Previous seasons</h2>
@@ -934,7 +996,7 @@ $('#standings tbody').innerHTML = M.map(m => {
     <td class="hide-m"><svg class="form" width="${EV.length * 11 - 3}" height="28" viewBox="0 0 ${EV.length * 11 - 3} 28" style="fill:var(--s${m.i + 1})" role="img" aria-label="Gameweek points: ${m.gws.map(x => x.points).join(', ')}">${bars}</svg></td>
     <td class="num">${g.points ?? '—'}</td>
     <td class="num total">${m.total}</td>
-    <td class="num ${gap ? '' : 'muted'}">${gap ? '−' + gap : '—'}</td>
+    <td class="num hide-xs ${gap ? '' : 'muted'}">${gap ? '−' + gap : '—'}</td>
     <td class="hide-m">${esc(g.captain ?? '—')}${g.captain_mult === 3 ? ' <span class="tag">TC</span>' : ''}</td>
     <td class="hide-m">${chips}</td>
     <td class="num hide-m">${m.hitSum ? '−' + m.hitSum : '0'}</td>
@@ -1838,6 +1900,151 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
       card.addEventListener('pointerenter', () => { if (pinned == null) focusOn(entry); });
       card.addEventListener('pointerleave', () => { if (pinned == null) focusOn(null); });
     });
+  }
+}
+
+// Head-to-head grid
+{
+  const sec = $('#h2h-section');
+  if (M.length < 2 || !EV.length) {
+    sec.hidden = true;
+  } else {
+    const record = (a, b) => {
+      let w = 0, d = 0, l = 0;
+      EV.forEach(e => {
+        const x = net(a, e.event), y = net(b, e.event);
+        if (x > y) w++; else if (x < y) l++; else d++;
+      });
+      return { w, d, l };
+    };
+    $('#h2h-table').innerHTML = `
+      <thead><tr><th scope="col">Manager</th>${M.map(m => `<th scope="col"><span class="psw" style="background:var(--s${m.i + 1})"></span>${esc(m.first)}</th>`).join('')}<th scope="col">Total</th></tr></thead>
+      <tbody>${M.map(a => {
+        let tw = 0, td = 0, tl = 0;
+        const cells = M.map(b => {
+          if (a === b) return '<td class="self">—</td>';
+          const r = record(a, b);
+          tw += r.w; td += r.d; tl += r.l;
+          const cls = r.w > r.l ? 'up' : r.l > r.w ? 'down' : 'level';
+          return `<td class="${cls}" title="${esc(a.first)} ${r.w}W ${r.d}D ${r.l}L against ${esc(b.first)}">${r.w}–${r.d}–${r.l}</td>`;
+        }).join('');
+        return `<tr data-entry="${a.entry}"><th scope="row">${mgrCell(a)}</th>${cells}<td class="tot">${tw}–${td}–${tl}</td></tr>`;
+      }).join('')}</tbody>`;
+    $('#h2h-key').textContent = `Wins–draws–losses over ${EV.length} gameweek${EV.length === 1 ? '' : 's'}, scored after transfer hits. Blue means a winning record against that manager, red a losing one.`;
+    linkRows($('#h2h-table'));
+  }
+}
+
+// Transfer report card
+{
+  const sec = $('#tr-section');
+  const all = M.flatMap(m => (m.transfers_log || []).map(t => ({ ...t, m })));
+  if (!all.length) {
+    sec.hidden = true;
+  } else {
+    const kept = t => t.chip !== 'freehit';
+    const rows = M.map(m => {
+      const list = m.transfers_log || [];
+      const gained = list.filter(kept).reduce((s, t) => s + t.delta, 0);
+      return { m, list, gained, hits: m.hitSum, net: gained - m.hitSum };
+    });
+    const best = [...all].filter(kept).sort((a, b) => b.delta - a.delta)[0];
+    const worst = [...all].filter(kept).sort((a, b) => a.delta - b.delta)[0];
+    const busiest = [...rows].sort((a, b) => b.list.length - a.list.length)[0];
+    const bestNet = [...rows].sort((a, b) => b.net - a.net)[0];
+    const swap = t => `${t.out.name} → ${t.in.name}`;
+    $('#tr-leaders').innerHTML = [
+      leaderHTML('Best transfer', best.m.first, `${swap(best)} in GW${best.event}, ${best.delta >= 0 ? '+' : ''}${best.delta} pts since`),
+      leaderHTML('Worst transfer', worst.m.first, `${swap(worst)} in GW${worst.event}, ${worst.delta >= 0 ? '+' : ''}${worst.delta} pts since`),
+      leaderHTML('Busiest', busiest.m.first, `${busiest.list.length} transfers made`),
+      leaderHTML('Best after hits', bestNet.m.first, `${bestNet.net >= 0 ? '+' : ''}${bestNet.net} pts once hits are paid for`),
+    ].join('');
+    $('#tr-summary').innerHTML = `
+      <thead><tr><th scope="col">Manager</th><th scope="col" class="num hide-m">Transfers</th><th scope="col" class="num">Points gained</th><th scope="col" class="num">Hits paid</th><th scope="col" class="num">Net</th></tr></thead>
+      <tbody>${[...rows].sort((a, b) => b.net - a.net).map(r => `<tr data-entry="${r.m.entry}"><th scope="row">${mgrCell(r.m)}</th>
+        <td class="num hide-m">${r.list.length}</td>
+        <td class="num">${r.gained >= 0 ? '+' : ''}${r.gained}</td>
+        <td class="num">${r.hits ? '−' + r.hits : '0'}</td>
+        <td class="num total tr-delta ${r.net > 0 ? 'good' : r.net < 0 ? 'bad' : ''}">${r.net >= 0 ? '+' : ''}${r.net}</td>
+      </tr>`).join('')}</tbody>`;
+    linkRows($('#tr-summary'));
+
+    const who = $('#tr-who');
+    who.innerHTML = '<option value="all">Everyone</option>' + M.map(m => `<option value="${m.entry}">${esc(m.name)}</option>`).join('');
+    const drawList = () => {
+      const pick = who.value;
+      const list = all
+        .filter(t => pick === 'all' || t.m.entry === +pick)
+        .sort((a, b) => b.event - a.event || b.delta - a.delta);
+      $('#tr-table').innerHTML = `
+        <thead><tr><th scope="col">GW</th><th scope="col" class="hide-m">Manager</th><th scope="col">Transfer</th><th scope="col" class="num">Out</th><th scope="col" class="num">In</th><th scope="col" class="num">Swing</th></tr></thead>
+        <tbody>${list.map(t => `<tr data-entry="${t.m.entry}">
+          <th scope="row">GW${t.event}${t.chip ? `<small>${esc(chipLong(t.chip))}</small>` : ''}</th>
+          <td class="hide-m">${mgrCell(t.m)}</td>
+          <td><div class="swap"><span class="out">${esc(t.out.name)} £${t.out.cost.toFixed(1)}m</span><span class="in"><b>${esc(t.in.name)}</b> £${t.in.cost.toFixed(1)}m</span></div></td>
+          <td class="num">${t.pts_out}</td>
+          <td class="num">${t.pts_in}</td>
+          <td class="num tr-delta ${t.delta > 0 ? 'good' : t.delta < 0 ? 'bad' : ''}">${t.delta >= 0 ? '+' : ''}${t.delta}</td>
+        </tr>`).join('')}</tbody>`;
+      linkRows($('#tr-table'));
+      if (pinned != null) focusOn(pinned);
+      markScrollers?.();
+    };
+    who.addEventListener('change', drawList);
+    drawList();
+  }
+}
+
+// Records
+{
+  const sec = $('#records-section');
+  const weeks = M.flatMap(m => m.gws.map(g => ({ m, g, net: g.points - g.hits })));
+  if (!weeks.length) {
+    sec.hidden = true;
+  } else {
+    const pick = (list, by) => [...list].sort(by)[0];
+    const bestWeek = pick(weeks, (a, b) => b.net - a.net);
+    const worstWeek = pick(weeks, (a, b) => a.net - b.net);
+    const bench = pick(weeks, (a, b) => b.g.bench - a.g.bench);
+    const hits = pick(weeks.filter(w => w.g.hits), (a, b) => b.g.hits - a.g.hits);
+    const caps = weeks.filter(w => w.g.cap);
+    const bestCap = pick(caps, (a, b) => b.g.cap.pts * b.g.cmult - a.g.cap.pts * a.g.cmult);
+    const worstCap = pick(caps, (a, b) => a.g.cap.pts - b.g.cap.pts);
+    const climbs = weeks.map(w => {
+      const prev = w.m.gw[w.g.event - 1];
+      return prev ? { ...w, jump: prev.overall_rank - w.g.overall_rank } : null;
+    }).filter(Boolean);
+    const climb = climbs.length ? pick(climbs, (a, b) => b.jump - a.jump) : null;
+    const margins = EV.map(e => {
+      const sorted = [...M].sort((a, b) => net(b, e.event) - net(a, e.event));
+      return { e, top: sorted[0], bottom: sorted[sorted.length - 1], gap: net(sorted[0], e.event) - net(sorted[sorted.length - 1], e.event) };
+    });
+    const margin = pick(margins, (a, b) => b.gap - a.gap);
+    const streaks = M.map(m => {
+      let best = 0, run = 0, end = null;
+      EV.forEach(e => {
+        if (RANK[e.event][m.entry].pos === 1) { run++; if (run >= best) { best = run; end = e.event; } }
+        else run = 0;
+      });
+      return { m, best, end };
+    });
+    const streak = pick(streaks.filter(s => s.best), (a, b) => b.best - a.best);
+    const value = pick(M.map(m => { const g = m.gws[m.gws.length - 1]; return { m, v: g ? g.value + g.bank : 0 }; }), (a, b) => b.v - a.v);
+
+    const card = (label, value, who, detail) => `<div class="rec"><p class="label">${esc(label)}</p><p class="rec-v">${esc(String(value))}</p><p class="rec-who">${esc(who)}</p><p class="rec-d">${esc(detail)}</p></div>`;
+    const cards = [
+      card('Best gameweek', bestWeek.net, bestWeek.m.name, `GW${bestWeek.g.event}, with ${bestWeek.g.captain} captained`),
+      card('Worst gameweek', worstWeek.net, worstWeek.m.name, `GW${worstWeek.g.event}, when the FPL average was ${EV.find(e => e.event === worstWeek.g.event)?.average ?? '–'}`),
+      card('Most left on the bench', bench.g.bench, bench.m.name, `GW${bench.g.event}, while scoring ${bench.net}`),
+      card('Biggest weekly margin', margin.gap, `${margin.top.first} over ${margin.bottom.first}`, `GW${margin.e.event}: ${net(margin.top, margin.e.event)} against ${net(margin.bottom, margin.e.event)}`),
+      bestCap ? card('Best captain call', bestCap.g.cap.pts * bestCap.g.cmult, bestCap.m.name, `${bestCap.g.cap.name} in GW${bestCap.g.event}${bestCap.g.cmult === 3 ? ', tripled' : ', doubled'}`) : '',
+      worstCap ? card('Worst captain call', worstCap.g.cap.pts * worstCap.g.cmult, worstCap.m.name, `${worstCap.g.cap.name} in GW${worstCap.g.event}`) : '',
+      hits ? card('Biggest hit taken', `−${hits.g.hits}`, hits.m.name, `GW${hits.g.event}, for ${hits.g.transfers} transfers, then scored ${hits.net}`) : '',
+      climb ? card('Biggest weekly climb', climb.jump >= 1e6 ? (climb.jump / 1e6).toFixed(1) + 'M' : compact(climb.jump), climb.m.name, `GW${climb.g.event}, places gained in the overall rankings`) : '',
+      streak ? card('Longest spell on top', `${streak.best} GW${streak.best === 1 ? '' : 's'}`, streak.m.name, `Most recently after GW${streak.end}`) : '',
+      card('Highest team value', `£${value.v.toFixed(1)}m`, value.m.name, 'Squad value including money in the bank'),
+    ].filter(Boolean);
+    $('#records-grid').innerHTML = cards.join('');
   }
 }
 
