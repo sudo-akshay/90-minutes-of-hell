@@ -31,6 +31,13 @@
    "average": 69,
    "highest": 151,
    "finished": true,
+   "current": false
+  },
+  {
+   "event": 5,
+   "average": 18,
+   "highest": 108,
+   "finished": false,
    "current": true
   }
  ],
@@ -121,7 +128,7 @@
      "xi": true
     },
     {
-     "id": 237,
+     "id": 40,
      "xi": true
     },
     {
@@ -133,7 +140,7 @@
      "xi": true
     },
     {
-     "id": 165,
+     "id": 464,
      "xi": true
     },
     {
@@ -155,7 +162,7 @@
    ],
    "rank": 1,
    "last_rank": 1,
-   "total": 298,
+   "total": 312,
    "gws": [
     {
      "event": 1,
@@ -328,6 +335,49 @@
       "name": "Raya",
       "pts": 14
      }
+    },
+    {
+     "event": 5,
+     "points": 14,
+     "total": 312,
+     "overall_rank": 1218044,
+     "value": 100.1,
+     "bank": 0.0,
+     "transfers": 2,
+     "hits": 0,
+     "bench": 4,
+     "chip": null,
+     "captain": "Haaland",
+     "captain_mult": 2,
+     "captain_id": 411,
+     "pos": [
+      1,
+      11,
+      2,
+      0
+     ],
+     "xi": [
+      1,
+      8,
+      173,
+      277,
+      426,
+      427,
+      397,
+      40,
+      346,
+      411,
+      464
+     ],
+     "cmult": 2,
+     "cap": {
+      "name": "Raya",
+      "pts": 1
+     },
+     "best": {
+      "name": "Thomas",
+      "pts": 9
+     }
     }
    ],
    "past": [
@@ -392,15 +442,15 @@
      "xi": true
     },
     {
-     "id": 259,
-     "xi": true
-    },
-    {
      "id": 426,
      "xi": true
     },
     {
-     "id": 368,
+     "id": 454,
+     "xi": true
+    },
+    {
+     "id": 480,
      "xi": true
     },
     {
@@ -412,11 +462,11 @@
      "xi": true
     },
     {
-     "id": 411,
+     "id": 379,
      "xi": true
     },
     {
-     "id": 379,
+     "id": 411,
      "xi": true
     },
     {
@@ -424,11 +474,11 @@
      "xi": false
     },
     {
-     "id": 499,
+     "id": 259,
      "xi": false
     },
     {
-     "id": 454,
+     "id": 499,
      "xi": false
     },
     {
@@ -438,7 +488,7 @@
    ],
    "rank": 2,
    "last_rank": 2,
-   "total": 279,
+   "total": 299,
    "gws": [
     {
      "event": 1,
@@ -611,6 +661,49 @@
       "name": "Groß",
       "pts": 17
      }
+    },
+    {
+     "event": 5,
+     "points": 20,
+     "total": 299,
+     "overall_rank": 2016327,
+     "value": 100.3,
+     "bank": 0.2,
+     "transfers": 1,
+     "hits": 0,
+     "bench": 5,
+     "chip": null,
+     "captain": "Haaland",
+     "captain_mult": 2,
+     "captain_id": 411,
+     "pos": [
+      2,
+      2,
+      16,
+      0
+     ],
+     "xi": [
+      496,
+      418,
+      8,
+      31,
+      426,
+      454,
+      480,
+      124,
+      346,
+      379,
+      411
+     ],
+     "cmult": 2,
+     "cap": {
+      "name": "Haaland",
+      "pts": 0
+     },
+     "best": {
+      "name": "Groß",
+      "pts": 14
+     }
     }
    ],
    "past": [
@@ -641,7 +734,7 @@
    "team": "HaaLand Rovers",
    "squad": [
     {
-     "id": 109,
+     "id": 496,
      "xi": true
     },
     {
@@ -649,7 +742,7 @@
      "xi": true
     },
     {
-     "id": 87,
+     "id": 418,
      "xi": true
     },
     {
@@ -661,7 +754,7 @@
      "xi": true
     },
     {
-     "id": 368,
+     "id": 480,
      "xi": true
     },
     {
@@ -673,7 +766,7 @@
      "xi": true
     },
     {
-     "id": 165,
+     "id": 127,
      "xi": true
     },
     {
@@ -685,25 +778,25 @@
      "xi": true
     },
     {
-     "id": 496,
+     "id": 109,
      "xi": false
     },
     {
-     "id": 127,
+     "id": 87,
+     "xi": false
+    },
+    {
+     "id": 165,
      "xi": false
     },
     {
      "id": 259,
      "xi": false
-    },
-    {
-     "id": 418,
-     "xi": false
     }
    ],
    "rank": 3,
    "last_rank": 3,
-   "total": 277,
+   "total": 295,
    "gws": [
     {
      "event": 1,
@@ -876,6 +969,49 @@
       "name": "João Pedro",
       "pts": 12
      }
+    },
+    {
+     "event": 5,
+     "points": 18,
+     "total": 295,
+     "overall_rank": 2304443,
+     "value": 100.5,
+     "bank": 1.5,
+     "transfers": 1,
+     "hits": 0,
+     "bench": 18,
+     "chip": null,
+     "captain": "Haaland",
+     "captain_mult": 2,
+     "captain_id": 411,
+     "pos": [
+      2,
+      2,
+      14,
+      0
+     ],
+     "xi": [
+      496,
+      31,
+      418,
+      8,
+      557,
+      480,
+      154,
+      399,
+      127,
+      411,
+      346
+     ],
+     "cmult": 2,
+     "cap": {
+      "name": "Gibbs-White",
+      "pts": 2
+     },
+     "best": {
+      "name": "Gomez",
+      "pts": 8
+     }
     }
    ],
    "past": [
@@ -928,7 +1064,7 @@
      "xi": true
     },
     {
-     "id": 503,
+     "id": 499,
      "xi": true
     },
     {
@@ -944,7 +1080,7 @@
      "xi": true
     },
     {
-     "id": 397,
+     "id": 124,
      "xi": true
     },
     {
@@ -972,7 +1108,7 @@
      "xi": false
     },
     {
-     "id": 499,
+     "id": 503,
      "xi": false
     },
     {
@@ -986,7 +1122,7 @@
    ],
    "rank": 4,
    "last_rank": 4,
-   "total": 254,
+   "total": 280,
    "gws": [
     {
      "event": 1,
@@ -1159,6 +1295,49 @@
       "name": "Raya",
       "pts": 14
      }
+    },
+    {
+     "event": 5,
+     "points": 26,
+     "total": 280,
+     "overall_rank": 3528409,
+     "value": 100.3,
+     "bank": 3.9,
+     "transfers": 1,
+     "hits": 0,
+     "bench": 3,
+     "chip": null,
+     "captain": "Haaland",
+     "captain_mult": 2,
+     "captain_id": 411,
+     "pos": [
+      1,
+      3,
+      16,
+      6
+     ],
+     "xi": [
+      1,
+      499,
+      8,
+      419,
+      31,
+      124,
+      399,
+      40,
+      565,
+      411,
+      249
+     ],
+     "cmult": 2,
+     "cap": {
+      "name": "Raya",
+      "pts": 1
+     },
+     "best": {
+      "name": "Groß",
+      "pts": 14
+     }
     }
    ],
    "past": [
@@ -1215,19 +1394,19 @@
      "xi": true
     },
     {
-     "id": 8,
-     "xi": true
-    },
-    {
      "id": 31,
      "xi": true
     },
     {
-     "id": 212,
+     "id": 8,
      "xi": true
     },
     {
-     "id": 290,
+     "id": 499,
+     "xi": true
+    },
+    {
+     "id": 368,
      "xi": true
     },
     {
@@ -1239,15 +1418,15 @@
      "xi": true
     },
     {
-     "id": 368,
+     "id": 286,
+     "xi": true
+    },
+    {
+     "id": 399,
      "xi": true
     },
     {
      "id": 411,
-     "xi": true
-    },
-    {
-     "id": 165,
      "xi": true
     },
     {
@@ -1259,7 +1438,7 @@
      "xi": false
     },
     {
-     "id": 499,
+     "id": 320,
      "xi": false
     },
     {
@@ -1269,7 +1448,7 @@
    ],
    "rank": 5,
    "last_rank": 5,
-   "total": 246,
+   "total": 255,
    "gws": [
     {
      "event": 1,
@@ -1442,6 +1621,49 @@
       "name": "João Pedro",
       "pts": 12
      }
+    },
+    {
+     "event": 5,
+     "points": 17,
+     "total": 255,
+     "overall_rank": 5782655,
+     "value": 100.4,
+     "bank": 0.1,
+     "transfers": 3,
+     "hits": 8,
+     "bench": 1,
+     "chip": null,
+     "captain": "Haaland",
+     "captain_mult": 2,
+     "captain_id": 411,
+     "pos": [
+      8,
+      3,
+      6,
+      0
+     ],
+     "xi": [
+      226,
+      388,
+      31,
+      8,
+      499,
+      368,
+      426,
+      40,
+      286,
+      399,
+      411
+     ],
+     "cmult": 2,
+     "cap": {
+      "name": "Haaland",
+      "pts": 0
+     },
+     "best": {
+      "name": "Pickford",
+      "pts": 8
+     }
     }
    ],
    "past": [
@@ -1472,11 +1694,11 @@
      "xi": true
     },
     {
-     "id": 142,
+     "id": 498,
      "xi": true
     },
     {
-     "id": 399,
+     "id": 142,
      "xi": true
     },
     {
@@ -1512,7 +1734,7 @@
      "xi": false
     },
     {
-     "id": 498,
+     "id": 399,
      "xi": false
     },
     {
@@ -1522,7 +1744,7 @@
    ],
    "rank": 6,
    "last_rank": 6,
-   "total": 238,
+   "total": 243,
    "gws": [
     {
      "event": 1,
@@ -1695,6 +1917,49 @@
       "name": "Raya",
       "pts": 14
      }
+    },
+    {
+     "event": 5,
+     "points": 5,
+     "total": 243,
+     "overall_rank": 6667031,
+     "value": 100.2,
+     "bank": 0.0,
+     "transfers": 0,
+     "hits": 0,
+     "bench": 0,
+     "chip": null,
+     "captain": "João Pedro",
+     "captain_mult": 2,
+     "captain_id": 165,
+     "pos": [
+      1,
+      0,
+      4,
+      0
+     ],
+     "xi": [
+      1,
+      387,
+      356,
+      498,
+      142,
+      426,
+      377,
+      480,
+      40,
+      165,
+      55
+     ],
+     "cmult": 2,
+     "cap": {
+      "name": "Raya",
+      "pts": 1
+     },
+     "best": {
+      "name": "Gibbs-White",
+      "pts": 2
+     }
     }
    ],
    "past": [],
@@ -1714,11 +1979,11 @@
      "xi": true
     },
     {
-     "id": 586,
+     "id": 201,
      "xi": true
     },
     {
-     "id": 201,
+     "id": 422,
      "xi": true
     },
     {
@@ -1746,7 +2011,7 @@
      "xi": true
     },
     {
-     "id": 165,
+     "id": 464,
      "xi": true
     },
     {
@@ -1762,13 +2027,13 @@
      "xi": false
     },
     {
-     "id": 422,
+     "id": 586,
      "xi": false
     }
    ],
    "rank": 7,
    "last_rank": 7,
-   "total": 227,
+   "total": 241,
    "gws": [
     {
      "event": 1,
@@ -1941,6 +2206,49 @@
       "name": "Raya",
       "pts": 14
      }
+    },
+    {
+     "event": 5,
+     "points": 14,
+     "total": 241,
+     "overall_rank": 6856503,
+     "value": 99.4,
+     "bank": 1.5,
+     "transfers": 1,
+     "hits": 0,
+     "bench": 0,
+     "chip": null,
+     "captain": "Haaland",
+     "captain_mult": 2,
+     "captain_id": 411,
+     "pos": [
+      1,
+      2,
+      11,
+      0
+     ],
+     "xi": [
+      1,
+      356,
+      201,
+      422,
+      428,
+      427,
+      40,
+      399,
+      453,
+      411,
+      464
+     ],
+     "cmult": 2,
+     "cap": {
+      "name": "Rogers",
+      "pts": 2
+     },
+     "best": {
+      "name": "Barnes",
+      "pts": 9
+     }
     }
    ],
    "past": [
@@ -1965,15 +2273,15 @@
    "team": "Pending Moderation",
    "squad": [
     {
-     "id": 572,
-     "xi": true
-    },
-    {
-     "id": 173,
+     "id": 1,
      "xi": true
     },
     {
      "id": 279,
+     "xi": true
+    },
+    {
+     "id": 305,
      "xi": true
     },
     {
@@ -1997,7 +2305,7 @@
      "xi": true
     },
     {
-     "id": 605,
+     "id": 40,
      "xi": true
     },
     {
@@ -2005,7 +2313,7 @@
      "xi": true
     },
     {
-     "id": 379,
+     "id": 165,
      "xi": true
     },
     {
@@ -2013,7 +2321,7 @@
      "xi": false
     },
     {
-     "id": 305,
+     "id": 173,
      "xi": false
     },
     {
@@ -2027,7 +2335,7 @@
    ],
    "rank": 8,
    "last_rank": 8,
-   "total": 180,
+   "total": 182,
    "gws": [
     {
      "event": 1,
@@ -2200,6 +2508,49 @@
       "name": "Haaland",
       "pts": 9
      }
+    },
+    {
+     "event": 5,
+     "points": 10,
+     "total": 182,
+     "overall_rank": 9422044,
+     "value": 100.2,
+     "bank": 0.2,
+     "transfers": 3,
+     "hits": 8,
+     "bench": 11,
+     "chip": null,
+     "captain": "Haaland",
+     "captain_mult": 2,
+     "captain_id": 411,
+     "pos": [
+      1,
+      3,
+      6,
+      0
+     ],
+     "xi": [
+      1,
+      279,
+      305,
+      282,
+      12,
+      154,
+      399,
+      367,
+      40,
+      411,
+      165
+     ],
+     "cmult": 2,
+     "cap": {
+      "name": "Haaland",
+      "pts": 0
+     },
+     "best": {
+      "name": "Davis",
+      "pts": 2
+     }
     }
    ],
    "past": [
@@ -2232,6 +2583,97 @@
  ],
  "news": [
   {
+   "name": "van Ewijk",
+   "team": "COV",
+   "pos": "DEF",
+   "status": "d",
+   "chance": 75,
+   "news": "Hamstring injury - 75% chance of playing",
+   "added": "2026-09-19T16:00:09.486751Z",
+   "owners": [
+    {
+     "entry": 7587350,
+     "xi": false
+    }
+   ]
+  },
+  {
+   "name": "Pedro Porro",
+   "team": "TOT",
+   "pos": "DEF",
+   "status": "d",
+   "chance": 75,
+   "news": "Hamstring injury - 75% chance of playing",
+   "added": "2026-09-19T12:00:08.823872Z",
+   "owners": [
+    {
+     "entry": 7599534,
+     "xi": false
+    },
+    {
+     "entry": 4762060,
+     "xi": true
+    },
+    {
+     "entry": 6341322,
+     "xi": true
+    }
+   ]
+  },
+  {
+   "name": "James",
+   "team": "CHE",
+   "pos": "DEF",
+   "status": "d",
+   "chance": 75,
+   "news": "Hamstring injury - 75% chance of playing",
+   "added": "2026-09-18T10:30:09.719371Z",
+   "owners": [
+    {
+     "entry": 7693414,
+     "xi": true
+    }
+   ]
+  },
+  {
+   "name": "Targett",
+   "team": "HUL",
+   "pos": "DEF",
+   "status": "d",
+   "chance": 75,
+   "news": "Ankle injury - 75% chance of playing",
+   "added": "2026-09-17T14:00:26.419938Z",
+   "owners": [
+    {
+     "entry": 7693414,
+     "xi": false
+    }
+   ]
+  },
+  {
+   "name": "João Pedro",
+   "team": "CHE",
+   "pos": "FWD",
+   "status": "d",
+   "chance": 75,
+   "news": "Knee injury - 75% chance of playing",
+   "added": "2026-09-16T19:00:09.919929Z",
+   "owners": [
+    {
+     "entry": 7598024,
+     "xi": false
+    },
+    {
+     "entry": 7693414,
+     "xi": true
+    },
+    {
+     "entry": 7592803,
+     "xi": true
+    }
+   ]
+  },
+  {
    "name": "Elanga",
    "team": "NEW",
    "pos": "MID",
@@ -2242,45 +2684,7 @@
    "owners": [
     {
      "entry": 7599534,
-     "xi": false
-    }
-   ]
-  },
-  {
-   "name": "Mendy",
-   "team": "HUL",
-   "pos": "DEF",
-   "status": "d",
-   "chance": 50,
-   "news": "Concussion - 50% chance of playing",
-   "added": "2026-09-12T18:00:09.334142Z",
-   "owners": [
-    {
-     "entry": 7628837,
      "xi": true
-    }
-   ]
-  },
-  {
-   "name": "Pedro Porro",
-   "team": "TOT",
-   "pos": "DEF",
-   "status": "d",
-   "chance": 75,
-   "news": "Unspecified injury - 75% chance of playing",
-   "added": "2026-09-11T18:00:09.076279Z",
-   "owners": [
-    {
-     "entry": 7599534,
-     "xi": false
-    },
-    {
-     "entry": 4762060,
-     "xi": false
-    },
-    {
-     "entry": 6341322,
-     "xi": false
     }
    ]
   },
@@ -2289,8 +2693,8 @@
    "team": "MUN",
    "pos": "DEF",
    "status": "d",
-   "chance": 75,
-   "news": "Unspecified injury - 75% chance of playing",
+   "chance": 50,
+   "news": "Unspecified injury - 50% chance of playing",
    "added": "2026-09-11T13:00:09.030120Z",
    "owners": [
     {
@@ -2321,39 +2725,39 @@
    "team": "ARS",
    "pos": "GK",
    "price": 6.0,
-   "selected": 40.5,
-   "points": 29
+   "selected": 41.8,
+   "points": 30
   },
   "8": {
    "name": "Calafiori",
    "team": "ARS",
    "pos": "DEF",
    "price": 5.8,
-   "selected": 50.1,
-   "points": 28
+   "selected": 50.7,
+   "points": 29
   },
   "173": {
    "name": "Thomas",
    "team": "COV",
    "pos": "DEF",
    "price": 4.0,
-   "selected": 9.0,
-   "points": 15
+   "selected": 8.6,
+   "points": 24
   },
   "277": {
    "name": "Egan",
    "team": "HUL",
    "pos": "DEF",
    "price": 4.1,
-   "selected": 6.8,
-   "points": 25
+   "selected": 7.1,
+   "points": 26
   },
   "426": {
    "name": "B.Fernandes",
    "team": "MUN",
    "pos": "MID",
    "price": 12.0,
-   "selected": 41.7,
+   "selected": 39.7,
    "points": 29
   },
   "427": {
@@ -2361,7 +2765,7 @@
    "team": "MUN",
    "pos": "MID",
    "price": 7.9,
-   "selected": 22.8,
+   "selected": 21.3,
    "points": 23
   },
   "397": {
@@ -2369,47 +2773,47 @@
    "team": "MCI",
    "pos": "MID",
    "price": 8.4,
-   "selected": 15.5,
+   "selected": 14.6,
    "points": 16
   },
-  "237": {
-   "name": "Ndiaye",
-   "team": "MCI",
+  "40": {
+   "name": "Rogers",
+   "team": "CHE",
    "pos": "MID",
-   "price": 5.9,
-   "selected": 8.0,
-   "points": 17
+   "price": 7.7,
+   "selected": 40.1,
+   "points": 29
   },
   "346": {
    "name": "Calvert-Lewin",
    "team": "LEE",
    "pos": "FWD",
    "price": 6.0,
-   "selected": 22.6,
+   "selected": 25.7,
    "points": 20
   },
   "411": {
    "name": "Haaland",
    "team": "MCI",
    "pos": "FWD",
-   "price": 15.5,
-   "selected": 72.4,
+   "price": 15.6,
+   "selected": 73.4,
    "points": 33
   },
-  "165": {
-   "name": "João Pedro",
-   "team": "CHE",
+  "464": {
+   "name": "Wissa",
+   "team": "NEW",
    "pos": "FWD",
-   "price": 7.8,
-   "selected": 75.3,
-   "points": 33
+   "price": 6.2,
+   "selected": 19.1,
+   "points": 15
   },
   "497": {
    "name": "Dubravka",
    "team": "TOT",
    "pos": "GK",
    "price": 4.0,
-   "selected": 17.6,
+   "selected": 17.4,
    "points": 0
   },
   "212": {
@@ -2417,7 +2821,7 @@
    "team": "CRY",
    "pos": "MID",
    "price": 4.4,
-   "selected": 8.0,
+   "selected": 7.6,
    "points": 2
   },
   "259": {
@@ -2425,15 +2829,15 @@
    "team": "IPS",
    "pos": "DEF",
    "price": 4.0,
-   "selected": 13.8,
-   "points": 8
+   "selected": 13.1,
+   "points": 12
   },
   "175": {
    "name": "van Ewijk",
    "team": "COV",
    "pos": "DEF",
    "price": 4.0,
-   "selected": 10.1,
+   "selected": 9.3,
    "points": 6
   },
   "496": {
@@ -2441,47 +2845,55 @@
    "team": "TOT",
    "pos": "GK",
    "price": 4.5,
-   "selected": 18.4,
-   "points": 16
+   "selected": 18.0,
+   "points": 18
   },
   "418": {
    "name": "Maguire",
    "team": "MUN",
    "pos": "DEF",
    "price": 4.9,
-   "selected": 10.1,
+   "selected": 9.1,
    "points": 8
   },
   "31": {
    "name": "Konsa",
    "team": "ARS",
    "pos": "DEF",
-   "price": 4.5,
-   "selected": 18.1,
-   "points": 11
+   "price": 4.6,
+   "selected": 19.4,
+   "points": 12
   },
-  "368": {
-   "name": "Szoboszlai",
-   "team": "LIV",
+  "454": {
+   "name": "Elanga",
+   "team": "NEW",
    "pos": "MID",
-   "price": 7.0,
-   "selected": 36.1,
+   "price": 6.1,
+   "selected": 5.4,
    "points": 18
+  },
+  "480": {
+   "name": "Gibbs-White",
+   "team": "NFO",
+   "pos": "MID",
+   "price": 8.0,
+   "selected": 16.0,
+   "points": 28
   },
   "124": {
    "name": "Groß",
    "team": "BHA",
    "pos": "MID",
-   "price": 5.6,
-   "selected": 18.7,
-   "points": 33
+   "price": 5.8,
+   "selected": 24.0,
+   "points": 47
   },
   "379": {
    "name": "Isak",
    "team": "LIV",
    "pos": "FWD",
    "price": 9.1,
-   "selected": 22.1,
+   "selected": 21.9,
    "points": 25
   },
   "301": {
@@ -2489,48 +2901,24 @@
    "team": "IPS",
    "pos": "GK",
    "price": 4.0,
-   "selected": 4.1,
+   "selected": 4.0,
    "points": 0
   },
   "499": {
    "name": "Pedro Porro",
    "team": "TOT",
    "pos": "DEF",
-   "price": 5.5,
-   "selected": 9.2,
-   "points": 8
-  },
-  "454": {
-   "name": "Elanga",
-   "team": "NEW",
-   "pos": "MID",
-   "price": 6.2,
-   "selected": 9.6,
-   "points": 18
-  },
-  "109": {
-   "name": "Verbruggen",
-   "team": "BHA",
-   "pos": "GK",
-   "price": 4.5,
-   "selected": 22.0,
-   "points": 17
-  },
-  "87": {
-   "name": "Ajer",
-   "team": "BRE",
-   "pos": "DEF",
-   "price": 4.5,
-   "selected": 4.3,
-   "points": 14
+   "price": 5.4,
+   "selected": 8.2,
+   "points": 9
   },
   "557": {
    "name": "Tzolis",
    "team": "ARS",
    "pos": "MID",
-   "price": 6.4,
-   "selected": 14.7,
-   "points": 14
+   "price": 6.3,
+   "selected": 12.9,
+   "points": 16
   },
   "154": {
    "name": "Palmer",
@@ -2538,14 +2926,14 @@
    "pos": "MID",
    "price": 9.7,
    "selected": 26.8,
-   "points": 26
+   "points": 28
   },
   "399": {
    "name": "Cherki",
    "team": "MCI",
    "pos": "MID",
    "price": 7.8,
-   "selected": 28.4,
+   "selected": 27.8,
    "points": 26
   },
   "127": {
@@ -2553,16 +2941,32 @@
    "team": "BHA",
    "pos": "MID",
    "price": 5.0,
-   "selected": 4.6,
-   "points": 16
+   "selected": 4.1,
+   "points": 24
   },
-  "503": {
-   "name": "Van de Ven",
-   "team": "TOT",
+  "109": {
+   "name": "Verbruggen",
+   "team": "BHA",
+   "pos": "GK",
+   "price": 4.5,
+   "selected": 21.7,
+   "points": 23
+  },
+  "87": {
+   "name": "Ajer",
+   "team": "BRE",
    "pos": "DEF",
-   "price": 5.0,
-   "selected": 3.9,
-   "points": 15
+   "price": 4.5,
+   "selected": 4.0,
+   "points": 21
+  },
+  "165": {
+   "name": "João Pedro",
+   "team": "CHE",
+   "pos": "FWD",
+   "price": 7.8,
+   "selected": 67.8,
+   "points": 33
   },
   "419": {
    "name": "Martinez",
@@ -2572,20 +2976,12 @@
    "selected": 1.3,
    "points": 6
   },
-  "40": {
-   "name": "Rogers",
-   "team": "CHE",
-   "pos": "MID",
-   "price": 7.7,
-   "selected": 37.7,
-   "points": 27
-  },
   "565": {
    "name": "M.Sangaré",
    "team": "BRE",
    "pos": "MID",
-   "price": 5.7,
-   "selected": 12.1,
+   "price": 5.6,
+   "selected": 10.7,
    "points": 22
   },
   "249": {
@@ -2593,31 +2989,39 @@
    "team": "EVE",
    "pos": "FWD",
    "price": 5.6,
-   "selected": 6.5,
-   "points": 14
+   "selected": 8.0,
+   "points": 20
   },
   "28": {
    "name": "Martinez",
    "team": "CHE",
    "pos": "GK",
    "price": 5.0,
-   "selected": 5.0,
-   "points": 7
+   "selected": 4.8,
+   "points": 9
+  },
+  "503": {
+   "name": "Van de Ven",
+   "team": "TOT",
+   "pos": "DEF",
+   "price": 5.0,
+   "selected": 3.9,
+   "points": 16
   },
   "43": {
    "name": "Tielemans",
    "team": "MUN",
    "pos": "MID",
    "price": 5.8,
-   "selected": 1.6,
+   "selected": 1.5,
    "points": 10
   },
   "552": {
    "name": "Brobbey",
    "team": "SUN",
    "pos": "FWD",
-   "price": 5.8,
-   "selected": 6.1,
+   "price": 5.7,
+   "selected": 5.3,
    "points": 7
   },
   "226": {
@@ -2625,8 +3029,8 @@
    "team": "EVE",
    "pos": "GK",
    "price": 5.5,
-   "selected": 8.8,
-   "points": 17
+   "selected": 9.0,
+   "points": 25
   },
   "388": {
    "name": "Guéhi",
@@ -2636,20 +3040,36 @@
    "selected": 18.5,
    "points": 26
   },
-  "290": {
-   "name": "Slater",
+  "368": {
+   "name": "Szoboszlai",
+   "team": "LIV",
+   "pos": "MID",
+   "price": 7.0,
+   "selected": 34.2,
+   "points": 18
+  },
+  "286": {
+   "name": "Belloumi",
    "team": "HUL",
    "pos": "MID",
-   "price": 4.5,
-   "selected": 5.6,
-   "points": 13
+   "price": 5.1,
+   "selected": 4.5,
+   "points": 31
   },
   "423": {
    "name": "Shaw",
    "team": "MUN",
    "pos": "DEF",
-   "price": 4.4,
-   "selected": 10.3,
+   "price": 4.3,
+   "selected": 8.1,
+   "points": 7
+  },
+  "320": {
+   "name": "Akpom",
+   "team": "IPS",
+   "pos": "FWD",
+   "price": 5.0,
+   "selected": 1.2,
    "points": 7
   },
   "272": {
@@ -2657,7 +3077,7 @@
    "team": "FUL",
    "pos": "FWD",
    "price": 4.5,
-   "selected": 5.9,
+   "selected": 5.6,
    "points": 0
   },
   "387": {
@@ -2665,7 +3085,7 @@
    "team": "MCI",
    "pos": "DEF",
    "price": 6.4,
-   "selected": 12.4,
+   "selected": 11.5,
    "points": 5
   },
   "356": {
@@ -2673,15 +3093,23 @@
    "team": "LIV",
    "pos": "DEF",
    "price": 6.5,
-   "selected": 16.7,
+   "selected": 16.3,
    "points": 17
+  },
+  "498": {
+   "name": "Senesi",
+   "team": "TOT",
+   "pos": "DEF",
+   "price": 5.8,
+   "selected": 3.7,
+   "points": 3
   },
   "142": {
    "name": "James",
    "team": "CHE",
    "pos": "DEF",
    "price": 5.4,
-   "selected": 7.2,
+   "selected": 6.3,
    "points": 3
   },
   "377": {
@@ -2689,23 +3117,15 @@
    "team": "LIV",
    "pos": "MID",
    "price": 6.5,
-   "selected": 1.1,
+   "selected": 1.0,
    "points": 14
-  },
-  "480": {
-   "name": "Gibbs-White",
-   "team": "NFO",
-   "pos": "MID",
-   "price": 7.9,
-   "selected": 12.0,
-   "points": 26
   },
   "55": {
    "name": "Watkins",
    "team": "AVL",
    "pos": "FWD",
    "price": 7.8,
-   "selected": 2.8,
+   "selected": 2.6,
    "points": 0
   },
   "273": {
@@ -2721,56 +3141,16 @@
    "team": "HUL",
    "pos": "DEF",
    "price": 4.0,
-   "selected": 1.8,
+   "selected": 1.7,
    "points": 1
-  },
-  "498": {
-   "name": "Senesi",
-   "team": "TOT",
-   "pos": "DEF",
-   "price": 5.8,
-   "selected": 4.0,
-   "points": 3
-  },
-  "586": {
-   "name": "Mendy",
-   "team": "HUL",
-   "pos": "DEF",
-   "price": 4.1,
-   "selected": 7.3,
-   "points": 25
   },
   "201": {
    "name": "Muñoz",
    "team": "NFO",
    "pos": "DEF",
    "price": 5.4,
-   "selected": 5.5,
-   "points": 3
-  },
-  "428": {
-   "name": "Cunha",
-   "team": "MUN",
-   "pos": "MID",
-   "price": 7.9,
-   "selected": 6.1,
-   "points": 16
-  },
-  "453": {
-   "name": "Barnes",
-   "team": "NEW",
-   "pos": "MID",
-   "price": 6.0,
-   "selected": 3.1,
-   "points": 19
-  },
-  "308": {
-   "name": "Furlong",
-   "team": "IPS",
-   "pos": "DEF",
-   "price": 4.0,
-   "selected": 0.5,
-   "points": 1
+   "selected": 5.9,
+   "points": 5
   },
   "422": {
    "name": "Mazraoui",
@@ -2780,28 +3160,60 @@
    "selected": 0.5,
    "points": 3
   },
-  "572": {
-   "name": "Tzolakis",
-   "team": "HUL",
-   "pos": "GK",
-   "price": 4.6,
-   "selected": 10.8,
+  "428": {
+   "name": "Cunha",
+   "team": "MUN",
+   "pos": "MID",
+   "price": 7.9,
+   "selected": 5.7,
+   "points": 16
+  },
+  "453": {
+   "name": "Barnes",
+   "team": "NEW",
+   "pos": "MID",
+   "price": 6.1,
+   "selected": 4.8,
    "points": 28
+  },
+  "308": {
+   "name": "Furlong",
+   "team": "IPS",
+   "pos": "DEF",
+   "price": 3.9,
+   "selected": 0.6,
+   "points": 1
+  },
+  "586": {
+   "name": "Mendy",
+   "team": "HUL",
+   "pos": "DEF",
+   "price": 4.1,
+   "selected": 6.4,
+   "points": 25
   },
   "279": {
    "name": "Ajayi",
    "team": "HUL",
    "pos": "DEF",
    "price": 4.2,
-   "selected": 13.7,
-   "points": 26
+   "selected": 14.2,
+   "points": 27
+  },
+  "305": {
+   "name": "Davis",
+   "team": "IPS",
+   "pos": "DEF",
+   "price": 4.0,
+   "selected": 6.8,
+   "points": 25
   },
   "282": {
    "name": "Giles",
    "team": "HUL",
    "pos": "DEF",
    "price": 4.0,
-   "selected": 2.4,
+   "selected": 2.9,
    "points": 24
   },
   "12": {
@@ -2809,32 +3221,16 @@
    "team": "ARS",
    "pos": "MID",
    "price": 9.5,
-   "selected": 12.2,
-   "points": 30
+   "selected": 13.3,
+   "points": 32
   },
   "367": {
    "name": "Gakpo",
    "team": "LIV",
    "pos": "MID",
    "price": 7.2,
-   "selected": 12.1,
+   "selected": 12.7,
    "points": 29
-  },
-  "605": {
-   "name": "Yalcouyé",
-   "team": "BHA",
-   "pos": "MID",
-   "price": 4.5,
-   "selected": 3.7,
-   "points": 19
-  },
-  "305": {
-   "name": "Davis",
-   "team": "IPS",
-   "pos": "DEF",
-   "price": 4.0,
-   "selected": 6.2,
-   "points": 23
   },
   "321": {
    "name": "Walle Egeli",
@@ -2849,612 +3245,639 @@
    "team": "IPS",
    "pos": "DEF",
    "price": 4.0,
-   "selected": 2.9,
-   "points": 8
+   "selected": 2.8,
+   "points": 10
   }
  },
- "fetched_at": "2026-09-15 18:05 UTC",
+ "fetched_at": "2026-09-20 06:20 UTC",
  "predictions": {
-  "from_event": 4,
+  "from_event": 5,
   "events": [
-   5,
    6,
-   7
+   7,
+   8
   ],
   "managers": {
    "7587350": {
     "gws": [
      {
-      "event": 5,
-      "pts": 68.1,
-      "captain": "Haaland",
-      "captain_xp": 17.6,
-      "captain_vs": "SUN (H)",
-      "top": [
-       {
-        "name": "Haaland",
-        "xp": 8.8
-       },
-       {
-        "name": "B.Fernandes",
-        "xp": 6.7
-       },
-       {
-        "name": "João Pedro",
-        "xp": 6.4
-       }
-      ]
-     },
-     {
       "event": 6,
-      "pts": 65.4,
-      "captain": "B.Fernandes",
-      "captain_xp": 14.6,
-      "captain_vs": "TOT (H)",
+      "pts": 55.1,
+      "captain": "Calafiori",
+      "captain_xp": 12.6,
+      "captain_vs": "LEE (H)",
       "top": [
-       {
-        "name": "B.Fernandes",
-        "xp": 7.3
-       },
-       {
-        "name": "João Pedro",
-        "xp": 6.9
-       },
        {
         "name": "Calafiori",
-        "xp": 6.7
+        "xp": 6.3
+       },
+       {
+        "name": "Raya",
+        "xp": 5.7
+       },
+       {
+        "name": "Rogers",
+        "xp": 5.2
        }
       ]
      },
      {
       "event": 7,
-      "pts": 67.6,
+      "pts": 51.8,
       "captain": "Haaland",
-      "captain_xp": 17.6,
+      "captain_xp": 11.7,
       "captain_vs": "IPS (H)",
       "top": [
        {
         "name": "Haaland",
-        "xp": 8.8
+        "xp": 5.9
        },
        {
-        "name": "B.Fernandes",
-        "xp": 6.7
+        "name": "Calafiori",
+        "xp": 5.2
        },
        {
-        "name": "João Pedro",
-        "xp": 6.4
+        "name": "Rogers",
+        "xp": 4.8
+       }
+      ]
+     },
+     {
+      "event": 8,
+      "pts": 52.3,
+      "captain": "Calafiori",
+      "captain_xp": 11.3,
+      "captain_vs": "EVE (H)",
+      "top": [
+       {
+        "name": "Calafiori",
+        "xp": 5.6
+       },
+       {
+        "name": "Rogers",
+        "xp": 5.2
+       },
+       {
+        "name": "Raya",
+        "xp": 5.1
        }
       ]
      }
     ],
-    "total": 201.1,
-    "flags": []
+    "total": 159.2,
+    "flags": [
+     {
+      "name": "van Ewijk",
+      "chance": 75,
+      "news": "Hamstring injury - 75% chance of playing"
+     }
+    ]
    },
    "7599534": {
     "gws": [
      {
-      "event": 5,
-      "pts": 60.9,
-      "captain": "Haaland",
-      "captain_xp": 17.6,
-      "captain_vs": "SUN (H)",
-      "top": [
-       {
-        "name": "Haaland",
-        "xp": 8.8
-       },
-       {
-        "name": "B.Fernandes",
-        "xp": 6.7
-       },
-       {
-        "name": "Calafiori",
-        "xp": 5.5
-       }
-      ]
-     },
-     {
       "event": 6,
-      "pts": 58.0,
-      "captain": "B.Fernandes",
-      "captain_xp": 14.6,
-      "captain_vs": "TOT (H)",
+      "pts": 50.4,
+      "captain": "Calafiori",
+      "captain_xp": 12.6,
+      "captain_vs": "LEE (H)",
       "top": [
        {
-        "name": "B.Fernandes",
-        "xp": 7.3
-       },
-       {
         "name": "Calafiori",
-        "xp": 6.7
+        "xp": 6.3
        },
        {
-        "name": "Haaland",
-        "xp": 6.4
+        "name": "Groß",
+        "xp": 5.8
+       },
+       {
+        "name": "Gibbs-White",
+        "xp": 5.3
        }
       ]
      },
      {
       "event": 7,
-      "pts": 61.3,
-      "captain": "Haaland",
-      "captain_xp": 17.6,
-      "captain_vs": "IPS (H)",
+      "pts": 50.2,
+      "captain": "Groß",
+      "captain_xp": 12.5,
+      "captain_vs": "CRY (H)",
       "top": [
        {
-        "name": "Haaland",
-        "xp": 8.8
+        "name": "Groß",
+        "xp": 6.2
        },
        {
-        "name": "B.Fernandes",
-        "xp": 6.7
+        "name": "Haaland",
+        "xp": 5.9
+       },
+       {
+        "name": "Calafiori",
+        "xp": 5.2
+       }
+      ]
+     },
+     {
+      "event": 8,
+      "pts": 50.0,
+      "captain": "Gibbs-White",
+      "captain_xp": 11.8,
+      "captain_vs": "IPS (A)",
+      "top": [
+       {
+        "name": "Gibbs-White",
+        "xp": 5.9
+       },
+       {
+        "name": "Calafiori",
+        "xp": 5.6
        },
        {
         "name": "Groß",
-        "xp": 5.6
+        "xp": 5.1
        }
       ]
      }
     ],
-    "total": 180.2,
+    "total": 150.6,
     "flags": [
-     {
-      "name": "Pedro Porro",
-      "chance": 75,
-      "news": "Unspecified injury - 75% chance of playing"
-     },
      {
       "name": "Elanga",
       "chance": 0,
       "news": "Unspecified injury - Unknown return date"
+     },
+     {
+      "name": "Pedro Porro",
+      "chance": 75,
+      "news": "Hamstring injury - 75% chance of playing"
      }
     ]
    },
    "7598024": {
     "gws": [
      {
-      "event": 5,
-      "pts": 64.3,
-      "captain": "Haaland",
-      "captain_xp": 17.6,
-      "captain_vs": "SUN (H)",
-      "top": [
-       {
-        "name": "Haaland",
-        "xp": 8.8
-       },
-       {
-        "name": "João Pedro",
-        "xp": 6.4
-       },
-       {
-        "name": "Cherki",
-        "xp": 6.3
-       }
-      ]
-     },
-     {
       "event": 6,
-      "pts": 60.2,
-      "captain": "João Pedro",
-      "captain_xp": 13.8,
-      "captain_vs": "BOU (H)",
-      "top": [
-       {
-        "name": "João Pedro",
-        "xp": 6.9
-       },
-       {
-        "name": "Calafiori",
-        "xp": 6.7
-       },
-       {
-        "name": "Haaland",
-        "xp": 6.4
-       }
-      ]
-     },
-     {
-      "event": 7,
-      "pts": 64.7,
-      "captain": "Haaland",
-      "captain_xp": 17.6,
-      "captain_vs": "IPS (H)",
-      "top": [
-       {
-        "name": "Haaland",
-        "xp": 8.8
-       },
-       {
-        "name": "João Pedro",
-        "xp": 6.4
-       },
-       {
-        "name": "Cherki",
-        "xp": 6.3
-       }
-      ]
-     }
-    ],
-    "total": 189.2,
-    "flags": []
-   },
-   "4762060": {
-    "gws": [
-     {
-      "event": 5,
-      "pts": 63.5,
-      "captain": "Haaland",
-      "captain_xp": 17.6,
-      "captain_vs": "SUN (H)",
-      "top": [
-       {
-        "name": "Haaland",
-        "xp": 8.8
-       },
-       {
-        "name": "Cherki",
-        "xp": 6.3
-       },
-       {
-        "name": "Semenyo",
-        "xp": 6.1
-       }
-      ]
-     },
-     {
-      "event": 6,
-      "pts": 58.2,
+      "pts": 53.5,
       "captain": "Calafiori",
-      "captain_xp": 13.4,
+      "captain_xp": 12.6,
       "captain_vs": "LEE (H)",
       "top": [
        {
         "name": "Calafiori",
-        "xp": 6.7
+        "xp": 6.3
        },
        {
-        "name": "Haaland",
-        "xp": 6.4
+        "name": "Palmer",
+        "xp": 5.6
        },
        {
-        "name": "Raya",
-        "xp": 6.1
+        "name": "Gibbs-White",
+        "xp": 5.3
        }
       ]
      },
      {
       "event": 7,
-      "pts": 63.4,
+      "pts": 52.8,
       "captain": "Haaland",
-      "captain_xp": 17.6,
+      "captain_xp": 11.7,
       "captain_vs": "IPS (H)",
       "top": [
        {
         "name": "Haaland",
-        "xp": 8.8
+        "xp": 5.9
        },
        {
-        "name": "Cherki",
-        "xp": 6.3
+        "name": "Calafiori",
+        "xp": 5.2
        },
        {
-        "name": "Semenyo",
-        "xp": 6.1
+        "name": "Palmer",
+        "xp": 5.2
+       }
+      ]
+     },
+     {
+      "event": 8,
+      "pts": 52.8,
+      "captain": "Gibbs-White",
+      "captain_xp": 11.8,
+      "captain_vs": "IPS (A)",
+      "top": [
+       {
+        "name": "Gibbs-White",
+        "xp": 5.9
+       },
+       {
+        "name": "Calafiori",
+        "xp": 5.6
+       },
+       {
+        "name": "Palmer",
+        "xp": 5.6
        }
       ]
      }
     ],
-    "total": 185.1,
+    "total": 159.1,
+    "flags": [
+     {
+      "name": "João Pedro",
+      "chance": 75,
+      "news": "Knee injury - 75% chance of playing"
+     }
+    ]
+   },
+   "4762060": {
+    "gws": [
+     {
+      "event": 6,
+      "pts": 52.9,
+      "captain": "Calafiori",
+      "captain_xp": 12.6,
+      "captain_vs": "LEE (H)",
+      "top": [
+       {
+        "name": "Calafiori",
+        "xp": 6.3
+       },
+       {
+        "name": "Groß",
+        "xp": 5.8
+       },
+       {
+        "name": "Raya",
+        "xp": 5.7
+       }
+      ]
+     },
+     {
+      "event": 7,
+      "pts": 52.7,
+      "captain": "Groß",
+      "captain_xp": 12.5,
+      "captain_vs": "CRY (H)",
+      "top": [
+       {
+        "name": "Groß",
+        "xp": 6.2
+       },
+       {
+        "name": "Haaland",
+        "xp": 5.9
+       },
+       {
+        "name": "Calafiori",
+        "xp": 5.2
+       }
+      ]
+     },
+     {
+      "event": 8,
+      "pts": 48.7,
+      "captain": "Calafiori",
+      "captain_xp": 11.3,
+      "captain_vs": "EVE (H)",
+      "top": [
+       {
+        "name": "Calafiori",
+        "xp": 5.6
+       },
+       {
+        "name": "Rogers",
+        "xp": 5.2
+       },
+       {
+        "name": "Raya",
+        "xp": 5.1
+       }
+      ]
+     }
+    ],
+    "total": 154.3,
     "flags": [
      {
       "name": "Pedro Porro",
       "chance": 75,
-      "news": "Unspecified injury - 75% chance of playing"
+      "news": "Hamstring injury - 75% chance of playing"
      }
     ]
    },
    "6341322": {
     "gws": [
      {
-      "event": 5,
-      "pts": 64.1,
-      "captain": "Haaland",
-      "captain_xp": 17.6,
-      "captain_vs": "SUN (H)",
-      "top": [
-       {
-        "name": "Haaland",
-        "xp": 8.8
-       },
-       {
-        "name": "B.Fernandes",
-        "xp": 6.7
-       },
-       {
-        "name": "Guéhi",
-        "xp": 6.4
-       }
-      ]
-     },
-     {
       "event": 6,
-      "pts": 61.2,
-      "captain": "B.Fernandes",
-      "captain_xp": 14.6,
-      "captain_vs": "TOT (H)",
+      "pts": 48.5,
+      "captain": "Calafiori",
+      "captain_xp": 12.6,
+      "captain_vs": "LEE (H)",
       "top": [
-       {
-        "name": "B.Fernandes",
-        "xp": 7.3
-       },
-       {
-        "name": "João Pedro",
-        "xp": 6.9
-       },
        {
         "name": "Calafiori",
-        "xp": 6.7
+        "xp": 6.3
+       },
+       {
+        "name": "Rogers",
+        "xp": 5.2
+       },
+       {
+        "name": "B.Fernandes",
+        "xp": 4.9
        }
       ]
      },
      {
       "event": 7,
-      "pts": 63.9,
+      "pts": 49.1,
       "captain": "Haaland",
-      "captain_xp": 17.6,
+      "captain_xp": 11.7,
       "captain_vs": "IPS (H)",
       "top": [
        {
         "name": "Haaland",
-        "xp": 8.8
+        "xp": 5.9
+       },
+       {
+        "name": "Calafiori",
+        "xp": 5.2
+       },
+       {
+        "name": "Rogers",
+        "xp": 4.8
+       }
+      ]
+     },
+     {
+      "event": 8,
+      "pts": 46.3,
+      "captain": "Calafiori",
+      "captain_xp": 11.3,
+      "captain_vs": "EVE (H)",
+      "top": [
+       {
+        "name": "Calafiori",
+        "xp": 5.6
+       },
+       {
+        "name": "Rogers",
+        "xp": 5.2
        },
        {
         "name": "B.Fernandes",
-        "xp": 6.7
-       },
-       {
-        "name": "Guéhi",
-        "xp": 6.4
+        "xp": 4.9
        }
       ]
      }
     ],
-    "total": 189.2,
+    "total": 143.9,
     "flags": [
-     {
-      "name": "Shaw",
-      "chance": 75,
-      "news": "Unspecified injury - 75% chance of playing"
-     },
      {
       "name": "Pedro Porro",
       "chance": 75,
-      "news": "Unspecified injury - 75% chance of playing"
+      "news": "Hamstring injury - 75% chance of playing"
+     },
+     {
+      "name": "Shaw",
+      "chance": 50,
+      "news": "Unspecified injury - 50% chance of playing"
      }
     ]
    },
    "7693414": {
     "gws": [
      {
-      "event": 5,
-      "pts": 55.3,
-      "captain": "B.Fernandes",
-      "captain_xp": 13.4,
-      "captain_vs": "FUL (A)",
+      "event": 6,
+      "pts": 39.6,
+      "captain": "Raya",
+      "captain_xp": 11.5,
+      "captain_vs": "LEE (H)",
       "top": [
        {
-        "name": "B.Fernandes",
-        "xp": 6.7
+        "name": "Raya",
+        "xp": 5.7
        },
        {
         "name": "Gibbs-White",
-        "xp": 6.7
+        "xp": 5.3
        },
        {
-        "name": "João Pedro",
-        "xp": 6.4
-       }
-      ]
-     },
-     {
-      "event": 6,
-      "pts": 54.9,
-      "captain": "B.Fernandes",
-      "captain_xp": 14.6,
-      "captain_vs": "TOT (H)",
-      "top": [
-       {
-        "name": "B.Fernandes",
-        "xp": 7.3
-       },
-       {
-        "name": "João Pedro",
-        "xp": 6.9
-       },
-       {
-        "name": "Raya",
-        "xp": 6.1
+        "name": "Rogers",
+        "xp": 5.2
        }
       ]
      },
      {
       "event": 7,
-      "pts": 53.9,
-      "captain": "B.Fernandes",
-      "captain_xp": 13.4,
-      "captain_vs": "LEE (A)",
+      "pts": 38.6,
+      "captain": "Gibbs-White",
+      "captain_xp": 10.1,
+      "captain_vs": "ARS (H)",
       "top": [
        {
-        "name": "B.Fernandes",
-        "xp": 6.7
+        "name": "Gibbs-White",
+        "xp": 5.0
        },
        {
-        "name": "João Pedro",
-        "xp": 6.4
+        "name": "Rogers",
+        "xp": 4.8
        },
        {
-        "name": "Cherki",
-        "xp": 6.3
+        "name": "Raya",
+        "xp": 4.7
+       }
+      ]
+     },
+     {
+      "event": 8,
+      "pts": 42.5,
+      "captain": "Gibbs-White",
+      "captain_xp": 11.8,
+      "captain_vs": "IPS (A)",
+      "top": [
+       {
+        "name": "Gibbs-White",
+        "xp": 5.9
+       },
+       {
+        "name": "Rogers",
+        "xp": 5.2
+       },
+       {
+        "name": "Raya",
+        "xp": 5.1
        }
       ]
      }
     ],
-    "total": 164.1,
+    "total": 120.7,
     "flags": [
+     {
+      "name": "James",
+      "chance": 75,
+      "news": "Hamstring injury - 75% chance of playing"
+     },
+     {
+      "name": "João Pedro",
+      "chance": 75,
+      "news": "Knee injury - 75% chance of playing"
+     },
      {
       "name": "Watkins",
       "chance": 0,
       "news": "Has joined Al Hilal permanently"
+     },
+     {
+      "name": "Targett",
+      "chance": 75,
+      "news": "Ankle injury - 75% chance of playing"
      }
     ]
    },
    "7628837": {
     "gws": [
      {
-      "event": 5,
-      "pts": 63.4,
-      "captain": "Haaland",
-      "captain_xp": 17.6,
-      "captain_vs": "SUN (H)",
-      "top": [
-       {
-        "name": "Haaland",
-        "xp": 8.8
-       },
-       {
-        "name": "João Pedro",
-        "xp": 6.4
-       },
-       {
-        "name": "Cherki",
-        "xp": 6.3
-       }
-      ]
-     },
-     {
       "event": 6,
-      "pts": 60.0,
-      "captain": "João Pedro",
-      "captain_xp": 13.8,
-      "captain_vs": "BOU (H)",
+      "pts": 47.7,
+      "captain": "Raya",
+      "captain_xp": 11.5,
+      "captain_vs": "LEE (H)",
       "top": [
-       {
-        "name": "João Pedro",
-        "xp": 6.9
-       },
-       {
-        "name": "Haaland",
-        "xp": 6.4
-       },
        {
         "name": "Raya",
-        "xp": 6.1
+        "xp": 5.7
+       },
+       {
+        "name": "Barnes",
+        "xp": 5.5
+       },
+       {
+        "name": "Rogers",
+        "xp": 5.2
        }
       ]
      },
      {
       "event": 7,
-      "pts": 63.4,
+      "pts": 48.1,
       "captain": "Haaland",
-      "captain_xp": 17.6,
+      "captain_xp": 11.7,
       "captain_vs": "IPS (H)",
       "top": [
        {
         "name": "Haaland",
-        "xp": 8.8
+        "xp": 5.9
        },
        {
-        "name": "João Pedro",
-        "xp": 6.4
+        "name": "Barnes",
+        "xp": 5.3
        },
        {
-        "name": "Cherki",
-        "xp": 6.3
+        "name": "Rogers",
+        "xp": 4.8
+       }
+      ]
+     },
+     {
+      "event": 8,
+      "pts": 46.7,
+      "captain": "Rogers",
+      "captain_xp": 10.4,
+      "captain_vs": "TOT (H)",
+      "top": [
+       {
+        "name": "Rogers",
+        "xp": 5.2
+       },
+       {
+        "name": "Raya",
+        "xp": 5.1
+       },
+       {
+        "name": "Barnes",
+        "xp": 4.9
        }
       ]
      }
     ],
-    "total": 186.8,
-    "flags": [
-     {
-      "name": "Mendy",
-      "chance": 50,
-      "news": "Concussion - 50% chance of playing"
-     }
-    ]
+    "total": 142.5,
+    "flags": []
    },
    "7592803": {
     "gws": [
      {
-      "event": 5,
-      "pts": 62.2,
-      "captain": "Haaland",
-      "captain_xp": 17.6,
-      "captain_vs": "SUN (H)",
-      "top": [
-       {
-        "name": "Haaland",
-        "xp": 8.8
-       },
-       {
-        "name": "Saka",
-        "xp": 6.5
-       },
-       {
-        "name": "Cherki",
-        "xp": 6.3
-       }
-      ]
-     },
-     {
       "event": 6,
-      "pts": 60.5,
+      "pts": 56.3,
       "captain": "Saka",
-      "captain_xp": 15.8,
+      "captain_xp": 14.6,
       "captain_vs": "LEE (H)",
       "top": [
        {
         "name": "Saka",
-        "xp": 7.9
+        "xp": 7.3
        },
        {
-        "name": "Haaland",
-        "xp": 6.4
+        "name": "Raya",
+        "xp": 5.7
        },
        {
         "name": "Palmer",
-        "xp": 5.9
+        "xp": 5.6
        }
       ]
      },
      {
       "event": 7,
-      "pts": 62.7,
-      "captain": "Haaland",
-      "captain_xp": 17.6,
-      "captain_vs": "IPS (H)",
+      "pts": 52.5,
+      "captain": "Saka",
+      "captain_xp": 12.1,
+      "captain_vs": "NFO (A)",
       "top": [
        {
-        "name": "Haaland",
-        "xp": 8.8
+        "name": "Saka",
+        "xp": 6.0
        },
+       {
+        "name": "Haaland",
+        "xp": 5.9
+       },
+       {
+        "name": "Palmer",
+        "xp": 5.2
+       }
+      ]
+     },
+     {
+      "event": 8,
+      "pts": 54.8,
+      "captain": "Saka",
+      "captain_xp": 13.1,
+      "captain_vs": "EVE (H)",
+      "top": [
        {
         "name": "Saka",
         "xp": 6.5
        },
        {
-        "name": "Cherki",
-        "xp": 6.3
+        "name": "Palmer",
+        "xp": 5.6
+       },
+       {
+        "name": "Rogers",
+        "xp": 5.2
        }
       ]
      }
     ],
-    "total": 185.4,
-    "flags": []
+    "total": 163.6,
+    "flags": [
+     {
+      "name": "João Pedro",
+      "chance": 75,
+      "news": "Knee injury - 75% chance of playing"
+     }
+    ]
    }
   },
-  "generated_at": "2026-09-15 18:06 UTC"
+  "generated_at": "2026-09-20 06:20 UTC"
  }
 }
