@@ -243,16 +243,23 @@ b { font-weight: 600; }
 @keyframes cardin { from { transform: translateY(-24px) rotate(-40deg); opacity: 0; } to { transform: rotate(8deg); opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .redcard { animation: none; } }
 
-/* Notes strip */
+/* Highlight cards */
 .notes {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 20px 28px;
-  border-top: 2px solid var(--ink);
-  padding-top: 16px;
+  gap: 10px;
 }
-.note { display: flex; flex-direction: column; gap: 4px; }
-.note-v { font-size: 18px; font-weight: 600; line-height: 1.25; text-wrap: balance; }
+.note {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 13px 14px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+}
+.note-v { display: flex; align-items: center; gap: 7px; font-size: 17px; font-weight: 600; line-height: 1.25; text-wrap: balance; }
+.note-v .swatch { flex: none; }
 .note-d { font-size: 13px; color: var(--ink-2); }
 
 /* Sections */
@@ -1063,13 +1070,15 @@ const leagueAvg = Math.round(gwPts.reduce((a, b) => a + b, 0) / M.length);
 const bench = [...M].sort((a, b) => b.benchSum - a.benchSum)[0];
 const hits = [...M].sort((a, b) => b.hitSum - a.hitSum)[0];
 const notes = [
-  ['Top of the table', M[0].name, `${M[0].total} pts, ${M[0].total - M[1].total} clear of ${M[1].first}`],
-  [LIVE ? `GW${LAST} top score so far` : `GW${LAST} top score`, topM.map(m => m.name).join(' & '), `${topPts} pts · league avg ${leagueAvg}, global avg ${lastEv.average}`],
-  ['Most left on the bench', bench.name, `${bench.benchSum} pts on the bench over ${EV.length} gameweeks`],
-  ['Most spent on hits', hits.hitSum ? hits.name : 'Nobody yet', hits.hitSum ? `−${hits.hitSum} pts in transfer hits this season` : 'No transfer hits taken'],
+  ['Top of the table', M[0].name, `${M[0].total} pts, ${M[0].total - M[1].total} clear of ${M[1].first}`, [M[0]]],
+  [LIVE ? `GW${LAST} top score so far` : `GW${LAST} top score`, topM.map(m => m.name).join(' & '), `${topPts} pts · league avg ${leagueAvg}, global avg ${lastEv.average}`, topM],
+  ['Most left on the bench', bench.name, `${bench.benchSum} pts on the bench over ${EV.length} gameweeks`, [bench]],
+  ['Most spent on hits', hits.hitSum ? hits.name : 'Nobody yet', hits.hitSum ? `−${hits.hitSum} pts in transfer hits this season` : 'No transfer hits taken', hits.hitSum ? [hits] : []],
 ];
-$('#notes').innerHTML = notes.map(([l, v, d]) =>
-  `<div class="note"><p class="label">${esc(l)}</p><p class="note-v">${esc(v)}</p><p class="note-d">${esc(d)}</p></div>`).join('');
+$('#notes').innerHTML = notes.map(([l, v, d, who]) => {
+  const dots = (who || []).slice(0, 2).map(m => `<span class="swatch" style="background:var(--s${m.i + 1})"></span>`).join('');
+  return `<div class="note"><p class="label">${esc(l)}</p><p class="note-v">${dots}<span>${esc(v)}</span></p><p class="note-d">${esc(d)}</p></div>`;
+}).join('');
 
 // Standings
 const maxPts = Math.max(...M.flatMap(m => m.gws.map(g => g.points)));
