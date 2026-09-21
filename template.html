@@ -193,6 +193,48 @@ b { font-weight: 600; }
   .ticker-btn { display: none; }
 }
 
+/* Deadline countdown */
+.deadline { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.deadline b { color: var(--ink); font-weight: 600; }
+.deadline .cd { padding: 1px 6px; border-radius: 3px; background: var(--hover); font-family: var(--mono); font-size: 12px; }
+
+/* Form and milestones */
+.form-t { min-width: 0; }
+.res { display: inline-block; width: 16px; height: 16px; margin-right: 3px; border-radius: 3px; font: 600 9px/16px var(--mono); text-align: center; color: var(--surface); }
+.res.w { background: var(--up); }
+.res.l { background: var(--down); }
+.res.d { background: var(--axis); color: var(--ink); }
+.streak { font-weight: 600; }
+.streak.up { color: var(--up); }
+.streak.down { color: var(--down); }
+
+/* League XI */
+.xi { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; }
+.xi-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.xi-lab { flex: none; width: 34px; font: 500 11px var(--mono); text-transform: uppercase; color: var(--muted); }
+.xi-p { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border: 1px solid var(--rule); border-radius: 5px; font-size: 13px; }
+.xi-p b { font-weight: 600; }
+.xi-p .team { font-size: 11px; }
+.xi-pts { font-weight: 700; font-variant-numeric: tabular-nums; }
+.xi-own { display: flex; align-items: center; gap: 5px; color: var(--muted); font-size: 12px; }
+
+/* Title flourishes */
+.tcard { position: relative; overflow: hidden; }
+.confetti { position: absolute; inset: 0; pointer-events: none; }
+.redcard {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 16px;
+  height: 22px;
+  border-radius: 2px;
+  background: #d03b3b;
+  transform: rotate(8deg);
+  animation: cardin .5s ease-out;
+}
+@keyframes cardin { from { transform: translateY(-24px) rotate(-40deg); opacity: 0; } to { transform: rotate(8deg); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .redcard { animation: none; } }
+
 /* Notes strip */
 .notes {
   display: grid;
@@ -627,6 +669,7 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
         <span class="muted" id="stamp"></span>
       </div>
       <div class="ticks" id="ticks" role="img" aria-label="Season progress"></div>
+      <p class="deadline" id="deadline" hidden></p>
     </div>
   </header>
 
@@ -671,6 +714,17 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
           </thead>
           <tbody></tbody>
         </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-form" id="form-section">
+      <div class="sec-head">
+        <h2 id="h-form">Form and milestones</h2>
+        <p>Recent weeks against the rest of the league, and what each manager is chasing. A week counts as a win when they beat the league's middle score that week.</p>
+      </div>
+      <div class="panel">
+        <div class="leaders" id="form-leaders"></div>
+        <div class="scroll"><table class="form-t sticky-first" id="form-table"></table></div>
       </div>
     </section>
 
@@ -832,6 +886,23 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
           </label>
         </div>
         <div class="key" id="own-key"></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-xi" id="xi-section">
+      <div class="sec-head">
+        <h2 id="h-xi">League XI</h2>
+        <p>The best eleven that could be built out of everyone's squads, and the eleven nobody wants to claim. Every player is owned by someone here.</p>
+      </div>
+      <div class="panel">
+        <div class="own-filters">
+          <div class="seg" id="xi-mode" role="group" aria-label="Which eleven">
+            <button type="button" id="xi-best" data-mode="best" aria-pressed="true">Best XI</button>
+            <button type="button" id="xi-worst" data-mode="worst" aria-pressed="false">Worst XI</button>
+          </div>
+          <p class="pager-info" id="xi-caption"></p>
+        </div>
+        <div class="xi" id="xi-grid"></div>
       </div>
     </section>
 
@@ -1911,7 +1982,9 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
       const t = TITLES[c.ti], v = t.vals[i];
       const x = val => (t.hi === t.lo ? 50 : (val - t.lo) / (t.hi - t.lo) * 100).toFixed(1);
       const dots = t.vals.map((val, j) => val == null || j === i ? '' : `<i style="left:${x(val)}%"></i>`).join('') + `<i class="me" style="left:${x(v)}%"></i>`;
-      return `<article class="tcard" data-entry="${m.entry}" style="--c:var(--s${m.i + 1})">
+      const flourish = t.name === 'Weekend Winner' ? ' winner' : t.name === 'Wooden Spoon' ? ' spoon' : '';
+      return `<article class="tcard${flourish}" data-entry="${m.entry}" style="--c:var(--s${m.i + 1})">
+        ${flourish === ' spoon' ? '<span class="redcard" aria-hidden="true"></span>' : ''}
         ${head}
         <h3>${esc(t.name)}</h3>
         <p class="tcard-why">${esc(t.why(v, r))}</p>
@@ -2128,6 +2201,166 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
   }
 }
 
+// Countdown to the next deadline
+if (DATA.next_event?.deadline) {
+  const el = $('#deadline');
+  const when = new Date(DATA.next_event.deadline);
+  const stamp = when.toLocaleString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hour12: false });
+  const tick = () => {
+    const ms = when - Date.now();
+    if (ms <= 0) {
+      el.innerHTML = `<b>GW${DATA.next_event.event} deadline</b> has passed`;
+      return;
+    }
+    const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60, sec = Math.floor(ms / 1000) % 60;
+    el.innerHTML = `<b>GW${DATA.next_event.event} deadline</b> ${esc(stamp)} · <span class="cd">${d ? d + 'd ' : ''}${h}h ${m}m${d ? '' : ' ' + sec + 's'}</span>`;
+  };
+  tick();
+  el.hidden = false;
+  setInterval(tick, 1000);
+}
+
+// Form and milestones
+{
+  const sec = $('#form-section');
+  if (!EV.length) {
+    sec.hidden = true;
+  } else {
+    const middle = e => {
+      const v = M.map(m => net(m, e.event)).sort((a, b) => a - b);
+      return (v[Math.floor((v.length - 1) / 2)] + v[Math.ceil((v.length - 1) / 2)]) / 2;
+    };
+    const mids = Object.fromEntries(EV.map(e => [e.event, middle(e)]));
+    const results = m => EV.map(e => {
+      const v = net(m, e.event);
+      return { event: e.event, r: v > mids[e.event] ? 'w' : v < mids[e.event] ? 'l' : 'd', pts: v };
+    });
+    const rows = M.map(m => {
+      const res = results(m);
+      const last = res.slice(-5);
+      let streak = 0, kind = null;
+      for (let k = res.length - 1; k >= 0; k--) {
+        if (kind == null) { kind = res[k].r; streak = 1; }
+        else if (res[k].r === kind) streak++;
+        else break;
+      }
+      const form = res.slice(-4).reduce((s, x) => s + x.pts, 0);
+      const pos = RANK[LAST][m.entry].pos;
+      const above = M.find(o => RANK[LAST][o.entry].pos === pos - 1);
+      return { m, res, last, streak, kind, form, pos, above, gap: above ? above.total - m.total : 0, pace: Math.round(m.total / EV.length * 38) };
+    });
+    const bestForm = [...rows].sort((a, b) => b.form - a.form)[0];
+    const worstForm = [...rows].sort((a, b) => a.form - b.form)[0];
+    const hottest = [...rows].filter(r => r.kind === 'w').sort((a, b) => b.streak - a.streak)[0];
+    const closest = [...rows].filter(r => r.above).sort((a, b) => a.gap - b.gap)[0];
+    const weeks = Math.min(4, EV.length);
+    $('#form-leaders').innerHTML = [
+      leaderHTML(`Best form`, bestForm.m.first, `${bestForm.form} pts over the last ${weeks} gameweek${weeks === 1 ? '' : 's'}`),
+      leaderHTML(`Worst form`, worstForm.m.first, `${worstForm.form} pts over the last ${weeks} gameweek${weeks === 1 ? '' : 's'}`),
+      hottest ? leaderHTML('Longest run', hottest.m.first, `${hottest.streak} straight ${hottest.streak === 1 ? 'week' : 'weeks'} above the league's middle score`) : leaderHTML('Longest run', 'Nobody', 'No winning runs going'),
+      closest ? leaderHTML('Closest chase', closest.m.first, `${closest.gap} pts behind ${closest.above.first}`) : leaderHTML('Closest chase', '–', 'Nothing to chase'),
+    ].join('');
+    $('#form-table').innerHTML = `
+      <thead><tr><th scope="col">Manager</th><th scope="col">Last ${Math.min(5, EV.length)}</th><th scope="col">Streak</th><th scope="col" class="num">Form<small>last ${weeks}</small></th><th scope="col" class="num">To catch</th><th scope="col" class="num hide-m">On pace for</th></tr></thead>
+      <tbody>${rows.map(r => `<tr data-entry="${r.m.entry}"><th scope="row">${mgrCell(r.m)}</th>
+        <td>${r.last.map(x => `<span class="res ${x.r}" title="GW${x.event}: ${x.pts} pts">${x.r.toUpperCase()}</span>`).join('')}</td>
+        <td class="streak ${r.kind === 'w' ? 'up' : r.kind === 'l' ? 'down' : ''}">${r.kind === 'w' ? `${r.streak} win${r.streak === 1 ? '' : 's'}` : r.kind === 'l' ? `${r.streak} loss${r.streak === 1 ? '' : 'es'}` : `${r.streak} level`}</td>
+        <td class="num total">${r.form}</td>
+        <td class="num">${r.above ? `${r.gap} <span class="muted hide-m">to ${esc(r.above.first)}</span>` : '<span class="muted">Top</span>'}</td>
+        <td class="num hide-m">${r.pace}</td>
+      </tr>`).join('')}</tbody>`;
+    linkRows($('#form-table'));
+  }
+}
+
+// League XI
+{
+  const sec = $('#xi-section');
+  const P = DATA.players || {};
+  const ownerOf = {};
+  M.forEach(m => (m.squad || []).forEach(sp => { (ownerOf[sp.id] ||= []).push(m); }));
+  const pool = Object.entries(P).filter(([id]) => ownerOf[id]).map(([id, p]) => ({ ...p, id: +id, owners: ownerOf[id] }));
+  if (pool.length < 11) {
+    sec.hidden = true;
+  } else {
+    const pickXI = mode => {
+      const by = { GK: [], DEF: [], MID: [], FWD: [] };
+      pool.forEach(p => by[p.pos]?.push(p));
+      Object.values(by).forEach(list => list.sort((a, b) => mode === 'best'
+        ? b.points - a.points || b.price - a.price
+        : a.points - b.points || b.price - a.price));
+      let best = null;
+      for (let d = 3; d <= 5; d++) for (let m = 2; m <= 5; m++) for (let f = 1; f <= 3; f++) {
+        if (d + m + f !== 10 || !by.GK.length || by.DEF.length < d || by.MID.length < m || by.FWD.length < f) continue;
+        const xi = { GK: by.GK.slice(0, 1), DEF: by.DEF.slice(0, d), MID: by.MID.slice(0, m), FWD: by.FWD.slice(0, f) };
+        const total = [].concat(...Object.values(xi)).reduce((s, p) => s + p.points, 0);
+        const cost = [].concat(...Object.values(xi)).reduce((s, p) => s + p.price, 0);
+        if (!best || (mode === 'best' ? total > best.total : total < best.total)) best = { total, cost, xi, shape: `${d}-${m}-${f}` };
+      }
+      return best;
+    };
+    const draw = mode => {
+      const r = pickXI(mode);
+      $('#xi-caption').textContent = mode === 'best'
+        ? `${r.shape} · ${r.total} pts this season · £${r.cost.toFixed(1)}m of talent`
+        : `${r.shape} · ${r.total} pts this season · £${r.cost.toFixed(1)}m wasted`;
+      $('#xi-grid').innerHTML = ['GK', 'DEF', 'MID', 'FWD'].map(pos => `<div class="xi-row"><span class="xi-lab">${pos}</span>${r.xi[pos].map(p => `
+        <span class="xi-p"><span><b>${esc(p.name)}</b> <span class="team">${esc(p.team)} · £${p.price.toFixed(1)}m</span></span><span class="xi-pts">${p.points}</span><span class="xi-own"><span class="swatch" style="background:var(--s${p.owners[0].i + 1})"></span>${esc(p.owners.map(o => o.first).join(', '))}</span></span>`).join('')}</div>`).join('');
+    };
+    document.querySelectorAll('#xi-mode button').forEach(b => b.addEventListener('click', () => {
+      document.querySelectorAll('#xi-mode button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+      draw(b.dataset.mode);
+    }));
+    draw('best');
+  }
+}
+
+// A little ceremony on the Titles tab
+function celebrate() {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const card = document.querySelector('#week-grid .tcard.winner');
+  if (!card || card.dataset.done) return;
+  card.dataset.done = '1';
+  const canvas = document.createElement('canvas');
+  canvas.className = 'confetti';
+  card.appendChild(canvas);
+  const rect = card.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+  const ctx = canvas.getContext('2d');
+  const css = getComputedStyle(document.documentElement);
+  const colours = [1, 2, 3, 4, 5, 8].map(k => css.getPropertyValue(`--s${k}`).trim() || '#2a78d6').concat(css.getPropertyValue('--accent').trim() || '#f2b705');
+  const bits = Array.from({ length: 70 }, () => ({
+    x: canvas.width / 2 + (Math.random() - .5) * 60,
+    y: canvas.height * .35,
+    vx: (Math.random() - .5) * 5,
+    vy: -3 - Math.random() * 5,
+    w: 4 + Math.random() * 4,
+    h: 6 + Math.random() * 6,
+    rot: Math.random() * Math.PI,
+    vr: (Math.random() - .5) * .3,
+    c: colours[Math.floor(Math.random() * colours.length)],
+  }));
+  const started = performance.now();
+  const frame = now => {
+    const life = now - started;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    bits.forEach(b => {
+      b.x += b.vx; b.y += b.vy; b.vy += .16; b.rot += b.vr;
+      ctx.save();
+      ctx.translate(b.x, b.y);
+      ctx.rotate(b.rot);
+      ctx.fillStyle = b.c;
+      ctx.globalAlpha = Math.max(0, 1 - life / 2200);
+      ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h);
+      ctx.restore();
+    });
+    if (life < 2200) requestAnimationFrame(frame);
+    else canvas.remove();
+  };
+  requestAnimationFrame(frame);
+}
+
 // Bump chart
 function drawBump() {
   const box = $('#bump');
@@ -2217,6 +2450,7 @@ function showView() {
   });
   document.title = view === VIEWS[0] ? DATA.league.name : `${view.dataset.title} · ${DATA.league.name}`;
   markScrollers();
+  if (view.dataset.view === 'titles') celebrate();
 }
 addEventListener('hashchange', () => {
   showView();

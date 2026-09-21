@@ -34,6 +34,9 @@ events = [
 
 live_event = next((e["event"] for e in events if not e["finished"]), None)
 
+nxt = next((e for e in boot["events"] if e["is_next"]), None)
+next_event = {"event": nxt["id"], "deadline": nxt["deadline_time"]} if nxt else None
+
 league, managers, page = None, [], 1
 while True:
     d = get(f"leagues-classic/{LEAGUE_ID}/standings/", page_standings=page)
@@ -190,7 +193,7 @@ if events:
                "finished": events[-1]["finished"]}
 
 data = {"league": {"id": league["id"], "name": league["name"], "admin_entry": league["admin_entry"]},
-        "events": events, "phases": phases, "managers": out, "news": news, "players": players, "gw_news": gw_news,
+        "events": events, "phases": phases, "managers": out, "news": news, "players": players, "gw_news": gw_news, "next_event": next_event,
         "fetched_at": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())}
 OUT.write_text(json.dumps(data, indent=1, ensure_ascii=False))
 print(f"{league['name']}: {len(out)} managers, up to GW{events[-1]['event'] if events else 0}")
