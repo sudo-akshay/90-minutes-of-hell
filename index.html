@@ -217,7 +217,7 @@ b { font-weight: 600; }
 .streak.down { color: var(--down); }
 
 /* League XI */
-.xi { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; }
+.league-xi { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; }
 .xi-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .xi-lab { flex: none; width: 34px; font: 500 11px var(--mono); text-transform: uppercase; color: var(--muted); }
 .xi-p { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border: 1px solid var(--rule); border-radius: 5px; font-size: 13px; }
@@ -498,14 +498,14 @@ td.top-pos .r { font-weight: 700; text-decoration: underline; text-decoration-co
 }
 .seg button:hover { background: var(--hover); color: var(--ink); }
 .seg button[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); background: var(--hover); }
-.pips { display: inline-flex; gap: 3px; vertical-align: middle; }
-.pip { display: block; width: 10px; height: 10px; border-radius: 2px; box-shadow: inset 0 0 0 1px var(--axis); }
+.pips { display: inline-flex; flex: none; flex-wrap: nowrap; gap: 3px; vertical-align: middle; }
+.pip { display: block; flex: 0 0 10px; width: 10px; height: 10px; border-radius: 2px; box-shadow: inset 0 0 0 1px var(--axis); }
 .pip.xi { background: var(--c); box-shadow: none; }
 .pip.bench { box-shadow: inset 0 0 0 2px var(--c); }
 .pip.on { outline: 2px solid var(--ink); outline-offset: 1px; }
 .own-count { margin-left: 8px; font-size: 13px; color: var(--ink-2); white-space: nowrap; }
 .own-cell { white-space: nowrap; }
-.own .who { font-size: 13px; color: var(--ink-2); }
+.own .who { font-size: 13px; color: var(--ink-2); max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .own-empty { padding: 20px 16px; color: var(--muted); }
 .own-selects { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
 .dir-btn, .pager-btns button {
@@ -547,7 +547,7 @@ th[aria-sort] .sort-ind { opacity: 1; }
   .own-count { display: block; margin: 4px 0 0; }
   .own-cell { white-space: normal; }
   .pips { gap: 2px; }
-  .pip { width: 9px; height: 9px; }
+  .pip { flex: 0 0 9px; width: 9px; height: 9px; }
 }
 
 /* Compare squads */
@@ -614,7 +614,10 @@ th[aria-sort] .sort-ind { opacity: 1; }
 footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--rule); padding-top: 16px; font-size: 13px; color: var(--ink-2); max-width: 80ch; }
 
 /* Tablets and small laptops */
-.hide-t { }
+.hide-t, .hide-l { }
+@media (max-width: 1300px) {
+  .hide-l { display: none; }
+}
 @media (max-width: 1100px) {
   .hide-t { display: none; }
   .call { white-space: normal; }
@@ -917,7 +920,7 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
           </div>
           <p class="pager-info" id="xi-caption"></p>
         </div>
-        <div class="xi" id="xi-grid"></div>
+        <div class="league-xi" id="xi-grid"></div>
       </div>
     </section>
 
@@ -1694,7 +1697,7 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
           <td class="num hide-m">${pctText(r.here)}</td>
           <td class="num">${pctText(r.p.selected)}</td>
           <td class="num hide-m">${r.p.points}</td>
-          <td class="who hide-m hide-t">${esc(ownersText(r))}</td>
+          <td class="who hide-m hide-t" title="${esc(ownersText(r))}">${esc(ownersText(r))}</td>
         </tr>`).join('') : `<tr><td colspan="${COLUMNS.length}" class="own-empty">No players match these filters.</td></tr>`}</tbody>`;
 
       $('#own-info').textContent = shown.length
