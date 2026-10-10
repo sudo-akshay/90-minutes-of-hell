@@ -725,7 +725,7 @@ footer { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid 
               <th scope="col" class="num">Total</th>
               <th scope="col" class="num hide-xs">Gap</th>
               <th scope="col" id="th-cap" class="hide-m">Captain</th>
-              <th scope="col" class="hide-m">Chips used</th>
+              <th scope="col" class="hide-m hide-t">Chips used</th>
               <th scope="col" class="num hide-m">Hits</th>
               <th scope="col" class="num hide-m">Bench</th>
             </tr>
@@ -1074,7 +1074,7 @@ const bench = [...M].sort((a, b) => b.benchSum - a.benchSum)[0];
 const hits = [...M].sort((a, b) => b.hitSum - a.hitSum)[0];
 const notes = [
   ['Top of the table', M[0].name, `${M[0].total} pts, ${M[0].total - M[1].total} clear of ${M[1].first}`, [M[0]]],
-  [LIVE ? `GW${LAST} top score so far` : `GW${LAST} top score`, topM.map(m => m.name).join(' & '), `${topPts} pts · league avg ${leagueAvg}, global avg ${lastEv.average}`, topM],
+  [LIVE ? `GW${LAST} top score so far` : `GW${LAST} top score`, topM.map(m => m.name).join(' & '), `${topPts} pts · league avg ${leagueAvg}${lastEv.average ? `, global avg ${lastEv.average}` : ''}`, topM],
   ['Most left on the bench', bench.name, `${bench.benchSum} pts on the bench over ${EV.length} gameweeks`, [bench]],
   ['Most spent on hits', hits.hitSum ? hits.name : 'Nobody yet', hits.hitSum ? `−${hits.hitSum} pts in transfer hits this season` : 'No transfer hits taken', hits.hitSum ? [hits] : []],
 ];
@@ -1115,7 +1115,7 @@ $('#standings tbody').innerHTML = M.map(m => {
     <td class="num total">${m.total}</td>
     <td class="num hide-xs ${gap ? '' : 'muted'}">${gap ? '−' + gap : '—'}</td>
     <td class="hide-m">${esc(g.captain ?? '—')}${g.captain_mult === 3 ? ' <span class="tag">TC</span>' : ''}</td>
-    <td class="hide-m">${chips}</td>
+    <td class="hide-m hide-t">${chips}</td>
     <td class="num hide-m">${m.hitSum ? '−' + m.hitSum : '0'}</td>
     <td class="num hide-m">${m.benchSum}</td>
   </tr>`;
@@ -1125,7 +1125,7 @@ $('#standings tbody').innerHTML = M.map(m => {
 const bin = d => { const a = Math.abs(d), s = a < 5 ? 0 : a < 15 ? 1 : a < 30 ? 2 : 3; return s ? (d > 0 ? 'hp' : 'hn') + s : 'h0'; };
 const bestBy = Object.fromEntries(EV.map(e => [e.event, Math.max(...M.map(m => m.gw[e.event]?.points ?? 0))]));
 $('#heat').innerHTML = `
-  <thead><tr><th scope="col">Manager</th>${EV.map(e => `<th scope="col">GW${e.event}<small>FPL avg ${e.average} · top ${e.highest}${e.event === LAST && LIVE ? ' · in progress' : ''}</small></th>`).join('')}</tr></thead>
+  <thead><tr><th scope="col">Manager</th>${EV.map(e => `<th scope="col">GW${e.event}<small>${[e.average ? `FPL avg ${e.average}` : null, e.highest ? `top ${e.highest}` : null, e.event === LAST && LIVE ? 'in progress' : null].filter(Boolean).join(' · ')}</small></th>`).join('')}</tr></thead>
   <tbody>${M.map(m => `<tr data-entry="${m.entry}"><th scope="row">${mgrCell(m)}</th>${EV.map(e => {
     const g = m.gw[e.event];
     if (!g) return '<td class="cell"><div class="cell-in"><span class="muted">—</span></div></td>';
@@ -1941,7 +1941,7 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
       { name: 'Captain Calamity', key: 'miss', dir: 1, range: 4, ok: v => v > 0,
         fmt: v => `−${v}`, why: (v, r) => `Captained ${r.g.cap.name} (${r.g.cap.pts}) with ${r.g.best.name} (${r.g.best.pts}) sitting in the same XI. −${v} pts for that armband.` },
       { name: 'Armband Genius', key: 'miss', dir: -1, range: 4, ok: v => v != null,
-        fmt: v => `−${v}`, why: (v, r) => v === 0 ? `Captained ${r.g.cap.name}, the best pick in their XI. Enjoy being right for once.` : `Only ${v} pts lost to the armband this week, the least in the league.` },
+        fmt: v => `−${v}`, why: (v, r) => v === 0 ? `Captained ${r.g.cap.name}, the best pick in their XI. Enjoy being right for once.` : `Only ${v} ${v === 1 ? 'pt' : 'pts'} lost to the armband this week, the least in the league.` },
       { name: 'Hit Merchant', key: 'hits', dir: 1, range: 4, ok: v => v > 0,
         fmt: v => v ? `−${v}` : '0', why: (v, r) => `−${v} pts on transfers, then scored ${r.net}. Money well spent.` },
       { name: 'Green Arrow', key: 'climb', dir: 1, range: 1000, ok: v => v > 0,
@@ -2200,7 +2200,9 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
         done === N.fixtures.length ? 'All results in'
           : done ? `${played} kicked off, ${done} finished`
           : `${played} kicked off, none confirmed final yet`),
-      leaderHTML('FPL average', `${N.average} pts`, `The best score in the game is ${N.highest}`),
+      leaderHTML('FPL average',
+        N.average ? `${N.average} pts` : 'Not in yet',
+        N.highest ? `The best score in the game is ${N.highest}` : 'FPL publishes the average and the top score once the gameweek ends'),
       leaderHTML('Best in the league', leagueBest.first, `${net(leagueBest, LAST)} pts this gameweek`),
       topP ? leaderHTML('Top scorer', topP.name, `${topP.points} pts for ${topP.team}${topP.owners.length ? `, owned by ${namesList(topP.owners.map(e => byEntry[e].first))}` : ', owned by nobody here'}`) : '',
     ].filter(Boolean).join('');
