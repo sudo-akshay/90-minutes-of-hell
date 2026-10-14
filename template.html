@@ -1453,25 +1453,25 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
 
   const most = (c, word = 'the most in the league') => c.top ? `, ${word}` : '';
   const TITLES = [
-    { name: 'The Tinkerer', key: 'transfers', dir: 1, range: 2, ok: v => v >= 2, fmt: v => `${v}`, why: (v, c) => `${v} transfers made${c.top ? ', the most in the league' : `, against a league average of ${c.avg.toFixed(1)}`}` },
-    { name: 'Set and Forget', key: 'transfers', dir: -1, range: 2, ok: () => true, fmt: v => `${v}`, why: (v, c) => v === 0 ? 'Not a single transfer all season' : `Only ${v} ${v === 1 ? 'transfer' : 'transfers'} all season${most(c, 'the fewest in the league')}` },
-    { name: 'Hit Merchant', key: 'hits', dir: 1, range: 4, ok: v => v > 0, fmt: v => v ? `−${v}` : '0', why: (v, c) => `−${v} pts spent on transfer hits${most(c)}` },
-    { name: 'Captain Fantastic', key: 'capLost', dir: -1, range: 4, ok: v => v != null, fmt: v => `${v} lost`, why: (v, c) => `Lost just ${v} pts to captain choices${most(c, 'the fewest in the league')}` },
-    { name: 'Armband Anguish', key: 'capLost', dir: 1, range: 4, ok: v => v > 0, fmt: v => `${v} lost`, why: (v, c) => `${v} pts lost by captaining the wrong player${most(c)}` },
-    { name: 'Bench Regret', key: 'bench', dir: 1, range: 5, ok: v => v > 0, fmt: v => `${v} pts`, why: (v, c) => `${v} pts left on the bench${most(c)}` },
-    { name: 'The Metronome', key: 'swing', dir: -1, range: 3, ok: v => v != null, fmt: v => `±${Math.round(v)}`, why: (v, c) => `Weekly scores stay within about ±${Math.round(v)} pts of their average${most(c, 'the steadiest in the league')}` },
-    { name: 'The Rollercoaster', key: 'swing', dir: 1, range: 3, ok: v => v != null, fmt: v => `±${Math.round(v)}`, why: (v, c) => `Weekly scores swing by about ±${Math.round(v)} pts${most(c, 'the wildest in the league')}` },
-    { name: 'Chip Happy', key: 'chips', dir: 1, range: 1, ok: v => v > 0, fmt: v => `${v} ${v === 1 ? 'chip' : 'chips'}`, why: (v, c, m) => `Already played ${m.chips.map(ch => `${chipLong(ch.name)} in GW${ch.event}`).join(' and ')}` },
-    { name: 'The Maverick', key: 'maverick', dir: 1, range: 1, ok: v => v > 0, fmt: v => `${v} of ${n}`, why: v => `Went against the league's favourite captain in ${v} of ${n} gameweeks` },
-    { name: 'The Contrarian', key: 'overlap', dir: -1, range: 0.05, ok: v => v != null, fmt: pct, why: (v, c) => `Only ${pct(v)} of their starting XI matches a typical rival's${most(c, 'the most unique team in the league')}` },
-    { name: 'The Template', key: 'overlap', dir: 1, range: 0.05, ok: v => v != null, fmt: pct, why: (v, c) => `${pct(v)} of their starting XI matches a typical rival's${most(c, 'more than anyone else')}` },
-    { name: 'Midfield Maestro', key: 'mid', dir: 1, range: 0.04, ok: v => v != null, fmt: pct, why: (v, c) => `${pct(v)} of their points come from midfielders${most(c, 'the highest share in the league')}` },
-    { name: 'The Back Line', key: 'def', dir: 1, range: 0.04, ok: v => v != null, fmt: pct, why: (v, c) => `${pct(v)} of their points come from defenders${most(c, 'the highest share in the league')}` },
-    { name: 'Strike Force', key: 'fwd', dir: 1, range: 0.04, ok: v => v != null, fmt: pct, why: (v, c) => `${pct(v)} of their points come from forwards${most(c, 'the highest share in the league')}` },
-    { name: 'The Climber', key: 'climb', dir: 1, range: 1, ok: v => v > 0, fmt: v => (v > 0 ? `+${v}` : `${v}`), why: v => `Up ${v} ${v === 1 ? 'place' : 'places'} in the table since GW1` },
-    { name: 'Front Runner', key: 'leading', dir: 1, range: 1, ok: v => v > 0, fmt: v => `${v} of ${n}`, why: v => `Top of the table after ${v} of ${n} gameweeks` },
-    { name: 'Big Week Hunter', key: 'tops', dir: 1, range: 1, ok: v => v > 0, fmt: v => `${v}`, why: v => `Top scorer in the league in ${v} ${v === 1 ? 'gameweek' : 'gameweeks'}` },
-    { name: 'Market Wizard', key: 'value', dir: 1, range: 1, ok: v => v != null, fmt: v => `£${v.toFixed(1)}m`, why: (v, c) => `£${v.toFixed(1)}m team value, bank included${most(c, 'the highest in the league')}` },
+    { name: 'The Tinkerer', key: 'transfers', dir: 1, range: 2, ok: v => v >= 2, fmt: v => `${v}`, why: (v, c) => `${v} transfers made${c.top ? ', more than anyone' : `, against a league average of ${c.avg.toFixed(1)}`}. The squad is a revolving door.` },
+    { name: 'Set and Forget', key: 'transfers', dir: -1, range: 2, ok: () => true, fmt: v => `${v}`, why: (v, c) => (v === 0 ? 'Not one transfer all season' : `Only ${v} ${v === 1 ? 'transfer' : 'transfers'} all season${most(c, 'the fewest in the league')}`) + '. A masterplan, or a forgotten password.' },
+    { name: 'Hit Merchant', key: 'hits', dir: 1, range: 4, ok: v => v > 0, fmt: v => v ? `−${v}` : '0', why: (v, c) => `−${v} pts handed to the transfer market${most(c)}. A gameweek, donated.` },
+    { name: 'Captain Fantastic', key: 'capLost', dir: -1, range: 4, ok: v => v != null, fmt: v => `${v} lost`, why: (v, c) => `Only ${v} pts lost to captain picks${most(c, 'the fewest in the league')}. Infuriatingly good at the one call that matters.` },
+    { name: 'Armband Anguish', key: 'capLost', dir: 1, range: 4, ok: v => v > 0, fmt: v => `${v} lost`, why: (v, c) => `${v} pts incinerated by captain picks${most(c)}. The armband is not a toy.` },
+    { name: 'Bench Regret', key: 'bench', dir: 1, range: 5, ok: v => v > 0, fmt: v => `${v} pts`, why: (v, c) => `${v} pts left on the bench${most(c)}. A whole gameweek, watched from the sofa.` },
+    { name: 'The Metronome', key: 'swing', dir: -1, range: 3, ok: v => v != null, fmt: v => `±${Math.round(v)}`, why: (v, c) => `Scores stay within about ±${Math.round(v)} pts of their average${most(c, 'the steadiest in the league')}. Reliable. Also relentlessly dull.` },
+    { name: 'The Rollercoaster', key: 'swing', dir: 1, range: 3, ok: v => v != null, fmt: v => `±${Math.round(v)}`, why: (v, c) => `Scores swing by about ±${Math.round(v)} pts${most(c, 'the wildest in the league')}. Pick a lane.` },
+    { name: 'Chip Happy', key: 'chips', dir: 1, range: 1, ok: v => v > 0, fmt: v => `${v} ${v === 1 ? 'chip' : 'chips'}`, why: (v, c, m) => `Already played ${m.chips.map(ch => `${chipLong(ch.name)} in GW${ch.event}`).join(' and ')}. Nothing left in the locker for the run-in.` },
+    { name: 'The Maverick', key: 'maverick', dir: 1, range: 1, ok: v => v > 0, fmt: v => `${v} of ${n}`, why: v => `Went against the league's favourite captain in ${v} of ${n} gameweeks. Contrarian until proven wrong.` },
+    { name: 'The Contrarian', key: 'overlap', dir: -1, range: 0.05, ok: v => v != null, fmt: pct, why: (v, c) => `Only ${pct(v)} of their XI matches a typical rival's${most(c, 'the most unique team in the league')}. Nobody else wanted this squad.` },
+    { name: 'The Template', key: 'overlap', dir: 1, range: 0.05, ok: v => v != null, fmt: pct, why: (v, c) => `${pct(v)} of their XI matches a typical rival's${most(c, 'more than anyone else')}. Copy, paste, mid-table.` },
+    { name: 'Midfield Maestro', key: 'mid', dir: 1, range: 0.04, ok: v => v != null, fmt: pct, why: (v, c) => `${pct(v)} of their points come from midfielders${most(c, 'the highest share in the league')}. The forwards are ornamental.` },
+    { name: 'The Back Line', key: 'def', dir: 1, range: 0.04, ok: v => v != null, fmt: pct, why: (v, c) => `${pct(v)} of their points come from defenders${most(c, 'the highest share in the league')}. Clean sheets and corners: box office.` },
+    { name: 'Strike Force', key: 'fwd', dir: 1, range: 0.04, ok: v => v != null, fmt: pct, why: (v, c) => `${pct(v)} of their points come from forwards${most(c, 'the highest share in the league')}. One blank week from catastrophe.` },
+    { name: 'The Climber', key: 'climb', dir: 1, range: 1, ok: v => v > 0, fmt: v => (v > 0 ? `+${v}` : `${v}`), why: v => `Up ${v} ${v === 1 ? 'place' : 'places'} since GW1, and coming for somebody.` },
+    { name: 'Front Runner', key: 'leading', dir: 1, range: 1, ok: v => v > 0, fmt: v => `${v} of ${n}`, why: v => `Top of the table after ${v} of ${n} gameweeks, and nobody has heard the end of it.` },
+    { name: 'Big Week Hunter', key: 'tops', dir: 1, range: 1, ok: v => v > 0, fmt: v => `${v}`, why: v => `Top scorer in the league in ${v} ${v === 1 ? 'gameweek' : 'gameweeks'}. Feast or famine.` },
+    { name: 'Market Wizard', key: 'value', dir: 1, range: 1, ok: v => v != null, fmt: v => `£${v.toFixed(1)}m`, why: (v, c) => `£${v.toFixed(1)}m of squad value${most(c, 'the highest in the league')}. Rich club energy. Now convert it.` },
   ];
 
   // Score every manager on every title by how far they stand from the league average.
@@ -1925,29 +1925,29 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
 
     const TITLES = [
       { name: 'Weekend Winner', key: 'net', dir: 1, range: 1, ok: () => true,
-        fmt: v => `${v} pts`, why: (v, r) => `${v} pts, the best in the league this week. Screenshot it, it might not happen again.` },
+        fmt: v => `${v} pts`, why: (v, r) => `${v} pts, best in the league. Screenshot it — the fixtures will not be this kind again.` },
       { name: 'Wooden Spoon', key: 'net', dir: -1, range: 1, ok: () => true,
-        fmt: v => `${v} pts`, why: v => `${v} pts, the worst in the league this week${v < fplAvg ? `, and the FPL average was ${fplAvg}` : ''}.` },
+        fmt: v => `${v} pts`, why: v => `${v} pts${v < fplAvg ? `, against an FPL average of ${fplAvg}` : ''}. Seven other managers beat that. Every single one.` },
       { name: 'Bench Muppet', key: 'bench', dir: 1, range: 4, ok: v => v > 3,
-        fmt: v => `${v} pts`, why: (v, r) => `${v} pts left rotting on the bench${v > r.net ? ' — more than the XI they actually picked scored' : ''}. Picking the right eleven is free.` },
+        fmt: v => `${v} pts`, why: (v, r) => `${v} pts stranded on the bench${v > r.net ? ' — more than the XI they actually picked managed' : ''}. The points were bought. They just were not played.` },
       { name: 'Captain Calamity', key: 'miss', dir: 1, range: 4, ok: v => v > 0,
-        fmt: v => `−${v}`, why: (v, r) => `Captained ${r.g.cap.name} (${r.g.cap.pts}) with ${r.g.best.name} (${r.g.best.pts}) sitting in the same XI. −${v} pts for that armband.` },
+        fmt: v => `−${v}`, why: (v, r) => `Armband to ${r.g.cap.name} (${r.g.cap.pts}) while ${r.g.best.name} hauled ${r.g.best.pts} in the same XI. −${v} pts, entirely self-inflicted.` },
       { name: 'Armband Genius', key: 'miss', dir: -1, range: 4, ok: v => v != null,
-        fmt: v => `−${v}`, why: (v, r) => v === 0 ? `Captained ${r.g.cap.name}, the best pick in their XI. Enjoy being right for once.` : `Only ${v} ${v === 1 ? 'pt' : 'pts'} lost to the armband this week, the least in the league.` },
+        fmt: v => `−${v}`, why: (v, r) => v === 0 ? `Captained ${r.g.cap.name}, the best pick in the squad. Even a stopped clock gets one.` : `Only ${v} ${v === 1 ? 'pt' : 'pts'} lost to the armband, the least in the league — and they will not stop mentioning it.` },
       { name: 'Hit Merchant', key: 'hits', dir: 1, range: 4, ok: v => v > 0,
-        fmt: v => v ? `−${v}` : '0', why: (v, r) => `−${v} pts on transfers, then scored ${r.net}. Money well spent.` },
+        fmt: v => v ? `−${v}` : '0', why: (v, r) => `Paid −${v} pts for transfers and scored ${r.net}. An expensive way to stand still.` },
       { name: 'Green Arrow', key: 'climb', dir: 1, range: 1000, ok: v => v > 0,
-        fmt: v => (v > 0 ? '+' : '') + compact(Math.abs(v)), why: v => `Up ${compact(v)} places in the overall rankings this week. Don't get used to it.` },
+        fmt: v => (v > 0 ? '+' : '') + compact(Math.abs(v)), why: v => `Up ${compact(v)} places overall. Savour it — the fixtures turn fast.` },
       { name: 'Red Arrow', key: 'climb', dir: -1, range: 1000, ok: v => v < 0,
-        fmt: v => (v > 0 ? '+' : '−') + compact(Math.abs(v)), why: v => `Down ${compact(-v)} places in the overall rankings this week. Ouch.` },
+        fmt: v => (v > 0 ? '+' : '−') + compact(Math.abs(v)), why: v => `Down ${compact(-v)} places overall. That is not a dip, that is a trapdoor.` },
       { name: 'Sheep of the Week', key: 'overlap', dir: 1, range: 0.05, ok: v => v != null,
-        fmt: pct, why: v => `${pct(v)} of their XI is the same as everyone else's. Original thought: not detected.` },
+        fmt: pct, why: v => `${pct(v)} of their XI is everyone else's XI. Independent thought: still pending.` },
       { name: 'Lone Wolf', key: 'overlap', dir: -1, range: 0.05, ok: v => v != null,
-        fmt: pct, why: (v, r) => `Only ${pct(v)} of their XI matches a rival's. Brave, reckless, or both — ${r.net} pts says which.` },
+        fmt: pct, why: (v, r) => `Only ${pct(v)} of their XI matches a rival's. Fearless — and ${r.net} pts to show for it.` },
       { name: 'Chip Burner', key: 'chipUsed', dir: 1, range: 1, ok: v => v > 0,
-        fmt: v => v ? 'used' : '–', why: (v, r) => `Burned their ${chipLong(r.chip)} this week for ${r.net} pts.` },
+        fmt: v => v ? 'used' : '–', why: (v, r) => `Burned their ${chipLong(r.chip)} for ${r.net} pts. Chips do not grow back.` },
       { name: 'Set and Forget', key: 'transfers', dir: -1, range: 1, ok: () => true,
-        fmt: v => `${v}`, why: (v, r) => v === 0 ? `Didn't make a single transfer. Bold strategy, ${r.net} pts.` : `Just ${v} ${v === 1 ? 'transfer' : 'transfers'} made, the fewest in the league.` },
+        fmt: v => `${v}`, why: (v, r) => v === 0 ? `Not one transfer made. ${r.net} pts of pure, undiluted apathy.` : `Just ${v} ${v === 1 ? 'transfer' : 'transfers'} made, the fewest in the league. Why rush.` },
     ];
     stats.forEach(r => { r.chipUsed = r.chip ? 1 : 0; });
 
@@ -1989,7 +1989,7 @@ if (PRED && PRED.events?.length && M.every(m => PRED.managers[m.entry])) {
       const c = primary[i], r = stats[i];
       const head = `<p class="label">GW${LAST}${LIVE ? ' so far' : ''} · ${r.net} pts</p>${mgrCell(m)}`;
       if (!c) {
-        return `<article class="tcard" data-entry="${m.entry}" style="--c:var(--s${m.i + 1})">${head}<h3>Utterly Forgettable</h3><p class="tcard-why">Nothing good, nothing terrible. ${r.net} pts and no story at all.</p></article>`;
+        return `<article class="tcard" data-entry="${m.entry}" style="--c:var(--s${m.i + 1})">${head}<h3>Utterly Forgettable</h3><p class="tcard-why">${r.net} pts. No disasters, no highlights. The goalless draw of gameweeks.</p></article>`;
       }
       const t = TITLES[c.ti], v = t.vals[i];
       const x = val => (t.hi === t.lo ? 50 : (val - t.lo) / (t.hi - t.lo) * 100).toFixed(1);
