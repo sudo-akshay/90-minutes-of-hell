@@ -2,6 +2,9 @@ name: Refresh data
 
 on:
   workflow_dispatch:
+  schedule:
+    # Tuesdays at 12:00 IST (06:30 UTC). GitHub may start it a little late when busy.
+    - cron: "30 6 * * 2"
 
 permissions:
   contents: write

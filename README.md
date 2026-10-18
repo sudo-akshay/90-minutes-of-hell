@@ -6,10 +6,16 @@ Dashboard for the *90 Minutes of Hell* Fantasy Premier League mini-league (leagu
 
 ## Refreshing the data
 
-The page is a snapshot. To update it after a gameweek:
+The site refreshes itself **every Tuesday at 12:00 IST** (06:30 UTC) via the `Refresh data` workflow.
+
+To refresh it by hand at any time:
 
 1. Open the **Actions** tab → **Refresh data** → **Run workflow**.
 2. The workflow pulls fresh data from the FPL API, rebuilds `index.html` and commits it. The site updates a minute or two later.
+
+Or from a terminal: `gh workflow run refresh.yml -R sudo-akshay/90-minutes-of-hell`.
+
+Note: GitHub pauses scheduled workflows in repositories with no activity for 60 days. It emails first, and re-enabling is one click in the Actions tab.
 
 ## Running locally
 
