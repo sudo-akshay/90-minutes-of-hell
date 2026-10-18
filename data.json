@@ -49,8 +49,8 @@
   },
   {
    "event": 7,
-   "average": 0,
-   "highest": null,
+   "average": 29,
+   "highest": 94,
    "finished": false,
    "current": true
   }
@@ -440,12 +440,12 @@
      "event": 7,
      "points": 34,
      "total": 435,
-     "overall_rank": 1530764,
+     "overall_rank": 1502344,
      "value": 100.1,
      "bank": 0.0,
      "transfers": 0,
      "hits": 0,
-     "bench": 0,
+     "bench": 3,
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
@@ -927,12 +927,12 @@
      "event": 7,
      "points": 33,
      "total": 421,
-     "overall_rank": 2327833,
+     "overall_rank": 2297276,
      "value": 100.7,
      "bank": 1.5,
      "transfers": 0,
      "hits": 0,
-     "bench": 0,
+     "bench": 3,
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
@@ -1414,12 +1414,12 @@
      "event": 7,
      "points": 30,
      "total": 410,
-     "overall_rank": 2619276,
+     "overall_rank": 3048511,
      "value": 100.4,
      "bank": 1.1,
      "transfers": 2,
      "hits": 4,
-     "bench": 0,
+     "bench": 3,
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
@@ -1937,12 +1937,12 @@
      "event": 7,
      "points": 35,
      "total": 396,
-     "overall_rank": 4338290,
+     "overall_rank": 3991608,
      "value": 100.9,
      "bank": 3.5,
      "transfers": 0,
      "hits": 0,
-     "bench": 0,
+     "bench": 8,
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
@@ -2442,7 +2442,7 @@
      "event": 7,
      "points": 35,
      "total": 376,
-     "overall_rank": 5833934,
+     "overall_rank": 5392370,
      "value": 99.8,
      "bank": 2.3,
      "transfers": 0,
@@ -2923,12 +2923,12 @@
      "event": 7,
      "points": 21,
      "total": 361,
-     "overall_rank": 5928005,
+     "overall_rank": 6404500,
      "value": 100.4,
      "bank": 0.1,
      "transfers": 0,
      "hits": 0,
-     "bench": 0,
+     "bench": 1,
      "chip": null,
      "captain": "B.Fernandes",
      "captain_mult": 2,
@@ -3470,7 +3470,7 @@
      "event": 7,
      "points": 21,
      "total": 343,
-     "overall_rank": 7048613,
+     "overall_rank": 7389230,
      "value": 99.9,
      "bank": 0.0,
      "transfers": 0,
@@ -3847,12 +3847,12 @@
      "event": 7,
      "points": 34,
      "total": 295,
-     "overall_rank": 9408023,
+     "overall_rank": 9179464,
      "value": 101.2,
      "bank": 3.1,
      "transfers": 1,
      "hits": 0,
-     "bench": 0,
+     "bench": 2,
      "chip": null,
      "captain": "Haaland",
      "captain_mult": 2,
@@ -4763,9 +4763,9 @@
    "name": "Martinez",
    "team": "CHE",
    "pos": "GK",
-   "status": "d",
-   "chance": 25,
-   "news": "Head injury - 25% chance of playing",
+   "status": "i",
+   "chance": 0,
+   "news": "Head injury - Unknown return date",
    "added": "2026-10-17T13:30:08.724000Z",
    "owners": [
     {
@@ -4834,21 +4834,6 @@
    "owners": [
     {
      "entry": 7693414,
-     "xi": true
-    }
-   ]
-  },
-  {
-   "name": "Mazraoui",
-   "team": "MUN",
-   "pos": "DEF",
-   "status": "d",
-   "chance": 25,
-   "news": "Back injury - 25% chance of playing",
-   "added": "2026-10-04T21:30:08.533022Z",
-   "owners": [
-    {
-     "entry": 7628837,
      "xi": true
     }
    ]
@@ -4946,7 +4931,7 @@
    "name": "Calafiori",
    "team": "ARS",
    "pos": "DEF",
-   "price": 5.9,
+   "price": 6.0,
    "selected": 53.3,
    "points": 38
   },
@@ -4971,7 +4956,7 @@
    "team": "MUN",
    "pos": "MID",
    "price": 11.8,
-   "selected": 30.8,
+   "selected": 30.7,
    "points": 32
   },
   "427": {
@@ -4987,7 +4972,7 @@
    "team": "MCI",
    "pos": "MID",
    "price": 8.3,
-   "selected": 14.5,
+   "selected": 14.4,
    "points": 37
   },
   "40": {
@@ -5011,7 +4996,7 @@
    "team": "MCI",
    "pos": "FWD",
    "price": 15.7,
-   "selected": 76.4,
+   "selected": 76.5,
    "points": 58
   },
   "464": {
@@ -5019,7 +5004,7 @@
    "team": "NEW",
    "pos": "FWD",
    "price": 6.2,
-   "selected": 15.4,
+   "selected": 15.2,
    "points": 18
   },
   "497": {
@@ -5027,7 +5012,7 @@
    "team": "TOT",
    "pos": "GK",
    "price": 4.0,
-   "selected": 16.7,
+   "selected": 16.6,
    "points": 0
   },
   "212": {
@@ -5042,7 +5027,7 @@
    "name": "Diop",
    "team": "IPS",
    "pos": "DEF",
-   "price": 4.0,
+   "price": 3.9,
    "selected": 11.1,
    "points": 17
   },
@@ -5067,7 +5052,7 @@
    "team": "ARS",
    "pos": "DEF",
    "price": 4.6,
-   "selected": 17.4,
+   "selected": 17.5,
    "points": 16
   },
   "87": {
@@ -5098,8 +5083,8 @@
    "name": "Cherki",
    "team": "MCI",
    "pos": "MID",
-   "price": 7.9,
-   "selected": 36.9,
+   "price": 8.0,
+   "selected": 37.0,
    "points": 44
   },
   "127": {
@@ -5115,7 +5100,7 @@
    "team": "CHE",
    "pos": "FWD",
    "price": 7.8,
-   "selected": 72.3,
+   "selected": 72.4,
    "points": 47
   },
   "109": {
@@ -5147,7 +5132,7 @@
    "team": "MCI",
    "pos": "DEF",
    "price": 5.8,
-   "selected": 28.9,
+   "selected": 28.8,
    "points": 41
   },
   "124": {
@@ -5155,7 +5140,7 @@
    "team": "BHA",
    "pos": "MID",
    "price": 6.1,
-   "selected": 44.1,
+   "selected": 44.3,
    "points": 53
   },
   "301": {
@@ -5187,7 +5172,7 @@
    "team": "NEW",
    "pos": "DEF",
    "price": 5.3,
-   "selected": 20.3,
+   "selected": 20.4,
    "points": 35
   },
   "565": {
@@ -5211,7 +5196,7 @@
    "team": "CHE",
    "pos": "GK",
    "price": 5.0,
-   "selected": 4.6,
+   "selected": 4.5,
    "points": 20
   },
   "503": {
@@ -5243,7 +5228,7 @@
    "team": "LIV",
    "pos": "DEF",
    "price": 6.5,
-   "selected": 15.5,
+   "selected": 15.4,
    "points": 29
   },
   "330": {
@@ -5251,7 +5236,7 @@
    "team": "LEE",
    "pos": "DEF",
    "price": 4.7,
-   "selected": 9.6,
+   "selected": 9.7,
    "points": 43
   },
   "422": {
@@ -5275,7 +5260,7 @@
    "team": "NEW",
    "pos": "MID",
    "price": 6.1,
-   "selected": 8.0,
+   "selected": 7.9,
    "points": 32
   },
   "308": {
@@ -5299,7 +5284,7 @@
    "team": "HUL",
    "pos": "DEF",
    "price": 4.1,
-   "selected": 5.8,
+   "selected": 5.7,
    "points": 28
   },
   "226": {
@@ -5315,7 +5300,7 @@
    "team": "MCI",
    "pos": "DEF",
    "price": 6.0,
-   "selected": 18.0,
+   "selected": 17.9,
    "points": 37
   },
   "423": {
@@ -5331,7 +5316,7 @@
    "team": "LIV",
    "pos": "MID",
    "price": 6.8,
-   "selected": 21.4,
+   "selected": 21.1,
    "points": 21
   },
   "286": {
@@ -5419,7 +5404,7 @@
    "team": "HUL",
    "pos": "DEF",
    "price": 4.0,
-   "selected": 3.0,
+   "selected": 2.9,
    "points": 27
   },
   "12": {
@@ -5697,18 +5682,6 @@
     "owners": []
    },
    {
-    "name": "Lindelöf",
-    "team": "AVL",
-    "pos": "DEF",
-    "points": 10,
-    "goals": 0,
-    "assists": 0,
-    "clean": 1,
-    "bonus": 2,
-    "minutes": 90,
-    "owners": []
-   },
-   {
     "name": "Isak",
     "team": "LIV",
     "pos": "FWD",
@@ -5757,6 +5730,18 @@
     "owners": [
      7693414
     ]
+   },
+   {
+    "name": "Lindelöf",
+    "team": "AVL",
+    "pos": "DEF",
+    "points": 9,
+    "goals": 0,
+    "assists": 0,
+    "clean": 1,
+    "bonus": 1,
+    "minutes": 90,
+    "owners": []
    },
    {
     "name": "Castagne",
@@ -5821,15 +5806,15 @@
     "owners": []
    }
   ],
-  "average": 0,
-  "highest": null,
+  "average": 29,
+  "highest": 94,
   "finished": false
  },
  "next_event": {
   "event": 8,
   "deadline": "2026-10-23T17:30:00Z"
  },
- "fetched_at": "2026-10-17 19:17 UTC",
+ "fetched_at": "2026-10-18 12:52 UTC",
  "predictions": {
   "from_event": 7,
   "events": [
@@ -6143,8 +6128,8 @@
      },
      {
       "name": "Martinez",
-      "chance": 25,
-      "news": "Head injury - 25% chance of playing"
+      "chance": 0,
+      "news": "Head injury - Unknown return date"
      }
     ]
    },
@@ -6216,11 +6201,6 @@
     ],
     "total": 151.8,
     "flags": [
-     {
-      "name": "Mazraoui",
-      "chance": 25,
-      "news": "Back injury - 25% chance of playing"
-     },
      {
       "name": "Mendy",
       "chance": 0,
@@ -6473,6 +6453,6 @@
     "flags": []
    }
   },
-  "generated_at": "2026-10-17 19:17 UTC"
+  "generated_at": "2026-10-18 12:52 UTC"
  }
 }
