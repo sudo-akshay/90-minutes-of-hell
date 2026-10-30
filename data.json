@@ -5348,8 +5348,8 @@
    "team": "COV",
    "pos": "DEF",
    "status": "d",
-   "chance": 75,
-   "news": "Unspecified injury - 75% chance of playing",
+   "chance": 50,
+   "news": "Calf injury - 50% chance of playing",
    "added": "2026-10-24T17:00:09.115906Z",
    "owners": [
     {
@@ -5366,9 +5366,9 @@
    "name": "João Pedro",
    "team": "CHE",
    "pos": "FWD",
-   "status": "d",
-   "chance": 75,
-   "news": "Unspecified injury - 75% chance of playing",
+   "status": "i",
+   "chance": 0,
+   "news": "Thigh injury - Unknown return date",
    "added": "2026-10-24T16:30:09.687729Z",
    "owners": [
     {
@@ -5417,8 +5417,8 @@
    "team": "LIV",
    "pos": "MID",
    "status": "d",
-   "chance": 25,
-   "news": "Knee injury - 25% chance of playing",
+   "chance": 50,
+   "news": "Knee injury - 50% chance of playing",
    "added": "2026-10-20T18:30:09.999223Z",
    "owners": [
     {
@@ -5443,21 +5443,6 @@
    ]
   },
   {
-   "name": "Mendy",
-   "team": "HUL",
-   "pos": "DEF",
-   "status": "i",
-   "chance": 0,
-   "news": "Groin injury - Expected back 31 Oct",
-   "added": "2026-10-16T12:30:09.976274Z",
-   "owners": [
-    {
-     "entry": 7628837,
-     "xi": false
-    }
-   ]
-  },
-  {
    "name": "James",
    "team": "CHE",
    "pos": "DEF",
@@ -5476,9 +5461,9 @@
    "name": "Tzolis",
    "team": "ARS",
    "pos": "MID",
-   "status": "i",
-   "chance": 0,
-   "news": "Hamstring injury - Expected back 1 Nov",
+   "status": "d",
+   "chance": 75,
+   "news": "Hamstring injury - 75% chance of playing",
    "added": "2026-10-02T15:00:11.091226Z",
    "owners": [
     {
@@ -5524,15 +5509,15 @@
    "team": "ARS",
    "pos": "GK",
    "price": 6.2,
-   "selected": 45.7,
+   "selected": 45.6,
    "points": 49
   },
   "8": {
    "name": "Calafiori",
    "team": "ARS",
    "pos": "DEF",
-   "price": 6.0,
-   "selected": 52.3,
+   "price": 5.9,
+   "selected": 49.1,
    "points": 45
   },
   "173": {
@@ -5540,7 +5525,7 @@
    "team": "COV",
    "pos": "DEF",
    "price": 4.0,
-   "selected": 9.5,
+   "selected": 8.9,
    "points": 32
   },
   "277": {
@@ -5548,7 +5533,7 @@
    "team": "HUL",
    "pos": "DEF",
    "price": 4.1,
-   "selected": 7.2,
+   "selected": 7.3,
    "points": 35
   },
   "259": {
@@ -5556,7 +5541,7 @@
    "team": "IPS",
    "pos": "DEF",
    "price": 3.9,
-   "selected": 10.7,
+   "selected": 10.5,
    "points": 18
   },
   "175": {
@@ -5564,7 +5549,7 @@
    "team": "COV",
    "pos": "DEF",
    "price": 3.9,
-   "selected": 7.3,
+   "selected": 7.2,
    "points": 15
   },
   "427": {
@@ -5572,7 +5557,7 @@
    "team": "MUN",
    "pos": "MID",
    "price": 7.9,
-   "selected": 21.6,
+   "selected": 21.2,
    "points": 43
   },
   "156": {
@@ -5580,7 +5565,7 @@
    "team": "CHE",
    "pos": "MID",
    "price": 6.6,
-   "selected": 4.1,
+   "selected": 4.6,
    "points": 37
   },
   "40": {
@@ -5588,7 +5573,7 @@
    "team": "CHE",
    "pos": "MID",
    "price": 8.0,
-   "selected": 50.1,
+   "selected": 50.5,
    "points": 41
   },
   "346": {
@@ -5596,15 +5581,15 @@
    "team": "LEE",
    "pos": "FWD",
    "price": 6.1,
-   "selected": 21.4,
+   "selected": 21.1,
    "points": 35
   },
   "411": {
    "name": "Haaland",
    "team": "MCI",
    "pos": "FWD",
-   "price": 15.7,
-   "selected": 78.0,
+   "price": 15.8,
+   "selected": 78.5,
    "points": 66
   },
   "497": {
@@ -5612,7 +5597,7 @@
    "team": "TOT",
    "pos": "GK",
    "price": 4.0,
-   "selected": 16.1,
+   "selected": 15.8,
    "points": 0
   },
   "426": {
@@ -5620,7 +5605,7 @@
    "team": "MUN",
    "pos": "MID",
    "price": 11.7,
-   "selected": 24.6,
+   "selected": 23.4,
    "points": 33
   },
   "212": {
@@ -5628,15 +5613,15 @@
    "team": "CRY",
    "pos": "MID",
    "price": 4.3,
-   "selected": 6.0,
+   "selected": 5.9,
    "points": 3
   },
   "165": {
    "name": "João Pedro",
    "team": "CHE",
    "pos": "FWD",
-   "price": 7.9,
-   "selected": 70.7,
+   "price": 7.8,
+   "selected": 55.7,
    "points": 47
   },
   "109": {
@@ -5644,7 +5629,7 @@
    "team": "BHA",
    "pos": "GK",
    "price": 4.6,
-   "selected": 22.5,
+   "selected": 22.1,
    "points": 40
   },
   "31": {
@@ -5652,7 +5637,7 @@
    "team": "ARS",
    "pos": "DEF",
    "price": 4.7,
-   "selected": 20.1,
+   "selected": 20.7,
    "points": 39
   },
   "87": {
@@ -5668,7 +5653,7 @@
    "team": "NFO",
    "pos": "MID",
    "price": 7.9,
-   "selected": 12.0,
+   "selected": 11.6,
    "points": 32
   },
   "154": {
@@ -5676,7 +5661,7 @@
    "team": "CHE",
    "pos": "MID",
    "price": 9.8,
-   "selected": 27.5,
+   "selected": 27.3,
    "points": 37
   },
   "399": {
@@ -5684,7 +5669,7 @@
    "team": "MCI",
    "pos": "MID",
    "price": 8.0,
-   "selected": 38.6,
+   "selected": 37.6,
    "points": 44
   },
   "127": {
@@ -5692,15 +5677,15 @@
    "team": "BHA",
    "pos": "MID",
    "price": 5.0,
-   "selected": 4.0,
+   "selected": 3.9,
    "points": 39
   },
   "79": {
    "name": "Evanilson",
    "team": "BOU",
    "pos": "FWD",
-   "price": 6.2,
-   "selected": 7.4,
+   "price": 6.3,
+   "selected": 11.5,
    "points": 43
   },
   "496": {
@@ -5708,15 +5693,15 @@
    "team": "TOT",
    "pos": "GK",
    "price": 4.4,
-   "selected": 14.9,
+   "selected": 15.2,
    "points": 32
   },
   "557": {
    "name": "Tzolis",
    "team": "ARS",
    "pos": "MID",
-   "price": 6.2,
-   "selected": 4.1,
+   "price": 6.1,
+   "selected": 3.9,
    "points": 16
   },
   "418": {
@@ -5724,7 +5709,7 @@
    "team": "MUN",
    "pos": "DEF",
    "price": 4.7,
-   "selected": 6.2,
+   "selected": 5.9,
    "points": 16
   },
   "391": {
@@ -5732,7 +5717,7 @@
    "team": "MCI",
    "pos": "DEF",
    "price": 5.7,
-   "selected": 27.0,
+   "selected": 26.5,
    "points": 42
   },
   "124": {
@@ -5740,7 +5725,7 @@
    "team": "BHA",
    "pos": "MID",
    "price": 6.2,
-   "selected": 46.4,
+   "selected": 45.9,
    "points": 58
   },
   "454": {
@@ -5756,7 +5741,7 @@
    "team": "IPS",
    "pos": "GK",
    "price": 4.0,
-   "selected": 3.6,
+   "selected": 3.5,
    "points": 0
   },
   "499": {
@@ -5764,7 +5749,7 @@
    "team": "TOT",
    "pos": "DEF",
    "price": 5.3,
-   "selected": 4.8,
+   "selected": 5.0,
    "points": 10
   },
   "449": {
@@ -5779,8 +5764,8 @@
    "name": "M.Sangaré",
    "team": "BRE",
    "pos": "MID",
-   "price": 5.5,
-   "selected": 6.7,
+   "price": 5.4,
+   "selected": 6.5,
    "points": 28
   },
   "249": {
@@ -5788,7 +5773,7 @@
    "team": "EVE",
    "pos": "FWD",
    "price": 5.6,
-   "selected": 7.4,
+   "selected": 7.3,
    "points": 30
   },
   "28": {
@@ -5796,7 +5781,7 @@
    "team": "CHE",
    "pos": "GK",
    "price": 5.0,
-   "selected": 3.6,
+   "selected": 3.4,
    "points": 20
   },
   "503": {
@@ -5804,7 +5789,7 @@
    "team": "TOT",
    "pos": "DEF",
    "price": 5.0,
-   "selected": 3.7,
+   "selected": 3.9,
    "points": 24
   },
   "43": {
@@ -5820,7 +5805,7 @@
    "team": "SUN",
    "pos": "FWD",
    "price": 5.7,
-   "selected": 5.0,
+   "selected": 5.2,
    "points": 26
   },
   "356": {
@@ -5836,7 +5821,7 @@
    "team": "LEE",
    "pos": "DEF",
    "price": 4.8,
-   "selected": 11.1,
+   "selected": 11.3,
    "points": 50
   },
   "422": {
@@ -5851,8 +5836,8 @@
    "name": "Cunha",
    "team": "MUN",
    "pos": "MID",
-   "price": 7.9,
-   "selected": 6.1,
+   "price": 7.8,
+   "selected": 5.9,
    "points": 38
   },
   "453": {
@@ -5860,7 +5845,7 @@
    "team": "NEW",
    "pos": "MID",
    "price": 6.1,
-   "selected": 7.5,
+   "selected": 7.6,
    "points": 40
   },
   "464": {
@@ -5868,7 +5853,7 @@
    "team": "NEW",
    "pos": "FWD",
    "price": 6.0,
-   "selected": 11.6,
+   "selected": 10.8,
    "points": 19
   },
   "308": {
@@ -5884,7 +5869,7 @@
    "team": "FUL",
    "pos": "FWD",
    "price": 4.4,
-   "selected": 4.7,
+   "selected": 4.6,
    "points": 0
   },
   "586": {
@@ -5892,7 +5877,7 @@
    "team": "HUL",
    "pos": "DEF",
    "price": 4.1,
-   "selected": 4.9,
+   "selected": 4.7,
    "points": 28
   },
   "388": {
@@ -5900,7 +5885,7 @@
    "team": "MCI",
    "pos": "DEF",
    "price": 6.0,
-   "selected": 17.1,
+   "selected": 16.7,
    "points": 37
   },
   "334": {
@@ -5908,7 +5893,7 @@
    "team": "LEE",
    "pos": "DEF",
    "price": 5.1,
-   "selected": 5.7,
+   "selected": 6.0,
    "points": 43
   },
   "115": {
@@ -5916,7 +5901,7 @@
    "team": "BHA",
    "pos": "DEF",
    "price": 5.3,
-   "selected": 42.6,
+   "selected": 42.5,
    "points": 60
   },
   "261": {
@@ -5932,7 +5917,7 @@
    "team": "BRE",
    "pos": "MID",
    "price": 5.5,
-   "selected": 1.9,
+   "selected": 2.0,
    "points": 35
   },
   "623": {
@@ -5948,7 +5933,7 @@
    "team": "TOT",
    "pos": "DEF",
    "price": 5.7,
-   "selected": 3.1,
+   "selected": 3.0,
    "points": 5
   },
   "142": {
@@ -5956,7 +5941,7 @@
    "team": "CHE",
    "pos": "DEF",
    "price": 5.2,
-   "selected": 3.6,
+   "selected": 3.5,
    "points": 3
   },
   "377": {
@@ -5964,7 +5949,7 @@
    "team": "LIV",
    "pos": "MID",
    "price": 6.5,
-   "selected": 0.8,
+   "selected": 0.7,
    "points": 26
   },
   "55": {
@@ -5996,7 +5981,7 @@
    "team": "MCI",
    "pos": "DEF",
    "price": 6.2,
-   "selected": 8.6,
+   "selected": 8.5,
    "points": 13
   },
   "282": {
@@ -6004,7 +5989,7 @@
    "team": "HUL",
    "pos": "DEF",
    "price": 4.0,
-   "selected": 2.8,
+   "selected": 2.7,
    "points": 29
   },
   "304": {
@@ -6020,7 +6005,7 @@
    "team": "IPS",
    "pos": "DEF",
    "price": 4.0,
-   "selected": 7.2,
+   "selected": 7.1,
    "points": 28
   },
   "138": {
@@ -6028,7 +6013,7 @@
    "team": "BHA",
    "pos": "FWD",
    "price": 5.8,
-   "selected": 10.2,
+   "selected": 10.1,
    "points": 43
   },
   "12": {
@@ -6036,7 +6021,7 @@
    "team": "ARS",
    "pos": "MID",
    "price": 9.5,
-   "selected": 8.7,
+   "selected": 7.6,
    "points": 37
   },
   "279": {
@@ -6044,7 +6029,7 @@
    "team": "HUL",
    "pos": "DEF",
    "price": 4.2,
-   "selected": 13.0,
+   "selected": 12.9,
    "points": 34
   }
  },
@@ -6407,7 +6392,7 @@
   "event": 9,
   "deadline": "2026-10-31T11:00:00Z"
  },
- "fetched_at": "2026-10-27 12:36 UTC",
+ "fetched_at": "2026-10-30 15:54 UTC",
  "predictions": {
   "from_event": 8,
   "events": [
@@ -6441,7 +6426,7 @@
      },
      {
       "event": 10,
-      "pts": 57.9,
+      "pts": 57.2,
       "captain": "Haaland",
       "captain_xp": 14.3,
       "captain_vs": "NFO (A)",
@@ -6462,7 +6447,7 @@
      },
      {
       "event": 11,
-      "pts": 59.2,
+      "pts": 58.3,
       "captain": "Haaland",
       "captain_xp": 17.4,
       "captain_vs": "FUL (H)",
@@ -6482,7 +6467,7 @@
       ]
      }
     ],
-    "total": 171.0,
+    "total": 169.4,
     "flags": [
      {
       "name": "Calafiori",
@@ -6491,13 +6476,13 @@
      },
      {
       "name": "Thomas",
-      "chance": 75,
-      "news": "Unspecified injury - 75% chance of playing"
+      "chance": 50,
+      "news": "Calf injury - 50% chance of playing"
      },
      {
       "name": "João Pedro",
-      "chance": 75,
-      "news": "Unspecified injury - 75% chance of playing"
+      "chance": 0,
+      "news": "Thigh injury - Unknown return date"
      }
     ]
    },
@@ -6526,7 +6511,7 @@
      },
      {
       "event": 10,
-      "pts": 56.0,
+      "pts": 55.7,
       "captain": "Haaland",
       "captain_xp": 14.3,
       "captain_vs": "NFO (A)",
@@ -6547,7 +6532,7 @@
      },
      {
       "event": 11,
-      "pts": 59.7,
+      "pts": 59.0,
       "captain": "Haaland",
       "captain_xp": 17.4,
       "captain_vs": "FUL (H)",
@@ -6567,7 +6552,7 @@
       ]
      }
     ],
-    "total": 168.3,
+    "total": 167.3,
     "flags": [
      {
       "name": "Calafiori",
@@ -6576,13 +6561,13 @@
      },
      {
       "name": "João Pedro",
-      "chance": 75,
-      "news": "Unspecified injury - 75% chance of playing"
+      "chance": 0,
+      "news": "Thigh injury - Unknown return date"
      },
      {
       "name": "Tzolis",
-      "chance": 0,
-      "news": "Hamstring injury - Expected back 1 Nov"
+      "chance": 75,
+      "news": "Hamstring injury - 75% chance of playing"
      }
     ]
    },
@@ -6611,7 +6596,7 @@
      },
      {
       "event": 10,
-      "pts": 56.7,
+      "pts": 56.2,
       "captain": "Haaland",
       "captain_xp": 14.3,
       "captain_vs": "NFO (A)",
@@ -6632,7 +6617,7 @@
      },
      {
       "event": 11,
-      "pts": 57.7,
+      "pts": 56.9,
       "captain": "Haaland",
       "captain_xp": 17.4,
       "captain_vs": "FUL (H)",
@@ -6652,7 +6637,7 @@
       ]
      }
     ],
-    "total": 165.5,
+    "total": 164.2,
     "flags": [
      {
       "name": "Calafiori",
@@ -6661,8 +6646,8 @@
      },
      {
       "name": "João Pedro",
-      "chance": 75,
-      "news": "Unspecified injury - 75% chance of playing"
+      "chance": 0,
+      "news": "Thigh injury - Unknown return date"
      }
     ]
    },
@@ -6750,7 +6735,7 @@
     "gws": [
      {
       "event": 9,
-      "pts": 51.7,
+      "pts": 52.8,
       "captain": "Haaland",
       "captain_xp": 15.5,
       "captain_vs": "BHA (H)",
@@ -6771,7 +6756,7 @@
      },
      {
       "event": 10,
-      "pts": 54.4,
+      "pts": 54.7,
       "captain": "Haaland",
       "captain_xp": 14.3,
       "captain_vs": "NFO (A)",
@@ -6792,7 +6777,7 @@
      },
      {
       "event": 11,
-      "pts": 54.3,
+      "pts": 54.7,
       "captain": "Haaland",
       "captain_xp": 17.4,
       "captain_vs": "FUL (H)",
@@ -6812,14 +6797,8 @@
       ]
      }
     ],
-    "total": 160.4,
-    "flags": [
-     {
-      "name": "Mendy",
-      "chance": 0,
-      "news": "Groin injury - Expected back 31 Oct"
-     }
-    ]
+    "total": 162.2,
+    "flags": []
    },
    "6341322": {
     "gws": [
@@ -6867,7 +6846,7 @@
      },
      {
       "event": 11,
-      "pts": 65.0,
+      "pts": 64.9,
       "captain": "Haaland",
       "captain_xp": 17.4,
       "captain_vs": "FUL (H)",
@@ -6887,7 +6866,7 @@
       ]
      }
     ],
-    "total": 186.3,
+    "total": 186.2,
     "flags": [
      {
       "name": "Calafiori",
@@ -6896,8 +6875,8 @@
      },
      {
       "name": "João Pedro",
-      "chance": 75,
-      "news": "Unspecified injury - 75% chance of playing"
+      "chance": 0,
+      "news": "Thigh injury - Unknown return date"
      }
     ]
    },
@@ -6905,7 +6884,7 @@
     "gws": [
      {
       "event": 9,
-      "pts": 35.5,
+      "pts": 33.3,
       "captain": "Rogers",
       "captain_xp": 8.8,
       "captain_vs": "MUN (H)",
@@ -6926,7 +6905,7 @@
      },
      {
       "event": 10,
-      "pts": 40.7,
+      "pts": 39.5,
       "captain": "Raya",
       "captain_xp": 12.0,
       "captain_vs": "HUL (H)",
@@ -6947,7 +6926,7 @@
      },
      {
       "event": 11,
-      "pts": 40.6,
+      "pts": 40.0,
       "captain": "Rogers",
       "captain_xp": 10.0,
       "captain_vs": "LEE (H)",
@@ -6967,7 +6946,7 @@
       ]
      }
     ],
-    "total": 116.8,
+    "total": 112.8,
     "flags": [
      {
       "name": "James",
@@ -6976,13 +6955,13 @@
      },
      {
       "name": "Munoz",
-      "chance": 25,
-      "news": "Knee injury - 25% chance of playing"
+      "chance": 50,
+      "news": "Knee injury - 50% chance of playing"
      },
      {
       "name": "João Pedro",
-      "chance": 75,
-      "news": "Unspecified injury - 75% chance of playing"
+      "chance": 0,
+      "news": "Thigh injury - Unknown return date"
      },
      {
       "name": "Watkins",
@@ -7000,7 +6979,7 @@
     "gws": [
      {
       "event": 9,
-      "pts": 50.5,
+      "pts": 50.0,
       "captain": "Haaland",
       "captain_xp": 15.5,
       "captain_vs": "BHA (H)",
@@ -7021,7 +7000,7 @@
      },
      {
       "event": 10,
-      "pts": 53.7,
+      "pts": 52.3,
       "captain": "Haaland",
       "captain_xp": 14.3,
       "captain_vs": "NFO (A)",
@@ -7042,7 +7021,7 @@
      },
      {
       "event": 11,
-      "pts": 59.4,
+      "pts": 58.3,
       "captain": "Haaland",
       "captain_xp": 17.4,
       "captain_vs": "FUL (H)",
@@ -7062,17 +7041,17 @@
       ]
      }
     ],
-    "total": 163.6,
+    "total": 160.6,
     "flags": [
      {
       "name": "Thomas",
-      "chance": 75,
-      "news": "Unspecified injury - 75% chance of playing"
+      "chance": 50,
+      "news": "Calf injury - 50% chance of playing"
      },
      {
       "name": "João Pedro",
-      "chance": 75,
-      "news": "Unspecified injury - 75% chance of playing"
+      "chance": 0,
+      "news": "Thigh injury - Unknown return date"
      },
      {
       "name": "Saka",
@@ -7082,6 +7061,6 @@
     ]
    }
   },
-  "generated_at": "2026-10-27 12:36 UTC"
+  "generated_at": "2026-10-30 15:54 UTC"
  }
 }
