@@ -5040,7 +5040,7 @@
   {
    "entry": 7592803,
    "name": "Aditya Bitra",
-   "team": "Pending Moderation",
+   "team": "Hotspur XI",
    "squad": [
     {
      "id": 1,
@@ -6452,6 +6452,21 @@
  ],
  "news": [
   {
+   "name": "Maguire",
+   "team": "MUN",
+   "pos": "DEF",
+   "status": "d",
+   "chance": 75,
+   "news": "Back injury - 75% chance of playing",
+   "added": "2026-11-11T01:00:09.173434Z",
+   "owners": [
+    {
+     "entry": 7598024,
+     "xi": false
+    }
+   ]
+  },
+  {
    "name": "Brobbey",
    "team": "SUN",
    "pos": "FWD",
@@ -6624,7 +6639,7 @@
    "team": "ARS",
    "pos": "DEF",
    "price": 8.1,
-   "selected": 26.0,
+   "selected": 26.1,
    "points": 66
   },
   "566": {
@@ -6632,7 +6647,7 @@
    "team": "BOU",
    "pos": "DEF",
    "price": 5.1,
-   "selected": 3.6,
+   "selected": 3.7,
    "points": 40
   },
   "31": {
@@ -6640,7 +6655,7 @@
    "team": "ARS",
    "pos": "DEF",
    "price": 4.8,
-   "selected": 24.4,
+   "selected": 24.5,
    "points": 57
   },
   "115": {
@@ -6648,7 +6663,7 @@
    "team": "BHA",
    "pos": "DEF",
    "price": 5.5,
-   "selected": 47.6,
+   "selected": 47.7,
    "points": 75
   },
   "68": {
@@ -6656,7 +6671,7 @@
    "team": "BOU",
    "pos": "MID",
    "price": 6.7,
-   "selected": 31.2,
+   "selected": 31.3,
    "points": 58
   },
   "124": {
@@ -6680,7 +6695,7 @@
    "team": "BOU",
    "pos": "FWD",
    "price": 6.5,
-   "selected": 23.5,
+   "selected": 23.6,
    "points": 61
   },
   "411": {
@@ -6696,7 +6711,7 @@
    "team": "AVL",
    "pos": "FWD",
    "price": 7.1,
-   "selected": 30.7,
+   "selected": 30.9,
    "points": 54
   },
   "497": {
@@ -6712,7 +6727,7 @@
    "team": "AVL",
    "pos": "MID",
    "price": 6.2,
-   "selected": 8.5,
+   "selected": 8.6,
    "points": 40
   },
   "112": {
@@ -6720,7 +6735,7 @@
    "team": "TOT",
    "pos": "DEF",
    "price": 5.1,
-   "selected": 14.5,
+   "selected": 14.6,
    "points": 57
   },
   "129": {
@@ -6799,7 +6814,7 @@
    "name": "Verbruggen",
    "team": "BHA",
    "pos": "GK",
-   "price": 4.6,
+   "price": 4.7,
    "selected": 23.9,
    "points": 57
   },
@@ -6808,7 +6823,7 @@
    "team": "CHE",
    "pos": "FWD",
    "price": 7.6,
-   "selected": 32.1,
+   "selected": 31.9,
    "points": 47
   },
   "557": {
@@ -6832,7 +6847,7 @@
    "team": "MCI",
    "pos": "DEF",
    "price": 5.6,
-   "selected": 23.0,
+   "selected": 22.8,
    "points": 44
   },
   "426": {
@@ -6936,7 +6951,7 @@
    "team": "MCI",
    "pos": "DEF",
    "price": 6.0,
-   "selected": 14.3,
+   "selected": 14.2,
    "points": 37
   },
   "86": {
@@ -6952,7 +6967,7 @@
    "team": "LIV",
    "pos": "DEF",
    "price": 6.4,
-   "selected": 15.0,
+   "selected": 14.9,
    "points": 43
   },
   "330": {
@@ -6984,7 +6999,7 @@
    "team": "MUN",
    "pos": "MID",
    "price": 7.9,
-   "selected": 19.2,
+   "selected": 19.1,
    "points": 46
   },
   "453": {
@@ -6992,7 +7007,7 @@
    "team": "NEW",
    "pos": "MID",
    "price": 6.1,
-   "selected": 6.7,
+   "selected": 6.6,
    "points": 44
   },
   "464": {
@@ -7000,7 +7015,7 @@
    "team": "NEW",
    "pos": "FWD",
    "price": 5.9,
-   "selected": 8.4,
+   "selected": 8.3,
    "points": 22
   },
   "308": {
@@ -7024,7 +7039,7 @@
    "team": "HUL",
    "pos": "DEF",
    "price": 4.1,
-   "selected": 4.6,
+   "selected": 4.5,
    "points": 34
   },
   "387": {
@@ -7112,7 +7127,7 @@
    "team": "BHA",
    "pos": "FWD",
    "price": 5.8,
-   "selected": 9.9,
+   "selected": 9.8,
    "points": 47
   },
   "173": {
@@ -7120,7 +7135,7 @@
    "team": "COV",
    "pos": "DEF",
    "price": 4.0,
-   "selected": 7.4,
+   "selected": 7.3,
    "points": 32
   },
   "279": {
@@ -7128,7 +7143,7 @@
    "team": "HUL",
    "pos": "DEF",
    "price": 4.2,
-   "selected": 12.0,
+   "selected": 11.9,
    "points": 42
   }
  },
@@ -7501,7 +7516,7 @@
   "event": 11,
   "deadline": "2026-11-21T11:00:00Z"
  },
- "fetched_at": "2026-11-10 15:10 UTC",
+ "fetched_at": "2026-11-11 14:29 UTC",
  "predictions": {
   "from_event": 10,
   "events": [
@@ -7651,6 +7666,11 @@
       "name": "João Pedro",
       "chance": 0,
       "news": "Thigh injury - Unknown return date"
+     },
+     {
+      "name": "Maguire",
+      "chance": 75,
+      "news": "Back injury - 75% chance of playing"
      }
     ]
    },
@@ -8130,6 +8150,6 @@
     ]
    }
   },
-  "generated_at": "2026-11-10 15:10 UTC"
+  "generated_at": "2026-11-11 14:29 UTC"
  }
 }
