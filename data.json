@@ -6452,6 +6452,40 @@
  ],
  "news": [
   {
+   "name": "Mendy",
+   "team": "HUL",
+   "pos": "DEF",
+   "status": "d",
+   "chance": 75,
+   "news": "Knee injury - 75% chance of playing",
+   "added": "2026-11-16T19:00:05.574151Z",
+   "owners": [
+    {
+     "entry": 7628837,
+     "xi": false
+    }
+   ]
+  },
+  {
+   "name": "Manzambi",
+   "team": "AVL",
+   "pos": "MID",
+   "status": "d",
+   "chance": 75,
+   "news": "Calf injury - 75% chance of playing",
+   "added": "2026-11-12T13:00:05.872260Z",
+   "owners": [
+    {
+     "entry": 7587350,
+     "xi": false
+    },
+    {
+     "entry": 4762060,
+     "xi": true
+    }
+   ]
+  },
+  {
    "name": "Maguire",
    "team": "MUN",
    "pos": "DEF",
@@ -6631,7 +6665,7 @@
    "team": "ARS",
    "pos": "GK",
    "price": 6.2,
-   "selected": 47.5,
+   "selected": 47.6,
    "points": 60
   },
   "4": {
@@ -6639,7 +6673,7 @@
    "team": "ARS",
    "pos": "DEF",
    "price": 8.1,
-   "selected": 26.1,
+   "selected": 26.2,
    "points": 66
   },
   "566": {
@@ -6654,8 +6688,8 @@
    "name": "Konsa",
    "team": "ARS",
    "pos": "DEF",
-   "price": 4.8,
-   "selected": 24.5,
+   "price": 4.9,
+   "selected": 24.8,
    "points": 57
   },
   "115": {
@@ -6663,7 +6697,7 @@
    "team": "BHA",
    "pos": "DEF",
    "price": 5.5,
-   "selected": 47.7,
+   "selected": 48.0,
    "points": 75
   },
   "68": {
@@ -6671,7 +6705,7 @@
    "team": "BOU",
    "pos": "MID",
    "price": 6.7,
-   "selected": 31.3,
+   "selected": 31.6,
    "points": 58
   },
   "124": {
@@ -6679,7 +6713,7 @@
    "team": "BHA",
    "pos": "MID",
    "price": 6.3,
-   "selected": 48.0,
+   "selected": 48.2,
    "points": 70
   },
   "40": {
@@ -6687,7 +6721,7 @@
    "team": "CHE",
    "pos": "MID",
    "price": 8.2,
-   "selected": 53.9,
+   "selected": 54.0,
    "points": 52
   },
   "79": {
@@ -6695,7 +6729,7 @@
    "team": "BOU",
    "pos": "FWD",
    "price": 6.5,
-   "selected": 23.6,
+   "selected": 24.1,
    "points": 61
   },
   "411": {
@@ -6703,7 +6737,7 @@
    "team": "MCI",
    "pos": "FWD",
    "price": 15.8,
-   "selected": 78.9,
+   "selected": 78.8,
    "points": 70
   },
   "166": {
@@ -6711,7 +6745,7 @@
    "team": "AVL",
    "pos": "FWD",
    "price": 7.1,
-   "selected": 30.9,
+   "selected": 31.7,
    "points": 54
   },
   "497": {
@@ -6719,7 +6753,7 @@
    "team": "TOT",
    "pos": "GK",
    "price": 4.0,
-   "selected": 15.3,
+   "selected": 15.2,
    "points": 0
   },
   "53": {
@@ -6727,7 +6761,7 @@
    "team": "AVL",
    "pos": "MID",
    "price": 6.2,
-   "selected": 8.6,
+   "selected": 8.5,
    "points": 40
   },
   "112": {
@@ -6735,7 +6769,7 @@
    "team": "TOT",
    "pos": "DEF",
    "price": 5.1,
-   "selected": 14.6,
+   "selected": 15.0,
    "points": 57
   },
   "129": {
@@ -6743,7 +6777,7 @@
    "team": "BHA",
    "pos": "MID",
    "price": 5.5,
-   "selected": 2.3,
+   "selected": 2.4,
    "points": 46
   },
   "496": {
@@ -6775,7 +6809,7 @@
    "team": "IPS",
    "pos": "DEF",
    "price": 3.9,
-   "selected": 9.9,
+   "selected": 9.8,
    "points": 21
   },
   "480": {
@@ -6783,7 +6817,7 @@
    "team": "NFO",
    "pos": "MID",
    "price": 7.8,
-   "selected": 9.3,
+   "selected": 9.2,
    "points": 39
   },
   "154": {
@@ -6791,7 +6825,7 @@
    "team": "CHE",
    "pos": "MID",
    "price": 9.8,
-   "selected": 28.4,
+   "selected": 28.3,
    "points": 47
   },
   "399": {
@@ -6807,7 +6841,7 @@
    "team": "BHA",
    "pos": "MID",
    "price": 5.0,
-   "selected": 4.2,
+   "selected": 4.3,
    "points": 51
   },
   "109": {
@@ -6815,7 +6849,7 @@
    "team": "BHA",
    "pos": "GK",
    "price": 4.7,
-   "selected": 23.9,
+   "selected": 24.0,
    "points": 57
   },
   "165": {
@@ -6823,7 +6857,7 @@
    "team": "CHE",
    "pos": "FWD",
    "price": 7.6,
-   "selected": 31.9,
+   "selected": 31.3,
    "points": 47
   },
   "557": {
@@ -6839,7 +6873,7 @@
    "team": "MUN",
    "pos": "DEF",
    "price": 4.6,
-   "selected": 5.1,
+   "selected": 5.0,
    "points": 16
   },
   "391": {
@@ -6847,7 +6881,7 @@
    "team": "MCI",
    "pos": "DEF",
    "price": 5.6,
-   "selected": 22.8,
+   "selected": 22.3,
    "points": 44
   },
   "426": {
@@ -6855,7 +6889,7 @@
    "team": "MUN",
    "pos": "MID",
    "price": 11.6,
-   "selected": 20.4,
+   "selected": 20.3,
    "points": 45
   },
   "301": {
@@ -6879,7 +6913,7 @@
    "team": "CRY",
    "pos": "MID",
    "price": 4.3,
-   "selected": 5.6,
+   "selected": 5.5,
    "points": 4
   },
   "499": {
@@ -6903,7 +6937,7 @@
    "team": "CHE",
    "pos": "GK",
    "price": 4.9,
-   "selected": 3.1,
+   "selected": 3.0,
    "points": 20
   },
   "113": {
@@ -6935,7 +6969,7 @@
    "team": "LEE",
    "pos": "DEF",
    "price": 5.1,
-   "selected": 6.4,
+   "selected": 6.5,
    "points": 56
   },
   "623": {
@@ -6951,7 +6985,7 @@
    "team": "MCI",
    "pos": "DEF",
    "price": 6.0,
-   "selected": 14.2,
+   "selected": 13.9,
    "points": 37
   },
   "86": {
@@ -6967,7 +7001,7 @@
    "team": "LIV",
    "pos": "DEF",
    "price": 6.4,
-   "selected": 14.9,
+   "selected": 14.7,
    "points": 43
   },
   "330": {
@@ -6999,7 +7033,7 @@
    "team": "MUN",
    "pos": "MID",
    "price": 7.9,
-   "selected": 19.1,
+   "selected": 19.0,
    "points": 46
   },
   "453": {
@@ -7007,7 +7041,7 @@
    "team": "NEW",
    "pos": "MID",
    "price": 6.1,
-   "selected": 6.6,
+   "selected": 6.5,
    "points": 44
   },
   "464": {
@@ -7015,7 +7049,7 @@
    "team": "NEW",
    "pos": "FWD",
    "price": 5.9,
-   "selected": 8.3,
+   "selected": 8.2,
    "points": 22
   },
   "308": {
@@ -7103,7 +7137,7 @@
    "team": "IPS",
    "pos": "DEF",
    "price": 4.0,
-   "selected": 2.8,
+   "selected": 2.7,
    "points": 28
   },
   "305": {
@@ -7516,7 +7550,7 @@
   "event": 11,
   "deadline": "2026-11-21T11:00:00Z"
  },
- "fetched_at": "2026-11-11 14:29 UTC",
+ "fetched_at": "2026-11-17 16:24 UTC",
  "predictions": {
   "from_event": 10,
   "events": [
@@ -7571,7 +7605,7 @@
      },
      {
       "event": 13,
-      "pts": 64.7,
+      "pts": 64.6,
       "captain": "Haaland",
       "captain_xp": 14.9,
       "captain_vs": "LEE (H)",
@@ -7591,8 +7625,14 @@
       ]
      }
     ],
-    "total": 201.3,
-    "flags": []
+    "total": 201.2,
+    "flags": [
+     {
+      "name": "Manzambi",
+      "chance": 75,
+      "news": "Calf injury - 75% chance of playing"
+     }
+    ]
    },
    "7598024": {
     "gws": [
@@ -7753,7 +7793,7 @@
     "gws": [
      {
       "event": 11,
-      "pts": 63.3,
+      "pts": 62.1,
       "captain": "Haaland",
       "captain_xp": 16.7,
       "captain_vs": "FUL (H)",
@@ -7774,7 +7814,7 @@
      },
      {
       "event": 12,
-      "pts": 55.9,
+      "pts": 55.3,
       "captain": "Groß",
       "captain_xp": 11.9,
       "captain_vs": "NEW (H)",
@@ -7795,7 +7835,7 @@
      },
      {
       "event": 13,
-      "pts": 57.7,
+      "pts": 57.5,
       "captain": "Haaland",
       "captain_xp": 14.9,
       "captain_vs": "LEE (H)",
@@ -7815,8 +7855,13 @@
       ]
      }
     ],
-    "total": 176.9,
+    "total": 174.9,
     "flags": [
+     {
+      "name": "Manzambi",
+      "chance": 75,
+      "news": "Calf injury - 75% chance of playing"
+     },
      {
       "name": "Martinez",
       "chance": 75,
@@ -7908,7 +7953,7 @@
     "gws": [
      {
       "event": 11,
-      "pts": 55.2,
+      "pts": 54.5,
       "captain": "Haaland",
       "captain_xp": 16.7,
       "captain_vs": "FUL (H)",
@@ -7929,7 +7974,7 @@
      },
      {
       "event": 12,
-      "pts": 50.9,
+      "pts": 50.6,
       "captain": "Bogle",
       "captain_xp": 10.9,
       "captain_vs": "COV (H)",
@@ -7950,7 +7995,7 @@
      },
      {
       "event": 13,
-      "pts": 55.8,
+      "pts": 55.6,
       "captain": "Haaland",
       "captain_xp": 14.9,
       "captain_vs": "LEE (H)",
@@ -7970,12 +8015,17 @@
       ]
      }
     ],
-    "total": 161.9,
+    "total": 160.7,
     "flags": [
      {
       "name": "Virgil",
       "chance": 75,
       "news": "Unspecified injury - 75% chance of playing"
+     },
+     {
+      "name": "Mendy",
+      "chance": 75,
+      "news": "Knee injury - 75% chance of playing"
      }
     ]
    },
@@ -8150,6 +8200,6 @@
     ]
    }
   },
-  "generated_at": "2026-11-11 14:29 UTC"
+  "generated_at": "2026-11-17 16:24 UTC"
  }
 }
